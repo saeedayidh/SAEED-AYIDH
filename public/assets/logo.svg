@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-label="SBA logo">
+  <defs>
+    <linearGradient id="sbaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="currentColor" stop-opacity="1"/>
+      <stop offset="100%" stop-color="currentColor" stop-opacity="0.55"/>
+    </linearGradient>
+  </defs>
+  <text x="50%" y="58%" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Brush Script MT','Segoe Script',cursive" font-weight="700"
+        font-size="64" letter-spacing="2" fill="url(#sbaGrad)" font-style="italic">SBA</text>
+</svg>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم | سعيد بن عايض</title>
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-shell" id="loginScreen">
+  <div class="login-box">
+    <img src="/assets/logo.png" alt="logo">
+    <h1>لوحة تحكم سعيد بن عايض</h1>
+    <p class="sub">سجّل الدخول للوصول إلى لوحة التحكم</p>
+    <form id="loginForm">
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="field">
+        <label>كلمة المرور</label>
+        <input type="password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%">دخول</button>
+      <div class="form-msg error" id="loginError"></div>
+    </form>
+    <p class="help-text" style="margin-top:14px">
+      بيانات الدخول الافتراضية: admin@example.com / ChangeMe123! — غيّرها من تبويب «الحساب» بعد الدخول.
+    </p>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="admin-shell" id="dashboard" hidden>
+  <aside class="admin-sidebar">
+    <div class="brand">لوحة تحكم سعيد</div>
+    <button class="admin-nav-btn active" data-tab="settings">الإعدادات العامة</button>
+    <button class="admin-nav-btn" data-tab="nav-sections">أقسام التنقل</button>
+    <button class="admin-nav-btn" data-tab="stats">الإحصائيات</button>
+    <button class="admin-nav-btn" data-tab="social">حسابات التواصل</button>
+    <button class="admin-nav-btn" data-tab="pages">الصفحات</button>
+    <button class="admin-nav-btn" data-tab="footer-pages">الصفحات السفلية</button>
+    <button class="admin-nav-btn" data-tab="gallery">المعرض</button>
+    <button class="admin-nav-btn" data-tab="news">أخبار سعيد</button>
+    <button class="admin-nav-btn" data-tab="blog">المدونة</button>
+    <button class="admin-nav-btn" data-tab="help">سعيد سنترهلب</button>
+    <button class="admin-nav-btn" data-tab="complaint-cats">أقسام الشكاوى</button>
+    <button class="admin-nav-btn" data-tab="suggestions">الاقتراحات</button>
+    <button class="admin-nav-btn" data-tab="complaints">الشكاوى</button>
+    <button class="admin-nav-btn" data-tab="custom-design">التصميم المخصص</button>
+    <button class="admin-nav-btn" data-tab="account">الحساب</button>
+    <a id="viewSiteLink" href="/" target="_blank" class="admin-nav-btn" style="display:block;text-align:start;margin-top:10px">عرض الموقع ↗</a>
+    <button class="admin-nav-btn" id="logoutBtn" style="margin-top:auto;color:var(--red)">تسجيل الخروج</button>
+  </aside>
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1 id="tabTitle">الإعدادات العامة</h1>
+    </div>
+    <div id="tabContent"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="/admin/js/admin.js"></script>
+</body>
+</html>

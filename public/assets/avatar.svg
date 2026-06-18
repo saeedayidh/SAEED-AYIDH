@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Saeed bin Ayidh avatar">
+  <defs>
+    <radialGradient id="bgGrad" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#e3413a"/>
+      <stop offset="100%" stop-color="#7a0f10"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" fill="url(#bgGrad)"/>
+  <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Brush Script MT','Segoe Script',cursive" font-style="italic"
+        font-weight="700" font-size="150" fill="#ffffff" opacity="0.95">SBA</text>
+  <circle cx="200" cy="155" r="70" fill="#ffffff" opacity="0.12"/>
+  <path d="M90 340 C90 260 310 260 310 340 Z" fill="#ffffff" opacity="0.12"/>
+</svg>

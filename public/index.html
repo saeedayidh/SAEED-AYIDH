@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سعيد بن عايض | الموقع الرسمي</title>
+<meta name="description" content="الموقع الرسمي لسعيد بن عايض - شاعر، منشد، راوي قصص، قيمر، وفلوقر">
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/css/style.css">
+<style id="customCssStyle"></style>
+</head>
+<body>
+
+<!-- خلفية الأورورا -->
+<div class="aurora" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+<div class="noise" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- شريط التقدم + المؤشر -->
+<div id="progress"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- شاشة الترحيب -->
+<div id="splash">
+  <div class="splash-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <img class="splash-logo" src="/assets/logo.png" alt="logo">
+  <div class="splash-msg" id="splashMsg">
+    <p><span id="splashLine1"></span><span id="splashLine2"></span><span id="splashLine3"></span></p>
+  </div>
+  <button class="enter-btn" id="enterBtn" data-i18n="enter_btn"></button>
+</div>
+<script>if(sessionStorage.getItem('welcomed')){document.getElementById('splash').classList.add('skip')}</script>
+
+<!-- شريط التنقل -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#home" class="nav-logo">
+      <img src="/assets/logo.png" id="logoImg" alt="logo">
+      <span id="siteName"></span>
+    </a>
+    <div class="nav-links" id="navLinks"></div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" title="theme">🌗</button>
+      <button class="icon-btn" id="langBtn">EN</button>
+      <button class="menu-btn" id="menuBtn" aria-label="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- البطل -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div class="hero-text reveal">
+      <span class="eyebrow" data-i18n="eyebrow_hero"></span>
+      <h1 id="heroName"></h1>
+      <p class="greet" id="heroTagline"></p>
+      <div class="hero-cta">
+        <a href="#social" class="pill-btn solid" data-i18n="hero_explore"></a>
+        <a href="#contact" class="pill-btn outline" data-i18n="hero_contact"></a>
+      </div>
+    </div>
+    <div class="hero-cover reveal">
+      <div class="cover-glow" aria-hidden="true"></div>
+      <div class="cover-frame" id="coverFrame">
+        <img src="/assets/avatar.jpg" id="heroAvatar" alt="">
+        <div class="cover-shine" id="coverShine"></div>
+        <div class="cover-badge">
+          <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <span data-i18n="live_label"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- شريط متحرك -->
+<div class="marquee">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<!-- نبذة -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_about"></span>
+      <h2 id="aboutTitle"></h2>
+    </div>
+    <div class="about-card spot reveal">
+      <p class="lead" id="aboutLead"></p>
+      <p id="aboutText"></p>
+      <div class="roles" id="rolesList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- إعلان + الحسابات -->
+<section id="social">
+  <div class="wrap">
+    <div class="promo reveal">
+      <h3 id="promoTitle"></h3>
+      <span class="pill" data-i18n="promo_follow"></span>
+    </div>
+    <div class="sec-head reveal" style="margin-top:48px">
+      <span class="eyebrow" data-i18n="eyebrow_social"></span>
+      <h2 id="announcementTitle"></h2>
+      <p id="announcementText"></p>
+    </div>
+    <div class="social-grid" id="socialGrid"></div>
+  </div>
+</section>
+
+<!-- الصفحات -->
+<section id="pages">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_pages"></span>
+      <h2 id="pagesTitle"></h2>
+    </div>
+    <div class="pages-cats" id="pagesCats"></div>
+  </div>
+</section>
+
+<!-- الإحصائيات -->
+<section id="stats">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_stats"></span>
+      <h2 id="statsTitle"></h2>
+    </div>
+    <div class="stats-grid" id="statsGrid"></div>
+  </div>
+</section>
+
+<!-- المعرض -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_gallery"></span>
+      <h2 id="galleryTitle"></h2>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- الأخبار -->
+<section id="news">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_news"></span>
+      <h2 id="newsTitle"></h2>
+    </div>
+    <div class="cards-grid" id="newsGrid"></div>
+  </div>
+</section>
+
+<!-- المدونة -->
+<section id="blog">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_blog"></span>
+      <h2 id="blogTitle"></h2>
+    </div>
+    <div class="cards-grid" id="blogGrid"></div>
+  </div>
+</section>
+
+<!-- مركز المساعدة -->
+<section id="support">
+  <div class="wrap">
+    <div class="support-wrap reveal spot">
+      <div>
+        <span class="eyebrow" data-i18n="eyebrow_support"></span>
+        <h3 id="helpCenterTitle"></h3>
+        <p data-i18n="support_desc"></p>
+      </div>
+      <div class="support-cta">
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12" y2="17.01"/></svg>
+        </div>
+        <a href="/help.html" class="btn-red" data-i18n="support_btn"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- التواصل -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_contact"></span>
+      <h2 id="contactTitle"></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <h3 data-i18n="contact_suggestion_title"></h3>
+        <p class="hint" data-i18n="contact_suggestion_hint"></p>
+        <form id="suggestionForm">
+          <div class="field-group">
+            <label data-i18n="field_name"></label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="field-group">
+            <label data-i18n="field_email"></label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="field-group">
+            <label data-i18n="field_message"></label>
+            <textarea name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn-red" data-i18n="btn_send"></button>
+          <div class="form-msg" id="suggestionMsg"></div>
+        </form>
+      </div>
+      <div class="contact-card reveal">
+        <h3 data-i18n="contact_complaint_title"></h3>
+        <p class="hint" data-i18n="contact_complaint_hint"></p>
+        <form id="complaintForm">
+          <div class="field-group">
+            <label data-i18n="field_name"></label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="field-group">
+            <label data-i18n="field_email"></label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="field-group">
+            <label data-i18n="field_category"></label>
+            <select name="complaintCategory" id="complaintCategorySelect" required>
+              <option value="" data-i18n="category_placeholder"></option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label data-i18n="field_message"></label>
+            <textarea name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn-red" data-i18n="btn_send"></button>
+          <div class="form-msg" id="complaintMsg"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- الفوتر -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="/assets/logo.png" id="footLogo" alt="logo">
+        <span id="footerName"></span>
+      </div>
+      <div class="foot-links">
+        <a href="/help.html" data-i18n="nav_help"></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="copy"><span id="footerYear"></span> © <span id="footerName2"></span> — <span data-i18n="footer_rights"></span></p>
+      <div class="foot-pages" id="footerPages"></div>
+    </div>
+  </div>
+</footer>
+
+<!-- زر واتساب العائم -->
+<a id="waBtn" class="wa-float" href="#" target="_blank" rel="noopener noreferrer" hidden aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 0 1 6.9 12.1l.3.5-.7 2.5-2.6-.7-.5.3A8 8 0 0 1 12 4zm-3.1 3.6c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.2.2 1.6 2.6 4 3.5 2 .8 2.4.6 2.8.6.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4l-1.6-.8c-.2-.1-.4-.1-.6.1l-.6.8c-.1.2-.3.2-.5.1-1.1-.5-2.4-1.5-3.3-3-.1-.2 0-.4.1-.5l.6-.7c.1-.2.1-.4 0-.6l-.8-1.9c-.1-.2-.3-.4-.6-.4z"/></svg>
+</a>
+
+<button id="toTop" aria-label="top">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/icons.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

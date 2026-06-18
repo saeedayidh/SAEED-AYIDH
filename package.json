@@ -1,0 +1,15 @@
+{
+  "name": "saeed-bin-ayidh-site",
+  "version": "1.0.0",
+  "description": "Personal/portfolio website + admin dashboard for Saeed bin Ayidh (zero external dependencies, pure Node.js)",
+  "main": "server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {}
+}
