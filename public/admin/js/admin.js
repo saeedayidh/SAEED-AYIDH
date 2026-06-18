@@ -455,8 +455,7 @@ function renderFooterPages(content) {
     <div class="field"><label>الرابط المختصر (slug مثل: privacy، legal)</label><input type="text" id="newFpSlug" placeholder="privacy"></div>
     ${biField('المحتوى', { ar: '', en: '' }, true)}
     <button class="btn btn-primary" id="addFp">+ إضافة</button>
-  </div>
-  <div id="fpList"></div>`);
+  </div>`);
   content.appendChild(panel);
 
   panel.querySelector('#addFp').addEventListener('click', async () => {
@@ -472,7 +471,8 @@ function renderFooterPages(content) {
     toast('تمت الإضافة');
   });
 
-  const fpList = content.querySelector('#fpList');
+  const fpList = document.createElement('div');
+  content.appendChild(fpList);
 
   function row(item) {
     const r = h(`<div class="panel" style="margin-top:0;border-top:1px solid var(--border);border-radius:0">
@@ -556,10 +556,10 @@ function renderNewsOrBlog(content, collection, hasSlug) {
     ${biField('المحتوى', { ar: '', en: '' }, true)}
     ${hasSlug ? `<div class="field"><label>الرابط المختصر (slug)</label><input type="text" id="newSlug" placeholder="my-post"></div>` : ''}
     <button class="btn btn-primary" id="addItem">+ إضافة</button>
-  </div>
-  <div id="itemsList"></div>`);
+  </div>`);
   content.appendChild(panel);
-  const list = content.querySelector('#itemsList');
+  const list = document.createElement('div');
+  content.appendChild(list);
   let newImageUrl = '';
 
   panel.querySelector('#newImage').addEventListener('change', async (e) => {
@@ -626,10 +626,10 @@ function renderFaq(content, category) {
     ${biField('السؤال', { ar: '', en: '' })}
     ${biField('الإجابة', { ar: '', en: '' }, true)}
     <button class="btn btn-primary" id="addFaq">+ إضافة</button>
-  </div>
-  <div id="faqItemsList"></div>`);
+  </div>`);
   content.appendChild(panel);
-  const list = content.querySelector('#faqItemsList');
+  const list = document.createElement('div');
+  content.appendChild(list);
 
   panel.querySelector('#addFaq').addEventListener('click', async () => {
     const bi = readBi(panel);
