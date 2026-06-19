@@ -146,11 +146,31 @@ async function handleApi(req, res, pathname, query) {
   }
 
   if (pathname === '/api/contact' && req.method === 'POST') {
-    const body = await readJSON(req);
-    const { type, name, email, message, complaintCategory } = body;
+    const ct = req.headers['content-type'] || '';
+    let fields, fileAttachment;
+    if (ct.includes('multipart/form-data')) {
+      const buf = await readBody(req);
+      const parsed = parseMultipart(buf, ct);
+      fields = parsed.fields;
+      fileAttachment = parsed.files.find(f => f.field === 'attachment');
+    } else {
+      fields = await readJSON(req);
+      fileAttachment = null;
+    }
+    const { type, name, email, message, complaintCategory } = fields;
     if (!type || !['suggestion', 'complaint'].includes(type) || !message) {
       return sendJSON(res, 400, { error: 'invalid_input' });
     }
+
+    // حفظ المرفق إن وُجد
+    let attachmentUrl = '';
+    if (fileAttachment && fileAttachment.data && fileAttachment.data.length > 0) {
+      const ext = (path.extname(fileAttachment.filename) || '').toLowerCase().slice(0, 10);
+      const fname = 'attach_' + crypto.randomBytes(10).toString('hex') + ext;
+      fs.writeFileSync(path.join(UPLOADS_DIR, fname), fileAttachment.data);
+      attachmentUrl = `/uploads/${fname}`;
+    }
+
     const item = {
       id: store.nextId(data.messages),
       type,
@@ -158,6 +178,7 @@ async function handleApi(req, res, pathname, query) {
       email: (email || '').toString().slice(0, 200),
       message: message.toString().slice(0, 5000),
       complaintCategory: type === 'complaint' ? (complaintCategory || '').toString().slice(0, 100) : undefined,
+      attachmentUrl: attachmentUrl || undefined,
       date: new Date().toISOString(),
       read: false
     };
@@ -165,6 +186,7 @@ async function handleApi(req, res, pathname, query) {
     store.save();
 
     const label = type === 'suggestion' ? 'اقتراح جديد / New Suggestion' : 'شكوى جديدة / New Complaint';
+    const attachLine = attachmentUrl ? `<p><b>المرفق:</b> <a href="${attachmentUrl}">${fileAttachment.filename}</a></p>` : '';
     sendEmail({
       apiKey: data.settings.resendApiKey,
       from: data.settings.emailFrom,
@@ -174,8 +196,10 @@ async function handleApi(req, res, pathname, query) {
         <h2>${label}</h2>
         <p><b>الاسم:</b> ${escapeHtml(item.name) || '-'}</p>
         <p><b>البريد:</b> ${escapeHtml(item.email) || '-'}</p>
+        ${item.complaintCategory ? `<p><b>القسم:</b> ${escapeHtml(item.complaintCategory)}</p>` : ''}
         <p><b>الرسالة:</b></p>
         <p>${escapeHtml(item.message)}</p>
+        ${attachLine}
         <hr><p style="color:#888;font-size:12px">${item.date}</p>
       </div>`
     });
