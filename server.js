@@ -14,6 +14,31 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 const UPLOADS_DIR = path.join(PUBLIC_DIR, 'uploads');
 if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
+// امتدادات مسموح بها للمرفقات من المستخدمين
+const ALLOWED_USER_EXTS = new Set([
+  '.jpg','.jpeg','.png','.gif','.webp','.svg',
+  '.mp4','.webm','.mov','.avi',
+  '.pdf','.doc','.docx','.xls','.xlsx','.ppt','.pptx',
+  '.txt','.csv','.zip','.rar'
+]);
+
+// Rate limiting بسيط لنموذج التواصل
+const contactRateMap = new Map();
+function checkContactRate(ip) {
+  const now = Date.now();
+  const key = ip;
+  const record = contactRateMap.get(key) || { count: 0, reset: now + 60_000 };
+  if (now > record.reset) { record.count = 0; record.reset = now + 60_000; }
+  record.count++;
+  contactRateMap.set(key, record);
+  return record.count <= 5; // 5 طلبات في الدقيقة
+}
+// مسح القديم كل 5 دقائق
+setInterval(() => {
+  const now = Date.now();
+  for (const [k, v] of contactRateMap) { if (now > v.reset) contactRateMap.delete(k); }
+}, 300_000);
+
 const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'navSections', 'complaintCategories', 'footerPages'];
 
 const MIME_TYPES = {
@@ -84,6 +109,8 @@ function requireAuth(req, res) {
 function publicData(data) {
   const settings = { ...data.settings };
   delete settings.resendApiKey;
+  delete settings.notificationEmail;
+  delete settings.emailFrom;
   return {
     settings,
     stats: data.stats,
@@ -146,6 +173,10 @@ async function handleApi(req, res, pathname, query) {
   }
 
   if (pathname === '/api/contact' && req.method === 'POST') {
+    const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket.remoteAddress || 'unknown';
+    if (!checkContactRate(clientIp)) {
+      return sendJSON(res, 429, { error: 'too_many_requests' });
+    }
     const ct = req.headers['content-type'] || '';
     let fields, fileAttachment;
     if (ct.includes('multipart/form-data')) {
@@ -162,10 +193,16 @@ async function handleApi(req, res, pathname, query) {
       return sendJSON(res, 400, { error: 'invalid_input' });
     }
 
-    // حفظ المرفق إن وُجد
+    // حفظ المرفق إن وُجد مع التحقق من الامتداد
     let attachmentUrl = '';
     if (fileAttachment && fileAttachment.data && fileAttachment.data.length > 0) {
       const ext = (path.extname(fileAttachment.filename) || '').toLowerCase().slice(0, 10);
+      if (!ALLOWED_USER_EXTS.has(ext)) {
+        return sendJSON(res, 400, { error: 'file_type_not_allowed' });
+      }
+      if (fileAttachment.data.length > 10 * 1024 * 1024) { // 10MB للمرفق
+        return sendJSON(res, 400, { error: 'file_too_large' });
+      }
       const fname = 'attach_' + crypto.randomBytes(10).toString('hex') + ext;
       fs.writeFileSync(path.join(UPLOADS_DIR, fname), fileAttachment.data);
       attachmentUrl = `/uploads/${fname}`;
@@ -243,7 +280,7 @@ async function handleApi(req, res, pathname, query) {
 
     // Full bundle for admin dashboard
     if (pathname === '/api/admin/bundle' && req.method === 'GET') {
-      const safe = { ...data };
+      const safe = { ...data, admin: { email: data.admin.email } };
       return sendJSON(res, 200, safe);
     }
 
