@@ -476,3 +476,15 @@ footer{border-top:1px solid var(--line);padding:48px 0 60px;position:relative;z-
 }
 .field-group select:focus{outline:none;border-color:var(--red)}
 .field-group select option{background:var(--panel)}
+
+/* ---------- حقل رفع الملف ---------- */
+.file-input-wrap{display:flex;flex-direction:column;gap:6px}
+.file-input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.file-label{
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  padding:10px 16px;border:1.5px dashed var(--line);border-radius:10px;
+  background:var(--panel);color:var(--muted);font-size:.88rem;
+  transition:border-color .2s,color .2s;
+}
+.file-label:hover{border-color:var(--red);color:var(--cream)}
+.file-name{font-size:.78rem;color:var(--red);min-height:1.2em;padding-inline-start:4px;word-break:break-all}
