@@ -339,6 +339,16 @@ function renderAll(data) {
 /* ============================= نموذج التواصل ============================= */
 
 function setupContactForms() {
+  // عرض اسم الملف المختار
+  ['suggestionFile', 'complaintFile'].forEach(inputId => {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const nameEl = document.getElementById(inputId.replace('File', 'FileName'));
+    input.addEventListener('change', () => {
+      if (nameEl) nameEl.textContent = input.files[0] ? input.files[0].name : '';
+    });
+  });
+
   const map = [
     { formId: 'suggestionForm', msgId: 'suggestionMsg', type: 'suggestion' },
     { formId: 'complaintForm', msgId: 'complaintMsg', type: 'complaint' }
@@ -351,26 +361,25 @@ function setupContactForms() {
       e.preventDefault();
       msg.textContent = '';
       msg.className = 'form-msg';
+
+      // استخدام FormData مباشرة لدعم رفع الملفات
       const fd = new FormData(form);
-      const payload = {
-        type,
-        name: fd.get('name') || '',
-        email: fd.get('email') || '',
-        message: fd.get('message') || ''
-      };
-      if (type === 'complaint') {
-        payload.complaintCategory = fd.get('complaintCategory') || '';
-      }
+      fd.append('type', type);
+
       try {
         const res = await fetch('/api/contact', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          body: fd   // لا نضع Content-Type يدوياً، المتصفح يضعه تلقائياً مع الحدود
         });
         if (!res.ok) throw new Error('failed');
         msg.textContent = t('send_success');
         msg.classList.add('success');
         form.reset();
+        // مسح اسم الملف بعد الإرسال
+        const nameEl = document.getElementById(
+          type === 'suggestion' ? 'suggestionFileName' : 'complaintFileName'
+        );
+        if (nameEl) nameEl.textContent = '';
       } catch {
         msg.textContent = t('send_error');
         msg.classList.add('error');
