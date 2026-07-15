@@ -210,9 +210,15 @@ function renderGallery(data) {
   data.gallery.forEach(item => {
     const el = document.createElement('div');
     el.className = 'gallery-item';
-    const media = item.type === 'video'
-      ? `<video src="${item.url}" controls muted></video>`
-      : `<img src="${item.url}" alt="${L(item.caption)}" loading="lazy">`;
+    const ytId = item.url && item.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/)?.[1];
+    let media;
+    if (ytId) {
+      media = `<iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen style="width:100%;aspect-ratio:16/9;border:none;border-radius:12px"></iframe>`;
+    } else if (item.type === 'video') {
+      media = `<video src="${item.url}" controls muted></video>`;
+    } else {
+      media = `<img src="${item.url}" alt="${L(item.caption)}" loading="lazy">`;
+    }
     const caption = L(item.caption) ? `<div class="caption">${L(item.caption)}</div>` : '';
     el.innerHTML = media + caption;
     grid.appendChild(el);
@@ -226,18 +232,27 @@ function renderCards(containerId, items, emptyKey) {
     grid.innerHTML = `<div class="empty-state">${t(emptyKey)}</div>`;
     return;
   }
+  const type = containerId === 'newsGrid' ? 'news' : 'blog';
   items.forEach(item => {
-    const el = document.createElement('div');
+    const el = document.createElement('a');
     el.className = 'card';
+    el.href = `/article.html?type=${type}&id=${item.id}`;
     const img = item.image ? `<img class="card-img" src="${item.image}" alt="">` : '';
     const content = L(item.content) || '';
     const preview = content.length > 160 ? content.slice(0, 160) + '…' : content;
+    const linkBtn = (type === 'news' && item.link)
+      ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer" class="read-more" style="margin-inline-end:12px" onclick="event.stopPropagation()">↗ ${currentLang()==='ar'?'رابط الخبر':'Read More'}</a>`
+      : '';
     el.innerHTML = `
       ${img}
       <div class="card-body">
         <div class="card-date">${fmtDate(item.date)}</div>
         <h3>${L(item.title)}</h3>
         <p>${preview}</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+          ${linkBtn}
+          <span class="read-more">${t('read_more')}</span>
+        </div>
       </div>`;
     grid.appendChild(el);
   });
