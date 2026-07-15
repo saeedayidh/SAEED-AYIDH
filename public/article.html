@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مقال | سعيد بن عايض</title>
+<link rel="icon" href="/assets/logo.png">
+<link rel="stylesheet" href="/css/style.css">
+<style id="customCssStyle"></style>
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+</div>
+<div class="noise" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+
+<div id="progress"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="nav-in">
+    <a href="/" class="nav-logo">
+      <img src="/assets/logo.png" id="logoImg" alt="logo">
+      <span id="siteName"></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="/" data-i18n="nav_home"></a>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" title="theme">🌗</button>
+      <button class="icon-btn" id="langBtn">EN</button>
+    </div>
+  </div>
+</nav>
+
+<main style="padding-top:100px">
+  <div class="wrap">
+    <div class="article-wrap" id="articleWrap">
+      <div class="empty-state" id="loadingMsg">جاري التحميل...</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="/assets/logo.png" id="footLogo" alt="logo">
+        <span id="footerName"></span>
+      </div>
+      <div class="foot-links">
+        <a href="/" data-i18n="nav_home"></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="copy"><span id="footerYear"></span> © <span id="footerName2"></span> — <span data-i18n="footer_rights"></span></p>
+      <div class="foot-pages" id="footerPages"></div>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="top">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<script src="/js/i18n.js"></script>
+<script>
+function L(field) {
+  if (!field) return '';
+  const lang = currentLang();
+  return field[lang] || field.ar || field.en || '';
+}
+function fmtDate(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString(currentLang() === 'ar' ? 'ar-SA' : 'en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch { return ''; }
+}
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+}
+function applyLang() {
+  const lang = currentLang();
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', I18N[lang].dir);
+  document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = t(el.getAttribute('data-i18n')));
+  document.getElementById('langBtn').textContent = t('lang_toggle');
+}
+
+function setupCursor() {
+  const dot = document.querySelector('.cursor-dot');
+  const ring = document.querySelector('.cursor-ring');
+  if (!dot || !ring) return;
+  let active = false;
+  window.addEventListener('pointermove', (e) => {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    if (!active) { active = true; document.body.classList.add('has-cursor'); }
+    dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+    ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+  });
+}
+function setupScrollEffects() {
+  const progress = document.getElementById('progress');
+  const nav = document.getElementById('nav');
+  const toTop = document.getElementById('toTop');
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    if (progress) progress.style.width = pct + '%';
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 30);
+    if (toTop) toTop.classList.toggle('show', window.scrollY > 500);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  if (toTop) toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+function renderFooterPages(fps) {
+  const container = document.getElementById('footerPages');
+  if (!container) return;
+  (fps || []).forEach(fp => {
+    const a = document.createElement('a');
+    a.href = `/p/${fp.slug}`;
+    a.textContent = L(fp.name);
+    container.appendChild(a);
+  });
+}
+
+async function init() {
+  applyTheme();
+  applyLang();
+  setupCursor();
+  setupScrollEffects();
+
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    localStorage.setItem('theme', (localStorage.getItem('theme') || 'dark') === 'dark' ? 'light' : 'dark');
+    applyTheme();
+  });
+  document.getElementById('langBtn').addEventListener('click', () => {
+    localStorage.setItem('lang', currentLang() === 'ar' ? 'en' : 'ar');
+    applyLang();
+    renderArticle(window._data);
+  });
+
+  const params = new URLSearchParams(location.search);
+  const type = params.get('type'); // 'blog' or 'news'
+  const id = Number(params.get('id'));
+
+  const res = await fetch('/api/data');
+  const data = await res.json();
+  window._data = data;
+
+  const s = data.settings;
+  document.getElementById('siteName').textContent = L(s.siteName);
+  document.getElementById('footerName').textContent = L(s.siteName);
+  document.getElementById('footerName2').textContent = L(s.siteName);
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+  if (s.logo) { document.getElementById('logoImg').src = s.logo; document.getElementById('footLogo').src = s.logo; }
+  if (s.customCss) document.getElementById('customCssStyle').textContent = s.customCss;
+  renderFooterPages(data.footerPages);
+
+  const items = type === 'news' ? data.news : data.blog;
+  const item = items && items.find(x => x.id === id);
+
+  const wrap = document.getElementById('articleWrap');
+  if (!item) {
+    wrap.innerHTML = `<div class="empty-state">المقال غير موجود</div><a href="/" class="back-link">← العودة للرئيسية</a>`;
+    return;
+  }
+
+  window._item = item;
+  renderArticle(data);
+}
+
+function renderArticle(data) {
+  const item = window._item;
+  const wrap = document.getElementById('articleWrap');
+  const backLabel = currentLang() === 'ar' ? '← العودة للرئيسية' : '← Back to Home';
+  const sectionLabel = currentLang() === 'ar'
+    ? (new URLSearchParams(location.search).get('type') === 'news' ? 'الأخبار' : 'المدونة')
+    : (new URLSearchParams(location.search).get('type') === 'news' ? 'News' : 'Blog');
+  const img = item.image ? `<img class="article-img" src="${item.image}" alt="">` : '';
+  wrap.innerHTML = `
+    <a href="/" class="back-link">${backLabel}</a>
+    <div class="article-date">${sectionLabel} · ${fmtDate(item.date)}</div>
+    <h1>${L(item.title)}</h1>
+    ${img}
+    <div class="article-body">${L(item.content)}</div>`;
+
+  document.title = `${L(item.title)} | ${L(data.settings.siteName)}`;
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
