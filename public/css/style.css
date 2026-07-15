@@ -488,3 +488,17 @@ footer{border-top:1px solid var(--line);padding:48px 0 60px;position:relative;z-
 }
 .file-label:hover{border-color:var(--red);color:var(--cream)}
 .file-name{font-size:.78rem;color:var(--red);min-height:1.2em;padding-inline-start:4px;word-break:break-all}
+
+/* ---------- كارد المقال قابل للضغط ---------- */
+a.card{display:block;text-decoration:none;color:inherit;cursor:pointer}
+a.card:hover{transform:translateY(-4px)}
+.read-more{display:inline-block;margin-top:10px;font-size:.82rem;color:var(--red);font-weight:600}
+
+/* ---------- صفحة المقال الكامل ---------- */
+.article-wrap{max-width:780px;margin:0 auto;padding:40px 20px 80px}
+.article-wrap .article-date{color:var(--muted);font-size:.85rem;margin-bottom:8px}
+.article-wrap h1{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:24px;line-height:1.3}
+.article-wrap .article-img{width:100%;border-radius:16px;margin-bottom:28px;object-fit:cover;max-height:420px}
+.article-body{font-size:1.05rem;line-height:1.9;white-space:pre-wrap;color:var(--cream)}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.88rem;margin-bottom:32px;transition:color .2s}
+.back-link:hover{color:var(--cream)}
