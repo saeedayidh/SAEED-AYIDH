@@ -508,15 +508,32 @@ function renderFooterPages(content) {
 function renderGallery(content) {
   const panel = h(`<div class="panel"><h2>معرض الصور والمقاطع</h2>
     <div class="field"><label>إضافة ملف جديد (صورة أو فيديو)</label><input type="file" id="galleryFile" accept="image/*,video/*"></div>
+    <div class="field" style="margin-top:12px">
+      <label>أو أضف رابط (يوتيوب / صورة / فيديو) — اختياري</label>
+      <input type="text" id="galleryUrl" placeholder="https://youtube.com/watch?v=... أو رابط صورة">
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <select id="galleryUrlType" style="padding:8px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--panel);color:var(--cream)">
+          <option value="image">صورة</option>
+          <option value="video">فيديو / يوتيوب</option>
+        </select>
+        <button class="btn btn-outline" id="addUrlBtn">+ إضافة الرابط</button>
+      </div>
+    </div>
     <div id="galleryList"></div>
   </div>`);
   content.appendChild(panel);
   const list = panel.querySelector('#galleryList');
 
   function row(item) {
-    const preview = item.type === 'video'
-      ? `<video src="${item.url}" class="thumb" muted></video>`
-      : `<img src="${item.url}" class="thumb">`;
+    let preview = '';
+    const ytId = item.url && item.url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/)?.[1];
+    if (ytId) {
+      preview = `<iframe src="https://www.youtube.com/embed/${ytId}" class="thumb" style="border:none" allowfullscreen></iframe>`;
+    } else if (item.type === 'video') {
+      preview = `<video src="${item.url}" class="thumb" muted></video>`;
+    } else {
+      preview = `<img src="${item.url}" class="thumb">`;
+    }
     const r = h(`<div class="item-row">
       <div style="display:flex;gap:12px;align-items:flex-start">${preview}<div style="flex:1">${biField('وصف (اختياري)', item.caption)}</div></div>
       <div class="item-actions">
@@ -538,10 +555,21 @@ function renderGallery(content) {
   }
 
   BUNDLE.gallery.forEach(item => list.appendChild(row(item)));
+
+  // رفع ملف
   panel.querySelector('#galleryFile').addEventListener('change', async (e) => {
     const file = e.target.files[0]; if (!file) return;
     const url = await uploadFile(file);
     const type = file.type.startsWith('video') ? 'video' : 'image';
+    const item = await api('/api/admin/gallery', { method: 'POST', body: { url, type, caption: { ar: '', en: '' } } });
+    BUNDLE.gallery.push(item); renderGallery(document.getElementById('tabContent')); toast('تمت الإضافة');
+  });
+
+  // إضافة رابط
+  panel.querySelector('#addUrlBtn').addEventListener('click', async () => {
+    const url = panel.querySelector('#galleryUrl').value.trim();
+    if (!url) return toast('أدخل رابطاً أولاً');
+    const type = panel.querySelector('#galleryUrlType').value;
     const item = await api('/api/admin/gallery', { method: 'POST', body: { url, type, caption: { ar: '', en: '' } } });
     BUNDLE.gallery.push(item); renderGallery(document.getElementById('tabContent')); toast('تمت الإضافة');
   });
@@ -554,6 +582,7 @@ function renderNewsOrBlog(content, collection, hasSlug) {
     <div class="field"><label>صورة (اختياري)</label><input type="file" id="newImage" accept="image/*"></div>
     ${biField('العنوان', { ar: '', en: '' })}
     ${biField('المحتوى', { ar: '', en: '' }, true)}
+    ${!hasSlug ? `<div class="field"><label>رابط خارجي (اختياري)</label><input type="text" id="newLink" placeholder="https://..."></div>` : ''}
     ${hasSlug ? `<div class="field"><label>الرابط المختصر (slug)</label><input type="text" id="newSlug" placeholder="my-post"></div>` : ''}
     <button class="btn btn-primary" id="addItem">+ إضافة</button>
   </div>`);
@@ -570,6 +599,7 @@ function renderNewsOrBlog(content, collection, hasSlug) {
   panel.querySelector('#addItem').addEventListener('click', async () => {
     const bi = readBi(panel);
     const payload = { title: bi[0], content: bi[1], image: newImageUrl, date: new Date().toISOString() };
+    if (!hasSlug && panel.querySelector('#newLink')) payload.link = panel.querySelector('#newLink').value.trim();
     if (hasSlug) payload.slug = panel.querySelector('#newSlug').value || ('post-' + Date.now());
     const item = await api(`/api/admin/${collection}`, { method: 'POST', body: payload });
     BUNDLE[collection].push(item);
@@ -584,6 +614,7 @@ function renderNewsOrBlog(content, collection, hasSlug) {
           ${biField('العنوان', item.title)}
           ${biField('المحتوى', item.content, true)}
           ${hasSlug ? `<div class="field"><label>slug</label><input type="text" data-f="slug" value="${escAttr(item.slug || '')}"></div>` : ''}
+          ${!hasSlug ? `<div class="field"><label>رابط خارجي (اختياري)</label><input type="text" data-f="link" value="${escAttr(item.link || '')}" placeholder="https://..."></div>` : ''}
           <div class="field"><label>التاريخ</label><input type="date" data-f="date" value="${(item.date || '').slice(0,10)}"></div>
           <div class="field"><label>تغيير الصورة</label><input type="file" data-f="image" accept="image/*"></div>
         </div>
@@ -604,6 +635,7 @@ function renderNewsOrBlog(content, collection, hasSlug) {
       const dateVal = r.querySelector('[data-f="date"]').value;
       if (dateVal) payload.date = new Date(dateVal).toISOString();
       if (hasSlug) payload.slug = r.querySelector('[data-f="slug"]').value;
+      if (!hasSlug && r.querySelector('[data-f="link"]')) payload.link = r.querySelector('[data-f="link"]').value.trim();
       if (newImg) payload.image = newImg;
       await api(`/api/admin/${collection}/${item.id}`, { method: 'PUT', body: payload });
       toast('تم الحفظ'); await loadBundle();
@@ -722,8 +754,8 @@ function renderMessages(content, type) {
     .sort((a,b) => new Date(b.date) - new Date(a.date));
 
   const cols = isComplaint
-    ? '<th>القسم</th><th>الاسم</th><th>البريد</th><th>الرسالة</th><th>التاريخ</th><th>الحالة</th><th></th>'
-    : '<th>الاسم</th><th>البريد</th><th>الرسالة</th><th>التاريخ</th><th>الحالة</th><th></th>';
+    ? '<th>القسم</th><th>الاسم</th><th>البريد</th><th>الرسالة</th><th>المرفق</th><th>التاريخ</th><th>الحالة</th><th></th>'
+    : '<th>الاسم</th><th>البريد</th><th>الرسالة</th><th>المرفق</th><th>التاريخ</th><th>الحالة</th><th></th>';
 
   const panel = h(`<div class="panel"><h2>${title}</h2>
     <p style="color:var(--text-muted);font-size:.85rem;margin-bottom:12px">${items.length} رسالة</p>
@@ -735,17 +767,21 @@ function renderMessages(content, type) {
   const tbody = panel.querySelector('#msgBody');
 
   if (!items.length) {
-    tbody.innerHTML = `<tr><td colspan="${isComplaint ? 7 : 6}" style="text-align:center;color:var(--text-muted)">لا توجد رسائل</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="${isComplaint ? 8 : 7}" style="text-align:center;color:var(--text-muted)">لا توجد رسائل</td></tr>`;
     return;
   }
 
   items.forEach(item => {
     const catCell = isComplaint ? `<td>${escHtml(item.complaintCategory || '-')}</td>` : '';
+    const attachCell = item.attachmentUrl
+      ? `<td><a href="${escAttr(item.attachmentUrl)}" target="_blank" rel="noopener noreferrer" style="color:var(--red)">📎 فتح</a></td>`
+      : `<td style="color:var(--text-muted)">—</td>`;
     const tr = h(`<tr>
       ${catCell}
       <td>${escHtml(item.name) || '-'}</td>
       <td>${escHtml(item.email) || '-'}</td>
       <td style="max-width:260px;white-space:pre-wrap">${escHtml(item.message)}</td>
+      ${attachCell}
       <td style="white-space:nowrap">${new Date(item.date).toLocaleString('ar-SA')}</td>
       <td><span class="badge ${item.read ? 'read' : 'unread'}" style="cursor:pointer" data-toggle>${item.read ? 'مقروءة' : 'غير مقروءة'}</span></td>
       <td><button class="btn btn-outline del-btn" style="color:var(--red);border-color:var(--red)">حذف</button></td>
