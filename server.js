@@ -39,7 +39,7 @@ setInterval(() => {
   for (const [k, v] of contactRateMap) { if (now > v.reset) contactRateMap.delete(k); }
 }, 300_000);
 
-const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'navSections', 'complaintCategories', 'footerPages'];
+const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'services', 'navSections', 'complaintCategories', 'footerPages'];
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -119,6 +119,7 @@ function publicData(data) {
     news: data.news.slice().sort((a, b) => new Date(b.date) - new Date(a.date)),
     blog: data.blog.slice().sort((a, b) => new Date(b.date) - new Date(a.date)),
     gallery: data.gallery,
+    services: data.services || [],
     navSections: (data.navSections || []).filter(n => n.visible !== false),
     complaintCategories: data.complaintCategories || [],
     footerPages: (data.footerPages || []).map(fp => ({ id: fp.id, slug: fp.slug, name: fp.name }))
