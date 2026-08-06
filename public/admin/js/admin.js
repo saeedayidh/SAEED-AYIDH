@@ -110,6 +110,7 @@ function renderTab(tab) {
     case 'social':         return renderSocial(content);
     case 'pages':          return renderPages(content);
     case 'footer-pages':   return renderFooterPages(content);
+    case 'services':       return renderServicesAdmin(content);
     case 'gallery':        return renderGallery(content);
     case 'news':           return renderNewsOrBlog(content, 'news', false);
     case 'blog':           return renderNewsOrBlog(content, 'blog', true);
@@ -183,6 +184,7 @@ function renderSettings(content) {
     ${biField('عنوان قسم الصفحات', s.pagesTitle)}
     ${biField('عنوان قسم الإحصائيات', s.statsTitle)}
     ${biField('عنوان المعرض', s.galleryTitle)}
+    ${biField('عنوان الخدمات والمنتجات', s.servicesTitle)}
     ${biField('عنوان الأخبار', s.newsTitle)}
     ${biField('عنوان المدونة', s.blogTitle)}
     ${biField('عنوان قسم التواصل (اقتراحات وشكاوى)', s.contactTitle)}
@@ -246,7 +248,7 @@ function renderSettings(content) {
     const bi = readBi(panel);
     const keys = ['siteName', 'tagline', 'welcomeMessage', 'aboutTitle', 'aboutText',
       'announcementTitle', 'announcementText', 'pagesTitle', 'statsTitle', 'galleryTitle',
-      'newsTitle', 'blogTitle', 'contactTitle', 'helpCenterName'];
+      'servicesTitle', 'newsTitle', 'blogTitle', 'contactTitle', 'helpCenterName'];
     const payload = {};
     keys.forEach((k, i) => payload[k] = bi[i]);
     payload.whatsapp = document.getElementById('whatsapp').value;
@@ -502,6 +504,87 @@ function renderFooterPages(content) {
   }
 
   (BUNDLE.footerPages || []).forEach(item => fpList.appendChild(row(item)));
+}
+
+// ================= SERVICES =================
+function renderServicesAdmin(content) {
+  const panel = h(`<div class="panel">
+    <h2>الخدمات والمنتجات — إضافة جديد</h2>
+    <div class="field"><label>صورة المنتج / الخدمة (اختياري)</label><input type="file" id="newSvcImg" accept="image/*"></div>
+    ${biField('الاسم', { ar: '', en: '' })}
+    ${biField('الوصف', { ar: '', en: '' }, true)}
+    ${biField('النص الترويجي (اختياري — مثال: عرض خاص، جديد)', { ar: '', en: '' })}
+    <div class="field"><label>السعر (مثال: 100 ريال، مجاني، بالتواصل)</label><input type="text" id="newSvcPrice" placeholder="100 ريال"></div>
+    <button class="btn btn-primary" id="addSvc">+ إضافة</button>
+  </div>`);
+  content.appendChild(panel);
+  const list = document.createElement('div');
+  content.appendChild(list);
+  let newImgUrl = '';
+
+  panel.querySelector('#newSvcImg').addEventListener('change', async (e) => {
+    if (!e.target.files[0]) return;
+    newImgUrl = await uploadFile(e.target.files[0]); toast('تم رفع الصورة');
+  });
+
+  panel.querySelector('#addSvc').addEventListener('click', async () => {
+    const bi = readBi(panel);
+    const payload = {
+      name: bi[0],
+      description: bi[1],
+      promo: bi[2],
+      price: panel.querySelector('#newSvcPrice').value.trim(),
+      image: newImgUrl
+    };
+    const item = await api('/api/admin/services', { method: 'POST', body: payload });
+    BUNDLE.services = BUNDLE.services || [];
+    BUNDLE.services.push(item);
+    renderServicesAdmin(document.getElementById('tabContent')); toast('تمت الإضافة');
+  });
+
+  function row(item) {
+    const r = h(`<div class="panel" style="margin-top:0;border-top:1px solid var(--border);border-radius:0">
+      <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+        ${item.image ? `<img src="${escAttr(item.image)}" class="thumb" style="width:90px;height:90px;object-fit:cover;border-radius:10px">` : ''}
+        <div style="flex:1;min-width:220px">
+          ${biField('الاسم', item.name)}
+          ${biField('الوصف', item.description || { ar: '', en: '' }, true)}
+          ${biField('النص الترويجي', item.promo || { ar: '', en: '' })}
+          <div class="field"><label>السعر</label><input type="text" data-f="price" value="${escAttr(item.price || '')}"></div>
+          <div class="field"><label>تغيير الصورة</label><input type="file" data-f="image" accept="image/*"></div>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-outline save-btn">حفظ</button>
+        <button class="btn btn-outline del-btn" style="color:var(--red);border-color:var(--red)">حذف</button>
+      </div>
+    </div>`);
+    let newImg = null;
+    r.querySelector('[data-f="image"]').addEventListener('change', async (e) => {
+      if (!e.target.files[0]) return;
+      newImg = await uploadFile(e.target.files[0]); toast('تم رفع الصورة (اضغط حفظ)');
+    });
+    r.querySelector('.save-btn').addEventListener('click', async () => {
+      const bi = readBi(r);
+      const payload = {
+        name: bi[0],
+        description: bi[1],
+        promo: bi[2],
+        price: r.querySelector('[data-f="price"]').value.trim()
+      };
+      if (newImg) payload.image = newImg;
+      await api(`/api/admin/services/${item.id}`, { method: 'PUT', body: payload });
+      toast('تم الحفظ'); await loadBundle();
+    });
+    r.querySelector('.del-btn').addEventListener('click', async () => {
+      if (!confirm('حذف هذا المنتج / الخدمة؟')) return;
+      await api(`/api/admin/services/${item.id}`, { method: 'DELETE' });
+      await loadBundle(); renderServicesAdmin(document.getElementById('tabContent'));
+    });
+    return r;
+  }
+
+  (BUNDLE.services || []).forEach(item => list.appendChild(row(item)));
 }
 
 // ================= GALLERY =================
