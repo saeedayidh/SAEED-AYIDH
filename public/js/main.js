@@ -90,6 +90,7 @@ function renderHeader(data) {
   document.getElementById('newsTitle').textContent = L(s.newsTitle);
   document.getElementById('blogTitle').textContent = L(s.blogTitle);
   document.getElementById('contactTitle').textContent = L(s.contactTitle);
+  document.getElementById('servicesTitle').textContent = L(s.servicesTitle || { ar: 'خدمات سعيد', en: "Saeed's Services" });
   document.getElementById('helpCenterTitle').textContent = L(s.helpCenterName);
 
   // أسطر شاشة الترحيب
@@ -225,6 +226,34 @@ function renderGallery(data) {
   });
 }
 
+function renderServices(data) {
+  const grid = document.getElementById('servicesGrid');
+  grid.innerHTML = '';
+  const items = data.services || [];
+  if (!items.length) {
+    grid.innerHTML = `<div class="empty-state">${t('services_empty')}</div>`;
+    return;
+  }
+  items.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'service-card reveal';
+    const img = item.image
+      ? `<div class="svc-img-wrap"><img class="svc-img" src="${item.image}" alt="${L(item.name)}" loading="lazy"></div>`
+      : `<div class="svc-img-wrap svc-img-placeholder"></div>`;
+    const promo = L(item.promo) ? `<div class="svc-promo">${L(item.promo)}</div>` : '';
+    const desc = L(item.description) ? `<p class="svc-desc">${L(item.description)}</p>` : '';
+    el.innerHTML = `
+      ${img}
+      <div class="svc-body">
+        ${promo}
+        <h3 class="svc-name">${L(item.name)}</h3>
+        ${desc}
+        <div class="svc-price">${item.price || ''}</div>
+      </div>`;
+    grid.appendChild(el);
+  });
+}
+
 function renderCards(containerId, items, emptyKey) {
   const grid = document.getElementById(containerId);
   grid.innerHTML = '';
@@ -342,6 +371,7 @@ function renderAll(data) {
   renderStats(data);
   renderSocial(data);
   renderPages(data);
+  renderServices(data);
   renderGallery(data);
   renderCards('newsGrid', data.news, 'news_empty');
   renderCards('blogGrid', data.blog, 'blog_empty');
