@@ -134,7 +134,7 @@ body.has-cursor *{cursor:none!important}
   font-size:1rem;color:#fff;background:rgba(7,4,5,.35);border:1.5px solid rgba(255,255,255,.5);
   padding:15px 50px;border-radius:999px;letter-spacing:.04em;backdrop-filter:blur(6px);
   box-shadow:0 12px 34px rgba(0,0,0,.35);transition:.3s;opacity:0;animation:fadeIn 1s ease 1.15s forwards;
-  font-family:var(--font)}
+  font-family:var(--font);-webkit-tap-highlight-color:transparent;touch-action:manipulation;min-width:180px}
 .enter-btn:hover{background:var(--cream);color:#8C0E14;transform:translateY(-3px) scale(1.04);border-color:transparent}
 
 /* ---------- أزرار البطل (Hero CTA) ---------- */
