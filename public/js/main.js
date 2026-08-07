@@ -91,6 +91,8 @@ function renderHeader(data) {
   document.getElementById('blogTitle').textContent = L(s.blogTitle);
   document.getElementById('contactTitle').textContent = L(s.contactTitle);
   document.getElementById('servicesTitle').textContent = L(s.servicesTitle || { ar: 'خدمات سعيد', en: "Saeed's Services" });
+  const promoBannersTitle = document.getElementById('promoBannersTitle');
+  if (promoBannersTitle) promoBannersTitle.textContent = L(s.promoBannersTitle || { ar: 'عروض سعيد', en: "Saeed's Offers" });
   document.getElementById('helpCenterTitle').textContent = L(s.helpCenterName);
 
   // أسطر شاشة الترحيب
@@ -222,6 +224,80 @@ function renderGallery(data) {
     }
     const caption = L(item.caption) ? `<div class="caption">${L(item.caption)}</div>` : '';
     el.innerHTML = media + caption;
+    grid.appendChild(el);
+  });
+}
+
+/* ---- الشريط الإعلاني العلوي ---- */
+function renderTopBar(data) {
+  const tb = data.settings.topBar;
+  const bar = document.getElementById('topBar');
+  if (!bar || !tb || !tb.enabled) return;
+  bar.style.background = tb.bgColor || '#FF2027';
+  bar.style.color = tb.textColor || '#fff';
+  document.getElementById('topBarText').textContent = L(tb.text);
+  const btn = document.getElementById('topBarBtn');
+  if (tb.btnUrl && L(tb.btnText)) {
+    btn.href = tb.btnUrl;
+    btn.textContent = L(tb.btnText);
+    btn.hidden = false;
+  }
+  bar.hidden = false;
+  // تعديل padding الـ nav
+  document.getElementById('nav').style.top = bar.offsetHeight + 'px';
+  document.getElementById('topBarClose').addEventListener('click', () => {
+    bar.hidden = true;
+    document.getElementById('nav').style.top = '0';
+  });
+}
+
+/* ---- بنرات الصور ---- */
+function renderImageBanners(data) {
+  const wrap = document.getElementById('imageBannersWrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  const items = data.imageBanners || [];
+  items.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'image-banner reveal';
+    div.style.backgroundImage = item.image ? `url(${item.image})` : 'none';
+    const title = L(item.title) ? `<h2 class="ibanner-title">${L(item.title)}</h2>` : '';
+    const sub = L(item.subtitle) ? `<p class="ibanner-sub">${L(item.subtitle)}</p>` : '';
+    const btn = (item.btnUrl && L(item.btnText))
+      ? `<a href="${item.btnUrl}" class="pill-btn solid ibanner-btn" target="_blank" rel="noopener noreferrer">${L(item.btnText)}</a>`
+      : '';
+    div.innerHTML = `<div class="ibanner-overlay"></div><div class="ibanner-content">${title}${sub}${btn}</div>`;
+    wrap.appendChild(div);
+  });
+}
+
+/* ---- البنرات الترويجية ---- */
+function renderPromoBanners(data) {
+  const grid = document.getElementById('promoBannersGrid');
+  const sec = document.getElementById('promoBannersSection');
+  if (!grid || !sec) return;
+  const items = data.promoBanners || [];
+  if (!items.length) { sec.style.display = 'none'; return; }
+  sec.style.display = '';
+  grid.innerHTML = '';
+  items.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'promo-banner-card reveal';
+    const img = item.image
+      ? `<div class="pbc-img" style="background-image:url(${item.image})"></div>`
+      : `<div class="pbc-img pbc-img-empty"></div>`;
+    const badge = L(item.badge) ? `<span class="pbc-badge">${L(item.badge)}</span>` : '';
+    const btn = (item.btnUrl && L(item.btnText))
+      ? `<a href="${item.btnUrl}" class="read-more" target="_blank" rel="noopener noreferrer">${L(item.btnText)} ↗</a>`
+      : '';
+    el.innerHTML = `
+      ${img}
+      <div class="pbc-body">
+        ${badge}
+        <h3 class="pbc-title">${L(item.title)}</h3>
+        <p class="pbc-text">${L(item.text)}</p>
+        ${btn}
+      </div>`;
     grid.appendChild(el);
   });
 }
@@ -371,7 +447,10 @@ function renderAll(data) {
   renderStats(data);
   renderSocial(data);
   renderPages(data);
+  renderTopBar(data);
+  renderImageBanners(data);
   renderServices(data);
+  renderPromoBanners(data);
   renderGallery(data);
   renderCards('newsGrid', data.news, 'news_empty');
   renderCards('blogGrid', data.blog, 'blog_empty');
