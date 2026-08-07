@@ -90,10 +90,12 @@ function renderHeader(data) {
   document.getElementById('newsTitle').textContent = L(s.newsTitle);
   document.getElementById('blogTitle').textContent = L(s.blogTitle);
   document.getElementById('contactTitle').textContent = L(s.contactTitle);
-  document.getElementById('servicesTitle').textContent = L(s.servicesTitle || { ar: 'خدمات سعيد', en: "Saeed's Services" });
-  const promoBannersTitle = document.getElementById('promoBannersTitle');
-  if (promoBannersTitle) promoBannersTitle.textContent = L(s.promoBannersTitle || { ar: 'عروض سعيد', en: "Saeed's Offers" });
-  document.getElementById('helpCenterTitle').textContent = L(s.helpCenterName);
+  const servicesTitleEl = document.getElementById('servicesTitle');
+  if (servicesTitleEl) servicesTitleEl.textContent = L(s.servicesTitle || { ar: 'خدمات سعيد', en: "Saeed's Services" });
+  const promoBannersTitleEl = document.getElementById('promoBannersTitle');
+  if (promoBannersTitleEl) promoBannersTitleEl.textContent = L(s.promoBannersTitle || { ar: 'عروض سعيد', en: "Saeed's Offers" });
+  const helpCenterTitleEl = document.getElementById('helpCenterTitle');
+  if (helpCenterTitleEl) helpCenterTitleEl.textContent = L(s.helpCenterName);
 
   // أسطر شاشة الترحيب
   const lines = L(s.welcomeMessage).split('\n').filter(Boolean);
@@ -304,6 +306,7 @@ function renderPromoBanners(data) {
 
 function renderServices(data) {
   const grid = document.getElementById('servicesGrid');
+  if (!grid) return;
   grid.innerHTML = '';
   const items = data.services || [];
   if (!items.length) {
@@ -517,17 +520,26 @@ function setupContactForms() {
 function setupSplash() {
   const splash = document.getElementById('splash');
   const enterBtn = document.getElementById('enterBtn');
+  if (!splash || !enterBtn) return;
   const seen = sessionStorage.getItem('welcomed');
   if (seen) {
     splash.classList.add('skip');
     return;
   }
+  // تأكد من ظهور الزر بعد ثانيتين حتى لو لم تعمل الـ animation
+  setTimeout(() => { enterBtn.style.opacity = '1'; }, 2000);
+
+  let closed = false;
   const close = () => {
+    if (closed) return;
+    closed = true;
     splash.classList.add('gone');
     sessionStorage.setItem('welcomed', '1');
-    setTimeout(() => splash.remove(), 1100);
+    setTimeout(() => { if (splash.parentNode) splash.remove(); }, 1100);
   };
   enterBtn.addEventListener('click', close);
+  // دعم اللمس على الجوال
+  enterBtn.addEventListener('touchend', (e) => { e.preventDefault(); close(); }, { passive: false });
 }
 
 /* ============================= تفاعلات الواجهة ============================= */
