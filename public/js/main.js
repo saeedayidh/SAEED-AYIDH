@@ -38,6 +38,9 @@ function applyLang() {
   });
   const langBtn = document.getElementById('langBtn');
   if (langBtn) langBtn.textContent = t('lang_toggle');
+  // اجبر ظهور زر الدخول فوراً بعد تعيين النص
+  const enterBtn = document.getElementById('enterBtn');
+  if (enterBtn) { enterBtn.style.opacity = '1'; enterBtn.style.animation = 'none'; }
 }
 
 function toggleTheme() {
@@ -101,8 +104,14 @@ function renderHeader(data) {
   const lines = L(s.welcomeMessage).split('\n').filter(Boolean);
   ['splashLine1', 'splashLine2', 'splashLine3'].forEach((id, i) => {
     const el = document.getElementById(id);
-    if (lines[i]) { el.textContent = lines[i]; el.style.display = ''; }
-    else { el.style.display = 'none'; }
+    if (el && lines[i]) {
+      el.textContent = lines[i];
+      el.style.display = 'block';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    } else if (el) {
+      el.style.display = 'none';
+    }
   });
 
   // الشريط المتحرك
