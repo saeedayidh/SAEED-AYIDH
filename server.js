@@ -39,7 +39,7 @@ setInterval(() => {
   for (const [k, v] of contactRateMap) { if (now > v.reset) contactRateMap.delete(k); }
 }, 300_000);
 
-const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'services', 'navSections', 'complaintCategories', 'footerPages'];
+const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'services', 'imageBanners', 'promoBanners', 'navSections', 'complaintCategories', 'footerPages'];
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -120,6 +120,8 @@ function publicData(data) {
     blog: data.blog.slice().sort((a, b) => new Date(b.date) - new Date(a.date)),
     gallery: data.gallery,
     services: data.services || [],
+    imageBanners: (data.imageBanners || []).filter(b => b.enabled !== false),
+    promoBanners: (data.promoBanners || []).filter(b => b.enabled !== false),
     navSections: (data.navSections || []).filter(n => n.visible !== false),
     complaintCategories: data.complaintCategories || [],
     footerPages: (data.footerPages || []).map(fp => ({ id: fp.id, slug: fp.slug, name: fp.name }))
@@ -537,4 +539,19 @@ server.listen(PORT, () => {
   console.log(`Admin panel: http://localhost:${PORT}/admin`);
   console.log(`Default admin login -> email: admin@example.com / password: ChangeMe123!`);
   console.log(`(Change these immediately from the admin Settings tab.)`);
+
+  // إعادة تعيين كلمة المرور إذا وُجد المتغير
+  const resetPass = process.env.RESET_ADMIN_PASSWORD;
+  if (resetPass) {
+    try {
+      const data = store.load();
+      const { salt, hash } = store.hashPassword(resetPass);
+      data.admin.salt = salt;
+      data.admin.hash = hash;
+      store.save();
+      console.log(`[RESET] Admin password has been reset successfully.`);
+    } catch (e) {
+      console.error(`[RESET] Failed to reset password:`, e.message);
+    }
+  }
 });
