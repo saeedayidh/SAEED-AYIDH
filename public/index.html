@@ -11,6 +11,13 @@
 </head>
 <body>
 
+<!-- الشريط الإعلاني العلوي -->
+<div id="topBar" hidden>
+  <span id="topBarText"></span>
+  <a id="topBarBtn" href="#" hidden></a>
+  <button id="topBarClose" aria-label="close">✕</button>
+</div>
+
 <!-- خلفية الأورورا -->
 <div class="aurora" aria-hidden="true">
   <div class="blob b1"></div>
@@ -80,6 +87,9 @@
   </div>
 </section>
 
+<!-- بنرات الصور (تُحقن بـ JS) -->
+<div id="imageBannersWrap"></div>
+
 <!-- شريط متحرك -->
 <div class="marquee">
   <div class="marquee-track" id="marqueeTrack"></div>
@@ -146,6 +156,17 @@
       <h2 id="servicesTitle"></h2>
     </div>
     <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- البنرات الترويجية -->
+<section id="promoBannersSection" style="display:none">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="eyebrow_promo"></span>
+      <h2 id="promoBannersTitle"></h2>
+    </div>
+    <div class="promo-banners-grid" id="promoBannersGrid"></div>
   </div>
 </section>
 
