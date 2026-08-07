@@ -111,6 +111,8 @@ function renderTab(tab) {
     case 'pages':          return renderPages(content);
     case 'footer-pages':   return renderFooterPages(content);
     case 'services':       return renderServicesAdmin(content);
+    case 'image-banners':  return renderImageBannersAdmin(content);
+    case 'promo-banners':  return renderPromoBannersAdmin(content);
     case 'gallery':        return renderGallery(content);
     case 'news':           return renderNewsOrBlog(content, 'news', false);
     case 'blog':           return renderNewsOrBlog(content, 'blog', true);
@@ -209,6 +211,20 @@ function renderSettings(content) {
       </div>
     </div>
 
+    <h3>الشريط الإعلاني العلوي</h3>
+    <div class="field" style="display:flex;align-items:center;gap:10px">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+        <input type="checkbox" id="topBarEnabled" ${s.topBar && s.topBar.enabled ? 'checked' : ''}> تفعيل الشريط الإعلاني
+      </label>
+    </div>
+    ${biField('نص الشريط', (s.topBar && s.topBar.text) || { ar: '', en: '' })}
+    ${biField('نص الزر (اختياري)', (s.topBar && s.topBar.btnText) || { ar: '', en: '' })}
+    <div class="field"><label>رابط الزر (اختياري)</label><input type="text" id="topBarBtnUrl" value="${escAttr((s.topBar && s.topBar.btnUrl) || '')}" placeholder="https://..."></div>
+    <div class="grid-2">
+      <div class="field"><label>لون الخلفية</label><input type="color" id="topBarBgColor" value="${escAttr((s.topBar && s.topBar.bgColor) || '#FF2027')}" style="height:42px;padding:2px 6px"></div>
+      <div class="field"><label>لون النص</label><input type="color" id="topBarTextColor" value="${escAttr((s.topBar && s.topBar.textColor) || '#ffffff')}" style="height:42px;padding:2px 6px"></div>
+    </div>
+
     <h3>إشعارات البريد الإلكتروني للاقتراحات والشكاوى</h3>
     <div class="grid-2">
       <div class="field">
@@ -248,15 +264,30 @@ function renderSettings(content) {
     const bi = readBi(panel);
     const keys = ['siteName', 'tagline', 'welcomeMessage', 'aboutTitle', 'aboutText',
       'announcementTitle', 'announcementText', 'pagesTitle', 'statsTitle', 'galleryTitle',
-      'servicesTitle', 'newsTitle', 'blogTitle', 'contactTitle', 'helpCenterName'];
+      'servicesTitle', 'newsTitle', 'blogTitle', 'contactTitle',
+      'topBar_text', 'topBar_btnText',
+      'helpCenterName'];
     const payload = {};
-    keys.forEach((k, i) => payload[k] = bi[i]);
+    const biKeys = ['siteName', 'tagline', 'welcomeMessage', 'aboutTitle', 'aboutText',
+      'announcementTitle', 'announcementText', 'pagesTitle', 'statsTitle', 'galleryTitle',
+      'servicesTitle', 'newsTitle', 'blogTitle', 'contactTitle', 'helpCenterName'];
+    biKeys.forEach((k, i) => payload[k] = bi[i]);
     payload.whatsapp = document.getElementById('whatsapp').value;
     payload.mainSiteUrl = document.getElementById('mainSiteUrl').value;
     payload.helpCenterUrl = document.getElementById('helpCenterUrl').value;
     payload.notificationEmail = document.getElementById('notificationEmail').value;
     payload.resendApiKey = document.getElementById('resendApiKey').value;
     payload.emailFrom = document.getElementById('emailFrom').value;
+    // topBar
+    const tbBi = readBi(panel).slice(biKeys.length);
+    payload.topBar = {
+      enabled: document.getElementById('topBarEnabled').checked,
+      text: tbBi[0] || { ar: '', en: '' },
+      btnText: tbBi[1] || { ar: '', en: '' },
+      btnUrl: document.getElementById('topBarBtnUrl').value,
+      bgColor: document.getElementById('topBarBgColor').value,
+      textColor: document.getElementById('topBarTextColor').value
+    };
     const res = await api('/api/admin/settings', { method: 'PUT', body: payload });
     BUNDLE.settings = res.settings;
     // update view-site link
@@ -585,6 +616,164 @@ function renderServicesAdmin(content) {
   }
 
   (BUNDLE.services || []).forEach(item => list.appendChild(row(item)));
+}
+
+// ================= IMAGE BANNERS =================
+function renderImageBannersAdmin(content) {
+  const panel = h(`<div class="panel">
+    <h2>بنرات الصور — إضافة جديد</h2>
+    <p class="help-text" style="margin-bottom:16px">بنر بصورة خلفية كبيرة مع عنوان وزر. تظهر بعد قسم البطل (Hero) مباشرة.</p>
+    <div class="field"><label>صورة الخلفية</label><input type="file" id="newBannerImg" accept="image/*"></div>
+    ${biField('العنوان', { ar: '', en: '' })}
+    ${biField('النص الفرعي (اختياري)', { ar: '', en: '' })}
+    ${biField('نص الزر (اختياري)', { ar: '', en: '' })}
+    <div class="field"><label>رابط الزر (اختياري)</label><input type="text" id="newBannerUrl" placeholder="https://..."></div>
+    <button class="btn btn-primary" id="addBanner">+ إضافة</button>
+  </div>`);
+  content.appendChild(panel);
+  const list = document.createElement('div');
+  content.appendChild(list);
+  let newImgUrl = '';
+
+  panel.querySelector('#newBannerImg').addEventListener('change', async (e) => {
+    if (!e.target.files[0]) return;
+    newImgUrl = await uploadFile(e.target.files[0]); toast('تم رفع الصورة');
+  });
+
+  panel.querySelector('#addBanner').addEventListener('click', async () => {
+    const bi = readBi(panel);
+    const item = await api('/api/admin/imageBanners', { method: 'POST', body: {
+      image: newImgUrl, title: bi[0], subtitle: bi[1], btnText: bi[2],
+      btnUrl: panel.querySelector('#newBannerUrl').value.trim(), enabled: true
+    }});
+    BUNDLE.imageBanners = BUNDLE.imageBanners || [];
+    BUNDLE.imageBanners.push(item);
+    renderImageBannersAdmin(document.getElementById('tabContent')); toast('تمت الإضافة');
+  });
+
+  function row(item) {
+    const r = h(`<div class="panel" style="margin-top:0;border-top:1px solid var(--border);border-radius:0">
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">
+        ${item.image ? `<img src="${escAttr(item.image)}" style="width:140px;height:80px;object-fit:cover;border-radius:8px">` : ''}
+        <div style="flex:1;min-width:220px">
+          ${biField('العنوان', item.title)}
+          ${biField('النص الفرعي', item.subtitle || { ar: '', en: '' })}
+          ${biField('نص الزر', item.btnText || { ar: '', en: '' })}
+          <div class="field"><label>رابط الزر</label><input type="text" data-f="btnUrl" value="${escAttr(item.btnUrl || '')}"></div>
+          <div class="field"><label>تغيير الصورة</label><input type="file" data-f="image" accept="image/*"></div>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:8px">
+            <input type="checkbox" data-f="enabled" ${item.enabled !== false ? 'checked' : ''}> مرئي في الموقع
+          </label>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-outline save-btn">حفظ</button>
+        <button class="btn btn-outline del-btn" style="color:var(--red);border-color:var(--red)">حذف</button>
+      </div>
+    </div>`);
+    let newImg = null;
+    r.querySelector('[data-f="image"]').addEventListener('change', async (e) => {
+      if (!e.target.files[0]) return;
+      newImg = await uploadFile(e.target.files[0]); toast('تم رفع الصورة (اضغط حفظ)');
+    });
+    r.querySelector('.save-btn').addEventListener('click', async () => {
+      const bi = readBi(r);
+      const payload = { title: bi[0], subtitle: bi[1], btnText: bi[2],
+        btnUrl: r.querySelector('[data-f="btnUrl"]').value,
+        enabled: r.querySelector('[data-f="enabled"]').checked };
+      if (newImg) payload.image = newImg;
+      await api(`/api/admin/imageBanners/${item.id}`, { method: 'PUT', body: payload });
+      toast('تم الحفظ'); await loadBundle();
+    });
+    r.querySelector('.del-btn').addEventListener('click', async () => {
+      if (!confirm('حذف هذا البنر؟')) return;
+      await api(`/api/admin/imageBanners/${item.id}`, { method: 'DELETE' });
+      await loadBundle(); renderImageBannersAdmin(document.getElementById('tabContent'));
+    });
+    return r;
+  }
+
+  (BUNDLE.imageBanners || []).forEach(item => list.appendChild(row(item)));
+}
+
+// ================= PROMO BANNERS =================
+function renderPromoBannersAdmin(content) {
+  const panel = h(`<div class="panel">
+    <h2>البنرات الترويجية — إضافة جديد</h2>
+    <p class="help-text" style="margin-bottom:16px">بنرات ترويجية بصورة وعنوان وشارة (badge) وزر CTA. تظهر في قسم "عروض سعيد".</p>
+    <div class="field"><label>صورة البنر</label><input type="file" id="newPromoBannerImg" accept="image/*"></div>
+    ${biField('الشارة / Badge (مثال: خصم 50%، جديد، حصري)', { ar: '', en: '' })}
+    ${biField('العنوان', { ar: '', en: '' })}
+    ${biField('النص', { ar: '', en: '' }, true)}
+    ${biField('نص الزر (اختياري)', { ar: '', en: '' })}
+    <div class="field"><label>رابط الزر (اختياري)</label><input type="text" id="newPromoUrl" placeholder="https://..."></div>
+    <button class="btn btn-primary" id="addPromoBanner">+ إضافة</button>
+  </div>`);
+  content.appendChild(panel);
+  const list = document.createElement('div');
+  content.appendChild(list);
+  let newImgUrl = '';
+
+  panel.querySelector('#newPromoBannerImg').addEventListener('change', async (e) => {
+    if (!e.target.files[0]) return;
+    newImgUrl = await uploadFile(e.target.files[0]); toast('تم رفع الصورة');
+  });
+
+  panel.querySelector('#addPromoBanner').addEventListener('click', async () => {
+    const bi = readBi(panel);
+    const item = await api('/api/admin/promoBanners', { method: 'POST', body: {
+      image: newImgUrl, badge: bi[0], title: bi[1], text: bi[2], btnText: bi[3],
+      btnUrl: panel.querySelector('#newPromoUrl').value.trim(), enabled: true
+    }});
+    BUNDLE.promoBanners = BUNDLE.promoBanners || [];
+    BUNDLE.promoBanners.push(item);
+    renderPromoBannersAdmin(document.getElementById('tabContent')); toast('تمت الإضافة');
+  });
+
+  function row(item) {
+    const r = h(`<div class="panel" style="margin-top:0;border-top:1px solid var(--border);border-radius:0">
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">
+        ${item.image ? `<img src="${escAttr(item.image)}" style="width:140px;height:80px;object-fit:cover;border-radius:8px">` : ''}
+        <div style="flex:1;min-width:220px">
+          ${biField('الشارة', item.badge || { ar: '', en: '' })}
+          ${biField('العنوان', item.title)}
+          ${biField('النص', item.text || { ar: '', en: '' }, true)}
+          ${biField('نص الزر', item.btnText || { ar: '', en: '' })}
+          <div class="field"><label>رابط الزر</label><input type="text" data-f="btnUrl" value="${escAttr(item.btnUrl || '')}"></div>
+          <div class="field"><label>تغيير الصورة</label><input type="file" data-f="image" accept="image/*"></div>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:8px">
+            <input type="checkbox" data-f="enabled" ${item.enabled !== false ? 'checked' : ''}> مرئي في الموقع
+          </label>
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-outline save-btn">حفظ</button>
+        <button class="btn btn-outline del-btn" style="color:var(--red);border-color:var(--red)">حذف</button>
+      </div>
+    </div>`);
+    let newImg = null;
+    r.querySelector('[data-f="image"]').addEventListener('change', async (e) => {
+      if (!e.target.files[0]) return;
+      newImg = await uploadFile(e.target.files[0]); toast('تم رفع الصورة (اضغط حفظ)');
+    });
+    r.querySelector('.save-btn').addEventListener('click', async () => {
+      const bi = readBi(r);
+      const payload = { badge: bi[0], title: bi[1], text: bi[2], btnText: bi[3],
+        btnUrl: r.querySelector('[data-f="btnUrl"]').value,
+        enabled: r.querySelector('[data-f="enabled"]').checked };
+      if (newImg) payload.image = newImg;
+      await api(`/api/admin/promoBanners/${item.id}`, { method: 'PUT', body: payload });
+      toast('تم الحفظ'); await loadBundle();
+    });
+    r.querySelector('.del-btn').addEventListener('click', async () => {
+      if (!confirm('حذف هذا البنر؟')) return;
+      await api(`/api/admin/promoBanners/${item.id}`, { method: 'DELETE' });
+      await loadBundle(); renderPromoBannersAdmin(document.getElementById('tabContent'));
+    });
+    return r;
+  }
+
+  (BUNDLE.promoBanners || []).forEach(item => list.appendChild(row(item)));
 }
 
 // ================= GALLERY =================
