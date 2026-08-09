@@ -53,7 +53,7 @@ function toggleLang() {
   const cur = currentLang();
   localStorage.setItem('lang', cur === 'ar' ? 'en' : 'ar');
   applyLang();
-  if (SITE_DATA) renderAll(SITE_DATA);
+  if (SITE_DATA) { renderAll(SITE_DATA); setupReveal(); }
 }
 
 async function loadData() {
@@ -693,7 +693,6 @@ async function init() {
   setupSplash();
   setupCursor();
   setupScrollEffects();
-  setupReveal();
   setupSpotlight();
   setupTilt();
   setupMobileMenu();
@@ -701,6 +700,7 @@ async function init() {
   try {
     SITE_DATA = await loadData();
     renderAll(SITE_DATA);
+    setupReveal(); // بعد renderAll حتى تُراقَب عناصر .reveal الجديدة
   } catch (err) {
     console.error('Failed to load site data', err);
   }
