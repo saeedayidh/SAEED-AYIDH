@@ -209,52 +209,19 @@ export const defaultCMSData: CMSDataStore = {
     { id: 'm2', name: 'sba_logo_transparent.png', url: '/assets/sba_logo_transparent.png', type: 'image', size: '450 KB', uploadDate: '2026-08-28' },
     { id: 'm3', name: 'content_vlogs.png', url: '/assets/content_vlogs.png', type: 'image', size: '890 KB', uploadDate: '2026-08-28' }
   ],
-  submissions: [
-    {
-      id: 'sub-1',
-      type: 'suggestion',
-      name: 'عبدالله العتيبي',
-      email: 'abdullah@example.com',
-      message: 'اقترح إضافة قسم خاص بدورة إعداد الفلاتر السينمائية في لايت روم.',
-      date: '28 أغسطس 2026',
-      status: 'جديد'
-    },
-    {
-      id: 'sub-2',
-      type: 'contact',
-      name: 'محمد الغامدي',
-      email: 'm.ghamdi@example.com',
-      message: 'نرغب في التعاون الاستراتيجي مع سعيد بن عايض لإدارة حملة تسويق عقارية.',
-      date: '26 أغسطس 2026',
-      status: 'قيد المراجعة'
-    }
-  ]
+  submissions: []
 };
 
-const STORAGE_KEY = 'saeed_cms_data';
-
-// Local Storage & Server Sync Manager
-export const loadCMSData = (): CMSDataStore => {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      return { ...defaultCMSData, ...parsed };
-    }
-  } catch (e) {
-    console.error('Failed to load local CMS data', e);
-  }
-  return defaultCMSData;
-};
+// CMS persistence is handled by the authenticated server API.
+// This function only supplies safe initial data while the server state is loading.
+export const loadCMSData = (): CMSDataStore => ({
+  ...defaultCMSData,
+  submissions: []
+});
 
 export const saveCMSData = (data: CMSDataStore): void => {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    // Apply CSS Variables Live to DOM
-    applyThemeVariables(data.theme);
-  } catch (e) {
-    console.error('Failed to save local CMS data', e);
-  }
+  // Keep live theme preview behavior without storing admin state in the browser.
+  applyThemeVariables(data.theme);
 };
 
 export const applyThemeVariables = (theme: ThemeSettings): void => {

@@ -2,47 +2,19 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
-const crypto = require('crypto');
 
 const store = require('./lib/store');
 const sessions = require('./lib/sessions');
-const { parseMultipart } = require('./lib/multipart');
-const { sendEmail } = require('./lib/mailer');
+const cmsStore = require('./lib/cms-store');
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number(process.env.PORT) || 3000;
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const PUBLIC_DIR = path.join(__dirname, 'public');
+const DIST_DIR = path.join(__dirname, 'dist');
+
 const loginAttempts = new Map();
 const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 const LOGIN_MAX_ATTEMPTS = 8;
-
-function clientKey(req) {
-  return req.socket.remoteAddress || 'unknown';
-}
-function isLoginRateLimited(req) {
-  const key = clientKey(req);
-  const now = Date.now();
-  const current = loginAttempts.get(key);
-  if (!current || now - current.startedAt > LOGIN_WINDOW_MS) {
-    loginAttempts.set(key, { count: 1, startedAt: now });
-    return false;
-  }
-  current.count += 1;
-  return current.count > LOGIN_MAX_ATTEMPTS;
-}
-function clearLoginAttempts(req) { loginAttempts.delete(clientKey(req)); }
-const PUBLIC_DIR = path.join(__dirname, 'public');
-const DIST_DIR = path.join(__dirname, 'dist');
-const UPLOADS_DIR = path.join(PUBLIC_DIR, 'uploads');
-if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
-
-const ALLOWED_USER_EXTS = new Set([
-  '.jpg','.jpeg','.png','.gif','.webp','.svg',
-  '.mp4','.webm','.mov','.avi',
-  '.pdf','.doc','.docx','.xls','.xlsx','.ppt','.pptx',
-  '.txt','.csv','.zip','.rar'
-]);
-
-const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'services', 'imageBanners', 'promoBanners', 'navSections', 'complaintCategories', 'footerPages', 'domains', 'buttons', 'cards', 'wallpapers', 'watchfaces', 'prompts', 'audioWorks', 'storiesWorks', 'vlogsWorks', 'extraWorks'];
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -62,46 +34,105 @@ const MIME_TYPES = {
   '.m4a': 'audio/mp4',
   '.ogg': 'audio/ogg',
   '.ico': 'image/x-icon',
+  '.woff': 'font/woff',
   '.woff2': 'font/woff2'
 };
 
+function setSecurityHeaders(res) {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  if (IS_PRODUCTION) {
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  }
+}
+
 function sendJSON(res, status, data) {
+  setSecurityHeaders(res);
   const body = JSON.stringify(data);
-  res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.writeHead(status, {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Cache-Control': 'no-store'
+  });
   res.end(body);
 }
 
-function readBody(req) {
+function readBody(req, maxBytes = 5 * 1024 * 1024) {
   return new Promise((resolve, reject) => {
     const chunks = [];
     let size = 0;
+    let rejected = false;
     req.on('data', (chunk) => {
+      if (rejected) return;
       size += chunk.length;
-      if (size > 25 * 1024 * 1024) {
-        reject(new Error('Payload too large'));
+      if (size > maxBytes) {
+        rejected = true;
+        reject(Object.assign(new Error('Payload too large'), { statusCode: 413 }));
         req.destroy();
         return;
       }
       chunks.push(chunk);
     });
-    req.on('end', () => resolve(Buffer.concat(chunks)));
+    req.on('end', () => { if (!rejected) resolve(Buffer.concat(chunks)); });
     req.on('error', reject);
   });
 }
 
-async function readJSON(req) {
-  const buf = await readBody(req);
+async function readJSON(req, maxBytes) {
+  const buf = await readBody(req, maxBytes);
   if (!buf.length) return {};
-  try {
-    return JSON.parse(buf.toString('utf-8'));
-  } catch {
-    return {};
+  try { return JSON.parse(buf.toString('utf8')); }
+  catch { throw Object.assign(new Error('Invalid JSON'), { statusCode: 400 }); }
+}
+
+function clientKey(req) {
+  return req.socket.remoteAddress || 'unknown';
+}
+
+function isLoginRateLimited(req) {
+  const key = clientKey(req);
+  const now = Date.now();
+  const current = loginAttempts.get(key);
+  if (!current || now - current.startedAt > LOGIN_WINDOW_MS) {
+    loginAttempts.set(key, { count: 1, startedAt: now });
+    return false;
   }
+  current.count += 1;
+  return current.count > LOGIN_MAX_ATTEMPTS;
+}
+
+function clearLoginAttempts(req) {
+  loginAttempts.delete(clientKey(req));
+}
+
+function sameOriginAllowed(req) {
+  if (req.headers['sec-fetch-site'] === 'cross-site') return false;
+  const origin = req.headers.origin;
+  if (!origin) return true;
+  try {
+    return new URL(origin).host === req.headers.host;
+  } catch {
+    return false;
+  }
+}
+
+function requireSameOrigin(req, res) {
+  if (!sameOriginAllowed(req)) {
+    sendJSON(res, 403, { error: 'cross_site_request_blocked' });
+    return false;
+  }
+  return true;
 }
 
 function getAuthSession(req) {
   const cookies = sessions.parseCookies(req);
-  return sessions.getSession(cookies.sid);
+  const session = sessions.getSession(cookies.sid);
+  if (!session) return null;
+  const data = store.load();
+  if (!data.admin || data.admin.email !== session.email) return null;
+  if ((data.admin.sessionVersion || 0) !== (session.sessionVersion || 0)) return null;
+  return session;
 }
 
 function requireAuth(req, res) {
@@ -114,24 +145,24 @@ function requireAuth(req, res) {
 }
 
 function publicData(data) {
-  const settings = { ...data.settings };
+  const settings = { ...(data.settings || {}) };
   delete settings.resendApiKey;
   delete settings.notificationEmail;
   delete settings.emailFrom;
   return {
     settings,
-    stats: data.stats,
-    social: data.social,
-    pages: data.pages,
+    stats: data.stats || [],
+    social: data.social || [],
+    pages: data.pages || [],
     news: (data.news || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date)),
     blog: (data.blog || []).slice().sort((a, b) => new Date(b.date) - new Date(a.date)),
-    gallery: data.gallery,
+    gallery: data.gallery || [],
     services: data.services || [],
-    imageBanners: (data.imageBanners || []).filter(b => b.enabled !== false),
-    promoBanners: (data.promoBanners || []).filter(b => b.enabled !== false),
-    navSections: (data.navSections || []).filter(n => n.visible !== false),
+    imageBanners: (data.imageBanners || []).filter((b) => b.enabled !== false),
+    promoBanners: (data.promoBanners || []).filter((b) => b.enabled !== false),
+    navSections: (data.navSections || []).filter((n) => n.visible !== false),
     complaintCategories: data.complaintCategories || [],
-    footerPages: (data.footerPages || []).map(fp => ({ id: fp.id, slug: fp.slug, name: fp.name })),
+    footerPages: (data.footerPages || []).map((fp) => ({ id: fp.id, slug: fp.slug, name: fp.name })),
     domains: data.domains || [],
     buttons: data.buttons || [],
     cards: data.cards || [],
@@ -145,108 +176,170 @@ function publicData(data) {
   };
 }
 
+function publicCMSData(cms) {
+  if (!cms) return null;
+  const { submissions, ...publicCms } = cms;
+  return publicCms;
+}
+
+function validateCMSPayload(data) {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return false;
+  const objectFields = ['theme', 'global', 'navbar', 'hero'];
+  for (const field of objectFields) {
+    if (data[field] != null && (typeof data[field] !== 'object' || Array.isArray(data[field]))) return false;
+  }
+  const arrayFields = ['sections', 'contentFields', 'news', 'blog', 'tools', 'services', 'portfolio', 'pages', 'media', 'submissions'];
+  for (const field of arrayFields) {
+    if (data[field] != null && !Array.isArray(data[field])) return false;
+  }
+  return true;
+}
+
+function safeStaticPath(root, pathname) {
+  let decoded;
+  try { decoded = decodeURIComponent(pathname); }
+  catch { return null; }
+  if (decoded.includes('\0')) return null;
+  const relative = decoded.replace(/^\/+/, '');
+  const candidate = path.resolve(root, relative);
+  const rootResolved = path.resolve(root);
+  if (candidate !== rootResolved && !candidate.startsWith(`${rootResolved}${path.sep}`)) return null;
+  return candidate;
+}
+
 async function serveStatic(req, res, pathname) {
-  let decodedPath = decodeURIComponent(pathname);
-  
-  // Try serving from dist directory first (Vite build)
-  let filePath = path.join(DIST_DIR, decodedPath);
-  
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-    const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || 'application/octet-stream' });
-    fs.createReadStream(filePath).pipe(res);
-    return;
+  for (const root of [DIST_DIR, PUBLIC_DIR]) {
+    const filePath = safeStaticPath(root, pathname);
+    if (!filePath) continue;
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      const ext = path.extname(filePath).toLowerCase();
+      setSecurityHeaders(res);
+      res.writeHead(200, {
+        'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
+        'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600'
+      });
+      fs.createReadStream(filePath).pipe(res);
+      return;
+    }
   }
 
-  // Try serving from public directory
-  filePath = path.join(PUBLIC_DIR, decodedPath);
-  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-    const ext = path.extname(filePath).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || 'application/octet-stream' });
-    fs.createReadStream(filePath).pipe(res);
-    return;
-  }
-
-  // SPA fallback for React Router (serve dist/index.html or public/index.html)
   const distIndex = path.join(DIST_DIR, 'index.html');
   const publicIndex = path.join(PUBLIC_DIR, 'index.html');
-
-  if (fs.existsSync(distIndex)) {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    fs.createReadStream(distIndex).pipe(res);
-    return;
-  } else if (fs.existsSync(publicIndex)) {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    fs.createReadStream(publicIndex).pipe(res);
+  const indexPath = fs.existsSync(distIndex) ? distIndex : (fs.existsSync(publicIndex) ? publicIndex : null);
+  if (indexPath) {
+    setSecurityHeaders(res);
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+    fs.createReadStream(indexPath).pipe(res);
     return;
   }
 
-  res.writeHead(404);
+  setSecurityHeaders(res);
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
   res.end('Not found');
 }
 
-async function handleApi(req, res, pathname, query) {
+async function handleApi(req, res, pathname) {
   const data = store.load();
-
-  // Migrate the legacy demo admin shipped by older versions. Never allow a known default account.
-  if (data.admin?.email === 'admin@example.com') {
-    if (process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD && process.env.ADMIN_PASSWORD.length >= 12) {
-      const { salt, hash } = store.hashPassword(process.env.ADMIN_PASSWORD);
-      data.admin = { email: process.env.ADMIN_EMAIL, salt, hash };
-      store.save();
-    } else {
-      data.admin = null;
-      store.save();
-    }
-  }
 
   if (pathname === '/api/data' && req.method === 'GET') {
     return sendJSON(res, 200, publicData(data));
   }
 
+  if (pathname === '/api/cms' && req.method === 'GET') {
+    return sendJSON(res, 200, { data: publicCMSData(cmsStore.load()) });
+  }
+
+  if (pathname === '/api/admin/cms' && req.method === 'GET') {
+    if (!requireAuth(req, res)) return;
+    return sendJSON(res, 200, { data: cmsStore.load() });
+  }
+
+  if (pathname === '/api/admin/cms' && req.method === 'PUT') {
+    if (!requireSameOrigin(req, res) || !requireAuth(req, res)) return;
+    const body = await readJSON(req, 8 * 1024 * 1024);
+    if (!validateCMSPayload(body)) return sendJSON(res, 400, { error: 'invalid_cms_payload' });
+    cmsStore.save(body);
+    return sendJSON(res, 200, { ok: true });
+  }
+
+  if (pathname === '/api/submissions' && req.method === 'POST') {
+    if (!requireSameOrigin(req, res)) return;
+    const body = await readJSON(req, 256 * 1024);
+    const type = ['suggestion', 'complaint', 'contact'].includes(body.type) ? body.type : 'contact';
+    const name = String(body.name || '').trim().slice(0, 120);
+    const email = String(body.email || '').trim().slice(0, 200);
+    const message = String(body.message || '').trim().slice(0, 5000);
+    if (!name || !email || !message) return sendJSON(res, 400, { error: 'invalid_submission' });
+
+    const item = {
+      id: `sub-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      type,
+      name,
+      email,
+      phone: body.phone ? String(body.phone).trim().slice(0, 40) : undefined,
+      category: body.category ? String(body.category).trim().slice(0, 120) : undefined,
+      message,
+      attachmentUrl: body.attachmentUrl ? String(body.attachmentUrl).slice(0, 2000) : undefined,
+      date: new Date().toLocaleDateString('ar-SA'),
+      status: 'جديد'
+    };
+    const cms = cmsStore.load() || {};
+    cms.submissions = [item, ...(Array.isArray(cms.submissions) ? cms.submissions : [])].slice(0, 5000);
+    cmsStore.save(cms);
+    return sendJSON(res, 201, { ok: true, item });
+  }
+
   if (pathname === '/api/admin/login' && req.method === 'POST') {
+    if (!requireSameOrigin(req, res)) return;
     if (isLoginRateLimited(req)) return sendJSON(res, 429, { error: 'too_many_attempts' });
     if (!data.admin) return sendJSON(res, 503, { error: 'admin_not_configured' });
-    const body = await readJSON(req);
-    const { email, password } = body;
+    const body = await readJSON(req, 64 * 1024);
+    const email = String(body.email || '').trim();
+    const password = String(body.password || '');
     if (!email || !password) return sendJSON(res, 400, { error: 'invalid_input' });
-    if (email.toLowerCase() !== data.admin.email.toLowerCase() ||
+    if (email.toLowerCase() !== String(data.admin.email).toLowerCase() ||
         !store.verifyPassword(password, data.admin.salt, data.admin.hash)) {
       return sendJSON(res, 401, { error: 'invalid_credentials' });
     }
     clearLoginAttempts(req);
-    const token = sessions.createSession(data.admin.email);
-    res.setHeader('Set-Cookie', `sid=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=Strict${IS_PRODUCTION ? '; Secure' : ''}`);
+    const token = sessions.createSession(data.admin.email, data.admin.sessionVersion || 0);
+    res.setHeader('Set-Cookie', `sid=${encodeURIComponent(token)}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=Strict${IS_PRODUCTION ? '; Secure' : ''}`);
     return sendJSON(res, 200, { ok: true, email: data.admin.email });
   }
 
   if (pathname === '/api/admin/session' && req.method === 'GET') {
     const session = getAuthSession(req);
-    return sendJSON(res, 200, { authenticated: !!session, email: session?.email || null });
+    return sendJSON(res, 200, { authenticated: Boolean(session), email: session?.email || null });
   }
 
   if (pathname === '/api/admin/logout' && req.method === 'POST') {
-    const cookies = sessions.parseCookies(req);
-    sessions.destroySession(cookies.sid);
+    if (!requireSameOrigin(req, res)) return;
     res.setHeader('Set-Cookie', `sid=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict${IS_PRODUCTION ? '; Secure' : ''}`);
     return sendJSON(res, 200, { ok: true });
   }
 
   if (pathname === '/api/admin/change-password' && req.method === 'POST') {
-    if (!requireAuth(req, res)) return;
+    if (!requireSameOrigin(req, res) || !requireAuth(req, res)) return;
     if (!data.admin) return sendJSON(res, 503, { error: 'admin_not_configured' });
-    const body = await readJSON(req);
-    const { currentPassword, newPassword } = body;
-    if (!currentPassword || !newPassword || newPassword.length < 12) {
+    const body = await readJSON(req, 64 * 1024);
+    const currentPassword = String(body.currentPassword || '');
+    const newPassword = String(body.newPassword || '');
+    if (!currentPassword || newPassword.length < 12) {
       return sendJSON(res, 400, { error: 'invalid_password', minLength: 12 });
     }
     if (!store.verifyPassword(currentPassword, data.admin.salt, data.admin.hash)) {
       return sendJSON(res, 401, { error: 'invalid_credentials' });
     }
     const { salt, hash } = store.hashPassword(newPassword);
-    data.admin = { ...data.admin, salt, hash };
+    data.admin = {
+      ...data.admin,
+      salt,
+      hash,
+      sessionVersion: (data.admin.sessionVersion || 0) + 1
+    };
     store.save();
-    return sendJSON(res, 200, { ok: true });
+    res.setHeader('Set-Cookie', `sid=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict${IS_PRODUCTION ? '; Secure' : ''}`);
+    return sendJSON(res, 200, { ok: true, reauthenticate: true });
   }
 
   return sendJSON(res, 404, { error: 'not_found' });
@@ -255,17 +348,19 @@ async function handleApi(req, res, pathname, query) {
 const server = http.createServer(async (req, res) => {
   try {
     const parsed = url.parse(req.url, true);
-    let pathname = parsed.pathname;
-
+    const pathname = parsed.pathname || '/';
     if (pathname.startsWith('/api/')) {
-      await handleApi(req, res, pathname, parsed.query);
+      await handleApi(req, res, pathname);
       return;
     }
-
     await serveStatic(req, res, pathname);
   } catch (err) {
     console.error(err);
-    sendJSON(res, 500, { error: 'server_error', message: err.message });
+    if (!res.headersSent) {
+      sendJSON(res, err.statusCode || 500, { error: err.statusCode === 413 ? 'payload_too_large' : (err.statusCode === 400 ? 'invalid_json' : 'server_error') });
+    } else {
+      res.end();
+    }
   }
 });
 

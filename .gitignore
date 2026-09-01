@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 
-# Build & production outputs
+# Build & Production outputs
 dist/
 build/
 .next/
@@ -11,10 +11,6 @@ build/
 .env.local
 .env.*.local
 
-# Runtime data and uploads (may contain private data)
-data/data.json
-public/uploads/
-
 # Logs and coverage
 *.log
 npm-debug.log*
@@ -22,9 +18,13 @@ yarn-debug.log*
 yarn-error.log*
 coverage/
 
-# OS and editor files
+# OS and Editor files
 .DS_Store
 .vscode/
 .idea/
 *.suo
 *.user
+
+# Runtime CMS state (use a persistent disk/database in production)
+data/cms.json
+data/cms.json.tmp

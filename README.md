@@ -1,6 +1,6 @@
 # موقع سعيد بن عايض الرسمي
 
-الموقع الرسمي لـ **سعيد بن عايض | Saeed Bin Ayidh** مع واجهة React/Vite ولوحة تحكم وإعدادات محتوى.
+الموقع الرسمي لـ **سعيد بن عايض | Saeed Bin Ayidh** مع واجهة React/Vite ولوحة تحكم وخادم Node API.
 
 ## التشغيل المحلي
 
@@ -18,51 +18,40 @@ npm start
 
 ## إعداد حساب الإدارة
 
-لا توجد أي بيانات دخول افتراضية داخل الكود.
-
-أنشئ ملف `.env` محليًا بالاعتماد على `.env.example` ثم عيّن:
+لا توجد أي بيانات دخول افتراضية داخل الكود. أنشئ ملف `.env` محليًا بالاعتماد على `.env.example` ثم عيّن قيمًا خاصة بك:
 
 ```env
 ADMIN_EMAIL=your-admin-email@example.com
 ADMIN_PASSWORD=use-a-strong-unique-password-at-least-12-characters
+SESSION_SECRET=use-a-long-random-secret-value
+DATA_FILE=./data/data.json
+CMS_DATA_FILE=./data/cms.json
 ```
 
 لا ترفع ملف `.env` الحقيقي إلى GitHub ولا تشارك كلمة المرور أو أي API Key أو GitHub Token.
 
-تسجيل الدخول يتم عبر السيرفر، والجلسة تستخدم Cookie من نوع `HttpOnly` مع `SameSite=Strict`، ويضاف `Secure` في بيئة الإنتاج.
+تسجيل الدخول يتم عبر السيرفر، والجلسة تستخدم Cookie موقعة من نوع `HttpOnly` مع `SameSite=Strict`، ويضاف `Secure` في بيئة الإنتاج.
 
-## متغيرات البيئة
+## تخزين لوحة التحكم
 
-راجع `.env.example` للمتغيرات المدعومة، ومنها:
+محتوى لوحة التحكم لم يعد يعتمد على `localStorage` كمصدر دائم. القراءة والحفظ يتمان من خلال API الخادم، والاقتراحات/الرسائل تحفظ على الخادم ولا تظهر في واجهة CMS العامة.
 
-- `PORT`
-- `NODE_ENV`
-- `ADMIN_EMAIL`
-- `ADMIN_PASSWORD`
-- `DATA_FILE`
-- `RESEND_API_KEY`
-- `NOTIFICATION_EMAIL`
-- `EMAIL_FROM`
+إذا كان الاستضافة تستخدم نظام ملفات مؤقتًا (مثل إعداد Render بدون Persistent Disk)، يجب توجيه `DATA_FILE` و`CMS_DATA_FILE` إلى قرص دائم أو استخدام قاعدة بيانات؛ وإلا يمكن فقد تعديلات وقت التشغيل بعد إعادة النشر.
 
 ## هيكلة رئيسية
 
 ```text
-server.js                  # خادم Node وواجهات API
-lib/store.js               # تخزين JSON وتجزئة كلمة المرور
-lib/sessions.js            # جلسات الإدارة
+server.js                  # خادم Node وواجهات API والحماية
+lib/store.js               # بيانات الإدارة وتجزئة كلمة المرور
+lib/sessions.js            # جلسات موقعة Stateless
+lib/cms-store.js           # تخزين CMS على الخادم
 src/                       # تطبيق React
-src/context/CMSContext.tsx # حالة CMS والمصادقة
+src/context/CMSContext.tsx # حالة CMS والمصادقة والمزامنة مع API
 src/pages/admin/           # صفحات لوحة التحكم
-data/data.json             # بيانات الخادم الحالية
+data/data.json             # بيانات الخادم غير السرية الحالية
 public/                    # الأصول العامة
 ```
 
-## ملاحظات أمنية
+## فحوصات
 
-- لا توجد كلمة مرور إدارة ثابتة في الواجهة.
-- لا يتم استخدام `localStorage` لإثبات تسجيل دخول الإدارة.
-- توجد حماية أساسية من كثرة محاولات تسجيل الدخول.
-- حساب الإدارة التجريبي القديم يتم تعطيله أثناء الترحيل.
-- لا تضع أسرار الإنتاج داخل `data/data.json` أو المستودع العام.
-
-راجع `SECURITY_NOTES.md` للتفاصيل والملاحظات المتبقية قبل اعتماد النظام كـ CMS إنتاجي كامل.
+GitHub Actions يشغل تثبيت الاعتماديات وفحص TypeScript وبناء Vite عند الدفع إلى `main`. راجع `SECURITY_NOTES.md` للتفاصيل الأمنية ومتطلبات الإنتاج.
