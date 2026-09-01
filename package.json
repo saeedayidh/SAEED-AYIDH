@@ -1,17 +1,15 @@
 {
-  "name": "saeed-portfolio",
+  "name": "saeed-bin-ayidh-website",
   "version": "1.0.0",
-  "description": "SAEED BIN AYIDH Official Website & Admin Dashboard",
+  "description": "Saeed Bin Ayidh - SBA Official Website & Admin Dashboard",
   "main": "server.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "prestart": "vite build",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "SAEED BIN AYIDH",
-  "license": "ISC",
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.18",
