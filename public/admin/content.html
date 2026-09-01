@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة إدارة المحتوى السريعة | سعيد بن عايض</title>
+<link rel="icon" href="/assets/sba_official_logo.png">
+<link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+
+<div class="admin-shell" id="contentApp">
+  <aside class="admin-sidebar">
+    <div class="brand">
+      <img src="/assets/sba_official_logo.png" style="height:32px;margin-bottom:8px" alt="logo"><br>
+      إدارة المحتوى السريعة
+    </div>
+    <button class="admin-nav-btn active" data-content-tab="quick-audio">🎤 إضافة صوت / شيلة</button>
+    <button class="admin-nav-btn" data-content-tab="quick-stories">📖 إضافة قصة</button>
+    <button class="admin-nav-btn" data-content-tab="quick-vlogs">🎥 إضافة فلوج</button>
+    <button class="admin-nav-btn" data-content-tab="quick-extra">🎮 إضافة مقطع ألعاب</button>
+    <button class="admin-nav-btn" data-content-tab="quick-cards">💌 بطاقات المعايدة</button>
+    <button class="admin-nav-btn" data-content-tab="quick-prompts">🤖 برومبتات AI</button>
+    <button class="admin-nav-btn" data-content-tab="quick-complaints">📩 الرسائل والشكاوى</button>
+    
+    <a href="/admin/index.html" class="admin-nav-btn" style="margin-top:20px;border:1px solid rgba(255,32,39,0.3)">👑 لوحة التحكم الرئيسية (Super Admin)</a>
+    <a href="/" target="_blank" class="admin-nav-btn" style="margin-top:10px">عرض الموقع ↗</a>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-header">
+      <h1 id="contentTabTitle">🎤 إضافة صوتية أو شيلة جديدة</h1>
+    </div>
+
+    <div id="contentTabBody" class="admin-card">
+      <form id="quickAudioForm">
+        <div class="field">
+          <label>عنوان القصيدة أو الشيلة (عربي)</label>
+          <input type="text" name="titleAr" placeholder="مثال: قصيدة منبر التميز" required>
+        </div>
+        <div class="field">
+          <label>عنوان القصيدة أو الشيلة (English)</label>
+          <input type="text" name="titleEn" placeholder="Poem of Excellence">
+        </div>
+        <div class="field">
+          <label>التصنيف</label>
+          <select name="category">
+            <option value="قصائد">قصائد</option>
+            <option value="شيلات">شيلات</option>
+            <option value="إنشاد">إنشاد</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>رابط الصوت أو اسم الملف</label>
+          <input type="text" name="src" placeholder="/assets/sample.mp3" required>
+        </div>
+        <button type="submit" class="btn btn-primary">حفظ ونشر الصوتية فوراً 🚀</button>
+      </form>
+    </div>
+  </main>
+</div>
+
+<script src="/admin/js/admin.js"></script>
+</body>
+</html>

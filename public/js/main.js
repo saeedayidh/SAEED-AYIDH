@@ -706,6 +706,34 @@ async function init() {
   }
 
   setupContactForms();
+  setupCardGenerator();
+  setupPromptCopying();
+}
+
+function setupCardGenerator() {
+  const cardInput = document.getElementById('cardUserNameInput');
+  const cardOverlay = document.getElementById('cardNameOverlay');
+  if (cardInput && cardOverlay) {
+    cardInput.addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      cardOverlay.textContent = val ? val : 'اسمك هنا';
+    });
+  }
+}
+
+function setupPromptCopying() {
+  document.querySelectorAll('.copy-prompt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const promptText = btn.getAttribute('data-prompt');
+      if (promptText) {
+        navigator.clipboard.writeText(promptText).then(() => {
+          const orig = btn.textContent;
+          btn.textContent = 'تم النسخ بنجاح! ✓';
+          setTimeout(() => btn.textContent = orig, 2000);
+        });
+      }
+    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', init);

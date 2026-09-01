@@ -1,15 +1,30 @@
 {
-  "name": "saeed-bin-ayidh-site",
+  "name": "saeed-portfolio",
   "version": "1.0.0",
-  "description": "Personal/portfolio website + admin dashboard for Saeed bin Ayidh (zero external dependencies, pure Node.js)",
-  "main": "server.js",
-  "type": "commonjs",
-  "engines": {
-    "node": ">=18"
-  },
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "dependencies": {}
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.0",
+    "autoprefixer": "^10.5.4",
+    "lucide-react": "^1.34.0",
+    "postcss": "^8.5.26",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
+  }
 }

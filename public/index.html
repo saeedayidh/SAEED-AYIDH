@@ -65,23 +65,131 @@
 <section class="hero" id="home">
   <div class="wrap hero-grid">
     <div class="hero-text reveal">
-      <span class="eyebrow" data-i18n="eyebrow_hero"></span>
-      <h1 id="heroName"></h1>
-      <p class="greet" id="heroTagline"></p>
-      <div class="hero-cta">
-        <a href="#social" class="pill-btn solid" data-i18n="hero_explore"></a>
-        <a href="#contact" class="pill-btn outline" data-i18n="hero_contact"></a>
+      <span class="eyebrow" data-i18n="eyebrow_hero">الموقع الرسمي</span>
+      <h1 id="heroName"><span class="accent">سعيد بن عايض</span></h1>
+      <p class="greet" id="heroTagline">شاعر، منشد، راوي قصص، قيمر، وفلوقر</p>
+      <div class="hero-cta" id="heroCtaWrap">
+        <a href="#domains" class="pill-btn solid" data-i18n="hero_explore">استكشف المجالات ✦</a>
+        <a href="#contact" class="pill-btn outline" data-i18n="hero_contact">تواصل معي ✉️</a>
       </div>
     </div>
     <div class="hero-cover reveal">
       <div class="cover-glow" aria-hidden="true"></div>
       <div class="cover-frame" id="coverFrame">
-        <img src="/assets/avatar.jpg" id="heroAvatar" alt="">
+        <img src="/assets/sba_official_avatar.jpg" id="heroAvatar" alt="سعيد بن عايض">
         <div class="cover-shine" id="coverShine"></div>
         <div class="cover-badge">
           <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          <span data-i18n="live_label"></span>
+          <span data-i18n="live_label">متصل الآن</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- شبكة مجالات سعيد بن عايض الأربعة -->
+<section id="domains" class="domains-section">
+  <div class="wrap">
+    <div class="sec-head reveal text-center">
+      <span class="eyebrow">👑 مجالات الإبداع</span>
+      <h2>مجالات سعيد بن عايض الأربعة</h2>
+      <p class="sub-lead">اختر المجال واستكشف كافة الأعمال والقصائد والفلوقات والألعاب</p>
+    </div>
+    <div class="domains-grid" id="domainsGrid">
+      <div class="domain-card spot reveal">
+        <div class="domain-badge">🎙️</div>
+        <img src="/assets/sba_official_avatar.jpg" class="domain-avatar" alt="سعيد بن عايض">
+        <h3>سعيد بن عايض</h3>
+        <p class="domain-tagline">القصائد والألحان والشيلات</p>
+        <a href="/audio.html" class="pill-btn solid btn-full">استكشف القصائد والشيلات ↗</a>
+      </div>
+      <div class="domain-card spot reveal">
+        <div class="domain-badge">📖</div>
+        <img src="/assets/sba_official_avatar.jpg" class="domain-avatar" alt="قصص سعيد">
+        <h3>قصص سعيد</h3>
+        <p class="domain-tagline">حكايات وقصص تشدك</p>
+        <a href="/stories.html" class="pill-btn solid btn-full">استكشف القصص ↗</a>
+      </div>
+      <div class="domain-card spot reveal">
+        <div class="domain-badge">🎥</div>
+        <img src="/assets/sba_official_avatar.jpg" class="domain-avatar" alt="فلوقات سعيد">
+        <h3>فلوقات سعيد</h3>
+        <p class="domain-tagline">مغامرات وتغطيات يومية</p>
+        <a href="/vlogs.html" class="pill-btn solid btn-full">استكشف الفلوقات ↗</a>
+      </div>
+      <div class="domain-card spot reveal">
+        <div class="domain-badge">🎮</div>
+        <img src="/assets/sba_official_avatar.jpg" class="domain-avatar" alt="سعيد اكسترا">
+        <h3>سعيد اكسترا</h3>
+        <p class="domain-tagline">بثوث وألعاب وتحديات</p>
+        <a href="/extra.html" class="pill-btn solid btn-full">استكشف الألعاب ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- مولّد بطاقات التهنئة والإهداءات المباشر (مستوحاة من a7.ae) -->
+<section id="cards-generator" class="cards-gen-section">
+  <div class="wrap">
+    <div class="sec-head reveal text-center">
+      <span class="eyebrow">💌 أداة تفاعلية</span>
+      <h2>بطاقات التهنئة والإهداءات المباشرة</h2>
+      <p class="sub-lead">اكتب اسمك ليظهر فوراً على بطاقة سعيد بن عايض وتنزيلها</p>
+    </div>
+    <div class="card-gen-box spot reveal">
+      <div class="card-preview-stage">
+        <img src="/assets/sba_official_banner.png" id="cardBgPreview" alt="card template">
+        <div class="card-name-overlay" id="cardNameOverlay">اسمك هنا</div>
+      </div>
+      <div class="card-form-controls">
+        <label>اكتب اسمك ليظهر على البطاقة:</label>
+        <input type="text" id="cardUserNameInput" placeholder="مثال: أحمد علي" maxlength="25">
+        <button class="pill-btn solid" id="downloadCardBtn">تنزيل البطاقة 📥</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- معرض الخلفيات وواجهات ساعة أبل (مستوحاة من a7.ae) -->
+<section id="wallpapers-section" class="wallpapers-section">
+  <div class="wrap">
+    <div class="sec-head reveal text-center">
+      <span class="eyebrow">🖼️ الوسائط والخلفيات</span>
+      <h2>الخلفيات وواجهات ساعة أبل (Apple Watch Faces)</h2>
+      <p class="sub-lead">تصفح وحمّل خلفيات دقة 4K وواجهات ساعات أبل الخاصة بـ سعيد بن عايض</p>
+    </div>
+    <div class="wallpapers-grid" id="wallpapersGrid">
+      <div class="wallpaper-item spot reveal">
+        <img src="/assets/sba_official_avatar.jpg" alt="wallpaper">
+        <div class="wp-meta">
+          <h4>سعيد بن عايض - الهوية الرسمية</h4>
+          <a href="/assets/sba_official_avatar.jpg" download class="pill-btn outline btn-sm">تحميل 4K 📥</a>
+        </div>
+      </div>
+      <div class="wallpaper-item spot reveal">
+        <img src="/assets/sba_official_logo.png" alt="logo wallpaper">
+        <div class="wp-meta">
+          <h4>شعار SBA Calligraphy White</h4>
+          <a href="/assets/sba_official_logo.png" download class="pill-btn outline btn-sm">تحميل 4K 📥</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- مكتبة برومبتات الذكاء الاصطناعي (مستوحاة من a7.ae) -->
+<section id="prompts-section" class="prompts-section">
+  <div class="wrap">
+    <div class="sec-head reveal text-center">
+      <span class="eyebrow">🤖 الذكاء الاصطناعي</span>
+      <h2>مكتبة برومبتات الذكاء الاصطناعي (AI Prompts)</h2>
+      <p class="sub-lead">انسخ أفضل التوجيهات لتوليد الصور والتصاميم بلمسة واحدة</p>
+    </div>
+    <div class="prompts-grid" id="promptsGrid">
+      <div class="prompt-card spot reveal">
+        <h3>Luxury SBA Branding Vector Prompt</h3>
+        <p class="prompt-snippet">Create a high-end vector illustration of Saeed bin Ayidh wearing sunglasses, dark jacket, crimson red background glow, 8k resolution...</p>
+        <button class="pill-btn outline copy-prompt-btn" data-prompt="Create a high-end vector illustration of Saeed bin Ayidh wearing sunglasses, dark jacket, crimson red background glow, 8k resolution, ultra detailed.">نسخ البرومبت 📋</button>
       </div>
     </div>
   </div>

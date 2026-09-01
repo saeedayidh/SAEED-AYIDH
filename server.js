@@ -39,7 +39,7 @@ setInterval(() => {
   for (const [k, v] of contactRateMap) { if (now > v.reset) contactRateMap.delete(k); }
 }, 300_000);
 
-const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'services', 'imageBanners', 'promoBanners', 'navSections', 'complaintCategories', 'footerPages'];
+const COLLECTIONS = ['stats', 'social', 'pages', 'faq', 'news', 'blog', 'gallery', 'services', 'imageBanners', 'promoBanners', 'navSections', 'complaintCategories', 'footerPages', 'domains', 'buttons', 'cards', 'wallpapers', 'watchfaces', 'prompts', 'audioWorks', 'storiesWorks', 'vlogsWorks', 'extraWorks'];
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -54,6 +54,10 @@ const MIME_TYPES = {
   '.webp': 'image/webp',
   '.mp4': 'video/mp4',
   '.webm': 'video/webm',
+  '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
+  '.m4a': 'audio/mp4',
+  '.ogg': 'audio/ogg',
   '.ico': 'image/x-icon',
   '.woff2': 'font/woff2'
 };
@@ -124,7 +128,17 @@ function publicData(data) {
     promoBanners: (data.promoBanners || []).filter(b => b.enabled !== false),
     navSections: (data.navSections || []).filter(n => n.visible !== false),
     complaintCategories: data.complaintCategories || [],
-    footerPages: (data.footerPages || []).map(fp => ({ id: fp.id, slug: fp.slug, name: fp.name }))
+    footerPages: (data.footerPages || []).map(fp => ({ id: fp.id, slug: fp.slug, name: fp.name })),
+    domains: data.domains || [],
+    buttons: data.buttons || [],
+    cards: data.cards || [],
+    wallpapers: data.wallpapers || [],
+    watchfaces: data.watchfaces || [],
+    prompts: data.prompts || [],
+    audioWorks: data.audioWorks || [],
+    storiesWorks: data.storiesWorks || [],
+    vlogsWorks: data.vlogsWorks || [],
+    extraWorks: data.extraWorks || []
   };
 }
 
