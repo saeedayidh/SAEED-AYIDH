@@ -2,6 +2,34 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const { execFileSync } = require('child_process');
+
+// Render is configured to run `node server.js` directly, so npm's prestart hook
+// is bypassed. Build the React/Vite frontend here before the server starts.
+const PROJECT_ROOT = __dirname;
+const DIST_INDEX = path.join(PROJECT_ROOT, 'dist', 'index.html');
+const VITE_BINARY = path.join(
+  PROJECT_ROOT,
+  'node_modules',
+  '.bin',
+  process.platform === 'win32' ? 'vite.cmd' : 'vite'
+);
+
+function ensureFrontendBuild() {
+  console.log('Building current Antigravity React frontend...');
+  if (!fs.existsSync(VITE_BINARY)) {
+    throw new Error('Vite is not installed; cannot build the React frontend.');
+  }
+  execFileSync(VITE_BINARY, ['build'], {
+    cwd: PROJECT_ROOT,
+    stdio: 'inherit'
+  });
+  if (!fs.existsSync(DIST_INDEX)) {
+    throw new Error('Frontend build completed without dist/index.html.');
+  }
+}
+
+ensureFrontendBuild();
 
 const store = require('./lib/store');
 const sessions = require('./lib/sessions');
@@ -208,34 +236,43 @@ function safeStaticPath(root, pathname) {
 }
 
 async function serveStatic(req, res, pathname) {
-  for (const root of [DIST_DIR, PUBLIC_DIR]) {
-    const filePath = safeStaticPath(root, pathname);
-    if (!filePath) continue;
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-      const ext = path.extname(filePath).toLowerCase();
-      setSecurityHeaders(res);
-      res.writeHead(200, {
-        'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
-        'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600'
-      });
-      fs.createReadStream(filePath).pipe(res);
-      return;
-    }
+  // Built React files always take priority.
+  const distFile = safeStaticPath(DIST_DIR, pathname);
+  if (distFile && fs.existsSync(distFile) && fs.statSync(distFile).isFile()) {
+    const ext = path.extname(distFile).toLowerCase();
+    setSecurityHeaders(res);
+    res.writeHead(200, {
+      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
+      'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600'
+    });
+    fs.createReadStream(distFile).pipe(res);
+    return;
   }
 
-  const distIndex = path.join(DIST_DIR, 'index.html');
-  const publicIndex = path.join(PUBLIC_DIR, 'index.html');
-  const indexPath = fs.existsSync(distIndex) ? distIndex : (fs.existsSync(publicIndex) ? publicIndex : null);
-  if (indexPath) {
+  // Allow static assets from public, but never serve legacy public HTML pages.
+  const publicFile = safeStaticPath(PUBLIC_DIR, pathname);
+  if (publicFile && fs.existsSync(publicFile) && fs.statSync(publicFile).isFile() && path.extname(publicFile).toLowerCase() !== '.html') {
+    const ext = path.extname(publicFile).toLowerCase();
     setSecurityHeaders(res);
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-    fs.createReadStream(indexPath).pipe(res);
+    res.writeHead(200, {
+      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
+      'Cache-Control': 'public, max-age=3600'
+    });
+    fs.createReadStream(publicFile).pipe(res);
+    return;
+  }
+
+  // SPA fallback must always be the current React build; never the legacy public/index.html.
+  if (fs.existsSync(DIST_INDEX)) {
+    setSecurityHeaders(res);
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store, no-cache, must-revalidate' });
+    fs.createReadStream(DIST_INDEX).pipe(res);
     return;
   }
 
   setSecurityHeaders(res);
-  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-  res.end('Not found');
+  res.writeHead(503, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' });
+  res.end('Frontend build unavailable');
 }
 
 async function handleApi(req, res, pathname) {
