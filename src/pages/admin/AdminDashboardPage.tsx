@@ -53,7 +53,9 @@ export const AdminDashboardPage: React.FC = () => {
   const {
     data,
     isAuthenticated,
+    authLoading,
     logout,
+    changePassword,
     updateTheme,
     resetThemeToDefault,
     updateGlobal,
@@ -162,6 +164,10 @@ export const AdminDashboardPage: React.FC = () => {
   const navLinks = data?.navbar?.links ?? [];
   const contentFieldsList = data?.contentFields ?? [];
   const pagesList = data?.pages ?? [];
+
+  if (authLoading) {
+    return <div className="min-h-screen bg-[#080808] flex items-center justify-center text-white text-sm">جارٍ التحقق من الجلسة الآمنة...</div>;
+  }
 
   if (!isAuthenticated) {
     return (
@@ -346,10 +352,15 @@ export const AdminDashboardPage: React.FC = () => {
   };
 
   // Password Change Handler
-  const handleChangePassword = (e: React.FormEvent) => {
+  const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newPass.length < 4) {
-      setPassMessage('كلمة المرور الجديدة يجب أن تكون 4 خانات على الأقل.');
+    if (newPass.length < 12) {
+      setPassMessage('كلمة المرور الجديدة يجب أن تكون 12 خانة على الأقل.');
+      return;
+    }
+    const ok = await changePassword(currentPass, newPass);
+    if (!ok) {
+      setPassMessage('تعذر تغيير كلمة المرور. تحقق من كلمة المرور الحالية.');
       return;
     }
     setPassMessage('تم تغيير كلمة المرور بنجاح وتأمين الحساب!');
