@@ -10,6 +10,26 @@ const { parseMultipart } = require('./lib/multipart');
 const { sendEmail } = require('./lib/mailer');
 
 const PORT = process.env.PORT || 3000;
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const loginAttempts = new Map();
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
+const LOGIN_MAX_ATTEMPTS = 8;
+
+function clientKey(req) {
+  return req.socket.remoteAddress || 'unknown';
+}
+function isLoginRateLimited(req) {
+  const key = clientKey(req);
+  const now = Date.now();
+  const current = loginAttempts.get(key);
+  if (!current || now - current.startedAt > LOGIN_WINDOW_MS) {
+    loginAttempts.set(key, { count: 1, startedAt: now });
+    return false;
+  }
+  current.count += 1;
+  return current.count > LOGIN_MAX_ATTEMPTS;
+}
+function clearLoginAttempts(req) { loginAttempts.delete(clientKey(req)); }
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const DIST_DIR = path.join(__dirname, 'dist');
 const UPLOADS_DIR = path.join(PUBLIC_DIR, 'uploads');
@@ -168,29 +188,64 @@ async function serveStatic(req, res, pathname) {
 async function handleApi(req, res, pathname, query) {
   const data = store.load();
 
+  // Migrate the legacy demo admin shipped by older versions. Never allow a known default account.
+  if (data.admin?.email === 'admin@example.com') {
+    if (process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD && process.env.ADMIN_PASSWORD.length >= 12) {
+      const { salt, hash } = store.hashPassword(process.env.ADMIN_PASSWORD);
+      data.admin = { email: process.env.ADMIN_EMAIL, salt, hash };
+      store.save();
+    } else {
+      data.admin = null;
+      store.save();
+    }
+  }
+
   if (pathname === '/api/data' && req.method === 'GET') {
     return sendJSON(res, 200, publicData(data));
   }
 
   if (pathname === '/api/admin/login' && req.method === 'POST') {
+    if (isLoginRateLimited(req)) return sendJSON(res, 429, { error: 'too_many_attempts' });
+    if (!data.admin) return sendJSON(res, 503, { error: 'admin_not_configured' });
     const body = await readJSON(req);
     const { email, password } = body;
     if (!email || !password) return sendJSON(res, 400, { error: 'invalid_input' });
-    if (email.toLowerCase() !== data.admin.email.toLowerCase()) {
+    if (email.toLowerCase() !== data.admin.email.toLowerCase() ||
+        !store.verifyPassword(password, data.admin.salt, data.admin.hash)) {
       return sendJSON(res, 401, { error: 'invalid_credentials' });
     }
-    if (!store.verifyPassword(password, data.admin.salt, data.admin.hash)) {
-      return sendJSON(res, 401, { error: 'invalid_credentials' });
-    }
+    clearLoginAttempts(req);
     const token = sessions.createSession(data.admin.email);
-    res.setHeader('Set-Cookie', `sid=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=Lax`);
+    res.setHeader('Set-Cookie', `sid=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=Strict${IS_PRODUCTION ? '; Secure' : ''}`);
     return sendJSON(res, 200, { ok: true, email: data.admin.email });
+  }
+
+  if (pathname === '/api/admin/session' && req.method === 'GET') {
+    const session = getAuthSession(req);
+    return sendJSON(res, 200, { authenticated: !!session, email: session?.email || null });
   }
 
   if (pathname === '/api/admin/logout' && req.method === 'POST') {
     const cookies = sessions.parseCookies(req);
     sessions.destroySession(cookies.sid);
-    res.setHeader('Set-Cookie', 'sid=; HttpOnly; Path=/; Max-Age=0');
+    res.setHeader('Set-Cookie', `sid=; HttpOnly; Path=/; Max-Age=0; SameSite=Strict${IS_PRODUCTION ? '; Secure' : ''}`);
+    return sendJSON(res, 200, { ok: true });
+  }
+
+  if (pathname === '/api/admin/change-password' && req.method === 'POST') {
+    if (!requireAuth(req, res)) return;
+    if (!data.admin) return sendJSON(res, 503, { error: 'admin_not_configured' });
+    const body = await readJSON(req);
+    const { currentPassword, newPassword } = body;
+    if (!currentPassword || !newPassword || newPassword.length < 12) {
+      return sendJSON(res, 400, { error: 'invalid_password', minLength: 12 });
+    }
+    if (!store.verifyPassword(currentPassword, data.admin.salt, data.admin.hash)) {
+      return sendJSON(res, 401, { error: 'invalid_credentials' });
+    }
+    const { salt, hash } = store.hashPassword(newPassword);
+    data.admin = { ...data.admin, salt, hash };
+    store.save();
     return sendJSON(res, 200, { ok: true });
   }
 

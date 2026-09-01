@@ -4,18 +4,23 @@ import { useCMS } from '../../context/CMSContext';
 import { Lock, ShieldCheck, ArrowLeft } from 'lucide-react';
 
 export const AdminLoginPage: React.FC = () => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { login } = useCMS();
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (login(password)) {
+    setLoading(true);
+    setError('');
+    if (await login(email, password)) {
       navigate('/admin');
     } else {
-      setError('كلمة المرور غير صحيحة. حاول مرة أخرى.');
+      setError('تعذر تسجيل الدخول. تحقق من البريد وكلمة المرور وحاول مرة أخرى.');
     }
+    setLoading(false);
   };
 
   return (
@@ -31,32 +36,41 @@ export const AdminLoginPage: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
+            <label className="text-xs font-bold text-gray-300 block">البريد الإلكتروني</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setError(''); }}
+              placeholder="بريد حساب الإدارة..."
+              autoComplete="username"
+              className="w-full px-4 py-3.5 rounded-xl bg-[#080808] border border-white/10 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#D51F2B]"
+              required
+            />
+          </div>
+          <div className="space-y-2">
             <label className="text-xs font-bold text-gray-300 block">كلمة المرور المشفرة</label>
             <input
               type="password"
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                setError('');
-              }}
+              onChange={(e) => { setPassword(e.target.value); setError(''); }}
               placeholder="أدخل كلمة مرور الإدارة..."
+              autoComplete="current-password"
               className="w-full px-4 py-3.5 rounded-xl bg-[#080808] border border-white/10 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#D51F2B]"
               required
             />
           </div>
 
           {error && (
-            <p className="text-xs text-[#D51F2B] font-semibold bg-[#220709] p-3 rounded-lg border border-[#D51F2B]/30">
-              {error}
-            </p>
+            <p className="text-xs text-[#D51F2B] font-semibold bg-[#220709] p-3 rounded-lg border border-[#D51F2B]/30">{error}</p>
           )}
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full py-3.5 rounded-xl bg-[#D51F2B] hover:bg-[#B5121B] text-white text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 shadow-red-glow"
           >
             <ShieldCheck className="w-4 h-4" />
-            <span>تسجيل الدخول للوحة التحكم</span>
+            <span>{loading ? 'جارٍ التحقق...' : 'تسجيل الدخول للوحة التحكم'}</span>
           </button>
         </form>
 
