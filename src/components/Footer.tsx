@@ -7,16 +7,14 @@ export const Footer: React.FC = () => {
   return (
     <footer className="relative bg-[#050505] border-t border-white/10 text-gray-400 text-xs pt-12 sm:pt-16 pb-10">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 mb-10 sm:mb-14 text-right" dir="rtl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10 mb-10 sm:mb-14 text-right" dir="rtl">
           <div className="space-y-4">
             <Link to="/" className="inline-block py-1">
               <img src="/assets/sba_logo_transparent.png" alt={siteData.brand.name} className="h-16 sm:h-20 w-auto max-w-[180px] object-contain filter drop-shadow-[0_0_18px_rgba(213,31,43,0.8)]" />
             </Link>
             <p className="text-gray-400 leading-relaxed font-light text-xs max-w-sm">{siteData.brand.footerMotto}</p>
-            <div className="pt-2">
-              <a href={`mailto:${siteData.brand.email}`} className="text-xs font-mono font-bold text-[#D51F2B] hover:underline block mb-3">{siteData.brand.email}</a>
-              <Link to="/contact" className="sba-btn-primary w-full sm:w-auto py-3 px-6 text-xs flex items-center justify-center gap-2 text-center"><Send className="w-3.5 h-3.5" /><span>تواصل معنا</span></Link>
-            </div>
+            <a href={`mailto:${siteData.brand.email}`} className="text-xs font-mono font-bold text-[#D51F2B] hover:underline block">{siteData.brand.email}</a>
+            <Link to="/contact" className="sba-btn-primary w-full sm:w-auto py-3 px-6 text-xs flex items-center justify-center gap-2 text-center"><Send className="w-3.5 h-3.5" /><span>تواصل معنا</span></Link>
           </div>
 
           <div className="space-y-4">
@@ -28,7 +26,15 @@ export const Footer: React.FC = () => {
               <li><a href="/#work-fields" className="hover:text-[#D51F2B]">مجالات العمل</a></li>
               <li><Link to="/services" className="hover:text-[#D51F2B]">خدمات سعيد</Link></li>
               <li><Link to="/news" className="hover:text-[#D51F2B]">أخبار سعيد</Link></li>
+              <li><Link to="/works" className="hover:text-[#D51F2B]">أعمال سعيد</Link></li>
               <li><Link to="/blog" className="hover:text-[#D51F2B]">بلوق سعيد</Link></li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-sm font-bold text-white pb-2 border-b border-white/10">أدوات سعيد</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/resources" className="hover:text-[#D51F2B]">عرض أدوات سعيد</Link></li>
             </ul>
           </div>
 
