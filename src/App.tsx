@@ -26,6 +26,7 @@ import { TermsPage } from './pages/TermsPage';
 // Admin Dashboard & Auth
 import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+import { AdminResponsiveShell } from './components/admin/AdminResponsiveShell';
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -86,8 +87,8 @@ const MainLayout: React.FC = () => {
 
           {/* Admin Protected Routes */}
           <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route path="/admin" element={<AdminDashboardPage />} />
-          <Route path="/admin/*" element={<AdminDashboardPage />} />
+          <Route path="/admin" element={<AdminResponsiveShell><AdminDashboardPage /></AdminResponsiveShell>} />
+          <Route path="/admin/*" element={<AdminResponsiveShell><AdminDashboardPage /></AdminResponsiveShell>} />
         </Routes>
       </main>
 
