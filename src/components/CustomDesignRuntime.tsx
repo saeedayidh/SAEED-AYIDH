@@ -1,32 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { useCMS } from '../context/CMSContext';
+
+const escapeClosingScript = (value: string) => value.replace(/<\/script/gi, '<\\/script');
 
 export const CustomDesignRuntime: React.FC = () => {
   const { data } = useCMS();
   const design: any = (data.global as any).customDesign || {};
 
-  useEffect(() => {
-    let style = document.getElementById('sba-custom-css') as HTMLStyleElement | null;
-    if (!style) {
-      style = document.createElement('style');
-      style.id = 'sba-custom-css';
-      document.head.appendChild(style);
-    }
-    style.textContent = design.css || '';
-    return () => { if (style) style.textContent = ''; };
-  }, [design.css]);
+  const srcDoc = useMemo(() => {
+    const html = String(design.html || '');
+    const css = String(design.css || '');
+    const js = escapeClosingScript(String(design.js || ''));
+    return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;background:transparent}${css}</style></head><body>${html}<script>${js}<\/script></body></html>`;
+  }, [design.html, design.css, design.js]);
 
-  useEffect(() => {
-    const old = document.getElementById('sba-custom-js');
-    old?.remove();
-    if (!design.js) return;
-    const script = document.createElement('script');
-    script.id = 'sba-custom-js';
-    script.textContent = design.js;
-    document.body.appendChild(script);
-    return () => script.remove();
-  }, [design.js]);
+  if (!design.enabled || (!design.html && !design.css && !design.js)) return null;
 
-  if (!design.enabled || !design.html) return null;
-  return <div id="sba-custom-html" dangerouslySetInnerHTML={{ __html: design.html }} />;
+  return (
+    <iframe
+      title="التصميم المخصص"
+      sandbox="allow-scripts"
+      srcDoc={srcDoc}
+      referrerPolicy="no-referrer"
+      className="block w-full border-0 bg-transparent"
+      style={{ minHeight: 320 }}
+    />
+  );
 };
