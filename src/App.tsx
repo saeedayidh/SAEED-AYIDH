@@ -22,91 +22,31 @@ import { SuggestionPage } from './pages/SuggestionPage';
 import { ComplaintPage } from './pages/ComplaintPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
-
-// Admin Dashboard & Auth
 import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
 import { AdminResponsiveShell } from './components/admin/AdminResponsiveShell';
+import { AdminEnhancements } from './components/admin/AdminEnhancements';
 
-const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-};
+const ScrollToTop: React.FC = () => { const { pathname } = useLocation(); useEffect(() => { window.scrollTo(0, 0); }, [pathname]); return null; };
+const AdminPanel = () => <AdminResponsiveShell><AdminEnhancements><AdminDashboardPage /></AdminEnhancements></AdminResponsiveShell>;
 
 const MainLayout: React.FC = () => {
-  const { pathname } = useLocation();
-  const isAdminRoute = pathname.startsWith('/admin');
-
-  return (
-    <div className="min-h-screen bg-[#080808] text-white font-cairo antialiased selection:bg-[#B5121B] selection:text-white flex flex-col justify-between">
-      {/* Sticky Global Navbar (Hidden on Admin routes) */}
-      {!isAdminRoute && <Navbar />}
-
-      {/* Dynamic Route Pages */}
-      <main className="grow">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-
-          {/* Content Fields Detail Routes */}
-          <Route path="/content/:slug" element={<ContentFieldDetailPage />} />
-
-          {/* Services Routes */}
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/services/:id" element={<ServiceDetailPage />} />
-
-          {/* News Routes */}
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="/news/:slug" element={<NewsDetailPage />} />
-
-          {/* Blog Routes */}
-          <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogDetailPage />} />
-
-          {/* Works / Portfolio Routes */}
-          <Route path="/works" element={<WorksPage />} />
-          <Route path="/work/:slug" element={<WorkDetailPage />} />
-
-          {/* Resources & Tools Routes */}
-          <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/resources/:sub" element={<ResourcesPage />} />
-          <Route path="/tools/:slug" element={<ToolDetailPage />} />
-
-          {/* Help & Contact Routes */}
-          <Route path="/centerhelp" element={<CenterHelpPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/suggestion" element={<SuggestionPage />} />
-          <Route path="/complaint" element={<ComplaintPage />} />
-          <Route path="/privacy" element={<PrivacyPage />} />
-          <Route path="/terms" element={<TermsPage />} />
-
-          {/* Admin Protected Routes */}
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route path="/admin" element={<AdminResponsiveShell><AdminDashboardPage /></AdminResponsiveShell>} />
-          <Route path="/admin/*" element={<AdminResponsiveShell><AdminDashboardPage /></AdminResponsiveShell>} />
-        </Routes>
-      </main>
-
-      {/* Global Footer (Hidden on Admin routes) */}
-      {!isAdminRoute && <Footer />}
-    </div>
-  );
+  const { pathname } = useLocation(); const isAdminRoute = pathname.startsWith('/admin');
+  return <div className="min-h-screen bg-[#080808] text-white font-cairo antialiased selection:bg-[#B5121B] selection:text-white flex flex-col justify-between">
+    {!isAdminRoute && <Navbar />}
+    <main className="grow"><Routes>
+      <Route path="/" element={<HomePage />} /><Route path="/about" element={<AboutPage />} />
+      <Route path="/content/:slug" element={<ContentFieldDetailPage />} />
+      <Route path="/services" element={<ServicesPage />} /><Route path="/services/:id" element={<ServiceDetailPage />} />
+      <Route path="/news" element={<NewsPage />} /><Route path="/news/:slug" element={<NewsDetailPage />} />
+      <Route path="/blog" element={<BlogPage />} /><Route path="/blog/:slug" element={<BlogDetailPage />} />
+      <Route path="/works" element={<WorksPage />} /><Route path="/work/:slug" element={<WorkDetailPage />} />
+      <Route path="/resources" element={<ResourcesPage />} /><Route path="/resources/:sub" element={<ResourcesPage />} /><Route path="/tools/:slug" element={<ToolDetailPage />} />
+      <Route path="/centerhelp" element={<CenterHelpPage />} /><Route path="/contact" element={<ContactPage />} /><Route path="/suggestion" element={<SuggestionPage />} /><Route path="/complaint" element={<ComplaintPage />} /><Route path="/privacy" element={<PrivacyPage />} /><Route path="/terms" element={<TermsPage />} />
+      <Route path="/admin/login" element={<AdminLoginPage />} /><Route path="/admin" element={<AdminPanel />} /><Route path="/admin/*" element={<AdminPanel />} />
+    </Routes></main>
+    {!isAdminRoute && <Footer />}
+  </div>;
 };
-
-export function App() {
-  return (
-    <CMSProvider>
-      <Router>
-        <ScrollToTop />
-        <MainLayout />
-      </Router>
-    </CMSProvider>
-  );
-}
-
+export function App(){return <CMSProvider><Router><ScrollToTop/><MainLayout/></Router></CMSProvider>}
 export default App;
