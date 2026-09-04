@@ -9,6 +9,7 @@ import { PortfolioSection } from '../components/PortfolioSection';
 import { HelpAndBlogSection } from '../components/HelpAndBlogSection';
 import { ActionCardsSection } from '../components/ActionCardsSection';
 import { FinalContactCta } from '../components/FinalContactCta';
+import { SaeedPlatformSection } from '../components/SaeedPlatformSection';
 
 export const HomePage: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ export const HomePage: React.FC = () => {
       <NewsSection />
       <ResourcesSection />
       <PortfolioSection />
+      <SaeedPlatformSection />
       <FinalContactCta />
       <HelpAndBlogSection />
       <ActionCardsSection />
