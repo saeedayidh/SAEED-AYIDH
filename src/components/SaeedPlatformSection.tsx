@@ -7,39 +7,8 @@ export type PlatformItem = { id:string; title:string; description:string; badge:
 export type SaeedPlatform = { enabled:boolean; badge:string; title:string; description:string; items:PlatformItem[] };
 
 export const defaultPlatformItems: PlatformItem[] = [
- ['now','سعيد الآن','آخر ما نزل من قصص وفلوقات وشيلات وبثوث ومشاريع.','الآن'],
- ['content','مركز المحتوى','بوابة تجمع القصص والفلوقات والقصائد والشيلات والقيمينق.','المحتوى'],
- ['archive','أرشيف سعيد','خط زمني مرتب لأعمال ومشاريع سعيد من البداية إلى اليوم.','الأرشيف'],
- ['play','Saeed Play','الألعاب والبثوث والكليبات وأبرز لحظات القيمينق.','Gaming'],
- ['stories','قصص سعيد','مكتبة قصص بتصنيفات وأغلفة وصفحات مستقلة.','القصص'],
- ['music','سعيد ميوزك','القصائد والشيلات والأعمال الصوتية في مكان واحد.','الصوت'],
- ['frame','Saeed Frame','خدمات التصوير والتغطيات والباقات ونماذج الأعمال.','التصوير'],
- ['newsroom','غرفة الأخبار','إعلانات المشاريع والتحديثات والأعمال القادمة.','الأخبار'],
- ['schedule','جدول سعيد','المقاطع والبثوث والمشاريع والفعاليات القادمة.','القادم'],
- ['countdown','عداد الإطلاق','عداد تنازلي لأي عمل أو مشروع جديد.','Countdown'],
- ['numbers','أعمالي بالأرقام','إحصائيات المحتوى والمشاريع والخبرة والتغطيات.','الأرقام'],
- ['projects','خريطة المشاريع','عرض مشاريع سعيد وعلاقة كل مشروع بالهوية الرئيسية.','المشاريع'],
- ['accounts','مركز الحسابات','الحسابات الرسمية مرتبة ومميزة.','الحسابات'],
- ['channels','مركز القنوات','قنوات يوتيوب وتخصص كل قناة وأحدث محتواها.','القنوات'],
- ['id','Saeed ID','بطاقة رقمية شخصية قابلة للمشاركة مع QR وروابط.','الهوية'],
- ['press','Press Kit','ملف إعلامي جاهز للشركات والجهات.','الإعلام'],
- ['collab','طلب تعاون','نموذج للشركات والأفراد للإعلانات والتغطيات والتعاون.','التعاون'],
- ['orders','حالة الطلب','متابعة حالة طلبات الخدمات من الإرسال حتى الاكتمال.','الطلبات'],
- ['ideas','اقتراح محتوى','استقبال اقتراحات القصص والفلوقات والألعاب والمقاطع.','اقتراح'],
- ['polls','تصويت الجمهور','تصويت الجمهور على المحتوى القادم والاختيارات.','التصويت'],
- ['questions','أسئلة سعيد','استقبال أسئلة الجمهور وعرض الإجابات المختارة.','Q&A'],
- ['wallpapers','خلفيات سعيد','مكتبة خلفيات للجوال والكمبيوتر.','الخلفيات'],
- ['tools','أدوات سعيد','برومبتات واختصارات وقوالب وفلاتر وموارد.','الأدوات'],
- ['labs','Saeed Labs','تجارب الذكاء الاصطناعي والواجهات والأفكار الجديدة.','Labs'],
- ['ai','Saeed AI','أدوات ذكاء اصطناعي صغيرة تحمل هوية سعيد.','AI'],
- ['search','البحث الشامل','بحث واحد داخل القصص والأخبار والبلوق والأعمال والأدوات.','البحث'],
- ['favorites','المفضلة','حفظ المحتوى والأدوات للرجوع لها لاحقًا.','المفضلة'],
- ['cinema','الوضع السينمائي','تجربة مشاهدة وقراءة مظلمة ومركزة للمحتوى.','Cinema'],
- ['whatsnew','وش الجديد؟','عرض آخر إضافات وتحديثات الموقع.','Updates'],
- ['notify','إشعارات سعيد','اختيار أنواع المحتوى التي يريد الزائر متابعتها.','الإشعارات'],
- ['analytics','لوحة الإحصائيات','إحصائيات الإدارة عن الزيارات والاستخدام والطلبات.','Analytics'],
- ['world','عالم سعيد','شاهدني، اعرفني، اعمل معي، واستخدم أدواتي في بوابة واحدة.','Saeed World']
- ].map((x,i)=>({id:x[0],title:x[1],description:x[2],badge:x[3],imageUrl:'',videoUrl:'',enabled:true,order:i+1,buttons:[{label:'استكشف',url:'#',enabled:true}]}));
+ ['now','سعيد الآن','آخر ما نزل من قصص وفلوقات وشيلات وبثوث ومشاريع.','الآن'],['content','مركز المحتوى','بوابة تجمع القصص والفلوقات والقصائد والشيلات والقيمينق.','المحتوى'],['archive','أرشيف سعيد','خط زمني مرتب لأعمال ومشاريع سعيد من البداية إلى اليوم.','الأرشيف'],['play','Saeed Play','الألعاب والبثوث والكليبات وأبرز لحظات القيمينق.','Gaming'],['stories','قصص سعيد','مكتبة قصص بتصنيفات وأغلفة وصفحات مستقلة.','القصص'],['music','سعيد ميوزك','القصائد والشيلات والأعمال الصوتية في مكان واحد.','الصوت'],['frame','Saeed Frame','خدمات التصوير والتغطيات والباقات ونماذج الأعمال.','التصوير'],['newsroom','غرفة الأخبار','إعلانات المشاريع والتحديثات والأعمال القادمة.','الأخبار'],['schedule','جدول سعيد','المقاطع والبثوث والمشاريع والفعاليات القادمة.','القادم'],['countdown','عداد الإطلاق','عداد تنازلي لأي عمل أو مشروع جديد.','Countdown'],['numbers','أعمالي بالأرقام','إحصائيات المحتوى والمشاريع والخبرة والتغطيات.','الأرقام'],['projects','خريطة المشاريع','عرض مشاريع سعيد وعلاقة كل مشروع بالهوية الرئيسية.','المشاريع'],['accounts','مركز الحسابات','الحسابات الرسمية مرتبة ومميزة.','الحسابات'],['channels','مركز القنوات','قنوات يوتيوب وتخصص كل قناة وأحدث محتواها.','القنوات'],['id','Saeed ID','بطاقة رقمية شخصية قابلة للمشاركة مع QR وروابط.','الهوية'],['press','Press Kit','ملف إعلامي جاهز للشركات والجهات.','الإعلام'],['collab','طلب تعاون','نموذج للشركات والأفراد للإعلانات والتغطيات والتعاون.','التعاون'],['orders','حالة الطلب','متابعة حالة طلبات الخدمات من الإرسال حتى الاكتمال.','الطلبات'],['ideas','اقتراح محتوى','استقبال اقتراحات القصص والفلوقات والألعاب والمقاطع.','اقتراح'],['polls','تصويت الجمهور','تصويت الجمهور على المحتوى القادم والاختيارات.','التصويت'],['questions','أسئلة سعيد','استقبال أسئلة الجمهور وعرض الإجابات المختارة.','Q&A'],['wallpapers','خلفيات سعيد','مكتبة خلفيات للجوال والكمبيوتر.','الخلفيات'],['tools','أدوات سعيد','برومبتات واختصارات وقوالب وفلاتر وموارد.','الأدوات'],['labs','Saeed Labs','تجارب الذكاء الاصطناعي والواجهات والأفكار الجديدة.','Labs'],['ai','Saeed AI','أدوات ذكاء اصطناعي صغيرة تحمل هوية سعيد.','AI'],['search','البحث الشامل','بحث واحد داخل القصص والأخبار والبلوق والأعمال والأدوات.','البحث'],['favorites','المفضلة','حفظ المحتوى والأدوات للرجوع لها لاحقًا.','المفضلة'],['cinema','الوضع السينمائي','تجربة مشاهدة وقراءة مظلمة ومركزة للمحتوى.','Cinema'],['whatsnew','وش الجديد؟','عرض آخر إضافات وتحديثات الموقع.','Updates'],['notify','إشعارات سعيد','اختيار أنواع المحتوى التي يريد الزائر متابعتها.','الإشعارات'],['analytics','لوحة الإحصائيات','إحصائيات الإدارة عن الزيارات والاستخدام والطلبات.','Analytics'],['world','عالم سعيد','شاهدني، اعرفني، اعمل معي، واستخدم أدواتي في بوابة واحدة.','Saeed World']
+ ].map((x,i)=>({id:x[0],title:x[1],description:x[2],badge:x[3],imageUrl:'',videoUrl:'',enabled:true,order:i+1,buttons:[{label:'استكشف',url:`/saeed/${x[0]}`,enabled:true}]}));
 
 export const defaultSaeedPlatform:SaeedPlatform={enabled:true,badge:'عالم سعيد',title:'كل شيء يخص سعيد في مكان واحد',description:'منصة شخصية تجمع المحتوى والأعمال والخدمات والأدوات والمشاريع والتفاعل مع الجمهور.',items:defaultPlatformItems};
 
@@ -47,14 +16,5 @@ export const SaeedPlatformSection:React.FC=()=>{
  const {data}=useCMS(); const platform:SaeedPlatform=(data.global as any).saeedPlatform||defaultSaeedPlatform;
  if(!platform.enabled)return null;
  const items=(platform.items||[]).filter(x=>x.enabled).sort((a,b)=>a.order-b.order);
- return <section id="saeed-world" className="relative overflow-hidden border-t border-white/5 bg-[#090909] py-20 sm:py-24" dir="rtl">
-  <div className="mx-auto max-w-7xl px-5 sm:px-8">
-   <div className="mb-12 max-w-3xl"><div className="mb-3 text-xs font-black tracking-[.18em] text-[#D51F2B]">{platform.badge}</div><h2 className="text-3xl font-black sm:text-5xl">{platform.title}</h2><p className="mt-4 leading-8 text-gray-400">{platform.description}</p></div>
-   <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{items.map(item=><article key={item.id} className="group overflow-hidden rounded-3xl border border-white/10 bg-[#111] transition hover:-translate-y-1 hover:border-[#D51F2B]/50">
-    {item.imageUrl&&<img src={item.imageUrl} alt={item.title} className="h-52 w-full object-cover"/>}
-    {item.videoUrl&&<div className="relative bg-black"><video src={item.videoUrl} controls playsInline preload="metadata" className="h-52 w-full object-cover"/><Play className="pointer-events-none absolute left-4 top-4 h-5 w-5 opacity-60"/></div>}
-    <div className="p-6"><span className="rounded-full bg-[#D51F2B]/10 px-3 py-1 text-[11px] font-black text-[#E52E3C]">{item.badge}</span><h3 className="mt-4 text-xl font-black">{item.title}</h3><p className="mt-3 min-h-14 text-sm leading-7 text-gray-400">{item.description}</p><div className="mt-5 flex flex-wrap gap-2">{(item.buttons||[]).filter(b=>b.enabled&&b.label).map((b,i)=><a key={`${item.id}-${i}`} href={b.url||'#'} className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2 text-xs font-bold transition hover:border-[#D51F2B] hover:text-[#E52E3C]">{b.label}<ArrowUpLeft className="h-3.5 w-3.5"/></a>)}</div></div>
-   </article>)}</div>
-  </div>
- </section>
+ return <section id="saeed-world" className="relative overflow-hidden border-t border-white/5 bg-[#090909] py-20 sm:py-24" dir="rtl"><div className="mx-auto max-w-7xl px-5 sm:px-8"><div className="mb-12 max-w-3xl"><div className="mb-3 text-xs font-black tracking-[.18em] text-[#D51F2B]">{platform.badge}</div><h2 className="text-3xl font-black sm:text-5xl">{platform.title}</h2><p className="mt-4 leading-8 text-gray-400">{platform.description}</p></div><div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{items.map(item=><article key={item.id} className="group overflow-hidden rounded-3xl border border-white/10 bg-[#111] transition hover:-translate-y-1 hover:border-[#D51F2B]/50">{item.imageUrl&&<img src={item.imageUrl} alt={item.title} className="h-52 w-full object-cover"/>}{item.videoUrl&&<div className="relative bg-black"><video src={item.videoUrl} controls playsInline preload="metadata" className="h-52 w-full object-cover"/><Play className="pointer-events-none absolute left-4 top-4 h-5 w-5 opacity-60"/></div>}<div className="p-6"><span className="rounded-full bg-[#D51F2B]/10 px-3 py-1 text-[11px] font-black text-[#E52E3C]">{item.badge}</span><h3 className="mt-4 text-xl font-black">{item.title}</h3><p className="mt-3 min-h-14 text-sm leading-7 text-gray-400">{item.description}</p><div className="mt-5 flex flex-wrap gap-2">{(item.buttons||[]).filter(b=>b.enabled&&b.label).map((b,i)=><a key={`${item.id}-${i}`} href={b.url&&b.url!=='#'?b.url:`/saeed/${item.id}`} className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-4 py-2 text-xs font-bold transition hover:border-[#D51F2B] hover:text-[#E52E3C]">{b.label}<ArrowUpLeft className="h-3.5 w-3.5"/></a>)}</div></div></article>)}</div></div></section>
 };
