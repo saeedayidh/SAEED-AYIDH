@@ -2,30 +2,5 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Briefcase, ChevronLeft } from 'lucide-react';
 import { useCMS } from '../context/CMSContext';
-
-export const PortfolioSection: React.FC = () => {
-  const { data } = useCMS();
-  const section = data.sections.find(s => s.id === 'portfolio');
-  if (section && !section.isVisible) return null;
-
-  return (
-    <section id="portfolio-section" className="py-24 relative bg-[#080808] border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#191919] border border-white/10 text-xs font-semibold text-[#D51F2B]">
-            <Briefcase className="w-3.5 h-3.5" />
-            <span>{section?.badge || 'معرض الأعمال'}</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">{section?.title || 'أعمال سعيد'}</h2>
-          <p className="text-base sm:text-lg text-[#B8B8B8] font-light leading-relaxed">
-            {section?.subtitle || 'هذا القسم مخصص لأعمال سعيد الحقيقية فقط.'}
-          </p>
-          <Link to="/works" className="sba-btn-secondary px-6 py-2.5 text-xs flex items-center gap-2 mt-2">
-            <span>استكشف أعمالي</span>
-            <ChevronLeft className="w-4 h-4 text-[#D51F2B]" />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-};
+import { FavoriteButton } from './FavoriteButton';
+export const PortfolioSection:React.FC=()=>{const{data}=useCMS();const section=data.sections.find(s=>s.id==='portfolio');if(section&&!section.isVisible)return null;const demo=[{id:'demo-work-1',title:'حملة تسويقية تجريبية',desc:'نموذج عمل تجريبي يوضح طريقة عرض المشروع والنتائج.'},{id:'demo-work-2',title:'واجهة مشروع تجريبية',desc:'نموذج لتصميم واجهة رقمية مع تفاصيل مختصرة.'},{id:'demo-work-3',title:'تغطية فعالية تجريبية',desc:'نموذج لتغطية ميدانية مع معلومات العمل.'}];return <section id="portfolio-section" className="py-24 relative bg-[#080808] border-t border-white/5"><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div className="flex flex-col items-center text-center space-y-4 max-w-3xl mx-auto mb-12"><div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#191919] border border-white/10 text-xs font-semibold text-[#D51F2B]"><Briefcase className="w-3.5 h-3.5"/><span>{section?.badge||'معرض الأعمال'}</span></div><h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">{section?.title||'أعمال سعيد'}</h2><p className="text-base sm:text-lg text-[#B8B8B8] font-light leading-relaxed">{section?.subtitle||'هذا القسم مخصص لأعمال سعيد الحقيقية فقط.'}</p></div><div className="grid gap-5 md:grid-cols-3">{demo.map(x=><div key={x.id} className="sba-card relative overflow-hidden p-5"><FavoriteButton id={x.id} title={x.title} url="/works" type="عمل" className="absolute left-4 top-4 z-10"/><div className="mb-5 h-40 rounded-xl bg-[#080808] border border-white/10"/><h3 className="text-lg font-black">{x.title}</h3><p className="mt-2 text-xs leading-6 text-gray-500">{x.desc}</p><Link to="/works" className="mt-5 flex items-center justify-between border-t border-white/5 pt-4 text-xs font-semibold text-gray-400 hover:text-white"><span>استكشف العمل</span><ChevronLeft className="w-4 h-4 text-[#D51F2B]"/></Link></div>)}</div><div className="mt-8 flex justify-center"><Link to="/works" className="sba-btn-secondary px-6 py-2.5 text-xs flex items-center gap-2"><span>استكشف أعمالي</span><ChevronLeft className="w-4 h-4 text-[#D51F2B]"/></Link></div></div></section>};
