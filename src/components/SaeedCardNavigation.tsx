@@ -1,4 +1,5 @@
 import React,{useEffect}from'react';
+import{useNavigate}from'react-router-dom';
 
 const sectionTypes:Record<string,string>={
   'saeed-press':'إعلام',
@@ -9,8 +10,16 @@ const sectionTypes:Record<string,string>={
   'saeed-frame':'تغطية',
 };
 
+const cardAnchor=(sectionId:string,title:string)=>`${sectionId}-card-${encodeURIComponent(title)}`;
+
 export const SaeedCardNavigation:React.FC=()=>{
+  const navigate=useNavigate();
   useEffect(()=>{
+    const returnAnchor=sessionStorage.getItem('sba_return_card');
+    if(returnAnchor){
+      sessionStorage.removeItem('sba_return_card');
+      requestAnimationFrame(()=>setTimeout(()=>document.getElementById(returnAnchor)?.scrollIntoView({behavior:'auto',block:'center'}),80));
+    }
     const handler=(event:MouseEvent)=>{
       const target=event.target as HTMLElement|null;
       if(!target)return;
@@ -24,10 +33,13 @@ export const SaeedCardNavigation:React.FC=()=>{
       if(!title)return;
       event.preventDefault();
       const type=sectionTypes[section.id];
-      window.location.href=`/saeed-item/${encodeURIComponent(type)}/${encodeURIComponent(title)}`;
+      const anchor=cardAnchor(section.id,title);
+      card.id=anchor;
+      sessionStorage.setItem('sba_source_card',anchor);
+      navigate(`/saeed-item/${encodeURIComponent(type)}/${encodeURIComponent(title)}`,{state:{sourceAnchor:anchor}});
     };
     document.addEventListener('click',handler);
     return()=>document.removeEventListener('click',handler);
-  },[]);
+  },[navigate]);
   return null;
 };
