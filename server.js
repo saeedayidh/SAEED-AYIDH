@@ -59,7 +59,7 @@ function setSecurityHeaders(res) {
     "img-src 'self' data: blob: https:",
     "media-src 'self' data: blob: https:",
     "connect-src 'self'",
-    "frame-src 'self' data: blob:"
+    "frame-src 'self' data: blob: https://www.youtube.com https://www.youtube-nocookie.com"
   ].join('; '));
   if (IS_PRODUCTION) res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 }
