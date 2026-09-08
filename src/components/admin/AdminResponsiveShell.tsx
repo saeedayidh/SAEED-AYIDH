@@ -1,7 +1,8 @@
 import React,{useEffect,useState}from'react';
-import{PanelRightOpen,X,Languages,SlidersHorizontal,Blocks,LayoutGrid,Wand2}from'lucide-react';
+import{PanelRightOpen,X,Languages,SlidersHorizontal,Blocks,LayoutGrid,Wand2,Settings2}from'lucide-react';
 
 const toolLabels=[
+  {label:'إدارة متقدمة',icon:Settings2},
   {label:'إدارة أقسام سعيد',icon:LayoutGrid},
   {label:'إدارة المحتوى الكامل',icon:Blocks},
   {label:'إدارة الأقسام الخاصة',icon:Wand2},
