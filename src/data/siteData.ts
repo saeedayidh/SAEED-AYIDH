@@ -107,11 +107,10 @@ export const siteData = {
         '/assets/content_sheylat.png'
       ],
       videos: [
-        {
-          type: 'youtube',
-          url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-          title: 'قصة ملهمة من التاريخ الرقمي'
-        }
+        { type: 'youtube', url: 'https://www.youtube.com/embed/RH9GT02obZs', title: 'قصة سعيد 1' },
+        { type: 'youtube', url: 'https://www.youtube.com/embed/nUI5_SF2H1I', title: 'قصة سعيد 2' },
+        { type: 'youtube', url: 'https://www.youtube.com/embed/8pqFqO31qD8', title: 'قصة سعيد 3' },
+        { type: 'youtube', url: 'https://www.youtube.com/embed/s7oQPax82yk', title: 'قصة سعيد 4' }
       ],
       externalLinks: [
         { title: 'مكتبة البودكاست والقصص', url: 'https://spotify.com', type: 'external', badge: 'بودكاست' }
