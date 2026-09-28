@@ -199,6 +199,62 @@ export const siteData = {
 
   services: [
     {
+      id: 'saeed-design-logo',
+      title: 'تصميم شعار',
+      description: 'تصميم شعار احترافي.',
+      price: '250 ر.س',
+      category: 'خدمات سعيد ديزاين',
+      features: []
+    },
+    {
+      id: 'saeed-design-banner',
+      title: 'تصميم بنر',
+      description: 'تصميم بنر احترافي.',
+      price: '85 ر.س',
+      category: 'خدمات سعيد ديزاين',
+      features: []
+    },
+    {
+      id: 'saeed-design-post',
+      title: 'تصميم بوست',
+      description: 'تصميم بوست احترافي.',
+      price: '55 ر.س',
+      category: 'خدمات سعيد ديزاين',
+      features: []
+    },
+    {
+      id: 'saeed-design-story',
+      title: 'تصميم خلفية ستوري',
+      description: 'تصميم خلفية ستوري احترافية.',
+      price: '45 ر.س',
+      category: 'خدمات سعيد ديزاين',
+      features: []
+    },
+    {
+      id: 'saeed-design-ui',
+      title: 'تصميم واجهة مستخدم',
+      description: 'تصميم واجهة مستخدم احترافية.',
+      price: '1,350 ر.س',
+      category: 'خدمات سعيد ديزاين',
+      features: []
+    },
+    {
+      id: 'saeed-manager-social',
+      title: 'إدارة حسابات سوشل ميديا',
+      description: 'إدارة حسابات السوشل ميديا.',
+      price: '1,700 ر.س',
+      category: 'خدمات سعيد مانجر',
+      features: []
+    },
+    {
+      id: 'saeed-manager-store',
+      title: 'إدارة متجر إلكتروني',
+      description: 'إدارة متجر إلكتروني.',
+      price: '1,000 ر.س',
+      category: 'خدمات سعيد مانجر',
+      features: []
+    },
+    {
       id: 'content-creation',
       title: 'صناعة المحتوى المرئي والصوتي',
       description: 'إنتاج إبداعي سينمائي شامل للفيديوهات والمقاطع القصيرة والصوتيات المتميزة.',
