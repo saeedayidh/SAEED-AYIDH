@@ -47,9 +47,10 @@ export interface ServiceItem {
   id: string;
   title: string;
   description: string;
+  longDescription?: string;
   price: string;
   category: string;
-  image: string;
+  image?: string;
   features: string[];
 }
 
