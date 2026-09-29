@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { publicEnglish } from '../i18n/publicEnglish';
 
 interface SEOProps {
   title: string;
@@ -15,7 +17,10 @@ export const SEO: React.FC<SEOProps> = ({
   url,
   type = 'website'
 }) => {
-  const fullTitle = `${title} | سعيد بن عايض`;
+  const { language } = useLanguage();
+  const translate = (value:string) => { if(language!=='en') return value; if(publicEnglish[value]) return publicEnglish[value]; let out=value; for(const [ar,en] of Object.entries(publicEnglish).sort((a,b)=>b[0].length-a[0].length)) if(out.includes(ar)) out=out.split(ar).join(en); return out; };
+  const localizedTitle=translate(title),localizedDescription=translate(description);
+  const fullTitle = `${localizedTitle} | ${language==='en'?'Saeed Bin Ayidh':'سعيد بن عايض'}`;
   const currentUrl = url || window.location.href;
 
   useEffect(() => {
@@ -39,13 +44,13 @@ export const SEO: React.FC<SEOProps> = ({
       element.setAttribute(attr, value);
     };
 
-    setMeta('meta[name="description"]', 'content', description);
+    setMeta('meta[name="description"]', 'content', localizedDescription);
     setMeta('meta[property="og:title"]', 'content', fullTitle);
-    setMeta('meta[property="og:description"]', 'content', description);
+    setMeta('meta[property="og:description"]', 'content', localizedDescription);
     setMeta('meta[property="og:image"]', 'content', image);
     setMeta('meta[property="og:url"]', 'content', currentUrl);
     setMeta('meta[property="og:type"]', 'content', type);
-  }, [fullTitle, description, image, currentUrl, type]);
+  }, [fullTitle, localizedDescription, image, currentUrl, type]);
 
   return null;
 };
