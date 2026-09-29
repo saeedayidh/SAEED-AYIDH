@@ -21,6 +21,7 @@ export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,f
 {id:'facebook',platform:'Facebook',group:'سعيد بن عايض',url:'https://www.facebook.com/share/1ByHdx5BC4/?mibextid=wwXIfr',enabled:true},
 {id:'linkedin',platform:'LinkedIn',group:'سعيد بن عايض',url:'https://www.linkedin.com/company/saeedbinayidh/',enabled:true}
 ];const officialStoryAccounts:any[]=[
+{id:'stories-snapchat',platform:'Snapchat',group:'قصص سعيد',url:'https://snapchat.com/t/3nSldj5H',enabled:true},
 {id:'stories-tiktok',platform:'TikTok',group:'قصص سعيد',url:'https://www.tiktok.com/@eczv?_r=1&_t=ZS-9A7oiOQREP6',enabled:true},
 {id:'stories-x',platform:'X',group:'قصص سعيد',url:'https://x.com/bkn8?s=11&t=o5zhmgF9bZG_mQ47HMhFEg',enabled:true}
 ];const officialVlogsAccounts:any[]=[
@@ -38,7 +39,9 @@ export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,f
 {id:'youtube-channel',platform:'YouTube',group:'سعيد بن عايض',url:'https://youtube.com/@saeedayidh?si=Hd4R8mpoGNNFVNU9',enabled:true},
 {id:'telegram-channel',platform:'Telegram',group:'سعيد بن عايض',url:'https://t.me/saeedbinayidh',enabled:true}
 ];const officialStoryChannels:any[]=[
-{id:'stories-youtube',platform:'YouTube',group:'قصص سعيد',url:'https://youtube.com/@storiessaeed?si=ZDbpT_4lKt4igrd_',enabled:true}
+{id:'stories-whatsapp',platform:'WhatsApp',group:'قصص سعيد',url:'https://whatsapp.com/channel/0029Vb7qd6O2phHPutLJoC0t',enabled:true},
+{id:'stories-youtube',platform:'YouTube',group:'قصص سعيد',url:'https://youtube.com/@storiessaeed?si=ZDbpT_4lKt4igrd_',enabled:true},
+{id:'stories-telegram',platform:'Telegram',group:'قصص سعيد',url:'https://t.me/saeedbinayidh',enabled:true}
 ];const officialVlogsChannels:any[]=[
 {id:'vlogs-youtube',platform:'YouTube',group:'فلوقات سعيد',url:'https://youtube.com/@vlogssaeed?si=M5IbTVj4A8mzNTNa',enabled:true}
 ];const officialMusicChannels:any[]=[
