@@ -33,7 +33,7 @@ export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,f
 {id:'music-instagram',platform:'Instagram',group:'سعيد ميوزك',url:'https://www.instagram.com/8gpq?stkn=MTQyMm9meXBwbGd2NQ==',enabled:true},
 {id:'music-x',platform:'X',group:'سعيد ميوزك',url:'https://x.com/axt9?s=11&t=o5zhmgF9bZG_mQ47HMhFEg',enabled:true},
 {id:'music-threads',platform:'Threads',group:'سعيد ميوزك',url:'https://www.threads.com/@8gpq?igshid=NTc4MTIwNjQ2YQ==',enabled:true}
-;const savedAccounts=(g.socialAccounts||[]).filter((x:any)=>x.enabled!==false&&x.url&&(x.group||'سعيد بن عايض')!=='سعيد بن عايض');const accounts=[...officialMainAccounts,...officialStoryAccounts,...officialVlogsAccounts,...officialMusicAccounts,...savedAccounts.filter((x:any)=>!['قصص سعيد','فلوقات سعيد','سعيد ميوزك','القصائد والشيلات'].includes(x.group||''))];const officialMainChannels:any[]=[
+];const savedAccounts=(g.socialAccounts||[]).filter((x:any)=>x.enabled!==false&&x.url&&(x.group||'سعيد بن عايض')!=='سعيد بن عايض');const accounts=[...officialMainAccounts,...officialStoryAccounts,...officialVlogsAccounts,...officialMusicAccounts,...savedAccounts.filter((x:any)=>!['قصص سعيد','فلوقات سعيد','سعيد ميوزك','القصائد والشيلات'].includes(x.group||''))];const officialMainChannels:any[]=[
 {id:'whatsapp-channel',platform:'WhatsApp',group:'سعيد بن عايض',url:'https://whatsapp.com/channel/0029Vb7qd6O2phHPutLJoC0t',enabled:true},
 {id:'youtube-channel',platform:'YouTube',group:'سعيد بن عايض',url:'https://youtube.com/@saeedayidh?si=Hd4R8mpoGNNFVNU9',enabled:true},
 {id:'telegram-channel',platform:'Telegram',group:'سعيد بن عايض',url:'https://t.me/saeedbinayidh',enabled:true}
