@@ -31,6 +31,7 @@ export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,f
 {id:'vlogs-x',platform:'X',group:'فلوقات سعيد',url:'https://x.com/19e3?s=11&t=o5zhmgF9bZG_mQ47HMhFEg',enabled:true},
 {id:'vlogs-threads',platform:'Threads',group:'فلوقات سعيد',url:'https://www.threads.com/@19e3?igshid=NTc4MTIwNjQ2YQ==',enabled:true}
 ];const officialMusicAccounts:any[]=[
+{id:'music-snapchat',platform:'Snapchat',group:'سعيد ميوزك',url:'https://snapchat.com/t/3nSldj5H',enabled:true},
 {id:'music-tiktok',platform:'TikTok',group:'سعيد ميوزك',url:'https://www.tiktok.com/@.3jh?_r=1&_t=ZS-9A7pdosl5s4',enabled:true},
 {id:'music-instagram',platform:'Instagram',group:'سعيد ميوزك',url:'https://www.instagram.com/8gpq?stkn=MTQyMm9meXBwbGd2NQ==',enabled:true},
 {id:'music-x',platform:'X',group:'سعيد ميوزك',url:'https://x.com/axt9?s=11&t=o5zhmgF9bZG_mQ47HMhFEg',enabled:true},
