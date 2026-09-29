@@ -25,6 +25,7 @@ export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,f
 {id:'stories-tiktok',platform:'TikTok',group:'قصص سعيد',url:'https://www.tiktok.com/@eczv?_r=1&_t=ZS-9A7oiOQREP6',enabled:true},
 {id:'stories-x',platform:'X',group:'قصص سعيد',url:'https://x.com/bkn8?s=11&t=o5zhmgF9bZG_mQ47HMhFEg',enabled:true}
 ];const officialVlogsAccounts:any[]=[
+{id:'vlogs-snapchat',platform:'Snapchat',group:'فلوقات سعيد',url:'https://snapchat.com/t/3nSldj5H',enabled:true},
 {id:'vlogs-tiktok',platform:'TikTok',group:'فلوقات سعيد',url:'https://www.tiktok.com/@8g2o?_r=1&_t=ZS-9A7otuVplY5',enabled:true},
 {id:'vlogs-instagram',platform:'Instagram',group:'فلوقات سعيد',url:'https://www.instagram.com/19e3?stkn=MTdsYW1oNHFxc3dpOA==',enabled:true},
 {id:'vlogs-x',platform:'X',group:'فلوقات سعيد',url:'https://x.com/19e3?s=11&t=o5zhmgF9bZG_mQ47HMhFEg',enabled:true},
@@ -43,7 +44,9 @@ export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,f
 {id:'stories-youtube',platform:'YouTube',group:'قصص سعيد',url:'https://youtube.com/@storiessaeed?si=ZDbpT_4lKt4igrd_',enabled:true},
 {id:'stories-telegram',platform:'Telegram',group:'قصص سعيد',url:'https://t.me/saeedbinayidh',enabled:true}
 ];const officialVlogsChannels:any[]=[
-{id:'vlogs-youtube',platform:'YouTube',group:'فلوقات سعيد',url:'https://youtube.com/@vlogssaeed?si=M5IbTVj4A8mzNTNa',enabled:true}
+{id:'vlogs-whatsapp',platform:'WhatsApp',group:'فلوقات سعيد',url:'https://whatsapp.com/channel/0029Vb7qd6O2phHPutLJoC0t',enabled:true},
+{id:'vlogs-youtube',platform:'YouTube',group:'فلوقات سعيد',url:'https://youtube.com/@vlogssaeed?si=M5IbTVj4A8mzNTNa',enabled:true},
+{id:'vlogs-telegram',platform:'Telegram',group:'فلوقات سعيد',url:'https://t.me/saeedbinayidh',enabled:true}
 ];const officialMusicChannels:any[]=[
 {id:'music-whatsapp',platform:'WhatsApp',group:'سعيد ميوزك',url:'https://whatsapp.com/channel/0029VazcQoa4Y9lvLtItYE2O',enabled:true},
 {id:'music-youtube-1',platform:'YouTube',group:'سعيد ميوزك',url:'https://youtube.com/@saeedbinayidh?si=cK-ufwWCh7Qtio7v',enabled:true},
