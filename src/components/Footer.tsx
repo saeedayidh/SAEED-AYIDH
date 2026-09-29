@@ -6,11 +6,11 @@ instagram:'https://cdn.simpleicons.org/instagram/D51F2B',
 x:'https://cdn.simpleicons.org/x/D51F2B',
 threads:'https://cdn.simpleicons.org/threads/D51F2B',
 facebook:'https://cdn.simpleicons.org/facebook/D51F2B',
-linkedin:'https://cdn.simpleicons.org/linkedin/D51F2B',
+linkedin:'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/linkedin.svg',
 whatsapp:'https://cdn.simpleicons.org/whatsapp/D51F2B',
 youtube:'https://cdn.simpleicons.org/youtube/D51F2B',
 telegram:'https://cdn.simpleicons.org/telegram/D51F2B'
-};const SocialIcon=({name}:{name:string})=>{const src=officialBrandIcons[(name||'').toLowerCase()];return <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#D51F2B]/35 bg-[#D51F2B]/10">{src&&<img src={src} alt="" aria-hidden="true" className="h-5 w-5 object-contain"/>}</span>};
+};const SocialIcon=({name}:{name:string})=>{const src=officialBrandIcons[(name||'').toLowerCase()];return <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#D51F2B]/35 bg-[#D51F2B]/10">{src&&<img src={src} alt="" aria-hidden="true" className="h-5 w-5 object-contain" style={name.toLowerCase()==='linkedin'?{filter:'brightness(0) saturate(100%) invert(21%) sepia(95%) saturate(3690%) hue-rotate(343deg) brightness(91%) contrast(92%)'}:undefined}/>}</span>};
 export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,footer=g.footer||{};const email=String(g.contactEmail||'').trim(),phone=String(g.whatsapp||'').trim(),validEmail=email&&!/^hello@saeedbinayidh\.com$/i.test(email),validPhone=phone&&!/500000000/.test(phone.replace(/\D/g,''));const officialMainAccounts:any[]=[
 {id:'snapchat',platform:'Snapchat',group:'سعيد بن عايض',url:'https://snapchat.com/t/3nSldj5H',enabled:true},
 {id:'tiktok',platform:'TikTok',group:'سعيد بن عايض',url:'https://www.tiktok.com/@saeedbinayidh?_r=1&_t=ZS-9A7lzCWCL7l',enabled:true},
