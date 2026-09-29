@@ -380,5 +380,7 @@ export const publicEnglish:Record<string,string>={
   "أفضل تجميعات الكمبيوتر": "Best PC Builds",
   "عن مجال": "About",
   "أبرز المحطات والأعمال المميزة": "Featured Highlights & Works",
-  "أحدث الأخبار في هذا المجال": "Latest News in This Field"
+  "أحدث الأخبار في هذا المجال": "Latest News in This Field",
+  "الرجوع للسابقة": "Back",
+  "سعيد بن عايض | صانع محتوى ومطور أعمال، أعمل في صناعة المحتوى والتسويق والذكاء الاصطناعي وبناء الواجهات الرقمية.": "Saeed Bin Ayidh | Content creator and business developer working in content creation, marketing, AI, and digital interfaces."
 };
