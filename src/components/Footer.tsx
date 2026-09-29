@@ -60,7 +60,12 @@ export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,f
 {id:'vlogs',title:'فلوقات سعيد',enabled:true,order:3},
 {id:'music',title:'سعيد ميوزك',enabled:true,order:4}
 ];const saeedLinks:any[]=(g.saeedPageLinks||[]).filter((x:any)=>x.enabled!==false&&x.url).sort((a:any,b:any)=>(a.order||0)-(b.order||0));const entertainment:any[]=[
-{id:'events',title:'سعيد ايفنتس',links:[{id:'events-discord',platform:'Discord',url:'https://discord.gg/wEygwYG5M'}]},
+{id:'events',title:'سعيد ايفنتس',links:[
+{id:'events-discord',platform:'Discord',url:'https://discord.gg/wEygwYG5M'},
+{id:'events-telegram',platform:'Telegram',url:'https://t.me/EmpireSaeed'},
+{id:'events-tiktok',platform:'TikTok',url:'https://tiktok.me/group/ZSyovPALD/'},
+{id:'events-instagram',platform:'Instagram',url:'https://ig.me/j/Aba4nSKowp5Bz4sV/'}
+]},
 {id:'empire',title:'امبراطورية سعيد',links:[
 {id:'empire-discord',platform:'Discord',url:'https://discord.gg/wEygwYG5M'},
 {id:'empire-telegram',platform:'Telegram',url:'https://t.me/EmpireSaeed'},
