@@ -1,16 +1,16 @@
 import React from'react';import{Link}from'react-router-dom';import{Send}from'lucide-react';import{useCMS}from'../context/CMSContext';
-const brandPaths:Record<string,React.ReactNode>={
-snapchat:<path fill="currentColor" d="M12 2c2.4 0 4.2 1.9 4.2 4.6 0 .7-.1 1.4-.1 2 .3.7 1 1 1.8 1.3.7.3 1.2.6 1.1 1.1-.1.4-.7.7-1.8.9-.5.1-.8.4-.9.8-.1.3.2.7.7.9.8.4 1.6.5 2 .6.4.1.6.3.6.6 0 .5-.8.7-1.5.8-.3.1-.5.3-.6.7-.1.3-.2.5-.5.5-.4.1-.8-.1-1.3-.2-.7-.2-1.5-.4-2.6.3-.8.5-1.5.8-2.2.8s-1.4-.3-2.2-.8c-1.1-.7-1.9-.5-2.6-.3-.5.1-.9.3-1.3.2-.3 0-.4-.2-.5-.5-.1-.4-.3-.6-.6-.7-.7-.1-1.5-.3-1.5-.8 0-.3.2-.5.6-.6.4-.1 1.2-.2 2-.6.5-.2.8-.6.7-.9-.1-.4-.4-.7-.9-.8-1.1-.2-1.7-.5-1.8-.9-.1-.5.4-.8 1.1-1.1.8-.3 1.5-.6 1.8-1.3 0-.6-.1-1.3-.1-2C7.8 3.9 9.6 2 12 2Z"/>,
-tiktok:<path fill="currentColor" d="M15.6 3c.4 2.2 1.7 3.5 3.9 3.7v3.1c-1.3.1-2.5-.3-3.8-1.1v5.8c0 3.7-2.6 6.5-6.2 6.5-4.5 0-7.1-4.7-4.7-8.5 1.4-2.2 4-3.1 6.5-2.4v3.2c-.4-.1-.8-.2-1.2-.2-1.4 0-2.6 1.1-2.6 2.5s1.1 2.5 2.5 2.5c1.7 0 2.6-1.1 2.6-3.1V3h3Z"/>,
-instagram:<><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="2"/><circle cx="17.5" cy="6.8" r="1.2" fill="currentColor"/></>,
-x:<path fill="currentColor" d="M4 3h4.7l4.1 5.5L17.6 3H20l-6.1 7.1L21 21h-4.7l-4.6-6.2L6.4 21H4l6.6-7.8L4 3Zm3.5 2 10 14h1L8.5 5h-1Z"/>,
-threads:<path fill="currentColor" d="M12 2c5.5 0 9.5 3.8 9.5 9.3 0 5.8-3.8 10.2-9.5 10.2-5.8 0-9.5-4.2-9.5-9.9C2.5 6 6.4 2 12 2Zm.1 3c-3.8 0-6.3 2.7-6.3 6.6 0 4 2.4 6.8 6.2 6.8 2.9 0 5-1.6 5.7-3.9-.9 1-2.2 1.6-3.9 1.6-2.8 0-4.7-1.5-4.7-3.7 0-2.1 1.8-3.6 4.4-3.6 1.3 0 2.4.3 3.3.8-.5-2.8-2.1-4.6-4.7-4.6Zm1.4 6.2c-1.1 0-1.8.5-1.8 1.2 0 .8.7 1.3 1.9 1.3 1.5 0 2.6-.7 3.2-1.8-.8-.5-1.9-.7-3.3-.7Z"/>,
-facebook:<path fill="currentColor" d="M13.8 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1V10H8v3h2.6v8h3.2Z"/>,
-linkedin:<path fill="currentColor" d="M5.3 7.4A2.2 2.2 0 1 0 5.3 3a2.2 2.2 0 0 0 0 4.4ZM3.5 21h3.6V9H3.5v12Zm5.8 0h3.6v-6.7c0-1.8.3-3.5 2.5-3.5 2.2 0 2.2 2 2.2 3.6V21h3.6v-7.4c0-3.6-.8-6.4-5-6.4-2 0-3.4 1.1-4 2.1h-.1V9H9.3v12Z"/>,
-whatsapp:<path fill="currentColor" d="M20.5 11.7A8.5 8.5 0 0 1 7.9 19l-4.4 1.4 1.4-4.2A8.5 8.5 0 1 1 20.5 11.7Zm-8.4-6.3a6.3 6.3 0 0 0-5.4 9.5l.2.4-.8 2.3 2.4-.8.4.2a6.3 6.3 0 1 0 3.2-11.6Zm-3.4 3c.2 0 .4 0 .5.4l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.5.9 1.3 1.7 2.2 2.2.3.2.5.2.7 0l.8-1c.2-.2.4-.3.7-.2l2 .9c.3.1.4.3.4.5 0 .4-.2 1.4-.9 1.9-.6.5-1.4.7-2.3.4-1.2-.3-2.8-1-4.5-2.5-1.4-1.3-2.4-2.9-2.7-4-.3-1.1 0-2 .5-2.5.4-.4.8-.5 1.1-.5Z"/>,
-youtube:<path fill="currentColor" d="M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C18 4.8 12 4.8 12 4.8s-6 0-7.7.5a2.7 2.7 0 0 0-1.9 1.9C2 8.9 2 12 2 12s0 3.1.4 4.8a2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.7.5 7.7.5s6 0 7.7-.5a2.7 2.7 0 0 0 1.9-1.9c.4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8ZM10 15.2V8.8l5.5 3.2-5.5 3.2Z"/>,
-telegram:<path fill="currentColor" d="m21.4 4.2-3 14.1c-.2 1-.8 1.2-1.6.7l-4.6-3.4-2.2 2.1c-.2.2-.5.5-.9.5l.3-4.7 8.6-7.8c.4-.3-.1-.5-.6-.2L6.8 12.2 2.2 10.8c-1-.3-1-1 .2-1.5l17.9-6.9c.8-.3 1.5.2 1.1 1.8Z"/>
-};const SocialIcon=({name}:{name:string})=><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#D51F2B]/35 bg-[#D51F2B]/10 text-[#D51F2B]"><svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">{brandPaths[(name||'').toLowerCase()]||<circle cx="12" cy="12" r="8" fill="currentColor"/>}</svg></span>;
+const officialBrandIcons:Record<string,string>={
+snapchat:'https://cdn.simpleicons.org/snapchat/D51F2B',
+tiktok:'https://cdn.simpleicons.org/tiktok/D51F2B',
+instagram:'https://cdn.simpleicons.org/instagram/D51F2B',
+x:'https://cdn.simpleicons.org/x/D51F2B',
+threads:'https://cdn.simpleicons.org/threads/D51F2B',
+facebook:'https://cdn.simpleicons.org/facebook/D51F2B',
+linkedin:'https://cdn.simpleicons.org/linkedin/D51F2B',
+whatsapp:'https://cdn.simpleicons.org/whatsapp/D51F2B',
+youtube:'https://cdn.simpleicons.org/youtube/D51F2B',
+telegram:'https://cdn.simpleicons.org/telegram/D51F2B'
+};const SocialIcon=({name}:{name:string})=>{const src=officialBrandIcons[(name||'').toLowerCase()];return <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#D51F2B]/35 bg-[#D51F2B]/10">{src&&<img src={src} alt="" aria-hidden="true" className="h-5 w-5 object-contain"/>}</span>};
 export const Footer:React.FC=()=>{const{data}=useCMS();const g:any=data.global,footer=g.footer||{};const email=String(g.contactEmail||'').trim(),phone=String(g.whatsapp||'').trim(),validEmail=email&&!/^hello@saeedbinayidh\.com$/i.test(email),validPhone=phone&&!/500000000/.test(phone.replace(/\D/g,''));const officialMainAccounts:any[]=[
 {id:'snapchat',platform:'Snapchat',group:'سعيد بن عايض',url:'https://snapchat.com/t/3nSldj5H',enabled:true},
 {id:'tiktok',platform:'TikTok',group:'سعيد بن عايض',url:'https://www.tiktok.com/@saeedbinayidh?_r=1&_t=ZS-9A7lzCWCL7l',enabled:true},
