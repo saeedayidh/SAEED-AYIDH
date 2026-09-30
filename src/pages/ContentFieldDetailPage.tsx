@@ -153,7 +153,7 @@ export const ContentFieldDetailPage: React.FC = () => {
 
           {isMusic ? (
             <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-6 text-start">
-              <h3 className="text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'سعيد ميوزك':'Saeed Music'}</h3>
+              <h3 className="text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'حسابات سعيد + قنوات سعيد':'Saeed Accounts + Saeed Channels'}</h3>
               <div className="space-y-3">
                 <h4 className="text-sm font-black text-[#D51F2B]">{isArabic?'حسابات سعيد ميوزك':'Saeed Music Accounts'}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -205,8 +205,10 @@ export const ContentFieldDetailPage: React.FC = () => {
 
 const MusicSocialLink=({item,label}:{item:any;label:string})=>{
   const src=brandIcons[String(item.platform||'').toLowerCase()];
-  return <a href={item.url} target="_blank" rel="noopener noreferrer" className="flex min-h-14 items-center justify-center gap-3 rounded-xl border border-white/10 bg-[#181818] px-4 py-3 text-center font-bold text-white hover:border-[#D51F2B]/60 transition-all">
-    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#D51F2B]/35 bg-[#D51F2B]/10">{src&&<img src={src} alt="" aria-hidden="true" className="h-5 w-5 object-contain"/>}</span>
-    <span className="text-sm">{label}</span>
+  return <a href={item.url} target="_blank" rel="noopener noreferrer" className="flex min-h-14 items-center justify-center rounded-xl border border-white/10 bg-[#181818] px-4 py-3 text-center font-bold text-white hover:border-[#D51F2B]/60 transition-all">
+    <span className="grid w-44 grid-cols-[1fr_2.25rem] items-center gap-3">
+      <span className="text-center text-sm">{label}</span>
+      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#D51F2B]/35 bg-[#D51F2B]/10">{src&&<img src={src} alt="" aria-hidden="true" className="h-5 w-5 object-contain"/>}</span>
+    </span>
   </a>
 };
