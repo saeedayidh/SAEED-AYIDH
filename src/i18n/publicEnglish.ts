@@ -658,5 +658,15 @@ export const publicEnglish:Record<string,string>={
   "• مفتوح": "• Open",
   "• اضغط للتوسيع": "• Tap to Expand",
   "خريطة سعيد | سعيد بن عايض": "Saeed Map | Saeed Bin Ayidh",
-  "خريطة سعيد التفاعلية لاستكشاف مجالات ومشاريع ومواقع وخدمات ومنصات سعيد بن عايض.": "Explore Saeed Bin Ayidh’s interactive map of content fields, projects, websites, services, and platforms."
+  "خريطة سعيد التفاعلية لاستكشاف مجالات ومشاريع ومواقع وخدمات ومنصات سعيد بن عايض.": "Explore Saeed Bin Ayidh’s interactive map of content fields, projects, websites, services, and platforms.",
+  "مجالات العمل والتطوير": "Work & Development Fields",
+  "حلول متكاملة لبناء الحضور الرقمي والنمو المستمر.": "Integrated solutions for building digital presence and sustainable growth.",
+  "التطوير والاستراتيجية": "Development & Strategy",
+  "خدمات احترافية مصممة خصيصاً لتلبية احتياجات العلامات والمشاريع.": "Professional services tailored to the needs of brands and projects.",
+  "الخدمات والاستشارات": "Services & Consulting",
+  "مجالات صناعة المحتوى": "Content Creation Fields",
+  "محتوى متنوع بهوية مختلفة لكل مجال.": "Diverse content with a distinct identity for each field.",
+  "صناعة المحتوى الإبداعي": "Creative Content Creation",
+  "تصميم واجهات المستخدم": "User Interface Design",
+  "روابط المنصات والتواصل": "Platform & Contact Links"
 };
