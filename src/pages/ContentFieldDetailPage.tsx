@@ -153,15 +153,15 @@ export const ContentFieldDetailPage: React.FC = () => {
 
           {isMusic ? (
             <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-6 text-start">
-              <h3 className="text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'حسابات سعيد + قنوات سعيد':'Saeed Accounts + Saeed Channels'}</h3>
+              <h3 className="text-center text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'سعيد ميوزك':'Saeed Music'}</h3>
               <div className="space-y-3">
-                <h4 className="text-sm font-black text-[#D51F2B]">{isArabic?'حسابات سعيد ميوزك':'Saeed Music Accounts'}</h4>
+                <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'حسابات سعيد':'Saeed Accounts'}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {musicAccounts.map(item=><MusicSocialLink key={item.id} item={item} label={item.platform}/>)}
                 </div>
               </div>
               <div className="space-y-3">
-                <h4 className="text-sm font-black text-[#D51F2B]">{isArabic?'قنوات سعيد ميوزك':'Saeed Music Channels'}</h4>
+                <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'قنوات سعيد':'Saeed Channels'}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {musicChannels.map(item=><MusicSocialLink key={item.id} item={item} label={isArabic?(item.labelAr||item.platform):(item.labelEn||item.platform)}/>)}
                 </div>
