@@ -1,0 +1,5 @@
+import React from'react';import{Share2}from'lucide-react';
+export const ShareButton=({title,url,className=''}:{title:string;url:string;className?:string})=>{
+  const share=async(e:React.MouseEvent<HTMLButtonElement>)=>{e.preventDefault();e.stopPropagation();const target=/^https?:\/\//i.test(url)?url:`${window.location.origin}${url.startsWith('/')?url:`/${url}`}`;try{if(navigator.share){await navigator.share({title,url:target})}else{await navigator.clipboard.writeText(target);alert('تم نسخ الرابط للمشاركة')}}catch(err:any){if(err?.name!=='AbortError'){try{await navigator.clipboard.writeText(target);alert('تم نسخ الرابط للمشاركة')}catch{}}}};
+  return <button type="button" onClick={share} aria-label="مشاركة" title="مشاركة" className={`grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/70 backdrop-blur transition hover:border-[#D51F2B] ${className}`}><Share2 className="h-4 w-4 text-white"/></button>
+};
