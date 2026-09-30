@@ -27,6 +27,19 @@ const musicChannels=[
   {id:'music-youtube-3',platform:'YouTube',labelAr:'YouTube',labelEn:'YouTube',url:'https://youtube.com/@saeedbinayidh1?si=sme7Mh_qbQwhOlDo'},
   {id:'music-telegram',platform:'Telegram',url:'https://t.me/SaeedAyidh'}
 ];
+const vlogsAccounts=[
+  {id:'vlogs-snapchat',platform:'Snapchat',url:'https://snapchat.com/t/3nSldj5H'},
+  {id:'vlogs-tiktok',platform:'TikTok',url:'https://www.tiktok.com/@8g2o?_r=1&_t=ZS-9A7otuVplY5'},
+  {id:'vlogs-instagram',platform:'Instagram',url:'https://www.instagram.com/19e3?stkn=MTdsYW1oNHFxc3dpOA=='},
+  {id:'vlogs-x',platform:'X',url:'https://x.com/19e3?s=11&t=o5zhmgF9bZG_mQ47HMhFEg'},
+  {id:'vlogs-threads',platform:'Threads',url:'https://www.threads.com/@19e3?igshid=NTc4MTIwNjQ2YQ=='}
+];
+const vlogsChannels=[
+  {id:'vlogs-whatsapp',platform:'WhatsApp',url:'https://whatsapp.com/channel/0029Vb7qd6O2phHPutLJoC0t'},
+  {id:'vlogs-youtube',platform:'YouTube',url:'https://youtube.com/@vlogssaeed?si=M5IbTVj4A8mzNTNa'},
+  {id:'vlogs-telegram',platform:'Telegram',url:'https://t.me/saeedbinayidh'}
+];
+
 const brandIcons:Record<string,string>={
   snapchat:'https://cdn.simpleicons.org/snapchat/D51F2B',
   tiktok:'https://cdn.simpleicons.org/tiktok/D51F2B',
@@ -45,6 +58,8 @@ export const ContentFieldDetailPage: React.FC = () => {
   const fallback = siteData.contentFields.find((f:any) => f.slug === slug || f.id === slug) || siteData.contentFields[0];
   const field:any = (data.contentFields || []).find((f:any) => f.slug === slug || f.id === slug) || fallback;
   const isMusic=field.id==='sheylat'||slug==='poems';
+  const isVlogs=field.id==='vlogs'||slug==='vlogs';
+  const isSpecialField=isMusic||isVlogs;
   const tr = (value:any, explicit?:any) => {
     if (isArabic || typeof value !== 'string') return value;
     return (typeof explicit === 'string' && explicit.trim()) ? explicit : (publicEnglish[value] || value);
@@ -54,8 +69,8 @@ export const ContentFieldDetailPage: React.FC = () => {
   const intro = tr(field.intro || field.description, field.introEn || field.descriptionEn);
   const categoryTag = tr(field.categoryTag, field.categoryTagEn || field.categoryEn);
   const fullContent = tr(field.fullContent || field.description, field.fullContentEn || field.descriptionEn);
-  const heroImage=isMusic?'https://gcdn.picsart.com/editing-temp/208b1b8b-2dde-4df8-9747-c474ce4275d9.jpeg':field.image;
-  const relatedNews = isMusic?[]:(data.news || []).filter((n:any) =>
+  const heroImage=isMusic?'https://gcdn.picsart.com/editing-temp/208b1b8b-2dde-4df8-9747-c474ce4275d9.jpeg':isVlogs?'https://gcdn.picsart.com/editing-temp/e8ef5eca-09a1-4efc-8e32-8204aa9b3545.jpeg':field.image;
+  const relatedNews = isSpecialField?[]:(data.news || []).filter((n:any) =>
     field.latestNewsSlugs?.includes?.(n.slug) ||
     (typeof n.category === 'string' && typeof field.title === 'string' && n.category.includes(field.title))
   );
@@ -71,22 +86,22 @@ export const ContentFieldDetailPage: React.FC = () => {
         ]} />
 
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#190305] via-[#100203] to-[#080808] border border-white/10 p-6 sm:p-10 mb-10">
-          <div className={isMusic?'flex flex-col gap-7':'flex flex-col lg:flex-row items-center justify-between gap-8'}>
-            <div className={isMusic?'w-full space-y-4 text-start':'w-full lg:w-[60%] space-y-4 text-start'}>
+          <div className={isSpecialField?'flex flex-col gap-7':'flex flex-col lg:flex-row items-center justify-between gap-8'}>
+            <div className={isSpecialField?'w-full space-y-4 text-start':'w-full lg:w-[60%] space-y-4 text-start'}>
               <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#D51F2B]/15 border border-[#D51F2B]/30 text-xs font-semibold text-[#D51F2B]">
                 <Layers className="w-3.5 h-3.5" /><span>{categoryTag}</span>
               </span>
               <h1 className="text-3xl sm:text-5xl font-black text-white leading-tight">{title}</h1>
               <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">{intro}</p>
             </div>
-            <div className={isMusic?'w-full':'w-full lg:w-[35%] flex justify-center'}>
-              <img src={heroImage} alt={title} className={isMusic?'block w-full aspect-[1536/514] rounded-2xl border border-white/10 shadow-2xl object-cover':'w-full max-w-[320px] h-auto rounded-2xl border border-white/10 shadow-2xl object-cover'} />
+            <div className={isSpecialField?'w-full':'w-full lg:w-[35%] flex justify-center'}>
+              <img src={heroImage} alt={title} className={isSpecialField?'block w-full rounded-2xl border border-white/10 shadow-2xl object-cover':'w-full max-w-[320px] h-auto rounded-2xl border border-white/10 shadow-2xl object-cover'} />
             </div>
           </div>
         </div>
 
-        <div className={isMusic?'space-y-8':'grid grid-cols-1 lg:grid-cols-3 gap-10'}>
-          <div className={isMusic?'space-y-8 text-start':'lg:col-span-2 space-y-8 text-start'}>
+        <div className={isSpecialField?'space-y-8':'grid grid-cols-1 lg:grid-cols-3 gap-10'}>
+          <div className={isSpecialField?'space-y-8 text-start':'lg:col-span-2 space-y-8 text-start'}>
             <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-4">
               <h2 className="text-xl font-bold text-white border-b border-white/10 pb-3">
                 {isArabic ? `عن مجال ${field.title}` : `About ${title}`}
@@ -128,7 +143,7 @@ export const ContentFieldDetailPage: React.FC = () => {
                   </div>
                 </div>
               </>
-            ) : (
+            ) : isVlogs ? null : (
               <>
                 {field.featuredItems && field.featuredItems.length > 0 && (
                   <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-4">
@@ -164,6 +179,22 @@ export const ContentFieldDetailPage: React.FC = () => {
                 <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'قنوات سعيد':'Saeed Channels'}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {musicChannels.map(item=><MusicSocialLink key={item.id} item={item} label={isArabic?(item.labelAr||item.platform):(item.labelEn||item.platform)}/>)}
+                </div>
+              </div>
+            </div>
+          ) : isVlogs ? (
+            <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-6 text-start">
+              <h3 className="text-center text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'فلوقات سعيد':'Saeed Vlogs'}</h3>
+              <div className="space-y-3">
+                <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'حسابات سعيد':'Saeed Accounts'}</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {vlogsAccounts.map(item=><MusicSocialLink key={item.id} item={item} label={item.platform}/>)}
+                </div>
+              </div>
+              <div className="space-y-3">
+                <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'قنوات سعيد':'Saeed Channels'}</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {vlogsChannels.map(item=><MusicSocialLink key={item.id} item={item} label={item.platform}/>)}
                 </div>
               </div>
             </div>
