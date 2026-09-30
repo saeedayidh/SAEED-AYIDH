@@ -27,6 +27,23 @@ const musicChannels=[
   {id:'music-youtube-3',platform:'YouTube',labelAr:'YouTube',labelEn:'YouTube',url:'https://youtube.com/@saeedbinayidh1?si=sme7Mh_qbQwhOlDo'},
   {id:'music-telegram',platform:'Telegram',url:'https://t.me/SaeedAyidh'}
 ];
+const storyWorks=[
+  {id:'forest-hotel',title:'فندق وسط الغابة',titleEn:'Hotel in the Middle of the Forest',url:'https://youtu.be/RH9GT02obZs?si=t_GD3SqoAE3PQbUp',videoId:'RH9GT02obZs'},
+  {id:'mysterious-village',title:'القرية الغامضة',titleEn:'The Mysterious Village',url:'https://youtu.be/nUI5_SF2H1I?si=kcUFatLjlyNcy9Ey',videoId:'nUI5_SF2H1I'},
+  {id:'jinn-prank',title:'جني يطقطق علي',titleEn:'A Jinn Pranks Me',url:'https://youtu.be/8pqFqO31qD8?si=dhAgDtRnEHRZUsnK',videoId:'8pqFqO31qD8'},
+  {id:'barhout-well',title:'بئر برهوت',titleEn:'Barhout Well',url:'https://youtu.be/s7oQPax82yk?si=X4MMz_TECbNEAGy4',videoId:'s7oQPax82yk'}
+];
+const storiesAccounts=[
+  {id:'stories-snapchat',platform:'Snapchat',url:'https://snapchat.com/t/3nSldj5H'},
+  {id:'stories-tiktok',platform:'TikTok',url:'https://www.tiktok.com/@eczv?_r=1&_t=ZS-9A7oiOQREP6'},
+  {id:'stories-x',platform:'X',url:'https://x.com/bkn8?s=11&t=o5zhmgF9bZG_mQ47HMhFEg'}
+];
+const storiesChannels=[
+  {id:'stories-whatsapp',platform:'WhatsApp',url:'https://whatsapp.com/channel/0029Vb7qd6O2phHPutLJoC0t'},
+  {id:'stories-youtube',platform:'YouTube',url:'https://youtube.com/@storiessaeed?si=ZDbpT_4lKt4igrd_'},
+  {id:'stories-telegram',platform:'Telegram',url:'https://t.me/saeedbinayidh'}
+];
+
 const vlogsAccounts=[
   {id:'vlogs-snapchat',platform:'Snapchat',url:'https://snapchat.com/t/3nSldj5H'},
   {id:'vlogs-tiktok',platform:'TikTok',url:'https://www.tiktok.com/@8g2o?_r=1&_t=ZS-9A7otuVplY5'},
@@ -59,7 +76,8 @@ export const ContentFieldDetailPage: React.FC = () => {
   const field:any = (data.contentFields || []).find((f:any) => f.slug === slug || f.id === slug) || fallback;
   const isMusic=field.id==='sheylat'||slug==='poems';
   const isVlogs=field.id==='vlogs'||slug==='vlogs';
-  const isSpecialField=isMusic||isVlogs;
+  const isStories=field.id==='stories'||slug==='stories';
+  const isSpecialField=isMusic||isVlogs||isStories;
   const tr = (value:any, explicit?:any) => {
     if (isArabic || typeof value !== 'string') return value;
     return (typeof explicit === 'string' && explicit.trim()) ? explicit : (publicEnglish[value] || value);
@@ -69,7 +87,7 @@ export const ContentFieldDetailPage: React.FC = () => {
   const intro = tr(field.intro || field.description, field.introEn || field.descriptionEn);
   const categoryTag = tr(field.categoryTag, field.categoryTagEn || field.categoryEn);
   const fullContent = tr(field.fullContent || field.description, field.fullContentEn || field.descriptionEn);
-  const heroImage=isMusic?'https://gcdn.picsart.com/editing-temp/208b1b8b-2dde-4df8-9747-c474ce4275d9.jpeg':isVlogs?'https://gcdn.picsart.com/editing-temp/e8ef5eca-09a1-4efc-8e32-8204aa9b3545.jpeg':field.image;
+  const heroImage=isMusic?'https://gcdn.picsart.com/editing-temp/208b1b8b-2dde-4df8-9747-c474ce4275d9.jpeg':isVlogs?'https://gcdn.picsart.com/editing-temp/e8ef5eca-09a1-4efc-8e32-8204aa9b3545.jpeg':isStories?'https://gcdn.picsart.com/editing-temp/af728546-332c-425a-9f73-327bc4ab4a59.jpeg':field.image;
   const relatedNews = isSpecialField?[]:(data.news || []).filter((n:any) =>
     field.latestNewsSlugs?.includes?.(n.slug) ||
     (typeof n.category === 'string' && typeof field.title === 'string' && n.category.includes(field.title))
@@ -143,6 +161,39 @@ export const ContentFieldDetailPage: React.FC = () => {
                   </div>
                 </div>
               </>
+            ) : isStories ? (
+              <>
+                <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-4">
+                  <h3 className="text-lg font-bold text-white">{isArabic?'أبرز الأعمال':'Featured Works'}</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {storyWorks.map(work=>(
+                      <a key={work.id} href={work.url} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between gap-3 p-4 rounded-xl bg-[#181818] border border-white/5 text-sm font-bold text-white hover:border-[#D51F2B]/60 hover:text-[#D51F2B] transition-all">
+                        <span>{isArabic?work.title:work.titleEn}</span><BackArrow className="w-4 h-4 text-[#D51F2B] shrink-0"/>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-5">
+                  <h3 className="text-lg font-bold text-white">{isArabic?'قصصي':'My Stories'}</h3>
+                  <div dir="ltr" className="overflow-x-auto scroll-smooth snap-x snap-mandatory touch-pan-x [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                    <div className="flex w-max gap-5 pb-2">
+                      {storyWorks.map(work=>(
+                        <div key={work.id} dir={isArabic?'rtl':'ltr'} className="w-[290px] sm:w-[360px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d]">
+                          <div className="aspect-video w-full overflow-hidden bg-black">
+                            <iframe src={`https://www.youtube.com/embed/${work.videoId}?rel=0`} title={isArabic?work.title:work.titleEn} loading="lazy" className="h-full w-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen/>
+                          </div>
+                          <div className="p-4">
+                            <h4 className="font-bold text-white">{isArabic?work.title:work.titleEn}</h4>
+                            <a href={work.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-white/15 px-3 py-3 text-xs font-bold hover:border-[#D51F2B]/60">
+                              <Play className="h-3.5 w-3.5"/>{isArabic?'تشغيل':'Play'}
+                            </a>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
             ) : isVlogs ? null : (
               <>
                 {field.featuredItems && field.featuredItems.length > 0 && (
@@ -179,6 +230,22 @@ export const ContentFieldDetailPage: React.FC = () => {
                 <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'قنوات سعيد':'Saeed Channels'}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                   {musicChannels.map(item=><MusicSocialLink key={item.id} item={item} label={isArabic?(item.labelAr||item.platform):(item.labelEn||item.platform)}/>)}
+                </div>
+              </div>
+            </div>
+          ) : isStories ? (
+            <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-6 text-start">
+              <h3 className="text-center text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'قصص سعيد':'Saeed Stories'}</h3>
+              <div className="space-y-3">
+                <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'حسابات سعيد':'Saeed Accounts'}</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {storiesAccounts.map(item=><MusicSocialLink key={item.id} item={item} label={item.platform}/>)}
+                </div>
+              </div>
+              <div className="space-y-3">
+                <h4 className="text-center text-sm font-black text-[#D51F2B]">{isArabic?'قنوات سعيد':'Saeed Channels'}</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {storiesChannels.map(item=><MusicSocialLink key={item.id} item={item} label={item.platform}/>)}
                 </div>
               </div>
             </div>
