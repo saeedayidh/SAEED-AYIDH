@@ -654,5 +654,9 @@ export const publicEnglish:Record<string,string>={
   "المحتوى": "Content",
   "قراءة الخبر": "Read News",
   "استكشف الكل": "Explore All",
-  "عرض الخدمة": "View Service"
+  "عرض الخدمة": "View Service",
+  "• مفتوح": "• Open",
+  "• اضغط للتوسيع": "• Tap to Expand",
+  "خريطة سعيد | سعيد بن عايض": "Saeed Map | Saeed Bin Ayidh",
+  "خريطة سعيد التفاعلية لاستكشاف مجالات ومشاريع ومواقع وخدمات ومنصات سعيد بن عايض.": "Explore Saeed Bin Ayidh’s interactive map of content fields, projects, websites, services, and platforms."
 };
