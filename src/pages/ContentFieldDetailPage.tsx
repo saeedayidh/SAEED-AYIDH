@@ -22,9 +22,9 @@ const musicAccounts=[
 ];
 const musicChannels=[
   {id:'music-whatsapp',platform:'WhatsApp',url:'https://whatsapp.com/channel/0029VazcQoa4Y9lvLtItYE2O'},
-  {id:'music-youtube-1',platform:'YouTube',labelAr:'يوتيوب 1',labelEn:'YouTube 1',url:'https://youtube.com/@saeedbinayidh?si=cK-ufwWCh7Qtio7v'},
-  {id:'music-youtube-2',platform:'YouTube',labelAr:'يوتيوب 2',labelEn:'YouTube 2',url:'https://youtube.com/@saeed_ayidh?si=y6oU_FmYqmo2r0Qo'},
-  {id:'music-youtube-3',platform:'YouTube',labelAr:'يوتيوب 3',labelEn:'YouTube 3',url:'https://youtube.com/@saeedbinayidh1?si=sme7Mh_qbQwhOlDo'},
+  {id:'music-youtube-1',platform:'YouTube',labelAr:'YouTube',labelEn:'YouTube',url:'https://youtube.com/@saeedbinayidh?si=cK-ufwWCh7Qtio7v'},
+  {id:'music-youtube-2',platform:'YouTube',labelAr:'YouTube',labelEn:'YouTube',url:'https://youtube.com/@saeed_ayidh?si=y6oU_FmYqmo2r0Qo'},
+  {id:'music-youtube-3',platform:'YouTube',labelAr:'YouTube',labelEn:'YouTube',url:'https://youtube.com/@saeedbinayidh1?si=sme7Mh_qbQwhOlDo'},
   {id:'music-telegram',platform:'Telegram',url:'https://t.me/SaeedAyidh'}
 ];
 const brandIcons:Record<string,string>={
@@ -108,7 +108,7 @@ export const ContentFieldDetailPage: React.FC = () => {
                 </div>
 
                 <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-5">
-                  <h3 className="text-lg font-bold text-white">{isArabic?'شيلاتي':'My Sheylat'}</h3>
+                  <h3 className="text-lg font-bold text-white">{isArabic?'أعمالي':'My Works'}</h3>
                   <div dir="ltr" className="overflow-x-auto scroll-smooth snap-x snap-mandatory touch-pan-x [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     <div className="flex w-max gap-5 pb-2">
                       {musicWorks.map(work=>(
@@ -153,7 +153,7 @@ export const ContentFieldDetailPage: React.FC = () => {
 
           {isMusic ? (
             <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-6 text-start">
-              <h3 className="text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'حسابات سعيد + قنوات سعيد':'Saeed Accounts + Saeed Channels'}</h3>
+              <h3 className="text-xl font-bold text-white border-b border-white/10 pb-4">{isArabic?'سعيد ميوزك':'Saeed Music'}</h3>
               <div className="space-y-3">
                 <h4 className="text-sm font-black text-[#D51F2B]">{isArabic?'حسابات سعيد ميوزك':'Saeed Music Accounts'}</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -205,7 +205,7 @@ export const ContentFieldDetailPage: React.FC = () => {
 
 const MusicSocialLink=({item,label}:{item:any;label:string})=>{
   const src=brandIcons[String(item.platform||'').toLowerCase()];
-  return <a href={item.url} target="_blank" rel="noopener noreferrer" className="flex min-h-14 items-center gap-3 rounded-xl border border-white/10 bg-[#181818] px-4 py-3 font-bold text-white hover:border-[#D51F2B]/60 transition-all">
+  return <a href={item.url} target="_blank" rel="noopener noreferrer" className="flex min-h-14 items-center justify-center gap-3 rounded-xl border border-white/10 bg-[#181818] px-4 py-3 text-center font-bold text-white hover:border-[#D51F2B]/60 transition-all">
     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[#D51F2B]/35 bg-[#D51F2B]/10">{src&&<img src={src} alt="" aria-hidden="true" className="h-5 w-5 object-contain"/>}</span>
     <span className="text-sm">{label}</span>
   </a>
