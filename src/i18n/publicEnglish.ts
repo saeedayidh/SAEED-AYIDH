@@ -644,5 +644,15 @@ export const publicEnglish:Record<string,string>={
   "إدارة التسويق عبر المؤثرين": "Managed influencer marketing",
   "تحليل عوائد الإعلانات المدفوعة": "Analyzed paid-ad returns",
   "تحقيق أعلى مبيعات موسمية في تاريخ الفرع": "Achieved the branch’s highest seasonal sales",
-  "زيادة نسبة المبيعات عبر الإنترنت بـ 85%": "Online sales increased by 85%"
+  "زيادة نسبة المبيعات عبر الإنترنت بـ 85%": "Online sales increased by 85%",
+  "صانع محتوى ومطور أعمال، أعمل في صناعة المحتوى والتسويق والذكاء الاصطناعي وبناء التجارب والواجهات الرقمية.": "Content creator and business developer working in content creation, marketing, artificial intelligence, and digital experiences and interfaces.",
+  "العلامة الرقمية الشخصية لسعيد بن عايض — الابتكار في صناعة المحتوى، تطوير الأعمال والحلول الذكية.": "Saeed Bin Ayidh’s personal digital brand — innovation in content creation, business development, and smart solutions.",
+  "صفحات سعيد": "Saeed Pages",
+  "حسابات سعيد": "Saeed Accounts",
+  "صفحات الترفيه": "Entertainment Pages",
+  "اختيار قسم الشكوى": "Choose Complaint Category",
+  "المحتوى": "Content",
+  "قراءة الخبر": "Read News",
+  "استكشف الكل": "Explore All",
+  "عرض الخدمة": "View Service"
 };
