@@ -54,7 +54,7 @@ export const ContentFieldDetailPage: React.FC = () => {
   const intro = tr(field.intro || field.description, field.introEn || field.descriptionEn);
   const categoryTag = tr(field.categoryTag, field.categoryTagEn || field.categoryEn);
   const fullContent = tr(field.fullContent || field.description, field.fullContentEn || field.descriptionEn);
-  const heroImage=isMusic?'/assets/saeed_bin_ayidh_banner.webp':field.image;
+  const heroImage=isMusic?'https://gcdn.picsart.com/editing-temp/208b1b8b-2dde-4df8-9747-c474ce4275d9.jpeg':field.image;
   const relatedNews = isMusic?[]:(data.news || []).filter((n:any) =>
     field.latestNewsSlugs?.includes?.(n.slug) ||
     (typeof n.category === 'string' && typeof field.title === 'string' && n.category.includes(field.title))
