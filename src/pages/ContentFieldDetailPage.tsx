@@ -8,6 +8,8 @@ import { Layers, ArrowLeft, ArrowRight, CheckCircle2, Play } from 'lucide-react'
 import { useCMS } from '../context/CMSContext';
 import { useLanguage } from '../context/LanguageContext';
 import { publicEnglish } from '../i18n/publicEnglish';
+import { FavoriteButton } from '../components/FavoriteButton';
+import { ShareButton } from '../components/ShareButton';
 
 const musicWorks=[
   {id:'montazer-eidik',title:'منتظر عيدك',titleEn:'Montazer Eidik',url:'https://youtu.be/HTMf4szHdT4?si=rB60wXFjhXZqWf1q',videoId:'HTMf4szHdT4'},
@@ -111,6 +113,7 @@ export const ContentFieldDetailPage: React.FC = () => {
               </span>
               <h1 className="text-3xl sm:text-5xl font-black text-white leading-tight">{title}</h1>
               <p className="text-base sm:text-lg text-gray-300 font-light leading-relaxed">{intro}</p>
+              <div className="flex items-center gap-2"><FavoriteButton id={`content-${field.id}`} title={title} url={`/content/${slug||field.id}`} type={isArabic?'مجال':'Field'}/><ShareButton title={title} url={`/content/${slug||field.id}`}/></div>
             </div>
             <div className={isSpecialField?'w-full':'w-full lg:w-[35%] flex justify-center'}>
               <img src={heroImage} alt={title} className={isSpecialField?'block w-full rounded-2xl border border-white/10 shadow-2xl object-cover':'w-full max-w-[320px] h-auto rounded-2xl border border-white/10 shadow-2xl object-cover'} />
