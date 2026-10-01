@@ -29,8 +29,8 @@ export const ResourcesSection:React.FC=()=>{
    </div>
    {cards.length?<div className="relative mx-auto h-[300px] max-w-[650px] overflow-hidden sm:h-[390px]">
     {cards.map(({offset,w})=>{
-     const abs=Math.abs(offset),scale=offset===0?1:abs===1?.82:.68,shift=offset*105;
-     return <Link key={`${w.id}-${offset}`} to="/resources/wallpapers" className="absolute left-1/2 top-1/2 block w-[150px] -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out sm:w-[195px]" style={{zIndex:10-abs,opacity:abs===2?.48:abs===1?.76:1,transform:`translate(calc(-50% + ${shift}px),-50%) scale(${scale})`}}>
+     const abs=Math.abs(offset),scale=offset===0?1:abs===1?0.82:0.68,shift=offset*105;
+     return <Link key={`${w.id}-${offset}`} to="/resources/wallpapers" className="absolute left-1/2 top-1/2 block w-[150px] -translate-x-1/2 -translate-y-1/2 transition-all duration-700 ease-out sm:w-[195px]" style={{zIndex:10-abs,opacity:abs===2?0.48:abs===1?0.76:1,transform:`translate(calc(-50% + ${shift}px),-50%) scale(${scale})`}}>
       <div className={`aspect-[9/16] overflow-hidden rounded-[26px] border bg-[#141414] shadow-2xl ${offset===0?'border-[#D51F2B]/45':'border-white/10'}`}>
        <img src={w.image} alt={w.title} loading="eager" decoding="async" className="h-full w-full object-cover"/>
       </div>
