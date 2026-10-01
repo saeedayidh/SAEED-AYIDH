@@ -41,3 +41,37 @@ export const ardrServiceWork={
     {platform:'Telegram',url:'https://t.me/ArdrServices'}
   ] as {platform:string;url:string}[]
 };
+
+
+export const ardrNaosWork={
+  id:'ardr-naos',
+  slug:'ardr-naos',
+  title:'ARDR Naos',
+  titleAr:'اردر ناوس',
+  shortDescription:'منصة متخصصة في أخبار الألعاب.',
+  shortDescriptionEn:'A platform specialized in gaming news.',
+  description:'اردر ناوس أحد عوالم اردر، ومتخصص في أخبار الألعاب.',
+  descriptionEn:'ARDR Naos is one of ARDR’s worlds, specialized in gaming news.',
+  previewUrl:'',
+  category:'أخبار الألعاب',
+  categoryEn:'Gaming News',
+  categoryDetails:'أخبار الألعاب',
+  categoryDetailsEn:'Gaming News',
+  logoUrl:'https://gcdn.picsart.com/editing-temp/5e7904c7-74c4-4eff-bcbb-cd827c075187.png',
+  bannerUrl:'https://gcdn.picsart.com/editing-temp/5c006f77-bed6-45ff-9932-c653c1c85174.jpeg',
+  features:[] as string[],
+  featuresEn:[] as string[],
+  accounts:[
+    {platform:'Snapchat',url:'https://snapchat.com/t/U6walawq'},
+    {platform:'Instagram',url:'https://www.instagram.com/ardr.naos?stkn=MXVmZDMwdmJlN2R6cQ=='},
+    {platform:'TikTok',url:'https://www.tiktok.com/@ardr.naos?_r=1&_t=ZS-9ABJhXKITeW'},
+    {platform:'X',url:'https://x.com/ardrnaos?s=11&t=o5zhmgF9bZG_mQ47HMhFEg'},
+    {platform:'Threads',url:'https://www.threads.com/@ardr.naos?igshid=NTc4MTIwNjQ2YQ=='}
+  ] as {platform:string;url:string}[],
+  channels:[
+    {platform:'WhatsApp',url:'https://whatsapp.com/channel/0029VakG5ZgBVJlCwD1rwf3a'},
+    {platform:'Telegram',url:'https://t.me/ardr_naos'}
+  ] as {platform:string;url:string}[]
+};
+
+export const featuredWorks=[ardrServiceWork,ardrNaosWork];
