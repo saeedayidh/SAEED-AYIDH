@@ -1,7 +1,7 @@
 import React from'react';
 import{Link}from'react-router-dom';
 import{Briefcase,ChevronLeft,ExternalLink}from'lucide-react';
-import{useCMS}from'../context/CMSContext';
+
 import{useLanguage}from'../context/LanguageContext';
 import{FavoriteButton}from'./FavoriteButton';
 import{ShareButton}from'./ShareButton';
