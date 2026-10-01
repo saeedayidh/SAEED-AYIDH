@@ -1,5 +1,7 @@
 import React,{useEffect,useMemo,useState}from'react';
-import{Search,SlidersHorizontal,ChevronLeft,ChevronRight,X}from'lucide-react';
+import{Search,SlidersHorizontal,ChevronLeft,ChevronRight,X,Download}from'lucide-react';
+import{FavoriteButton}from'../components/FavoriteButton';
+import{ShareButton}from'../components/ShareButton';
 import{useLanguage}from'../context/LanguageContext';
 import{wallpapers,wallpaperCategories,type WallpaperCategory}from'../data/resourcesData';
 
@@ -22,7 +24,7 @@ export const ResourcesPage:React.FC=()=>{
   return[page-2,page-1,page,page+1,page+2];
  },[page,pages]);
  return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}>
-  <style>{`@keyframes wallHeroLTR{from{transform:translateX(-50%)}to{transform:translateX(0)}}.wall-hero-track{animation:wallHeroLTR 38s linear infinite}.wall-hero-track:hover{animation-play-state:paused}@media(prefers-reduced-motion:reduce){.wall-hero-track{animation:none}}`}</style>
+  <style>{`@keyframes wallHeroLTR{from{transform:translateX(-50%)}to{transform:translateX(0)}}.wall-hero-track{animation:wallHeroLTR 38s linear infinite}.wall-hero-track:hover{animation-play-state:paused}`}</style>
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
    <div className="mb-8">
     <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد سعيد':'Saeed Resources'}</p>
@@ -50,12 +52,19 @@ export const ResourcesPage:React.FC=()=>{
    </label>
 
    {visible.length?<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-    {visible.map(w=><button key={w.id} onClick={()=>setSelected(w.image)} className="group text-right">
-     <div className="aspect-[9/16] overflow-hidden rounded-[22px] border border-white/10 bg-[#111] transition group-hover:border-[#D51F2B]/60">
-      <img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
+    {visible.map(w=><div key={w.id} id={`wallpaper-${w.id}`} className="group text-right">
+     <div className="relative aspect-[9/16] overflow-hidden rounded-[22px] border border-white/10 bg-[#111] transition group-hover:border-[#D51F2B]/60">
+      <button type="button" onClick={()=>setSelected(w.image)} className="absolute inset-0 h-full w-full" aria-label={w.title}>
+       <img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
+      </button>
+      <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-black/65 p-1.5 backdrop-blur-md">
+       <a href={w.image} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/70 transition hover:border-[#D51F2B]"><Download className="h-4 w-4 text-white"/></a>
+       <ShareButton title={w.title} url={w.image}/>
+       <FavoriteButton id={`wallpaper-${w.id}`} title={w.title} url={`/resources/wallpapers#wallpaper-${w.id}`} type="wallpaper"/>
+      </div>
      </div>
      <div className="mt-2 flex items-center justify-between px-1"><span className="text-xs font-bold text-white">{w.title}</span><span className="text-[10px] text-gray-600">{w.category}</span></div>
-    </button>)}
+    </div>)}
    </div>:<div className="py-20 text-center text-sm text-gray-500">{isArabic?'ما لقينا خلفيات مطابقة.':'No matching wallpapers found.'}</div>}
 
    {pages>1&&<div className="mt-12 flex flex-wrap items-center justify-center gap-2" dir="ltr">
