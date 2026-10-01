@@ -1,8 +1,14 @@
 import React,{useCallback,useEffect,useRef,useState}from'react';
 
-const SAEED_CHARACTER='https://cdn-ai-hs.picsart.com/ai-hot-storage/6cc5060e-2672-461c-9d18-f7e5eecf0c03.png';
-type Scene='left'|'right'|'bottom-left'|'bottom-right'|'run-ltr'|'run-rtl';
-const scenes:Scene[]=['left','right','bottom-left','bottom-right','run-ltr','run-rtl'];
+type Scene='left'|'top'|'right'|'bottom-left'|'bottom-right';
+const scenes:Scene[]=['left','top','right','bottom-left','bottom-right'];
+const assets:Record<Scene,string>={
+  left:'https://gcdn.picsart.com/editing-temp/3e4d27d1-9803-400e-806e-428c4b119f7c.png',
+  top:'https://gcdn.picsart.com/editing-temp/ace54c0a-1706-4e8e-bb5e-17ba58d672fe.png',
+  right:'https://gcdn.picsart.com/editing-temp/4e77668d-3b48-407b-a200-9f3a52d5524c.png',
+  'bottom-left':'https://gcdn.picsart.com/editing-temp/7eb286ab-03e1-4625-8ee9-a3f5f4b5057e.png',
+  'bottom-right':'https://gcdn.picsart.com/editing-temp/774efa05-e7f3-4efa-b558-9c1750503e27.png'
+};
 
 export const SaeedInteractiveCharacter:React.FC=()=>{
   const[scene,setScene]=useState<Scene>('right');
@@ -16,7 +22,7 @@ export const SaeedInteractiveCharacter:React.FC=()=>{
   const hide=useCallback(()=>{
     setFleeing(true);
     window.clearTimeout(hideTimer.current);
-    hideTimer.current=window.setTimeout(()=>{setVisible(false);setFleeing(false)},650);
+    hideTimer.current=window.setTimeout(()=>{setVisible(false);setFleeing(false)},620);
   },[]);
 
   const appear=useCallback(()=>{
@@ -27,12 +33,12 @@ export const SaeedInteractiveCharacter:React.FC=()=>{
     setFleeing(false);
     setVisible(true);
     window.clearTimeout(hideTimer.current);
-    hideTimer.current=window.setTimeout(()=>hide(),next.startsWith('run')?4200:5000);
+    hideTimer.current=window.setTimeout(hide,5200);
   },[hide]);
 
   useEffect(()=>{
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    const first=window.setTimeout(appear,7000);
+    const first=window.setTimeout(appear,4500);
     cycleTimer.current=window.setInterval(appear,15000);
     return()=>{window.clearTimeout(first);window.clearTimeout(hideTimer.current);window.clearInterval(cycleTimer.current)}
   },[appear]);
@@ -42,35 +48,34 @@ export const SaeedInteractiveCharacter:React.FC=()=>{
     const onPointer=(e:PointerEvent)=>{
       const now=performance.now(),prev=lastPointer.current;
       const distance=Math.hypot(e.clientX-prev.x,e.clientY-prev.y);
-      if(prev.t&&now-prev.t<280&&distance>55)hide();
+      if(prev.t&&now-prev.t<260&&distance>65)hide();
       lastPointer.current={x:e.clientX,y:e.clientY,t:now};
     };
-    const onTouch=()=>hide();
     window.addEventListener('pointermove',onPointer,{passive:true});
-    window.addEventListener('touchmove',onTouch,{passive:true});
-    return()=>{window.removeEventListener('pointermove',onPointer);window.removeEventListener('touchmove',onTouch)}
+    return()=>window.removeEventListener('pointermove',onPointer);
   },[visible,hide]);
 
   if(!visible)return null;
-  const run=scene==='run-ltr'||scene==='run-rtl';
+  const src=assets[scene];
   return <><style>{`
-.saeed-character-layer{position:fixed;z-index:45;pointer-events:none;will-change:transform,opacity;filter:drop-shadow(0 16px 28px rgba(0,0,0,.55));transition:opacity .28s ease,transform .62s cubic-bezier(.2,.8,.2,1)}
-.saeed-character-img{display:block;width:clamp(105px,12vw,180px);height:auto;user-select:none;-webkit-user-drag:none}
-.saeed-left{left:-42px;top:34%;animation:saeedPeekLeft .65s both}.saeed-right{right:-42px;top:28%;animation:saeedPeekRight .65s both}
-.saeed-bottom-left{left:4%;bottom:-115px;animation:saeedPeekBottom .7s both}.saeed-bottom-right{right:5%;bottom:-115px;animation:saeedPeekBottom .7s both}
-.saeed-run-ltr{left:-210px;bottom:3%;animation:saeedRunLTR 4.2s linear both}.saeed-run-rtl{right:-210px;bottom:3%;animation:saeedRunRTL 4.2s linear both}
-.saeed-running{width:clamp(115px,13vw,195px);animation:saeedBob .24s ease-in-out infinite alternate}
-.saeed-flee{opacity:0!important;transform:translate3d(var(--flee-x,0),45px,0) scale(.72) rotate(-7deg)!important}
-.saeed-left.saeed-flee{--flee-x:-180px}.saeed-right.saeed-flee{--flee-x:180px}.saeed-bottom-left.saeed-flee{--flee-x:-150px}.saeed-bottom-right.saeed-flee{--flee-x:150px}
-@keyframes saeedPeekLeft{from{opacity:0;transform:translateX(-90px) rotate(7deg)}to{opacity:1;transform:translateX(0) rotate(3deg)}}
-@keyframes saeedPeekRight{from{opacity:0;transform:translateX(90px) rotate(-7deg)}to{opacity:1;transform:translateX(0) rotate(-3deg)}}
-@keyframes saeedPeekBottom{from{opacity:0;transform:translateY(100px)}to{opacity:1;transform:translateY(0)}}
-@keyframes saeedRunLTR{0%{opacity:0;transform:translateX(0) scaleX(1)}8%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateX(calc(100vw + 420px)) scaleX(1)}}
-@keyframes saeedRunRTL{0%{opacity:0;transform:translateX(0) scaleX(-1)}8%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateX(calc(-100vw - 420px)) scaleX(-1)}}
-@keyframes saeedBob{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-8px) rotate(2deg)}}
-@media(max-width:640px){.saeed-character-img{width:100px}.saeed-running{width:112px}.saeed-left{left:-35px}.saeed-right{right:-35px}.saeed-bottom-left,.saeed-bottom-right{bottom:-72px}}
-@media(prefers-reduced-motion:reduce){.saeed-character-layer{display:none!important}}
-`}</style><div aria-hidden="true" className={`saeed-character-layer saeed-${scene} ${fleeing?'saeed-flee':''}`}>
-    <img src={SAEED_CHARACTER} alt="" draggable={false} className={run?'saeed-character-img saeed-running':'saeed-character-img'}/>
+.saeed-peek{position:fixed;z-index:45;pointer-events:none;will-change:transform,opacity;transition:opacity .25s ease,transform .62s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 14px 26px rgba(0,0,0,.58));overflow:hidden}
+.saeed-peek img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+.saeed-peek-main{position:relative;z-index:1}
+.saeed-peek-eyes{position:absolute;inset:0;z-index:2;animation:saeedEyes 1.35s ease-in-out infinite alternate;clip-path:inset(var(--eye-top) var(--eye-right) var(--eye-bottom) var(--eye-left))}
+.saeed-left{left:-5px;top:22%;width:155px;--eye-top:25%;--eye-right:20%;--eye-bottom:60%;--eye-left:28%;animation:saeedInLeft .65s both}
+.saeed-top{left:50%;top:-8px;width:270px;--eye-top:28%;--eye-right:25%;--eye-bottom:56%;--eye-left:34%;animation:saeedInTop .7s both}
+.saeed-right{right:-4px;top:24%;width:170px;--eye-top:25%;--eye-right:24%;--eye-bottom:60%;--eye-left:27%;animation:saeedInRight .65s both}
+.saeed-bottom-left{left:1%;bottom:-3px;width:190px;--eye-top:25%;--eye-right:25%;--eye-bottom:60%;--eye-left:26%;animation:saeedInBottom .7s both}
+.saeed-bottom-right{right:1%;bottom:-3px;width:205px;--eye-top:23%;--eye-right:24%;--eye-bottom:62%;--eye-left:28%;animation:saeedInBottom .7s both}
+.saeed-flee{opacity:0!important}
+.saeed-left.saeed-flee{transform:translateX(-180px) rotate(5deg) scale(.92)!important}.saeed-right.saeed-flee{transform:translateX(180px) rotate(-5deg) scale(.92)!important}
+.saeed-top.saeed-flee{transform:translateY(-180px) scale(.92)!important}.saeed-bottom-left.saeed-flee,.saeed-bottom-right.saeed-flee{transform:translateY(180px) scale(.92)!important}
+@keyframes saeedInLeft{from{opacity:0;transform:translateX(-120px)}to{opacity:1;transform:translateX(0)}}@keyframes saeedInRight{from{opacity:0;transform:translateX(120px)}to{opacity:1;transform:translateX(0)}}@keyframes saeedInTop{from{opacity:0;transform:translate(-50%,-130px)}to{opacity:1;transform:translate(-50%,0)}}@keyframes saeedInBottom{from{opacity:0;transform:translateY(130px)}to{opacity:1;transform:translateY(0)}}
+@keyframes saeedEyes{0%,12%{transform:translateX(-2px)}45%,60%{transform:translateX(2px)}88%,100%{transform:translateX(0)}}
+@media(max-width:640px){.saeed-left{width:110px}.saeed-right{width:118px}.saeed-top{width:190px}.saeed-bottom-left{width:125px}.saeed-bottom-right{width:140px}}
+@media(prefers-reduced-motion:reduce){.saeed-peek{display:none!important}}
+`}</style><div aria-hidden="true" className={`saeed-peek saeed-${scene} ${fleeing?'saeed-flee':''}`}>
+    <img src={src} alt="" draggable={false} className="saeed-peek-main"/>
+    <img src={src} alt="" draggable={false} className="saeed-peek-eyes"/>
   </div></>
 };
