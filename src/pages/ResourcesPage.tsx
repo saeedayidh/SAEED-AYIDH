@@ -28,7 +28,7 @@ export const ResourcesPage:React.FC=()=>{
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
    <div className="mb-8">
     <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد سعيد':'Saeed Resources'}</p>
-    <h1 className="text-4xl font-black sm:text-6xl">{isArabic?'خلفيات الجوال':'Mobile Wallpapers'}</h1>
+    <h1 className="text-4xl font-black sm:text-6xl">{isArabic?'خلفية جوال':'Mobile Wallpaper'}</h1>
     <p className="mt-3 text-sm text-gray-500">{isArabic?'100 خلفية مختارة للجوال — طبيعة، بحر، جبال، صحراء وسماء.':'100 selected mobile wallpapers — nature, sea, mountains, desert and sky.'}</p>
    </div>
 
