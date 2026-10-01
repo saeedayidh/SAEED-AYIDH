@@ -1,11 +1,14 @@
 import React,{useEffect,useMemo,useState}from'react';
-import{Search,SlidersHorizontal,ChevronLeft,ChevronRight,X,Download}from'lucide-react';
+import{Search,SlidersHorizontal,ChevronDown,ChevronLeft,ChevronRight,X,Download}from'lucide-react';
 import{FavoriteButton}from'../components/FavoriteButton';
 import{ShareButton}from'../components/ShareButton';
 import{useLanguage}from'../context/LanguageContext';
 import{wallpapers,wallpaperCategories,type WallpaperCategory}from'../data/resourcesData';
 
 const PER_PAGE=10;
+const englishCategories:Record<WallpaperCategory,string>={
+ 'الكل':'All','طبيعة':'Nature','بحر':'Sea','جبال':'Mountains','صحراء':'Desert','سماء':'Sky'
+};
 export const ResourcesPage:React.FC=()=>{
  const{isArabic}=useLanguage();
  const[q,setQ]=useState('');
@@ -55,11 +58,17 @@ export const ResourcesPage:React.FC=()=>{
     </div>
    </div>
 
-   <div className="mb-8 border-y border-white/5 py-7">
-    <div className="mb-4 flex items-center gap-2 text-sm font-bold text-gray-400"><SlidersHorizontal className="h-4 w-4 text-[#D51F2B]"/><span>{isArabic?'تصفية الخلفيات':'Filter wallpapers'}</span></div>
-    <div className="flex flex-wrap gap-2">
-     {wallpaperCategories.map(cat=><button key={cat} onClick={()=>setCategory(cat)} className={`rounded-xl border px-4 py-2 text-xs font-bold transition ${category===cat?'border-[#D51F2B] bg-[#D51F2B] text-white':'border-white/10 bg-[#111] text-gray-400 hover:border-white/20 hover:text-white'}`}>{cat}</button>)}
-    </div>
+   <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-7">
+    <span className="text-base font-bold text-gray-300">{isArabic?'فلترة خلفية جوال':'Filter wallpapers'}</span>
+    <label className="relative inline-flex min-w-[160px] items-center gap-2 rounded-xl border border-[#D51F2B]/60 bg-[#121212] px-4 py-3 text-white focus-within:ring-2 focus-within:ring-[#D51F2B]">
+     <SlidersHorizontal className="h-4 w-4 shrink-0 text-[#D51F2B]"/>
+     <span className="sr-only">{isArabic?'التصنيف':'Category'}</span>
+     <select value={category} onChange={e=>setCategory(e.target.value as WallpaperCategory)}
+      className="w-full cursor-pointer appearance-none bg-transparent ps-1 pe-5 text-sm font-bold outline-none">
+      {wallpaperCategories.map(cat=><option key={cat} value={cat} className="bg-[#121212] text-white">{isArabic?cat:englishCategories[cat]}</option>)}
+     </select>
+     <ChevronDown className="pointer-events-none absolute end-3 h-4 w-4 text-gray-400"/>
+    </label>
    </div>
 
    <label className="mb-9 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#101010] px-5 py-4 focus-within:border-[#D51F2B]/60">
