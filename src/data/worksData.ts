@@ -10,8 +10,8 @@ export const ardrServiceWork={
   previewUrl:'https://www.ardrservices.com',
   category:'متجر خدمات رقمية',
   categoryEn:'Digital Services Store',
-  logoUrl:'',
-  bannerUrl:'',
+  logoUrl:'https://gcdn.picsart.com/editing-temp/f778a660-f077-457e-8bd3-50ad1420ceb9.png',
+  bannerUrl:'https://gcdn.picsart.com/editing-temp/08d018f9-b6d5-414e-b346-ea270f3ebaa9.jpeg',
   features:[
     'خدمات مخصصة للمتاجر الإلكترونية',
     'خدمات لصناع المحتوى',
