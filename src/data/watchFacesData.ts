@@ -1,4 +1,12 @@
-export type WatchFaceItem = { id: number; title: string; englishTitle: string; image: string };
+export const watchFaceCategories = ['الكل', 'رياضية', 'كلاسيكية', 'رقمية', 'سيارات', 'فاخرة', 'بسيطة', 'أخرى'] as const;
+export type WatchFaceCategory = typeof watchFaceCategories[number];
+export type WatchFaceItem = {
+  id: number;
+  title: string;
+  englishTitle: string;
+  category: Exclude<WatchFaceCategory, 'الكل'>;
+  image: string;
+};
 
 // Fifty original SVG compositions. These are downloadable design images, not watchOS packages.
 // The official SBA mark is intentionally absent; it must never be recreated in code.
@@ -48,7 +56,7 @@ const art: Array<() => string> = [
   () => O(200,200,139,WHITE,2,.5)+ticks(151,24)+T(200,78,'N',30,RED)+T(326,209,'E',23)+T(200,345,'S',23)+T(72,209,'W',23)+C(200,200,9)+path('M200 107 L215 200 L200 190 L185 200 Z',RED,3,RED)+path('M200 293 L215 200 L200 210 L185 200 Z',WHITE,3,WHITE),
   () => arcs(146)+digits(69)+T(200,275,'01 OCT',20,RED)+mini('STEPS','8,420',105,335)+mini('CAL','320',294,335),
   () => Array.from({length:14},(_,i)=>L(35+i*25,100+(i%3)*18,35+i*25,312-(i%4)*15,i%3?WHITE:RED,2,.65)).join('')+R(55,141,290,119,'#080809',22,.92)+digits(76)+T(200,299,'WED • 01',18,RED),
-  () => ticks(142,60)+O(200,200,117,RED,3)+hands()+R(166,280,68,26,RED,13)+T(200,299,'01',17),
+  () => ticks(142,60)+O(200,200,117,RED,3)+hands()+R(148,273,104,35,RED,13)+T(200,298,'RPM  06',16)+T(200,89,'0  •  9',18),
   () => C(200,200,125,RED,.1)+arcs(125,[RED,RED,WHITE])+O(200,200,74,WHITE,1,.3)+digits(54)+T(200,274,'ACTIVE',15,RED),
   () => R(52,66,296,267,'#f6f6f6',26)+T(200,202,'10:08',75,'#080809')+R(72,225,256,6,RED,3)+T(200,286,'01 / 10',28,'#171719'),
   () => Array.from({length:11},(_,i)=>R(64+i*26,270-(i%5)*31,12,90+(i%5)*31,i%3?WHITE:RED,6,.75)).join('')+digits(68,200,194)+T(200,94,'RHYTHM',19,RED),
@@ -57,7 +65,7 @@ const art: Array<() => string> = [
   () => R(178,34,7,332,RED,2)+T(112,179,'10',71)+T(275,280,'08',71)+mini('HOUR','AM',109,271)+mini('MIN','OCT',282,181),
   () => O(200,200,145,RED,1)+path('M80 308 Q161 278 171 207 T322 89',RED,7)+C(169,209,15,WHITE)+digits(48,205,343),
   () => R(43,43,314,314,WHITE,40)+R(61,61,278,94,RED,23)+T(200,129,'10',75)+T(200,266,'08',113,'#111114')+T(200,312,'OCT 01',17,'#111114'),
-  () => O(200,200,125,RED,18,.45)+O(200,200,98,WHITE,2,.7)+T(200,197,'10:08',57)+T(200,258,'01 / THU',21,RED)+Array.from({length:12},(_,i)=>C(200+145*Math.cos(i*Math.PI/6),200+145*Math.sin(i*Math.PI/6),3,i%3?WHITE:RED)).join(''),
+  () => O(200,200,125,RED,18,.45)+O(200,200,98,WHITE,2,.7)+T(200,197,'10:08',57)+T(200,258,'KM/H  120',17,RED)+Array.from({length:12},(_,i)=>C(200+145*Math.cos(i*Math.PI/6),200+145*Math.sin(i*Math.PI/6),3,i%3?WHITE:RED)).join(''),
   () => path('M48 210 L350 210',RED,13)+digits(89,200,187)+T(200,268,'01  /  OCTOBER',21,WHITE)+L(61,297,339,297,WHITE,2,.5),
   () => R(43,53,314,290,'#171719',44)+L(62,98,338,98,RED,11)+digits(80)+T(200,283,'THURSDAY',18,RED)+L(62,310,338,310,RED,11),
   () => path('M28 270 C91 181 145 312 200 208 S312 155 373 84',RED,38)+digits(57,200,213)+T(200,308,'01 OCT',19,WHITE),
@@ -84,18 +92,30 @@ const art: Array<() => string> = [
   () => ticks(149,12)+T(200,103,'12',27)+T(200,324,'6',27)+T(83,210,'9',27)+T(319,210,'3',27)+hands()+R(159,253,82,29,RED,9)+T(200,275,'OCT 01',15),
   () => O(200,200,150,WHITE,3)+ticks(150,24)+T(200,95,'N',20,RED)+T(317,207,'E',20)+T(200,330,'S',20)+T(82,207,'W',20)+hands()+T(200,260,'ALT 240',13,RED),
   () => O(200,200,150,RED,11)+ticks(144,60)+O(200,200,110,WHITE,1,.55)+hands()+T(200,280,'DEPTH  32 M',13),
-  () => path('M52 292 L88 124 L124 208 L161 91 L198 279 L237 133 L277 216 L345 105',RED,9)+T(200,91,'10:08',62)+T(200,342,'LAP 03   •   01 OCT',16),
+  () => path('M52 292 L88 124 L124 208 L161 91 L198 279 L237 133 L277 216 L345 105',RED,9)+T(200,91,'10:08',62)+T(200,342,'LAP 03   •   RPM  8',16),
   () => L(200,45,200,355,RED,2)+L(45,200,355,200,RED,2)+T(118,164,'10',67)+T(283,165,'08',67)+mini('DAY','THU',111,264)+mini('DATE','01',283,264),
   () => O(200,200,139,WHITE,1,.6)+Array.from({length:6},(_,i)=>`<g transform="rotate(${i*60} 200 200)">${L(200,62,200,81,i%2?WHITE:RED,4)}</g>`).join('')+digits(56)+T(200,277,'UTC +03',20,RED)+T(200,317,'RIYADH',16),
   () => R(0,250,400,150,'url(#red)')+C(200,246,91,RED,.8)+O(200,246,106,WHITE,1,.6)+T(200,154,'10:08',68)+T(200,337,'SUNSET',22),
-  () => Array.from({length:20},(_,i)=>L(48+i*16,311,48+i*16,311-i*8,i%3?WHITE:RED,6,i%3?.4:1)).join('')+digits(67,200,188)+T(200,104,'01 OCT',20,RED),
+  () => Array.from({length:20},(_,i)=>L(48+i*16,311,48+i*16,311-i*8,i%3?WHITE:RED,6,i%3?.4:1)).join('')+digits(67,200,188)+T(200,104,'SPEED / KMH',18,RED),
   () => Array.from({length:12},(_,i)=>R(107,38+i*27,186,4,i===5||i===6?RED:WHITE,2,i===5||i===6?1:.25)).join('')+T(200,174,'10',74)+T(200,269,'08',74),
   () => arcs(145,[RED,WHITE,RED])+O(200,200,89,WHITE,2)+hands()+T(200,338,'01  •  OCT',17,RED),
 ];
+
+const categoryIds: Record<Exclude<WatchFaceCategory, 'الكل' | 'أخرى'>, number[]> = {
+  'رياضية': [2, 6, 9, 11, 12, 21, 22, 26, 28, 43],
+  'كلاسيكية': [1, 5, 27, 37, 41, 42, 46, 50],
+  'رقمية': [4, 7, 10, 13, 16, 20, 25, 29, 33, 36, 45],
+  'سيارات': [8, 17, 44, 48],
+  'فاخرة': [15, 23, 24, 30, 34, 35, 47],
+  'بسيطة': [3, 14, 18, 19, 32, 38, 49],
+};
+const categoryFor = (id: number): WatchFaceItem['category'] =>
+  (Object.entries(categoryIds).find(([, ids]) => ids.includes(id))?.[0] as WatchFaceItem['category']) || 'أخرى';
 
 export const watchFaces: WatchFaceItem[] = names.map(([title, englishTitle], index) => ({
   id: index + 1,
   title,
   englishTitle,
+  category: categoryFor(index + 1),
   image: base(index + 1, art[index]()),
 }));

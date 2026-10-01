@@ -1,24 +1,32 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Download, Search, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Download, Search, X, ChevronLeft, ChevronRight, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { FavoriteButton } from '../components/FavoriteButton';
 import { ShareButton } from '../components/ShareButton';
 import { WatchFaceCarousel } from '../components/WatchFaceCarousel';
 import { useLanguage } from '../context/LanguageContext';
-import { watchFaces, type WatchFaceItem } from '../data/watchFacesData';
+import { watchFaces, watchFaceCategories, type WatchFaceCategory, type WatchFaceItem } from '../data/watchFacesData';
 
 const PER_PAGE = 10;
+const englishCategories: Record<WatchFaceCategory, string> = {
+  'الكل': 'All', 'رياضية': 'Sport', 'كلاسيكية': 'Classic', 'رقمية': 'Digital',
+  'سيارات': 'Cars', 'فاخرة': 'Luxury', 'بسيطة': 'Minimal', 'أخرى': 'Other',
+};
 export const WatchFacesPage: React.FC = () => {
   const { isArabic } = useLanguage();
   const { hash } = useLocation();
   const [query, setQuery] = useState('');
+  const [category, setCategory] = useState<WatchFaceCategory>('الكل');
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState<WatchFaceItem | null>(null);
-  const filtered = useMemo(() => watchFaces.filter(face => !query.trim() ||
-    face.title.includes(query.trim()) || face.englishTitle.toLowerCase().includes(query.trim().toLowerCase()) || String(face.id).includes(query.trim())), [query]);
+  const filtered = useMemo(() => watchFaces.filter(face =>
+    (category === 'الكل' || face.category === category) &&
+    (!query.trim() || face.title.includes(query.trim()) ||
+      face.englishTitle.toLowerCase().includes(query.trim().toLowerCase()) ||
+      String(face.id).includes(query.trim()))), [query, category]);
   const pages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const visible = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-  useEffect(() => setPage(1), [query]);
+  useEffect(() => setPage(1), [query, category]);
   useEffect(() => {
     const id = Number(hash.match(/^#watch-face-(\d+)$/)?.[1]);
     if (!id || id > watchFaces.length) return;
@@ -36,6 +44,21 @@ export const WatchFacesPage: React.FC = () => {
       </div>
       <div className="mb-14">
         <WatchFaceCarousel faces={watchFaces} isArabic={isArabic} onSelect={setSelected}/>
+      </div>
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-7">
+        <span className="text-base font-bold text-gray-300">{isArabic ? 'فلترة واجهة الساعة' : 'Filter watch faces'}</span>
+        <label className="relative inline-flex min-w-[160px] items-center gap-2 rounded-xl border border-[#D51F2B]/60 bg-[#121212] px-4 py-3 text-white focus-within:ring-2 focus-within:ring-[#D51F2B]">
+          <SlidersHorizontal className="h-4 w-4 shrink-0 text-[#D51F2B]"/>
+          <span className="sr-only">{isArabic ? 'التصنيف' : 'Category'}</span>
+          <select value={category} onChange={event => setCategory(event.target.value as WatchFaceCategory)}
+            className="w-full cursor-pointer appearance-none bg-transparent ps-1 pe-5 text-sm font-bold outline-none">
+            {watchFaceCategories.map(item =>
+              <option key={item} value={item} className="bg-[#121212] text-white">
+                {isArabic ? item : englishCategories[item]}
+              </option>)}
+          </select>
+          <ChevronDown className="pointer-events-none absolute end-3 h-4 w-4 text-gray-400"/>
+        </label>
       </div>
       <label className="mb-9 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#101010] px-5 py-4 focus-within:border-[#D51F2B]/60">
         <Search className="h-5 w-5 text-gray-500"/>
