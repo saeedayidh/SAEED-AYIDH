@@ -1,8 +1,39 @@
-import React from'react';
+import React,{useMemo,useState}from'react';
 import{Link}from'react-router-dom';
-import{Wrench,ChevronLeft,ChevronRight,ArrowLeft,ArrowRight}from'lucide-react';
-import{useCMS}from'../context/CMSContext';
+import{Search,ChevronLeft}from'lucide-react';
 import{useLanguage}from'../context/LanguageContext';
-import{FavoriteButton}from'./FavoriteButton';
-const isDemo=(x:any)=>/(demo|test|sample|تجريب|نموذج)/i.test(`${x?.id||''} ${x?.name||''} ${x?.description||''}`);
-export const ResourcesSection:React.FC=()=>{const{data}=useCMS();const{isArabic}=useLanguage();const section=data.sections.find(s=>s.id==='resources');if(section&&!section.isVisible)return null;const Arrow=isArabic?ChevronLeft:ChevronRight;const SmallArrow=isArabic?ArrowLeft:ArrowRight;const all=(data.tools||[]).filter((x:any)=>!isDemo(x));const tools=all.slice(0,3);return <section id="resources-section" className="py-24 relative bg-[#0D0D0D] border-t border-white/5 overflow-hidden" dir={isArabic?'rtl':'ltr'}><div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between"><div className="max-w-3xl"><div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-[#191919] px-4 py-1.5 text-xs font-semibold text-[#D51F2B]"><Wrench className="w-3.5 h-3.5"/><span>{isArabic?(section?.badge||'المكتبة والأدوات الحصرية'):'Exclusive Library & Tools'}</span></div><h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">{isArabic?(section?.title||'أدوات سعيد'):'Saeed Tools'}</h2><p className="mt-4 text-base sm:text-lg text-[#B8B8B8] font-light leading-relaxed">{isArabic?(section?.subtitle||'مكتبة أدوات متكاملة تشمل البرومبت، واجهات الساعات، الخلفيات، الفلاتر والاختصارات.'):'A complete library of prompts, watch faces, wallpapers, filters and shortcuts.'}</p></div></div><div className="grid grid-cols-1 gap-5 md:grid-cols-3">{tools.map((tool:any)=><div key={tool.id} className="relative"><Link to={`/tools/${tool.slug||tool.id}`} className="sba-card group flex h-full flex-col justify-between p-5"><div><div className="relative mb-4 h-40 overflow-hidden rounded-xl border border-white/10 bg-[#151515]">{tool.image?<img src={tool.image} alt={tool.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"/>:null}<FavoriteButton id={`tool-${tool.id}`} title={tool.name} url={`/tools/${tool.slug||tool.id}`} type="أداة" className="absolute left-2 top-2 z-10"/></div>{tool.category&&<div className="text-[10px] font-bold text-[#D51F2B]">{tool.category}</div>}<h3 className="mt-2 text-lg font-black text-white group-hover:text-[#D51F2B]">{tool.name}</h3><p className="mt-2 line-clamp-3 text-xs leading-6 text-gray-500">{tool.description}</p></div><div className="mt-5 flex items-center justify-between border-t border-white/5 pt-4 text-xs font-semibold text-gray-400 group-hover:text-white"><span>{isArabic?'استعرض الأداة':'Explore Tool'}</span><SmallArrow className="h-4 w-4 text-[#D51F2B]"/></div></Link></div>)}</div><div className="mt-8 flex justify-center"><Link to="/resources" className="sba-btn-secondary px-7 py-3 text-xs flex items-center gap-2"><span>{isArabic?'استكشف أدوات سعيد':'Explore Saeed Tools'}</span><Arrow className="w-4 h-4 text-[#D51F2B]"/></Link></div></div></section>};
+import{wallpapers}from'../data/resourcesData';
+
+export const ResourcesSection:React.FC=()=>{
+ const{isArabic}=useLanguage();
+ const[q,setQ]=useState('');
+ const featured=useMemo(()=>wallpapers.filter(x=>!q.trim()||x.title.includes(q.trim())).slice(0,8),[q]);
+ const loop=[...featured,...featured];
+ return <section id="resources-section" className="relative overflow-hidden border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}>
+  <style>{`@keyframes saeedResourcesLTR{from{transform:translateX(-50%)}to{transform:translateX(0)}}.saeed-resources-track{animation:saeedResourcesLTR 34s linear infinite}.saeed-resources-track:hover{animation-play-state:paused}@media(prefers-reduced-motion:reduce){.saeed-resources-track{animation:none}}`}</style>
+  <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+   <div className="mb-8">
+    <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد مختارة لك':'Resources selected for you'}</p>
+    <h2 className="text-3xl font-black text-white sm:text-5xl">{isArabic?'موارد سعيد':'Saeed Resources'}</h2>
+   </div>
+   <div className="mb-8 grid items-center gap-3 md:grid-cols-[auto_1fr_auto]">
+    <h3 className="order-1 text-xl font-black text-white md:order-3 md:text-2xl">{isArabic?'خلفيات الجوال':'Mobile Wallpapers'}</h3>
+    <label className="order-2 flex min-w-0 items-center gap-3 rounded-2xl border border-white/10 bg-[#111] px-4 py-3 focus-within:border-[#D51F2B]/60 md:order-2">
+     <Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder={isArabic?'ابحث عن خلفية...':'Search wallpapers...'} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/>
+    </label>
+    <Link to="/resources/wallpapers" className="order-3 inline-flex items-center justify-center gap-2 rounded-2xl border border-[#D51F2B]/40 px-5 py-3 text-sm font-bold text-[#D51F2B] transition hover:bg-[#D51F2B] hover:text-white md:order-1">
+     <span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/>
+    </Link>
+   </div>
+   <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+    <div className="saeed-resources-track flex w-max gap-4 py-2" dir="ltr">
+     {loop.map((w,i)=><Link key={`${w.id}-${i}`} to="/resources/wallpapers" className="group block w-[150px] shrink-0 sm:w-[190px]">
+      <div className="aspect-[9/16] overflow-hidden rounded-[24px] border border-white/10 bg-[#141414] shadow-xl">
+       <img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105"/>
+      </div>
+     </Link>)}
+    </div>
+   </div>
+  </div>
+ </section>
+};
