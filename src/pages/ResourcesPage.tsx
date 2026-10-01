@@ -33,7 +33,7 @@ export const ResourcesPage:React.FC=()=>{
    <div className="mb-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
     <div className="wall-hero-track flex w-max gap-3 py-2" dir="ltr">
      {[...hero,...hero].map((w,i)=><button key={`${w.id}-hero-${i}`} onClick={()=>setSelected(w.image)} className="w-[120px] shrink-0 overflow-hidden rounded-[22px] border border-white/10 bg-[#111] sm:w-[155px]">
-      <img src={w.image} alt={w.title} className="aspect-[9/16] h-auto w-full object-cover" loading="eager" onError={e=>{const img=e.currentTarget;if(!img.dataset.fallback){img.dataset.fallback='1';img.src='https://picsum.photos/seed/saeed-hero-'+(img.alt.match(/\\d+/)?.[0]||'1')+'/720/1280'}}/>
+      <img src={w.image} alt={w.title} className="aspect-[9/16] h-auto w-full object-cover" loading="eager"/>
      </button>)}
     </div>
    </div>
@@ -52,7 +52,7 @@ export const ResourcesPage:React.FC=()=>{
    {visible.length?<div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
     {visible.map(w=><button key={w.id} onClick={()=>setSelected(w.image)} className="group text-right">
      <div className="aspect-[9/16] overflow-hidden rounded-[22px] border border-white/10 bg-[#111] transition group-hover:border-[#D51F2B]/60">
-      <img src={w.image} alt={w.title} loading="lazy" onError={e=>{const img=e.currentTarget;if(!img.dataset.fallback){img.dataset.fallback='1';img.src='https://picsum.photos/seed/saeed-wallpaper-'+(img.alt.match(/\\d+/)?.[0]||'1')+'/720/1280'}} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
+      <img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
      </div>
      <div className="mt-2 flex items-center justify-between px-1"><span className="text-xs font-bold text-white">{w.title}</span><span className="text-[10px] text-gray-600">{w.category}</span></div>
     </button>)}
