@@ -1,7 +1,7 @@
 export type SaeedEvent = {
   id: string; title: string; titleEn: string; description: string; descriptionEn: string;
   image: string; start: string; end: string; platform: string; location: string; locationEn: string;
-  registration: 'open' | 'closed'; about: string; aboutEn: string; instructions: string; instructionsEn: string;
+  registration: 'open' | 'closed'; registrationEnd?: string; about: string; aboutEn: string; instructions: string; instructionsEn: string;
   prizes: string; prizesEn: string; important: string; importantEn: string; registrationUrl: string; eventUrl: string;
   demo?: boolean; enabled?: boolean;
 };
@@ -37,3 +37,7 @@ export function countdown(event: SaeedEvent, now: number, ar: boolean) {
 }
 export function eventDate(event: SaeedEvent, ar: boolean) { return new Intl.DateTimeFormat(ar ? 'ar-SA-u-ca-gregory' : 'en-GB', { timeZone: 'Asia/Riyadh', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(event.start)); }
 export function safeEventUrl(value: string) { try { const url = new URL(value); return ['https:','http:'].includes(url.protocol) ? url.href : ''; } catch { return ''; } }
+
+export function filterEventTime(items: SaeedEvent[], date: string, hour: string, minute: string) {
+ return items.filter(event => { const d = new Date(Date.parse(event.start) + 3 * 3600000); return (!date || d.toISOString().slice(0,10) === date) && (!hour || String(d.getUTCHours()).padStart(2,'0') === hour) && (!minute || String(d.getUTCMinutes()).padStart(2,'0') === minute); });
+}
