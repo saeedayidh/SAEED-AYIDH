@@ -17,11 +17,11 @@ export const ResourcesSection:React.FC=()=>{
     <h2 className="text-3xl font-black text-white sm:text-5xl">{isArabic?'موارد سعيد':'Saeed Resources'}</h2>
    </div>
    <div className="mb-8 flex items-center gap-2 sm:gap-3">
-    <h3 className="order-3 shrink-0 whitespace-nowrap text-sm font-black text-white sm:text-xl md:text-2xl">{isArabic?'خلفيات الجوال':'Mobile Wallpapers'}</h3>
+    <h3 className="order-1 inline-flex shrink-0 items-center justify-center rounded-2xl border border-[#D51F2B]/40 px-3 py-3 text-xs font-black text-[#D51F2B] sm:px-5 sm:text-sm">{isArabic?'خلفية جوال':'Mobile Wallpaper'}</h3>
     <label className="order-2 flex min-w-0 flex-1 items-center gap-2 rounded-2xl border border-white/10 bg-[#111] px-3 py-3 focus-within:border-[#D51F2B]/60 sm:px-4">
      <Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder={isArabic?'ابحث عن خلفية...':'Search wallpapers...'} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/>
     </label>
-    <Link to="/resources/wallpapers" className="order-1 inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl border border-[#D51F2B]/40 px-3 py-3 text-xs font-bold text-[#D51F2B] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-5 sm:text-sm">
+    <Link to="/resources/wallpapers" className="order-3 inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl px-2 py-3 text-xs font-bold text-[#D51F2B] transition hover:text-white sm:gap-2 sm:px-4 sm:text-sm">
      <span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/>
     </Link>
    </div>
