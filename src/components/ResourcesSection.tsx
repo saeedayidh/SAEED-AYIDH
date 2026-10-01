@@ -27,8 +27,8 @@ export const ResourcesSection:React.FC=()=>{
   <style>{`
    @keyframes resourceNext{0%{opacity:.72;transform:translateX(28px)}100%{opacity:1;transform:translateX(0)}}
    @keyframes resourcePrev{0%{opacity:.72;transform:translateX(-28px)}100%{opacity:1;transform:translateX(0)}}
-   .resource-carousel-next{animation:resourceNext .58s cubic-bezier(.2,.8,.2,1)}
-   .resource-carousel-prev{animation:resourcePrev .58s cubic-bezier(.2,.8,.2,1)}
+   .resource-carousel-next{animation:resourceNext 1.05s cubic-bezier(.22,.75,.25,1)}
+   .resource-carousel-prev{animation:resourcePrev 1.05s cubic-bezier(.22,.75,.25,1)}
   `}</style>
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
    <div className="mb-8">
@@ -49,7 +49,7 @@ export const ResourcesSection:React.FC=()=>{
     <div key={animKey} className={`absolute inset-0 ${direction==='next'?'resource-carousel-next':'resource-carousel-prev'}`}>
     {cards.map(({offset,w})=>{
      const abs=Math.abs(offset),scale=offset===0?1:abs===1?.82:.68,shift=offset*88;
-     return <Link key={w.id} to="/resources/wallpapers" onClick={e=>{if(dragged.current){e.preventDefault();dragged.current=false}}} className="absolute left-1/2 top-1/2 block w-[158px] transition-[transform,opacity] duration-700 ease-out sm:w-[205px]" style={{zIndex:10-abs,opacity:abs===2?.28:abs===1?.68:1,transform:`translate3d(calc(-50% + ${shift}px),-50%,0) scale(${scale})`}}>
+     return <Link key={w.id} to="/resources/wallpapers" onClick={e=>{if(dragged.current){e.preventDefault();dragged.current=false}}} className="absolute left-1/2 top-1/2 block w-[158px] transition-[transform,opacity] duration-[1050ms] ease-out sm:w-[205px]" style={{zIndex:10-abs,opacity:abs===2?.28:abs===1?.68:1,transform:`translate3d(calc(-50% + ${shift}px),-50%,0) scale(${scale})`}}>
       <div className={`aspect-[9/16] overflow-hidden rounded-[26px] border bg-[#141414] shadow-2xl ${offset===0?'border-[#D51F2B]/45':'border-white/10'}`}>
        <img src={w.image} alt={w.title} loading="eager" decoding="async" draggable={false} className="h-full w-full object-cover"/>
       </div>
