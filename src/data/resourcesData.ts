@@ -1,18 +1,110 @@
 export type WallpaperCategory='الكل'|'طبيعة'|'بحر'|'جبال'|'صحراء'|'سماء';
 export type WallpaperItem={id:number;title:string;category:Exclude<WallpaperCategory,'الكل'>;image:string};
 export const wallpaperCategories:WallpaperCategory[]=['الكل','طبيعة','بحر','جبال','صحراء','سماء'];
-
-const sources=[
-['طبيعة','1472214103451-9374bd1c798e'],['طبيعة','1441974231531-c6227db76b6e'],['طبيعة','1433086966358-54859d0ed716'],['طبيعة','1447752875215-b2761acb3c5d'],['طبيعة','1501854140801-50d01698950b'],['طبيعة','1473448912268-2022ce9509d8'],['طبيعة','1511497584788-876760111969'],['طبيعة','1469474968028-56623f02e42e'],
-['بحر','1507525428034-b723cf961d3e'],['بحر','1473116763249-2faaef81ccda'],['بحر','1500530855697-b586d89ba3ee'],['بحر','1484291470158-b8f8d608850d'],
-['جبال','1470770841072-f978cf4d019e'],['جبال','1501785888041-af3ef285b470'],['جبال','1519681393784-d120267933ba'],['جبال','1464822759023-fed622ff2c3b'],['جبال','1483347756197-71ef80e95f73'],['جبال','1500534623283-312aade485b7'],
-['صحراء','1509316785289-025f5b846b35'],['صحراء','1500534314209-a25ddb2bd429'],
-['سماء','1470252649378-9c29740c9fa8'],['سماء','1499346030926-9a72daac6c63'],['سماء','1504608524841-42fe6f032b4b'],['سماء','1534088568595-a066f410bcda'],['سماء','1490730141103-6cac27aaab94']
+const baseWallpapers=[
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/39afefd6-82b2-41b1-bf0b-7c0c783d8200.jpeg"
+  },
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/7e260983-6b59-43a7-8ab7-5af1dfea6bcd.jpeg"
+  },
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/0a92fea7-2a8e-4974-9362-e836f04b9b21.jpeg"
+  },
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/697a0884-f46e-4067-b9ea-54c327813d06.jpeg"
+  },
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/937637fa-d283-498a-901a-fdc61933afb0.jpeg"
+  },
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/0e93b905-93a1-4863-a520-8c240762575c.jpeg"
+  },
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/b5d1b8ae-23d6-4f53-8a10-9c6039357aa5.jpeg"
+  },
+  {
+    "category": "طبيعة",
+    "image": "https://gcdn.picsart.com/editing-temp/8112bd84-60b6-477a-a32c-459790c6165a.jpeg"
+  },
+  {
+    "category": "بحر",
+    "image": "https://gcdn.picsart.com/editing-temp/3c8196bc-5a7e-4048-831d-07e4451c79a1.jpeg"
+  },
+  {
+    "category": "بحر",
+    "image": "https://gcdn.picsart.com/editing-temp/b4d28946-c58e-4083-b2d5-790f0bc99601.jpeg"
+  },
+  {
+    "category": "بحر",
+    "image": "https://gcdn.picsart.com/editing-temp/0d912d63-659e-45a5-971d-48ebe8174d3a.jpeg"
+  },
+  {
+    "category": "بحر",
+    "image": "https://gcdn.picsart.com/editing-temp/deca70d3-796b-4dc6-9ad1-01c97dbf35f5.jpeg"
+  },
+  {
+    "category": "جبال",
+    "image": "https://gcdn.picsart.com/editing-temp/7e3d30be-baaf-40b6-8425-fd3045428d5e.jpeg"
+  },
+  {
+    "category": "جبال",
+    "image": "https://gcdn.picsart.com/editing-temp/0c543cfd-0070-4aa4-bf9f-8c589b7fa31f.jpeg"
+  },
+  {
+    "category": "جبال",
+    "image": "https://gcdn.picsart.com/editing-temp/fbb3d9cf-e91b-422a-917a-3e39c45f0419.jpeg"
+  },
+  {
+    "category": "جبال",
+    "image": "https://gcdn.picsart.com/editing-temp/f873852a-8870-4400-9117-2701d8a3d86f.jpeg"
+  },
+  {
+    "category": "جبال",
+    "image": "https://gcdn.picsart.com/editing-temp/8650c207-d06d-491b-ac08-9df4b7a922ff.jpeg"
+  },
+  {
+    "category": "جبال",
+    "image": "https://gcdn.picsart.com/editing-temp/0fd99839-fd4e-4c30-a573-f4a99f84323f.jpeg"
+  },
+  {
+    "category": "صحراء",
+    "image": "https://gcdn.picsart.com/editing-temp/b86e7789-df49-4f15-962c-0755e678d98b.jpeg"
+  },
+  {
+    "category": "صحراء",
+    "image": "https://gcdn.picsart.com/editing-temp/c1d38773-bc9a-491f-9359-cfe7665baed0.jpeg"
+  },
+  {
+    "category": "سماء",
+    "image": "https://gcdn.picsart.com/editing-temp/d9a2940f-112f-4bcb-a56c-5e467637b92d.jpeg"
+  },
+  {
+    "category": "سماء",
+    "image": "https://gcdn.picsart.com/editing-temp/c79212e2-59d0-4552-a151-5c9c8fe94882.jpeg"
+  },
+  {
+    "category": "سماء",
+    "image": "https://gcdn.picsart.com/editing-temp/b14eecb7-ef94-4631-83f9-bd5c2edd3d68.jpeg"
+  },
+  {
+    "category": "سماء",
+    "image": "https://gcdn.picsart.com/editing-temp/02662f00-098f-46b7-9f95-2910d72bf345.jpeg"
+  },
+  {
+    "category": "سماء",
+    "image": "https://gcdn.picsart.com/editing-temp/2d5d9631-50ff-4b7c-b59d-4ba39c721570.jpeg"
+  }
 ] as const;
-const positions=['center','top','bottom','left'];
 export const wallpapers:WallpaperItem[]=Array.from({length:100},(_,i)=>{
- const [category,photo]=sources[i%sources.length];
- const pos=positions[Math.floor(i/sources.length)%positions.length];
+ const base=baseWallpapers[i%baseWallpapers.length];
  const n=i+1;
- return{id:n,title:`خلفية ${n}`,category,image:`https://images.unsplash.com/photo-${photo}?auto=format&fit=crop&w=720&h=1280&q=82&crop=${pos}`};
+ return{id:n,title:`خلفية ${n}`,category:base.category,image:base.image};
 });
