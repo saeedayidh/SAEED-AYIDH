@@ -1,0 +1,14 @@
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useCMS } from '../context/CMSContext';
+import { useLanguage } from '../context/LanguageContext';
+import { normalizeEvents, filterEvents, type EventPeriod } from '../data/eventsData';
+import { EventCard } from '../components/EventCard';
+import { useEventClock } from '../components/EventsSection';
+export function EventsPage() {
+  const { data } = useCMS(), { isArabic } = useLanguage(), now = useEventClock();
+  const [period, setPeriod] = useState<EventPeriod>('all'), [page, setPage] = useState(1);
+  const events = useMemo(() => filterEvents(normalizeEvents((data.global as any).saeedEvents), period, now), [data.global, period, now]);
+  const pages = Math.max(1, Math.ceil(events.length / 10)), current = Math.min(page, pages);
+  return <main className="mx-auto max-w-7xl px-4 pb-24 pt-28 text-white sm:px-6 lg:px-8" dir={isArabic ? 'rtl' : 'ltr'}><Link to="/#events-section" className="mb-7 inline-block rounded-xl border border-[#D51F2B]/40 px-5 py-3 text-sm text-[#ED1C2E]">{isArabic ? 'الرجوع' : 'Back'}</Link><h1 className="text-center text-4xl font-black">{isArabic ? 'سعيد ايفنتس' : 'Saeed Events'}</h1><p className="mt-4 text-center text-sm text-gray-400">{isArabic ? 'الفعاليات القادمة — جميع الأوقات بتوقيت السعودية.' : 'Upcoming events — all times use Saudi time.'}</p><div className="my-9 flex flex-wrap justify-center gap-3">{([['all','الكل','All'],['today','اليوم','Today'],['week','هذا الأسبوع','This week'],['month','هذا الشهر','This month']] as const).map(([id,ar,en]) => <button key={id} type="button" aria-pressed={period === id} onClick={() => { setPeriod(id); setPage(1); }} className={`rounded-xl border px-5 py-3 text-sm font-bold ${period === id ? 'border-[#D51F2B] bg-[#D51F2B]' : 'border-white/10 bg-[#111] text-gray-400'}`}>{isArabic ? ar : en}</button>)}</div><p className="mb-5 text-xs text-gray-500">{events.length} {isArabic ? 'فعالية' : 'events'}</p><div className="grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">{events.slice((current-1)*10, current*10).map(event => <EventCard key={event.id} event={event} isArabic={isArabic} now={now} library/>)}</div>{!events.length && <p className="py-16 text-center text-gray-500">{isArabic ? 'لا توجد فعاليات في هذه الفترة.' : 'No events in this period.'}</p>}{pages > 1 && <nav aria-label={isArabic ? 'صفحات الفعاليات' : 'Event pages'} className="mt-9 flex flex-wrap justify-center gap-2">{Array.from({length:pages}, (_,i) => <button type="button" key={i} aria-current={current === i+1 ? 'page' : undefined} onClick={() => { setPage(i+1); window.scrollTo({top:0,behavior:'smooth'}); }} className={`rounded-lg border px-4 py-2 ${current === i+1 ? 'border-[#D51F2B] bg-[#D51F2B]' : 'border-white/10'}`}>{i+1}</button>)}</nav>}</main>;
+}

@@ -81,6 +81,7 @@ export interface MediaFile {
 }
 
 export interface SubmissionItem {
+  attachments?: { id: string; name: string; extension: string; size: number }[];
   id: string;
   type: 'suggestion' | 'complaint' | 'contact';
   name: string;
