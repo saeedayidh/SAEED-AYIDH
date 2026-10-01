@@ -29,7 +29,7 @@ export const ResourcesPage:React.FC=()=>{
   if(page>=pages-2)return Array.from({length:5},(_,i)=>pages-4+i);
   return[page-2,page-1,page,page+1,page+2];
  },[page,pages]);
- return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}><style>{`@keyframes heroNext{0%{opacity:.65;transform:translateX(32px)}100%{opacity:1;transform:translateX(0)}}@keyframes heroPrev{0%{opacity:.65;transform:translateX(-32px)}100%{opacity:1;transform:translateX(0)}}.hero-next{animation:heroNext .58s cubic-bezier(.2,.8,.2,1)}.hero-prev{animation:heroPrev .58s cubic-bezier(.2,.8,.2,1)}`}</style>
+ return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}><style>{`@keyframes heroNext{0%{opacity:.65;transform:translateX(32px)}100%{opacity:1;transform:translateX(0)}}@keyframes heroPrev{0%{opacity:.65;transform:translateX(-32px)}100%{opacity:1;transform:translateX(0)}}.hero-next{animation:heroNext 1.05s cubic-bezier(.22,.75,.25,1)}.hero-prev{animation:heroPrev 1.05s cubic-bezier(.22,.75,.25,1)}`}</style>
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
    <div className="mb-8">
     <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد سعيد':'Saeed Resources'}</p>
@@ -41,7 +41,7 @@ export const ResourcesPage:React.FC=()=>{
     <div key={heroAnimKey} className={`absolute inset-0 ${heroDirection==='next'?'hero-next':'hero-prev'}`}>
     {heroCards.map(({offset,w})=>{
      const abs=Math.abs(offset),scale=offset===0?1:abs===1?0.82:0.68,shift=offset*88;
-     return <div key={w.id} className="group absolute left-1/2 top-1/2 w-[158px] transition-[transform,opacity] duration-700 ease-out sm:w-[205px]" style={{zIndex:10-abs,opacity:abs===2?0.28:abs===1?0.68:1,transform:`translate3d(calc(-50% + ${shift}px),-50%,0) scale(${scale})`}}>
+     return <div key={w.id} className="group absolute left-1/2 top-1/2 w-[158px] transition-[transform,opacity] duration-[1050ms] ease-out sm:w-[205px]" style={{zIndex:10-abs,opacity:abs===2?0.28:abs===1?0.68:1,transform:`translate3d(calc(-50% + ${shift}px),-50%,0) scale(${scale})`}}>
       <button type="button" onClick={()=>{if(heroDragged.current){heroDragged.current=false;return}setSelected(w.image)}} className={`relative block aspect-[9/16] w-full overflow-hidden rounded-[26px] border bg-[#111] shadow-2xl ${offset===0?'border-[#D51F2B]/45':'border-white/10'}`}>
        <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" draggable={false}/>
       </button>
