@@ -10,7 +10,7 @@ export const ResourcesSection:React.FC=()=>{
  const featured=useMemo(()=>wallpapers.filter(x=>!q.trim()||x.title.includes(q.trim())).slice(0,8),[q]);
  const loop=[...featured,...featured];
  return <section id="resources-section" className="relative overflow-hidden border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}>
-  <style>{`@keyframes saeedResourcesLTR{from{transform:translateX(-50%)}to{transform:translateX(0)}}.saeed-resources-track{animation:saeedResourcesLTR 34s linear infinite}.saeed-resources-track:hover{animation-play-state:paused}@media(prefers-reduced-motion:reduce){.saeed-resources-track{animation:none}}`}</style>
+  <style>{`@keyframes saeedResourcesLTR{from{transform:translateX(-50%)}to{transform:translateX(0)}}.saeed-resources-track{animation:saeedResourcesLTR 34s linear infinite}.saeed-resources-track:hover{animation-play-state:paused}`}</style>
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
    <div className="mb-8">
     <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد مختارة لك':'Resources selected for you'}</p>
@@ -21,7 +21,7 @@ export const ResourcesSection:React.FC=()=>{
     <label className="order-2 flex min-w-0 flex-1 items-center gap-2 rounded-2xl border border-white/10 bg-[#111] px-3 py-3 focus-within:border-[#D51F2B]/60 sm:px-4">
      <Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder={isArabic?'ابحث عن خلفية...':'Search wallpapers...'} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/>
     </label>
-    <Link to="/resources/wallpapers" className="order-3 inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl px-2 py-3 text-xs font-bold text-[#D51F2B] transition hover:text-white sm:gap-2 sm:px-4 sm:text-sm">
+    <Link to="/resources/wallpapers" className="order-3 inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl border border-[#D51F2B]/40 px-3 py-3 text-xs font-bold text-[#D51F2B] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-5 sm:text-sm">
      <span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/>
     </Link>
    </div>
