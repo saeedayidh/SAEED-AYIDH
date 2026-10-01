@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { CheckCircle2, Paperclip, Send, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useCMS } from '../context/CMSContext';
-let statusRequest: Promise<boolean> | undefined;
+let statusRequest: { at: number; promise: Promise<boolean> } | undefined;
+function attachmentStatus() {
+  if (!statusRequest || Date.now() - statusRequest.at > 25000) statusRequest = { at: Date.now(), promise: fetch('/api/submissions/attachments/status').then(r => r.ok ? r.json() : { enabled: false }).then(x => !!x.enabled).catch(() => false) };
+  return statusRequest.promise;
+}
 const inputClass = 'w-full rounded-xl border border-white/10 bg-[#080808] px-4 py-3 text-sm text-white outline-none focus:border-[#D51F2B]';
 const errorText: Record<string, [string, string]> = {
   unsafe_attachment: ['تم رفض مرفق غير آمن. احذفه ثم حاول مجددًا.', 'An unsafe attachment was rejected. Remove it and try again.'],
@@ -19,7 +23,7 @@ export function FeedbackForm({ type }: { type: 'suggestion' | 'complaint' }) {
   const configured = (key: string, ar: string, en: string) => cfg[isArabic ? key : key + 'En'] || t(ar, en);
   const [sent, setSent] = useState(false), [sending, setSending] = useState(false), [error, setError] = useState('');
   const [files, setFiles] = useState<File[]>([]), [enabled, setEnabled] = useState<boolean | null>(null);
-  useEffect(() => { let active = true; if (!statusRequest) statusRequest = fetch('/api/submissions/attachments/status').then(r => r.ok ? r.json() : { enabled: false }).then(x => !!x.enabled).catch(() => false); void statusRequest.then(value => { if (active) setEnabled(value); }); return () => { active = false; }; }, []);
+  useEffect(() => { let active = true; const refresh = () => { void attachmentStatus().then(value => { if (active) setEnabled(value); }); }; refresh(); const timer = window.setInterval(refresh, 30000); return () => { active = false; window.clearInterval(timer); }; }, []);
   const categories = cfg.categories?.length ? cfg.categories : [{ id: 'content', label: 'المحتوى', labelEn: 'Content' }, { id: 'services', label: 'الخدمات', labelEn: 'Services' }, { id: 'tools', label: 'الأدوات', labelEn: 'Tools' }, { id: 'tech', label: 'مشكلة تقنية', labelEn: 'Technical issue' }, { id: 'other', label: 'أخرى', labelEn: 'Other' }];
   const requiredLabel = (label: string) => <>{label.replace(/\s*\*/g, '')} <span className="text-[#ED1C2E]" aria-hidden="true">*</span><span className="sr-only">{t('إجباري', 'Required')}</span></>;
   const selectFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
