@@ -1,0 +1,21 @@
+[
+ {"id":"whatsapp","ar":"واتساب","en":"WhatsApp","prefix":"https://wa.me/","domain":"wa.me","kind":"phone","placeholder":"9665xxxxxxxx","icon":"whatsapp"},
+ {"id":"phone","ar":"اتصال","en":"Call","prefix":"tel:+","domain":"call","kind":"phone","placeholder":"9665xxxxxxxx","icon":"phone"},
+ {"id":"snapchat","ar":"سناب شات","en":"Snapchat","prefix":"https://www.snapchat.com/add/","domain":"snapchat.com","kind":"username","placeholder":"username","icon":"snapchat"},
+ {"id":"tiktok","ar":"تيك توك","en":"TikTok","prefix":"https://www.tiktok.com/@","domain":"tiktok.com","kind":"username","placeholder":"username","icon":"tiktok"},
+ {"id":"x","ar":"اكس","en":"X","prefix":"https://x.com/","domain":"x.com","kind":"username","placeholder":"username","icon":"x"},
+ {"id":"instagram","ar":"انستقرام","en":"Instagram","prefix":"https://www.instagram.com/","domain":"instagram.com","kind":"username","placeholder":"username","icon":"instagram"},
+ {"id":"youtube","ar":"يوتيوب","en":"YouTube","prefix":"https://www.youtube.com/@","domain":"youtube.com","kind":"username","placeholder":"username","icon":"youtube"},
+ {"id":"telegram","ar":"تيليجرام","en":"Telegram","prefix":"https://t.me/","domain":"t.me","kind":"username","placeholder":"username","icon":"telegram"},
+ {"id":"discord","ar":"ديسكورد","en":"Discord","prefix":"https://discord.gg/","domain":"discord.gg","kind":"invite","placeholder":"invite-code","icon":"discord"},
+ {"id":"facebook","ar":"فيسبوك","en":"Facebook","prefix":"https://www.facebook.com/","domain":"facebook.com","kind":"username","placeholder":"username","icon":"facebook"},
+ {"id":"linkedin","ar":"لينكدن","en":"LinkedIn","prefix":"https://www.linkedin.com/in/","domain":"linkedin.com","kind":"username","placeholder":"username","icon":"linkedin"},
+ {"id":"threads","ar":"ثريدز","en":"Threads","prefix":"https://www.threads.com/@","domain":"threads.com","kind":"username","placeholder":"username","icon":"threads"},
+ {"id":"reddit","ar":"ريدت","en":"Reddit","prefix":"https://www.reddit.com/user/","domain":"reddit.com","kind":"username","placeholder":"username","icon":"reddit"},
+ {"id":"kick","ar":"كيك","en":"Kick","prefix":"https://kick.com/","domain":"kick.com","kind":"username","placeholder":"username","icon":"kick"},
+ {"id":"twitch","ar":"تويتش","en":"Twitch","prefix":"https://www.twitch.tv/","domain":"twitch.tv","kind":"username","placeholder":"username","icon":"twitch"},
+ {"id":"tellonym","ar":"تيلينوم","en":"Tellonym","prefix":"https://tellonym.me/","domain":"tellonym.me","kind":"username","placeholder":"username","icon":"tellonym"},
+ {"id":"email","ar":"بريد إلكتروني","en":"Email","prefix":"mailto:","domain":"email","kind":"email","placeholder":"you@example.com","icon":"mail"},
+ {"id":"appstore","ar":"اب ستور","en":"App Store","prefix":"https://apps.apple.com/app/id","domain":"apps.apple.com","kind":"appId","placeholder":"123456789","icon":"appstore"},
+ {"id":"googleplay","ar":"جوجل بلاي","en":"Google Play","prefix":"https://play.google.com/store/apps/details?id=","domain":"play.google.com","kind":"package","placeholder":"com.example.app","icon":"googleplay"}
+]
