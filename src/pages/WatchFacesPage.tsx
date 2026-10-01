@@ -1,28 +1,90 @@
-import React,{useEffect,useMemo,useState}from'react';
-import{Search,SlidersHorizontal,ChevronLeft,ChevronRight,X,Download}from'lucide-react';
-import{FavoriteButton}from'../components/FavoriteButton';
-import{ShareButton}from'../components/ShareButton';
-import{useLanguage}from'../context/LanguageContext';
-import{watchFaces,watchFaceCategories,type WatchFaceCategory}from'../data/watchFacesData';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Download, Search, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { FavoriteButton } from '../components/FavoriteButton';
+import { ShareButton } from '../components/ShareButton';
+import { WatchFaceCarousel } from '../components/WatchFaceCarousel';
+import { useLanguage } from '../context/LanguageContext';
+import { watchFaces, type WatchFaceItem } from '../data/watchFacesData';
 
-const PER_PAGE=10;
-export const WatchFacesPage:React.FC=()=>{
- const{isArabic}=useLanguage();const[q,setQ]=useState('');const[category,setCategory]=useState<WatchFaceCategory>('الكل');const[page,setPage]=useState(1);const[selected,setSelected]=useState<string|null>(null);const[hero,setHero]=useState(0);
- const filtered=useMemo(()=>watchFaces.filter(w=>(category==='الكل'||w.category===category)&&(!q.trim()||w.title.includes(q.trim())||w.category.includes(q.trim()))),[q,category]);
- const pages=Math.max(1,Math.ceil(filtered.length/PER_PAGE));useEffect(()=>setPage(1),[q,category]);const visible=filtered.slice((page-1)*PER_PAGE,page*PER_PAGE);
- const heroFaces=watchFaces.slice(0,7);
- const pageButtons=useMemo(()=>pages<=5?Array.from({length:pages},(_,i)=>i+1):page<=3?[1,2,3,4,5]:page>=pages-2?Array.from({length:5},(_,i)=>pages-4+i):[page-2,page-1,page,page+1,page+2],[page,pages]);
- return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-  <div className="mb-10"><p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد سعيد':'Saeed Resources'}</p><h1 className="text-4xl font-black sm:text-6xl">{isArabic?'واجهات الساعة':'Watch Faces'}</h1><p className="mt-3 text-sm text-gray-500">{isArabic?'50 واجهة ساعة بتصاميم متنوعة.':'50 watch faces in varied designs.'}</p></div>
-  <div className="mb-14 flex flex-col items-center">
-   <div className="relative h-[310px] w-full max-w-[620px] sm:h-[390px]" dir="ltr">
-    {[-2,-1,0,1,2].map(offset=>{const idx=(hero+offset+heroFaces.length)%heroFaces.length;const f=heroFaces[idx];const active=offset===0;return <button key={offset} onClick={()=>active?setSelected(f.image):setHero(idx)} className="absolute left-1/2 top-1/2 transition-all duration-700 ease-out" style={{width:active?'250px':'190px',zIndex:10-Math.abs(offset),opacity:Math.abs(offset)===2?.42:1,transform:`translate(-50%,-50%) translateX(${offset*105}px) scale(${active?1:.88})`}}><img src={f.image} alt={f.title} className={`w-full rounded-[30%] shadow-2xl ${active?'ring-1 ring-[#D51F2B]/60':''}`}/></button>})}
-   </div>
-   <div className="mt-2 flex gap-2" dir="ltr">{heroFaces.map((_,i)=><button key={i} onClick={()=>setHero(i)} aria-label={`واجهة ${i+1}`} className={`h-2 rounded-full transition-all ${hero===i?'w-8 bg-[#D51F2B]':'w-2 bg-white/20'}`}/>)}</div>
-  </div>
-  <div className="mb-8 border-y border-white/5 py-7"><div className="mb-4 flex items-center gap-2 text-sm font-bold text-gray-400"><SlidersHorizontal className="h-4 w-4 text-[#D51F2B]"/><span>{isArabic?'تصفية الواجهات':'Filter watch faces'}</span></div><div className="flex flex-wrap gap-2">{watchFaceCategories.map(cat=><button key={cat} onClick={()=>setCategory(cat)} className={`rounded-xl border px-4 py-2 text-xs font-bold transition ${category===cat?'border-[#D51F2B] bg-[#D51F2B] text-white':'border-white/10 bg-[#111] text-gray-400'}`}>{cat}</button>)}</div></div>
-  <label className="mb-9 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#101010] px-5 py-4 focus-within:border-[#D51F2B]/60"><Search className="h-5 w-5 text-gray-500"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder={isArabic?'ابحث في واجهات الساعة...':'Search watch faces...'} className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/></label>
-  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">{visible.map(w=><div key={w.id} id={`watch-face-${w.id}`}><div className="group relative aspect-square overflow-hidden rounded-[28%] border border-white/10 bg-[#111]"><button type="button" onClick={()=>setSelected(w.image)} className="absolute inset-0 h-full w-full"><img src={w.image} alt={w.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/></button><div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/10 bg-black/70 p-1.5 backdrop-blur-md"><a href={w.image} download={`saeed-watch-face-${w.id}.svg`} onClick={e=>e.stopPropagation()} aria-label="تحميل" className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/70"><Download className="h-4 w-4"/></a><ShareButton title={w.title} url={`/resources/watch-faces#watch-face-${w.id}`}/><FavoriteButton id={`watch-face-${w.id}`} title={w.title} url={`/resources/watch-faces#watch-face-${w.id}`} type="watch-face"/></div></div><div className="mt-2 flex justify-between px-1 text-xs"><b>{w.title}</b><span className="text-gray-600">{w.category}</span></div></div>)}</div>
-  {pages>1&&<div className="mt-12 flex flex-wrap items-center justify-center gap-2" dir="ltr"><button disabled={page===1} onClick={()=>setPage(p=>Math.max(1,p-1))} className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-[#111] disabled:opacity-30"><ChevronLeft className="h-4 w-4"/></button>{pageButtons.map(n=><button key={n} onClick={()=>setPage(n)} className={`h-10 min-w-10 rounded-xl border px-3 text-sm font-black ${page===n?'border-[#D51F2B] bg-[#D51F2B]':'border-white/10 bg-[#111] text-gray-400'}`}>{n}</button>)}<button disabled={page===pages} onClick={()=>setPage(p=>Math.min(pages,p+1))} className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-[#111] disabled:opacity-30"><ChevronRight className="h-4 w-4"/></button></div>}
- </div>{selected&&<div className="fixed inset-0 z-[80] grid place-items-center bg-black/90 p-4 backdrop-blur-sm" onClick={()=>setSelected(null)}><button className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-black/60" onClick={()=>setSelected(null)}><X className="h-5 w-5"/></button><img src={selected} alt="" className="max-h-[82vh] max-w-[82vw] rounded-[26%] shadow-2xl" onClick={e=>e.stopPropagation()}/></div>}</div>
+const PER_PAGE = 10;
+export const WatchFacesPage: React.FC = () => {
+  const { isArabic } = useLanguage();
+  const { hash } = useLocation();
+  const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
+  const [selected, setSelected] = useState<WatchFaceItem | null>(null);
+  const filtered = useMemo(() => watchFaces.filter(face => !query.trim() ||
+    face.title.includes(query.trim()) || String(face.id).includes(query.trim())), [query]);
+  const pages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+  const visible = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
+  useEffect(() => setPage(1), [query]);
+  useEffect(() => {
+    const id = Number(hash.match(/^#watch-face-(\d+)$/)?.[1]);
+    if (!id || id > watchFaces.length) return;
+    setPage(Math.ceil(id / PER_PAGE));
+    setSelected(watchFaces[id - 1]);
+  }, [hash]);
+  const faceTitle = (face: WatchFaceItem) => isArabic ? face.title : `Watch Face ${face.id}`;
+  const pageButtons = Array.from({ length: pages }, (_, i) => i + 1);
+  return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic ? 'rtl' : 'ltr'}>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mb-10">
+        <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic ? 'موارد سعيد' : 'Saeed Resources'}</p>
+        <h1 className="text-4xl font-black sm:text-6xl">{isArabic ? 'واجهة الساعة' : 'Watch Face'}</h1>
+        <p className="mt-3 text-base text-gray-400">{isArabic ? '50 واجهة ساعة جاهزة للاستعراض والتحميل.' : 'Explore and download 50 watch faces.'}</p>
+      </div>
+      <div className="mb-14">
+        <WatchFaceCarousel faces={watchFaces} isArabic={isArabic} onSelect={setSelected}/>
+      </div>
+      <label className="mb-9 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#101010] px-5 py-4 focus-within:border-[#D51F2B]/60">
+        <Search className="h-5 w-5 text-gray-500"/>
+        <input value={query} onChange={event => setQuery(event.target.value)}
+          placeholder={isArabic ? 'ابحث عن واجهة ساعة...' : 'Search watch faces...'}
+          className="w-full bg-transparent text-base text-white outline-none placeholder:text-gray-500"/>
+      </label>
+      {visible.length ? <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        {visible.map(face => <div key={face.id} id={`watch-face-${face.id}`}>
+          <div className="group relative aspect-square overflow-hidden rounded-[28%] border border-white/10 bg-[#111]">
+            <button type="button" onClick={() => setSelected(face)} aria-label={faceTitle(face)} className="absolute inset-0 h-full w-full">
+              <img src={face.image} alt={faceTitle(face)} loading="lazy"
+                className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
+            </button>
+            <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/10 bg-black/80 p-1.5 backdrop-blur-md">
+              <a href={face.image} download={`saeed-watch-face-${face.id}.svg`}
+                aria-label={isArabic ? 'تحميل' : 'Download'}
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/70"><Download className="h-4 w-4"/></a>
+              <ShareButton title={faceTitle(face)} url={`/resources/watch-faces#watch-face-${face.id}`}/>
+              <FavoriteButton id={`watch-face-${face.id}`} title={faceTitle(face)}
+                url={`/resources/watch-faces#watch-face-${face.id}`} type="watch-face"/>
+            </div>
+          </div>
+          <p className="mt-2 px-1 text-sm font-bold">{faceTitle(face)}</p>
+        </div>)}
+      </div> : <p className="py-16 text-center text-gray-400">{isArabic ? 'ما لقينا واجهات مطابقة.' : 'No matching watch faces.'}</p>}
+      {pages > 1 && <nav aria-label={isArabic ? 'صفحات واجهة الساعة' : 'Watch face pages'}
+        className="mt-12 flex flex-wrap items-center justify-center gap-2" dir="ltr">
+        <button disabled={page === 1} onClick={() => setPage(p => p - 1)} aria-label={isArabic ? 'السابق' : 'Previous'}
+          className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-[#111] disabled:opacity-30"><ChevronLeft className="h-4 w-4"/></button>
+        {pageButtons.map(number => <button key={number} onClick={() => setPage(number)}
+          aria-current={page === number ? 'page' : undefined}
+          className={`h-10 min-w-10 rounded-xl border px-3 text-sm font-black ${page === number ? 'border-[#D51F2B] bg-[#D51F2B]' : 'border-white/10 bg-[#111] text-gray-400'}`}>{number}</button>)}
+        <button disabled={page === pages} onClick={() => setPage(p => p + 1)} aria-label={isArabic ? 'التالي' : 'Next'}
+          className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-[#111] disabled:opacity-30"><ChevronRight className="h-4 w-4"/></button>
+      </nav>}
+    </div>
+    {selected && <div role="dialog" aria-modal="true" aria-label={faceTitle(selected)}
+      className="fixed inset-0 z-[80] grid place-items-center bg-black/90 p-4 backdrop-blur-sm"
+      onClick={() => setSelected(null)}>
+      <button type="button" aria-label={isArabic ? 'إغلاق' : 'Close'} onClick={() => setSelected(null)}
+        className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-black/60"><X className="h-5 w-5"/></button>
+      <div className="flex flex-col items-center gap-5" onClick={event => event.stopPropagation()}>
+        <img src={selected.image} alt={faceTitle(selected)} className="max-h-[70vh] max-w-[82vw] rounded-[26%] shadow-2xl"/>
+        <a href={selected.image} download={`saeed-watch-face-${selected.id}.svg`}
+          className="inline-flex items-center gap-2 rounded-xl bg-[#D51F2B] px-6 py-3 text-sm font-bold">
+          <Download size={17}/>{isArabic ? 'تحميل الواجهة' : 'Download face'}
+        </a>
+      </div>
+    </div>}
+  </div>;
 };

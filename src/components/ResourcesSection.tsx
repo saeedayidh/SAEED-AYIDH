@@ -1,12 +1,14 @@
 import React,{useCallback,useEffect,useMemo,useRef,useState}from'react';
-import{Link}from'react-router-dom';
+import{Link,useNavigate}from'react-router-dom';
 import{Search,ChevronLeft}from'lucide-react';
 import{useLanguage}from'../context/LanguageContext';
 import{wallpapers}from'../data/resourcesData';
 import{watchFaces}from'../data/watchFacesData';
+import{WatchFaceCarousel}from'./WatchFaceCarousel';
 
 export const ResourcesSection:React.FC=()=>{
  const{isArabic}=useLanguage();
+ const navigate=useNavigate();
  const[q,setQ]=useState('');
  const[watchQ,setWatchQ]=useState('');
  const[active,setActive]=useState(0);
@@ -24,7 +26,7 @@ export const ResourcesSection:React.FC=()=>{
  useEffect(()=>{setActive(0)},[q]);
  useEffect(()=>{if(featured.length<2)return;const t=window.setInterval(()=>move('next'),4200);return()=>window.clearInterval(t)},[featured.length,move]);
  const cards=featured.length?[-2,-1,0,1,2].map(offset=>({offset,w:featured[(active+offset+featured.length)%featured.length]})):[];
- const watchFeatured=useMemo(()=>watchFaces.filter(x=>!watchQ.trim()||x.title.includes(watchQ.trim())||x.category.includes(watchQ.trim())).slice(0,5),[watchQ]);
+ const watchFeatured=useMemo(()=>watchFaces.filter(x=>!watchQ.trim()||x.title.includes(watchQ.trim())||String(x.id).includes(watchQ.trim())),[watchQ]);
  const endDrag=(x:number)=>{if(startX===null)return;const d=x-startX;dragged.current=Math.abs(d)>20;if(d<-35)move('next');else if(d>35)move('prev');setStartX(null)};
  return <section id="resources-section" className="relative overflow-hidden border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}>
   <style>{`
@@ -62,14 +64,12 @@ export const ResourcesSection:React.FC=()=>{
    </div>:<div className="grid h-[260px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا خلفيات مطابقة.':'No matching wallpapers found.'}</div>}
 
    <div className="mt-14 border-t border-white/5 pt-12">
-    <Link to="/resources/watch-faces" className="mb-3 flex w-full items-center justify-center rounded-2xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] px-5 py-4 text-base font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-lg">{isArabic?'واجهات الساعة':'Watch Faces'}</Link>
+    <Link to="/resources/watch-faces" className="mb-3 flex w-full items-center justify-center rounded-2xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] px-5 py-4 text-base font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-lg">{isArabic?'واجهة الساعة':'Watch Face'}</Link>
     <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
      <label className="flex min-w-0 flex-1 items-center gap-2 rounded-2xl border border-white/10 bg-[#111] px-3 py-3.5 focus-within:border-[#D51F2B]/60 sm:px-4"><Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={watchQ} onChange={e=>setWatchQ(e.target.value)} placeholder={isArabic?'ابحث عن واجهة ساعة...':'Search watch faces...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/></label>
      <Link to="/resources/watch-faces" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl border border-[#D51F2B]/45 px-3 py-3.5 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-6 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
     </div>
-    {watchFeatured.length?<div className="relative mx-auto h-[235px] w-full max-w-[650px] overflow-hidden sm:h-[310px]" dir="ltr">
-     {watchFeatured.map((w,i)=>{const mid=(watchFeatured.length-1)/2,offset=i-mid,abs=Math.abs(offset),activeWatch=abs<.5;return <Link key={w.id} to="/resources/watch-faces" className="absolute left-1/2 top-1/2 block transition-all duration-700 ease-out" style={{width:activeWatch?'190px':'155px',zIndex:10-abs,opacity:abs>=2?.34:abs>=1?.72:1,transform:`translate(-50%,-50%) translateX(${offset*92}px) scale(${activeWatch?1:.88})`}}><img src={w.image} alt={w.title} className={`w-full rounded-[28%] shadow-2xl ${activeWatch?'ring-1 ring-[#D51F2B]/55':'ring-1 ring-white/10'}`}/></Link>})}
-    </div>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا واجهات مطابقة.':'No matching watch faces found.'}</div>}
+    {watchFeatured.length?<WatchFaceCarousel faces={watchFeatured} isArabic={isArabic} onSelect={w=>navigate(`/resources/watch-faces#watch-face-${w.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا واجهات مطابقة.':'No matching watch faces found.'}</div>}
    </div>
   </div>
  </section>
