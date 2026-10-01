@@ -106,5 +106,841 @@
       "other",
       "claude"
     ]
+  },
+  {
+    "id": "window-light",
+    "title": "ضوء النافذة",
+    "titleEn": "Window Light",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/window-light.svg",
+    "description": "شخص بالغ جالس بجوار نافذة كبيرة، قميص كتان محايد، ضوء صباح ناعم، خلفية منزلية ضبابية، لقطة قريبة بعدسة 85 مم ونظرة خارج الإطار، بنسبة 4:5.",
+    "descriptionEn": "An adult sitting beside a large window in a neutral linen shirt; soft morning light, blurred interior, close 85mm framing and a gaze outside the frame. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ جالس بجوار نافذة كبيرة، قميص كتان محايد، ضوء صباح ناعم، خلفية منزلية ضبابية، لقطة قريبة بعدسة 85 مم ونظرة خارج الإطار. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult sitting beside a large window in a neutral linen shirt; soft morning light, blurred interior, close 85mm framing and a gaze outside the frame. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "neon-profile",
+    "title": "بورتريه النيون",
+    "titleEn": "Neon Profile",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/neon-profile.svg",
+    "description": "بورتريه جانبي لشخص بالغ، إضاءة حافة بنفسجية وسماوية، خلفية ليلية سوداء، تفاصيل بشرة طبيعية، عدسة 85 مم مع مساحة أمام اتجاه النظر، بنسبة 4:5.",
+    "descriptionEn": "An adult in side profile with violet and cyan rim lighting against a black night background; natural skin detail, an 85mm perspective and negative space in front of the gaze. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: بورتريه جانبي لشخص بالغ، إضاءة حافة بنفسجية وسماوية، خلفية ليلية سوداء، تفاصيل بشرة طبيعية، عدسة 85 مم مع مساحة أمام اتجاه النظر. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult in side profile with violet and cyan rim lighting against a black night background; natural skin detail, an 85mm perspective and negative space in front of the gaze. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "desert-dusk",
+    "title": "بورتريه غروب الصحراء",
+    "titleEn": "Desert Dusk Portrait",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/desert-dusk.svg",
+    "description": "شخص بالغ بملابس بيج أمام كثبان بعيدة، شمس الغروب خلف الكتف، ضوء تعبئة ناعم على الوجه، لقطة من الخصر وتباين منخفض وألوان رملية، بنسبة 4:5.",
+    "descriptionEn": "An adult in beige clothing before distant dunes, sunset behind one shoulder, soft face fill, waist-up framing, low contrast and a sandy color palette. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ بملابس بيج أمام كثبان بعيدة، شمس الغروب خلف الكتف، ضوء تعبئة ناعم على الوجه، لقطة من الخصر وتباين منخفض وألوان رملية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult in beige clothing before distant dunes, sunset behind one shoulder, soft face fill, waist-up framing, low contrast and a sandy color palette. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "studio-silver",
+    "title": "استوديو فضي",
+    "titleEn": "Silver Studio",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/studio-silver.svg",
+    "description": "بورتريه تحريري أمام خلفية رمادية، جاكيت أسود مطفأ، إضاءة فراشة متوازنة تحت مظلة كبيرة، تفاصيل الملابس واضحة ولقطة أمامية متناظرة، بنسبة 4:5.",
+    "descriptionEn": "An editorial portrait against gray with a matte black jacket, balanced butterfly lighting from a large umbrella, clear fabric detail and symmetrical frontal framing. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: بورتريه تحريري أمام خلفية رمادية، جاكيت أسود مطفأ، إضاءة فراشة متوازنة تحت مظلة كبيرة، تفاصيل الملابس واضحة ولقطة أمامية متناظرة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An editorial portrait against gray with a matte black jacket, balanced butterfly lighting from a large umbrella, clear fabric detail and symmetrical frontal framing. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "cafe-thought",
+    "title": "لحظة في المقهى",
+    "titleEn": "Cafe Reflection",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/cafe-thought.svg",
+    "description": "شخص بالغ في مقهى هادئ قرب نافذة ممطرة، انعكاس خفيف على الزجاج، إضاءة تنغستن دافئة، لقطة ثلاثة أرباع، خلفية خارجية باردة وعمق ضحل، بنسبة 4:5.",
+    "descriptionEn": "An adult in a quiet cafe beside a rainy window, subtle glass reflections, warm tungsten lighting, three-quarter framing, cool outdoor background and shallow depth. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ في مقهى هادئ قرب نافذة ممطرة، انعكاس خفيف على الزجاج، إضاءة تنغستن دافئة، لقطة ثلاثة أرباع، خلفية خارجية باردة وعمق ضحل. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult in a quiet cafe beside a rainy window, subtle glass reflections, warm tungsten lighting, three-quarter framing, cool outdoor background and shallow depth. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "golden-garden",
+    "title": "بورتريه الحديقة",
+    "titleEn": "Golden Garden Portrait",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/golden-garden.svg",
+    "description": "شخص بالغ وسط حديقة خضراء، شمس منخفضة تتسلل بين الأوراق، ضوء حافة ذهبي، تكوين غير مركزي بعدسة 50 مم وخلفية بوكيه طبيعية، بنسبة 4:5.",
+    "descriptionEn": "An adult in a green garden with low sunlight through leaves, a golden rim, off-center 50mm framing and natural background bokeh. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ وسط حديقة خضراء، شمس منخفضة تتسلل بين الأوراق، ضوء حافة ذهبي، تكوين غير مركزي بعدسة 50 مم وخلفية بوكيه طبيعية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult in a green garden with low sunlight through leaves, a golden rim, off-center 50mm framing and natural background bokeh. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "stage-red",
+    "title": "قبل المسرح",
+    "titleEn": "Before the Stage",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/stage-red.svg",
+    "description": "شخص بالغ خلف ستارة مسرح حمراء، ضوء رئيسي محدود من الأعلى، ظل ناعم يحافظ على تفاصيل الوجه، لقطة كتفين مع نسيج الستارة ظاهر، بنسبة 4:5.",
+    "descriptionEn": "An adult behind a red theater curtain, a restrained overhead key, soft shadows retaining face detail, shoulder-up framing and visible curtain texture. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ خلف ستارة مسرح حمراء، ضوء رئيسي محدود من الأعلى، ظل ناعم يحافظ على تفاصيل الوجه، لقطة كتفين مع نسيج الستارة ظاهر. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult behind a red theater curtain, a restrained overhead key, soft shadows retaining face detail, shoulder-up framing and visible curtain texture. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "blue-hour",
+    "title": "بورتريه الساعة الزرقاء",
+    "titleEn": "Blue Hour Portrait",
+    "category": "portrait",
+    "featured": false,
+    "image": "/assets/prompts/blue-hour.svg",
+    "description": "شخص بالغ على سطح مبنى عند الساعة الزرقاء، أضواء مدينة بعيدة، ضوء تعبئة محايد، لقطة قريبة وعدسة 85 مم وخلفية غير مقروءة، بنسبة 4:5.",
+    "descriptionEn": "An adult on a rooftop at blue hour, distant city lights, neutral fill light, close 85mm framing and an indistinct background. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ على سطح مبنى عند الساعة الزرقاء، أضواء مدينة بعيدة، ضوء تعبئة محايد، لقطة قريبة وعدسة 85 مم وخلفية غير مقروءة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult on a rooftop at blue hour, distant city lights, neutral fill light, close 85mm framing and an indistinct background. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "desert-camp",
+    "title": "مخيم تحت النجوم",
+    "titleEn": "Camp under Stars",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/desert-camp.svg",
+    "description": "مخيم صغير بين كثبان هادئة، خيمة وفانوس بجانب شخص بالغ من الخلف، سماء نجوم واقعية، ضوء نار دافئ وتكوين واسع بعدسة 24 مم، بنسبة 4:5.",
+    "descriptionEn": "A small dune camp with a tent and lantern beside an adult seen from behind, believable stars, warm firelight and wide 24mm composition. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مخيم صغير بين كثبان هادئة، خيمة وفانوس بجانب شخص بالغ من الخلف، سماء نجوم واقعية، ضوء نار دافئ وتكوين واسع بعدسة 24 مم. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A small dune camp with a tent and lantern beside an adult seen from behind, believable stars, warm firelight and wide 24mm composition. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "old-library",
+    "title": "المكتبة القديمة",
+    "titleEn": "Old Library",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/old-library.svg",
+    "description": "شخص بالغ يتصفح كتابًا في مكتبة خشبية قديمة، شعاع شمس يظهر الغبار، صفوف رفوف عميقة، منظور منخفض قليلًا وتباين سينمائي هادئ، بنسبة 4:5.",
+    "descriptionEn": "An adult reading in an old wooden library, a sunbeam revealing dust, deep rows of shelves, slightly low viewpoint and restrained cinematic contrast. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ يتصفح كتابًا في مكتبة خشبية قديمة، شعاع شمس يظهر الغبار، صفوف رفوف عميقة، منظور منخفض قليلًا وتباين سينمائي هادئ. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult reading in an old wooden library, a sunbeam revealing dust, deep rows of shelves, slightly low viewpoint and restrained cinematic contrast. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "train-platform",
+    "title": "رصيف القطار",
+    "titleEn": "Train Platform",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/train-platform.svg",
+    "description": "شخص بالغ ينتظر على رصيف محطة خيالية وقت الفجر، قطار بعيد وضباب رقيق، تكوين بخطوط السكة، إضاءة باردة مع نقطة دافئة من مصباح، بنسبة 4:5.",
+    "descriptionEn": "An adult waiting at a fictional station at dawn, distant train and thin fog, rails as leading lines, cool light with a warm lamp accent. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ ينتظر على رصيف محطة خيالية وقت الفجر، قطار بعيد وضباب رقيق، تكوين بخطوط السكة، إضاءة باردة مع نقطة دافئة من مصباح. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult waiting at a fictional station at dawn, distant train and thin fog, rails as leading lines, cool light with a warm lamp accent. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "fishing-dawn",
+    "title": "صياد عند الفجر",
+    "titleEn": "Fisher at Dawn",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/fishing-dawn.svg",
+    "description": "صياد بالغ على رصيف خشبي، قارب صغير وماء ساكن، شمس وردية عند الأفق، شخصية في الثلث الأيسر وانعكاسات طبيعية بعدسة 35 مم، بنسبة 4:5.",
+    "descriptionEn": "An adult fisher on a wooden pier, small boat and still water, pink sunrise, figure in the left third and natural reflections through a 35mm perspective. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: صياد بالغ على رصيف خشبي، قارب صغير وماء ساكن، شمس وردية عند الأفق، شخصية في الثلث الأيسر وانعكاسات طبيعية بعدسة 35 مم. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult fisher on a wooden pier, small boat and still water, pink sunrise, figure in the left third and natural reflections through a 35mm perspective. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "mountain-hiker",
+    "title": "مسار الجبل",
+    "titleEn": "Mountain Trail",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/mountain-hiker.svg",
+    "description": "متنزه بالغ بحقيبة صغيرة على مسار جبلي، طبقات جبال بعيدة وضباب صباحي، منظور من الخلف ولقطة واسعة تبرز الحجم الحقيقي للمكان، بنسبة 4:5.",
+    "descriptionEn": "An adult hiker with a small pack on a mountain path, layered distant peaks and morning mist, rear view and a wide frame emphasizing scale. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: متنزه بالغ بحقيبة صغيرة على مسار جبلي، طبقات جبال بعيدة وضباب صباحي، منظور من الخلف ولقطة واسعة تبرز الحجم الحقيقي للمكان. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult hiker with a small pack on a mountain path, layered distant peaks and morning mist, rear view and a wide frame emphasizing scale. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "market-evening",
+    "title": "السوق مساءً",
+    "titleEn": "Evening Market",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/market-evening.svg",
+    "description": "شخص بالغ يسير في سوق عربي خيالي، فوانيس دافئة وأقمشة ملونة، ممر مقوس يقود العين، عمق ميداني متوسط ودون لافتات مقروءة، بنسبة 4:5.",
+    "descriptionEn": "An adult walking through a fictional Arabian market, warm lanterns and colorful fabrics, an arched passage as a leading line, medium depth and no readable signs. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ يسير في سوق عربي خيالي، فوانيس دافئة وأقمشة ملونة، ممر مقوس يقود العين، عمق ميداني متوسط ودون لافتات مقروءة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult walking through a fictional Arabian market, warm lanterns and colorful fabrics, an arched passage as a leading line, medium depth and no readable signs. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "snow-cabin",
+    "title": "كوخ وسط الثلج",
+    "titleEn": "Snow Cabin",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/snow-cabin.svg",
+    "description": "شخص بالغ يقترب من كوخ خشبي مضاء وسط الثلج، آثار أقدام تقود إلى الباب، مساء أزرق وضوء داخلي برتقالي، لقطة بعيدة متوازنة، بنسبة 4:5.",
+    "descriptionEn": "An adult approaching a lit wooden cabin in snow, footprints leading to the door, blue evening and orange interior light, balanced distant framing. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شخص بالغ يقترب من كوخ خشبي مضاء وسط الثلج، آثار أقدام تقود إلى الباب، مساء أزرق وضوء داخلي برتقالي، لقطة بعيدة متوازنة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult approaching a lit wooden cabin in snow, footprints leading to the door, blue evening and orange interior light, balanced distant framing. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "space-greenhouse",
+    "title": "حديقة في الفضاء",
+    "titleEn": "Space Greenhouse",
+    "category": "scenes",
+    "featured": false,
+    "image": "/assets/prompts/space-greenhouse.svg",
+    "description": "رائد بالغ داخل بيت زجاجي نباتي في محطة فضائية خيالية، الأرض خلف النافذة، ضوء شمس جانبي وتفاصيل تقنية مقنعة دون علامات تجارية، بنسبة 4:5.",
+    "descriptionEn": "An adult astronaut in a planted glass greenhouse aboard a fictional orbital station, Earth beyond the window, side sunlight and plausible unbranded technical details. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: رائد بالغ داخل بيت زجاجي نباتي في محطة فضائية خيالية، الأرض خلف النافذة، ضوء شمس جانبي وتفاصيل تقنية مقنعة دون علامات تجارية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An adult astronaut in a planted glass greenhouse aboard a fictional orbital station, Earth beyond the window, side sunlight and plausible unbranded technical details. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "paper-city",
+    "title": "مدينة من الورق",
+    "titleEn": "Paper City",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/paper-city.svg",
+    "description": "مدينة خيالية مصنوعة من طبقات قصاصات ورق، مبانٍ وأقواس بألوان طوبية وكريمية، ظلال طبقات لطيفة، منظور أمامي وتكوين تحريري واضح، بنسبة 4:5.",
+    "descriptionEn": "A fictional city built from layered paper cutouts, brick and cream buildings and arches, gentle layer shadows, frontal view and clear editorial composition. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مدينة خيالية مصنوعة من طبقات قصاصات ورق، مبانٍ وأقواس بألوان طوبية وكريمية، ظلال طبقات لطيفة، منظور أمامي وتكوين تحريري واضح. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A fictional city built from layered paper cutouts, brick and cream buildings and arches, gentle layer shadows, frontal view and clear editorial composition. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "watercolor-coast",
+    "title": "ساحل بالألوان المائية",
+    "titleEn": "Watercolor Coast",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/watercolor-coast.svg",
+    "description": "ساحل هادئ بمراكب صغيرة بأسلوب ألوان مائية، ورق قطني ظاهر، أزرق مخفف ولمسات ذهبية، أفق منخفض وفراغ أبيض واسع، بنسبة 4:5.",
+    "descriptionEn": "A quiet coast with small boats in watercolor, visible cotton paper, diluted blue and golden accents, low horizon and generous white space. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: ساحل هادئ بمراكب صغيرة بأسلوب ألوان مائية، ورق قطني ظاهر، أزرق مخفف ولمسات ذهبية، أفق منخفض وفراغ أبيض واسع. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A quiet coast with small boats in watercolor, visible cotton paper, diluted blue and golden accents, low horizon and generous white space. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "ink-falcon",
+    "title": "صقر بالحبر",
+    "titleEn": "Ink Falcon",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/ink-falcon.svg",
+    "description": "رسم صقر يقف على غصن بحبر أسود، خطوط ريش دقيقة وتظليل متقاطع، خلفية ورق عاجي، تكوين عمودي يعرض الطائر كاملًا، بنسبة 4:5.",
+    "descriptionEn": "An ink drawing of a falcon perched on a branch, precise feather lines and crosshatching, ivory paper background, vertical composition showing the entire bird. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: رسم صقر يقف على غصن بحبر أسود، خطوط ريش دقيقة وتظليل متقاطع، خلفية ورق عاجي، تكوين عمودي يعرض الطائر كاملًا. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An ink drawing of a falcon perched on a branch, precise feather lines and crosshatching, ivory paper background, vertical composition showing the entire bird. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "gouache-breakfast",
+    "title": "فطور بالجواش",
+    "titleEn": "Gouache Breakfast",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/gouache-breakfast.svg",
+    "description": "طبيعة صامتة لفنجان وقليل من الخبز والتمر بأسلوب جواش، ألوان دافئة مسطحة، آثار فرشاة واضحة ومنظور من أعلى بزاوية خفيفة، بنسبة 4:5.",
+    "descriptionEn": "A gouache still life of a cup, bread and dates, warm flat colors, visible brush marks and a gently elevated viewpoint. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: طبيعة صامتة لفنجان وقليل من الخبز والتمر بأسلوب جواش، ألوان دافئة مسطحة، آثار فرشاة واضحة ومنظور من أعلى بزاوية خفيفة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A gouache still life of a cup, bread and dates, warm flat colors, visible brush marks and a gently elevated viewpoint. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "geometric-horse",
+    "title": "حصان هندسي",
+    "titleEn": "Geometric Horse",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/geometric-horse.svg",
+    "description": "حصان جانبي مرسوم بأشكال هندسية متداخلة، لوحة ألوان فحمي وطوبي وعاجي، حواف حادة وتكوين بسيط دون تفاصيل فوتوغرافية، بنسبة 4:5.",
+    "descriptionEn": "A side-view horse built from overlapping geometric shapes, charcoal, brick and ivory palette, crisp edges and minimal nonphotographic composition. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: حصان جانبي مرسوم بأشكال هندسية متداخلة، لوحة ألوان فحمي وطوبي وعاجي، حواف حادة وتكوين بسيط دون تفاصيل فوتوغرافية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A side-view horse built from overlapping geometric shapes, charcoal, brick and ivory palette, crisp edges and minimal nonphotographic composition. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "pastel-clouds",
+    "title": "سحب بالباستيل",
+    "titleEn": "Pastel Clouds",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/pastel-clouds.svg",
+    "description": "منظر سحب وقت الغروب بأقلام باستيل، ملمس طباشيري واضح، وردي وليلكي وأزرق، انتقالات لونية لطيفة ومساحات واسعة، بنسبة 4:5.",
+    "descriptionEn": "Sunset clouds drawn in pastel, visible chalk texture, pink, lilac and blue, gentle color transitions and broad open shapes. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: منظر سحب وقت الغروب بأقلام باستيل، ملمس طباشيري واضح، وردي وليلكي وأزرق، انتقالات لونية لطيفة ومساحات واسعة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: Sunset clouds drawn in pastel, visible chalk texture, pink, lilac and blue, gentle color transitions and broad open shapes. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "linocut-palms",
+    "title": "نخيل محفور",
+    "titleEn": "Linocut Palms",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/linocut-palms.svg",
+    "description": "صف نخيل بأسلوب لينوكات مطبوع، خطوط حفر واضحة، لونان أخضر داكن وعاجي، تكوين إيقاعي وخامة ورقية دون كتابة، بنسبة 4:5.",
+    "descriptionEn": "A row of palms in linocut print style, clear carved marks, two colors of deep green and ivory, rhythmic layout and paper texture without lettering. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: صف نخيل بأسلوب لينوكات مطبوع، خطوط حفر واضحة، لونان أخضر داكن وعاجي، تكوين إيقاعي وخامة ورقية دون كتابة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A row of palms in linocut print style, clear carved marks, two colors of deep green and ivory, rhythmic layout and paper texture without lettering. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "floating-stairs",
+    "title": "درج عائم",
+    "titleEn": "Floating Stairs",
+    "category": "concepts",
+    "featured": false,
+    "image": "/assets/prompts/floating-stairs.svg",
+    "description": "درج حجري عائم فوق بحيرة ساكنة ينتهي في فراغ، انعكاس مطابق، ضباب صباحي وتكوين متناظر، خامات واقعية مع فكرة سريالية، بنسبة 4:5.",
+    "descriptionEn": "Floating stone stairs over a still lake ending in empty air, matching reflection, morning mist and symmetrical framing, realistic materials with a surreal premise. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: درج حجري عائم فوق بحيرة ساكنة ينتهي في فراغ، انعكاس مطابق، ضباب صباحي وتكوين متناظر، خامات واقعية مع فكرة سريالية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: Floating stone stairs over a still lake ending in empty air, matching reflection, morning mist and symmetrical framing, realistic materials with a surreal premise. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "liquid-metal",
+    "title": "زهرة معدنية",
+    "titleEn": "Liquid Metal Flower",
+    "category": "concepts",
+    "featured": false,
+    "image": "/assets/prompts/liquid-metal.svg",
+    "description": "زهرة مصنوعة من معدن سائل كرومي فوق قاعدة سوداء، انعكاسات استوديو طويلة، خلفية فحمية ومساحة سلبية، لقطة ماكرو دون لمعان محروق، بنسبة 4:5.",
+    "descriptionEn": "A flower formed from liquid chrome on a black base, elongated studio reflections, charcoal background and negative space, macro framing with protected highlights. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: زهرة مصنوعة من معدن سائل كرومي فوق قاعدة سوداء، انعكاسات استوديو طويلة، خلفية فحمية ومساحة سلبية، لقطة ماكرو دون لمعان محروق. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A flower formed from liquid chrome on a black base, elongated studio reflections, charcoal background and negative space, macro framing with protected highlights. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "door-ocean",
+    "title": "باب إلى البحر",
+    "titleEn": "Door to the Ocean",
+    "category": "concepts",
+    "featured": false,
+    "image": "/assets/prompts/door-ocean.svg",
+    "description": "باب خشبي قائم وحده وسط صحراء، يظهر بحر أزرق داخل فتحته، اتجاه إضاءة واحد وظلال متسقة، منظور أمامي وخط أفق منخفض، بنسبة 4:5.",
+    "descriptionEn": "A wooden doorway standing alone in a desert with blue sea visible through it, one consistent light direction and shadows, frontal view and low horizon. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: باب خشبي قائم وحده وسط صحراء، يظهر بحر أزرق داخل فتحته، اتجاه إضاءة واحد وظلال متسقة، منظور أمامي وخط أفق منخفض. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A wooden doorway standing alone in a desert with blue sea visible through it, one consistent light direction and shadows, frontal view and low horizon. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "cloud-room",
+    "title": "غرفة من السحاب",
+    "titleEn": "Cloud Room",
+    "category": "concepts",
+    "featured": false,
+    "image": "/assets/prompts/cloud-room.svg",
+    "description": "غرفة بسيطة بجدران من سحب ناعمة، كرسي أحمر واحد، ضوء طبيعي منتشر وظلال مقنعة، تكوين داخلي واسع ومفهوم هادئ، بنسبة 4:5.",
+    "descriptionEn": "A minimal room with soft cloud walls and a single red chair, diffuse natural light and convincing shadows, wide interior composition and a quiet concept. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: غرفة بسيطة بجدران من سحب ناعمة، كرسي أحمر واحد، ضوء طبيعي منتشر وظلال مقنعة، تكوين داخلي واسع ومفهوم هادئ. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A minimal room with soft cloud walls and a single red chair, diffuse natural light and convincing shadows, wide interior composition and a quiet concept. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "hourglass-forest",
+    "title": "غابة في ساعة رملية",
+    "titleEn": "Forest Hourglass",
+    "category": "concepts",
+    "featured": false,
+    "image": "/assets/prompts/hourglass-forest.svg",
+    "description": "ساعة رملية زجاجية تحتوي غابة مصغرة في النصف العلوي ورملًا أسفلها، قطرات تكاثف خفيفة، إضاءة خلفية وخلفية خضراء داكنة، بنسبة 4:5.",
+    "descriptionEn": "A glass hourglass holding a miniature forest above and sand below, subtle condensation, backlighting and a deep green background. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: ساعة رملية زجاجية تحتوي غابة مصغرة في النصف العلوي ورملًا أسفلها، قطرات تكاثف خفيفة، إضاءة خلفية وخلفية خضراء داكنة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A glass hourglass holding a miniature forest above and sand below, subtle condensation, backlighting and a deep green background. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "folded-road",
+    "title": "طريق مطوي",
+    "titleEn": "Folded Road",
+    "category": "concepts",
+    "featured": false,
+    "image": "/assets/prompts/folded-road.svg",
+    "description": "طريق أسفلتي خيالي يلتف كشريط ورقي بين تلال، خطوط هندسية نظيفة، ضوء عصر دافئ وتفاصيل خامات واقعية، منظور جوي مائل، بنسبة 4:5.",
+    "descriptionEn": "A fictional asphalt road folding like a paper ribbon between hills, clean geometry, warm afternoon light and realistic material detail, oblique aerial view. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: طريق أسفلتي خيالي يلتف كشريط ورقي بين تلال، خطوط هندسية نظيفة، ضوء عصر دافئ وتفاصيل خامات واقعية، منظور جوي مائل. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A fictional asphalt road folding like a paper ribbon between hills, clean geometry, warm afternoon light and realistic material detail, oblique aerial view. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "light-ribbon",
+    "title": "شريط الضوء",
+    "titleEn": "Ribbon of Light",
+    "category": "concepts",
+    "featured": false,
+    "image": "/assets/prompts/light-ribbon.svg",
+    "description": "شريط ضوء أحمر يلتف حول حجر داكن، تصوير طويل التعريض بمسار واضح، خلفية سوداء وظل تلامس واقعي، تكوين مركزي دون ازدحام، بنسبة 4:5.",
+    "descriptionEn": "A red light ribbon winding around a dark stone, long-exposure aesthetic with a clear trail, black background and realistic contact shadow, uncluttered central framing. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: شريط ضوء أحمر يلتف حول حجر داكن، تصوير طويل التعريض بمسار واضح، خلفية سوداء وظل تلامس واقعي، تكوين مركزي دون ازدحام. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A red light ribbon winding around a dark stone, long-exposure aesthetic with a clear trail, black background and realistic contact shadow, uncluttered central framing. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "coffee-kiosk",
+    "title": "كشك قهوة مصغّر",
+    "titleEn": "Miniature Coffee Kiosk",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/coffee-kiosk.svg",
+    "description": "مجسم كشك قهوة صغير بواجهة زجاجية وآلة قهوة وطاولتين، قاعدة مستقلة، منظور إيزومتري وخامات خشب ومعدن، ضوء استوديو ناعم، بنسبة 4:5.",
+    "descriptionEn": "A miniature coffee kiosk with glass facade, coffee machine and two tables, separate base, isometric view, wood and metal materials and soft studio light. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مجسم كشك قهوة صغير بواجهة زجاجية وآلة قهوة وطاولتين، قاعدة مستقلة، منظور إيزومتري وخامات خشب ومعدن، ضوء استوديو ناعم. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A miniature coffee kiosk with glass facade, coffee machine and two tables, separate base, isometric view, wood and metal materials and soft studio light. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "desert-home",
+    "title": "بيت صحراوي مصغّر",
+    "titleEn": "Miniature Desert Home",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/desert-home.svg",
+    "description": "مجسم منزل طيني بفناء ونخلة، باب خشبي وتفاصيل جص، قاعدة رملية كاملة، منظور علوي مائل وإضاءة غروب دافئة، بنسبة 4:5.",
+    "descriptionEn": "A miniature clay home with courtyard and palm, wooden door and plaster detail, complete sandy base, elevated oblique view and warm sunset light. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مجسم منزل طيني بفناء ونخلة، باب خشبي وتفاصيل جص، قاعدة رملية كاملة، منظور علوي مائل وإضاءة غروب دافئة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A miniature clay home with courtyard and palm, wooden door and plaster detail, complete sandy base, elevated oblique view and warm sunset light. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "toy-observatory",
+    "title": "مرصد صغير",
+    "titleEn": "Tiny Observatory",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/toy-observatory.svg",
+    "description": "مرصد فلكي مصغر بقبة مفتوحة وتلسكوب، قاعدة صخرية مستديرة، خامات بلاستيك مطفأ ومعدن، إضاءة باردة ناعمة وخلفية بنفسجية، بنسبة 4:5.",
+    "descriptionEn": "A miniature observatory with open dome and telescope, round rocky base, matte plastic and metal materials, soft cool lighting and violet background. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مرصد فلكي مصغر بقبة مفتوحة وتلسكوب، قاعدة صخرية مستديرة، خامات بلاستيك مطفأ ومعدن، إضاءة باردة ناعمة وخلفية بنفسجية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A miniature observatory with open dome and telescope, round rocky base, matte plastic and metal materials, soft cool lighting and violet background. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "ceramic-robot",
+    "title": "روبوت خزفي",
+    "titleEn": "Ceramic Robot",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/ceramic-robot.svg",
+    "description": "روبوت خيالي صغير من خزف أبيض ومفاصل نحاسية، وجه بسيط غير بشري، وضعية جلوس، انعكاسات خافتة وظلال أرضية ناعمة، بنسبة 4:5.",
+    "descriptionEn": "A small fictional robot made of white ceramic with copper joints, simple nonhuman face, seated pose, restrained reflections and soft ground shadows. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: روبوت خيالي صغير من خزف أبيض ومفاصل نحاسية، وجه بسيط غير بشري، وضعية جلوس، انعكاسات خافتة وظلال أرضية ناعمة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A small fictional robot made of white ceramic with copper joints, simple nonhuman face, seated pose, restrained reflections and soft ground shadows. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "island-diorama",
+    "title": "جزيرة مصغّرة",
+    "titleEn": "Island Diorama",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/island-diorama.svg",
+    "description": "مجسم جزيرة صغيرة بنخيل وشاطئ وقارب، ماء راتنجي شفاف، مقطع أرضي ظاهر على قاعدة، منظور إيزومتري وإضاءة نهارية، بنسبة 4:5.",
+    "descriptionEn": "A small island diorama with palms, beach and boat, transparent resin water, visible soil cross-section on a base, isometric view and daylight. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مجسم جزيرة صغيرة بنخيل وشاطئ وقارب، ماء راتنجي شفاف، مقطع أرضي ظاهر على قاعدة، منظور إيزومتري وإضاءة نهارية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A small island diorama with palms, beach and boat, transparent resin water, visible soil cross-section on a base, isometric view and daylight. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "desk-world",
+    "title": "عالم المكتب",
+    "titleEn": "Desk World",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/desk-world.svg",
+    "description": "مجسم مكتب إبداعي صغير بحاسوب ودفتر ونبتة، تفاصيل بمقياس موحد، خشب فاتح وقماش داكن، منظور من أعلى وإضاءة جانبية، بنسبة 4:5.",
+    "descriptionEn": "A miniature creative desk with computer, notebook and plant, consistent scale, light wood and dark fabric, elevated view and side lighting. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مجسم مكتب إبداعي صغير بحاسوب ودفتر ونبتة، تفاصيل بمقياس موحد، خشب فاتح وقماش داكن، منظور من أعلى وإضاءة جانبية. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A miniature creative desk with computer, notebook and plant, consistent scale, light wood and dark fabric, elevated view and side lighting. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "clay-orchestra",
+    "title": "أوركسترا طينية",
+    "titleEn": "Clay Orchestra",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/clay-orchestra.svg",
+    "description": "مجموعة آلات موسيقية مصغرة من صلصال ملون على منصة نصف دائرية، ملمس يدوي، ظلال لطيفة وتكوين منظم دون شخصيات أو كتابة، بنسبة 4:5.",
+    "descriptionEn": "Miniature colorful clay musical instruments on a semicircular platform, handmade texture, gentle shadows and orderly composition without characters or text. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: مجموعة آلات موسيقية مصغرة من صلصال ملون على منصة نصف دائرية، ملمس يدوي، ظلال لطيفة وتكوين منظم دون شخصيات أو كتابة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: Miniature colorful clay musical instruments on a semicircular platform, handmade texture, gentle shadows and orderly composition without characters or text. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "fog-pier",
+    "title": "رصيف في الضباب",
+    "titleEn": "Fog Pier",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/fog-pier.svg",
+    "description": "رصيف خشبي يختفي في ضباب كثيف فوق ماء ساكن، أبيض وأسود بتدرجات ناعمة، تكوين متناظر بعدسة 50 مم ومساحة فارغة كبيرة، بنسبة 4:5.",
+    "descriptionEn": "A wooden pier disappearing into thick fog over still water, soft black-and-white tones, symmetrical 50mm framing and ample negative space. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: رصيف خشبي يختفي في ضباب كثيف فوق ماء ساكن، أبيض وأسود بتدرجات ناعمة، تكوين متناظر بعدسة 50 مم ومساحة فارغة كبيرة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A wooden pier disappearing into thick fog over still water, soft black-and-white tones, symmetrical 50mm framing and ample negative space. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "hands-pottery",
+    "title": "يد وصناعة",
+    "titleEn": "Hands at Work",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/hands-pottery.svg",
+    "description": "لقطة قريبة ليدي شخص بالغ يصنع إناءً طينيًا، أبيض وأسود، تفاصيل الطين والماء واضحة، إضاءة جانبية وتكوين محكم، بنسبة 4:5.",
+    "descriptionEn": "A close-up of adult hands forming a clay vessel, black and white, clear wet clay detail, side lighting and tight framing. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: لقطة قريبة ليدي شخص بالغ يصنع إناءً طينيًا، أبيض وأسود، تفاصيل الطين والماء واضحة، إضاءة جانبية وتكوين محكم. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A close-up of adult hands forming a clay vessel, black and white, clear wet clay detail, side lighting and tight framing. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "spiral-stairs",
+    "title": "درج حلزوني",
+    "titleEn": "Spiral Staircase",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/spiral-stairs.svg",
+    "description": "درج حلزوني معماري من أعلى، أبيض وأسود عالي التباين، خطوط تقود للمنتصف، ضوء نافذة يكشف الخامة ودون بشر، بنسبة 4:5.",
+    "descriptionEn": "An architectural spiral stair viewed from above, high-contrast black and white, lines leading to the center, window light revealing texture and no people. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: درج حلزوني معماري من أعلى، أبيض وأسود عالي التباين، خطوط تقود للمنتصف، ضوء نافذة يكشف الخامة ودون بشر. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: An architectural spiral stair viewed from above, high-contrast black and white, lines leading to the center, window light revealing texture and no people. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "desert-lines",
+    "title": "خطوط الرمال",
+    "titleEn": "Sand Lines",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/desert-lines.svg",
+    "description": "كثبان رملية بالأبيض والأسود، ضوء مائل يبرز تموجات الرمال، تكوين تجريدي بطبقات ظل وإضاءة، عدسة طويلة دون سماء بارزة، بنسبة 4:5.",
+    "descriptionEn": "Black-and-white dunes with angled light revealing sand ripples, abstract layers of shadow and light, long-lens framing with little visible sky. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: كثبان رملية بالأبيض والأسود، ضوء مائل يبرز تموجات الرمال، تكوين تجريدي بطبقات ظل وإضاءة، عدسة طويلة دون سماء بارزة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: Black-and-white dunes with angled light revealing sand ripples, abstract layers of shadow and light, long-lens framing with little visible sky. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "rain-glass",
+    "title": "المطر على الزجاج",
+    "titleEn": "Rain on Glass",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/rain-glass.svg",
+    "description": "قطرات مطر على نافذة بالأبيض والأسود، مدينة ضبابية خلفها، تركيز ماكرو على القطرات وتدرجات رمادية غنية دون كتابة، بنسبة 4:5.",
+    "descriptionEn": "Black-and-white rain droplets on a window with a blurred city behind, macro focus on droplets and rich gray tones without text. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: قطرات مطر على نافذة بالأبيض والأسود، مدينة ضبابية خلفها، تركيز ماكرو على القطرات وتدرجات رمادية غنية دون كتابة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: Black-and-white rain droplets on a window with a blurred city behind, macro focus on droplets and rich gray tones without text. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "bridge-shadow",
+    "title": "ظل الجسر",
+    "titleEn": "Bridge Shadow",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/bridge-shadow.svg",
+    "description": "جسر خرساني بالأبيض والأسود، منظور منخفض وظلال هندسية قوية، شخص بالغ صغير من الخلف لبيان الحجم، تفاصيل محفوظة في المناطق الداكنة، بنسبة 4:5.",
+    "descriptionEn": "A black-and-white concrete bridge from a low viewpoint, strong geometric shadows, a small adult seen from behind for scale, retained detail in dark areas. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: جسر خرساني بالأبيض والأسود، منظور منخفض وظلال هندسية قوية، شخص بالغ صغير من الخلف لبيان الحجم، تفاصيل محفوظة في المناطق الداكنة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: A black-and-white concrete bridge from a low viewpoint, strong geometric shadows, a small adult seen from behind for scale, retained detail in dark areas. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
+  },
+  {
+    "id": "still-pears",
+    "title": "طبيعة صامتة",
+    "titleEn": "Quiet Pears",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/still-pears.svg",
+    "description": "ثلاث حبات كمثرى على قماش كتان بالأبيض والأسود، ضوء نافذة واحد، تفاصيل القشرة وطيات القماش، تكوين مثلثي وخلفية داكنة، بنسبة 4:5.",
+    "descriptionEn": "Three pears on linen in black and white, a single window light, skin texture and fabric folds, triangular composition and dark background. Vertical 4:5.",
+    "promptAr": "أنشئ صورة بالتفاصيل التالية: ثلاث حبات كمثرى على قماش كتان بالأبيض والأسود، ضوء نافذة واحد، تفاصيل القشرة وطيات القماش، تكوين مثلثي وخلفية داكنة. حافظ على تناسق المنظور واتجاه الإضاءة، واجعل العنصر الرئيسي واضحًا مع توزيع متوازن للمساحات. استخدم نسبة عمودية 4:5 وتفاصيل دقيقة دون إفراط في الحدة. لا تضف نصوصًا أو علامات مائية أو شعارات. إذا أرفقت صورة شخص أو شعار مرجعي، حافظ على هويته وملامحه وشكل الشعار دون تغيير.",
+    "promptEn": "Create an image with the following brief: Three pears on linen in black and white, a single window light, skin texture and fabric folds, triangular composition and dark background. Keep perspective and light direction consistent. Make the main subject clear and balance negative space around it. Use a vertical 4:5 composition and fine detail without excessive sharpening. No text, watermarks or logos. If a reference person or logo is supplied, preserve exact facial identity, features and logo shape without alteration.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "claude",
+      "grok",
+      "other"
+    ]
   }
 ]
