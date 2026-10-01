@@ -15,7 +15,7 @@ export const WatchFacesPage: React.FC = () => {
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState<WatchFaceItem | null>(null);
   const filtered = useMemo(() => watchFaces.filter(face => !query.trim() ||
-    face.title.includes(query.trim()) || String(face.id).includes(query.trim())), [query]);
+    face.title.includes(query.trim()) || face.englishTitle.toLowerCase().includes(query.trim().toLowerCase()) || String(face.id).includes(query.trim())), [query]);
   const pages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const visible = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE);
   useEffect(() => setPage(1), [query]);
@@ -25,7 +25,7 @@ export const WatchFacesPage: React.FC = () => {
     setPage(Math.ceil(id / PER_PAGE));
     setSelected(watchFaces[id - 1]);
   }, [hash]);
-  const faceTitle = (face: WatchFaceItem) => isArabic ? face.title : `Watch Face ${face.id}`;
+  const faceTitle = (face: WatchFaceItem) => isArabic ? face.title : face.englishTitle;
   const pageButtons = Array.from({ length: pages }, (_, i) => i + 1);
   return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic ? 'rtl' : 'ltr'}>
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

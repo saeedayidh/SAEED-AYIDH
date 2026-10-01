@@ -26,7 +26,7 @@ export const ResourcesSection:React.FC=()=>{
  useEffect(()=>{setActive(0)},[q]);
  useEffect(()=>{if(featured.length<2)return;const t=window.setInterval(()=>move('next'),4200);return()=>window.clearInterval(t)},[featured.length,move]);
  const cards=featured.length?[-2,-1,0,1,2].map(offset=>({offset,w:featured[(active+offset+featured.length)%featured.length]})):[];
- const watchFeatured=useMemo(()=>watchFaces.filter(x=>!watchQ.trim()||x.title.includes(watchQ.trim())||String(x.id).includes(watchQ.trim())),[watchQ]);
+ const watchFeatured=useMemo(()=>watchFaces.filter(x=>!watchQ.trim()||x.title.includes(watchQ.trim())||x.englishTitle.toLowerCase().includes(watchQ.trim().toLowerCase())||String(x.id).includes(watchQ.trim())),[watchQ]);
  const endDrag=(x:number)=>{if(startX===null)return;const d=x-startX;dragged.current=Math.abs(d)>20;if(d<-35)move('next');else if(d>35)move('prev');setStartX(null)};
  return <section id="resources-section" className="relative overflow-hidden border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}>
   <style>{`
