@@ -12,14 +12,16 @@ export const ResourcesPage:React.FC=()=>{
  const[category,setCategory]=useState<WallpaperCategory>('الكل');
  const[page,setPage]=useState(1);
  const[selected,setSelected]=useState<string|null>(null);
- const[heroActive,setHeroActive]=useState(0);
+ const[heroActive,setHeroActive]=useState(0);const[heroStartX,setHeroStartX]=useState<number|null>(null);const[heroDirection,setHeroDirection]=useState<'next'|'prev'>('next');const[heroAnimKey,setHeroAnimKey]=useState(0);const heroDragged=React.useRef(false);
  const filtered=useMemo(()=>wallpapers.filter(w=>(category==='الكل'||w.category===category)&&(!q.trim()||w.title.includes(q.trim())||w.category.includes(q.trim()))),[q,category]);
  const pages=Math.max(1,Math.ceil(filtered.length/PER_PAGE));
  useEffect(()=>setPage(1),[q,category]);
  useEffect(()=>{wallpapers.slice(0,20).forEach(w=>{const img=new Image();img.src=w.image})},[]);
  const visible=filtered.slice((page-1)*PER_PAGE,page*PER_PAGE);
  const hero=wallpapers.slice(0,9);
- useEffect(()=>{const t=window.setInterval(()=>setHeroActive(v=>(v+1)%hero.length),3200);return()=>window.clearInterval(t)},[hero.length]);
+ const moveHero=React.useCallback((dir:'next'|'prev')=>{setHeroDirection(dir);setHeroAnimKey(k=>k+1);setHeroActive(v=>dir==='next'?(v+1)%hero.length:(v-1+hero.length)%hero.length)},[hero.length]);
+ useEffect(()=>{const t=window.setInterval(()=>moveHero('next'),4200);return()=>window.clearInterval(t)},[hero.length,moveHero]);
+ const endHeroDrag=(x:number)=>{if(heroStartX===null)return;const d=x-heroStartX;heroDragged.current=Math.abs(d)>20;if(d<-35)moveHero('next');else if(d>35)moveHero('prev');setHeroStartX(null)};
  const heroCards=[-2,-1,0,1,2].map(offset=>({offset,w:hero[(heroActive+offset+hero.length)%hero.length]}));
  const pageButtons=useMemo(()=>{
   if(pages<=5)return Array.from({length:pages},(_,i)=>i+1);
@@ -27,7 +29,7 @@ export const ResourcesPage:React.FC=()=>{
   if(page>=pages-2)return Array.from({length:5},(_,i)=>pages-4+i);
   return[page-2,page-1,page,page+1,page+2];
  },[page,pages]);
- return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}>
+ return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}><style>{`@keyframes heroNext{0%{opacity:.65;transform:translateX(32px)}100%{opacity:1;transform:translateX(0)}}@keyframes heroPrev{0%{opacity:.65;transform:translateX(-32px)}100%{opacity:1;transform:translateX(0)}}.hero-next{animation:heroNext .58s cubic-bezier(.2,.8,.2,1)}.hero-prev{animation:heroPrev .58s cubic-bezier(.2,.8,.2,1)}`}</style>
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
    <div className="mb-8">
     <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد سعيد':'Saeed Resources'}</p>
@@ -35,12 +37,13 @@ export const ResourcesPage:React.FC=()=>{
     <p className="mt-3 text-sm text-gray-500">{isArabic?'100 خلفية مختارة للجوال — طبيعة، بحر، جبال، صحراء وسماء.':'100 selected mobile wallpapers — nature, sea, mountains, desert and sky.'}</p>
    </div>
 
-   <div className="relative mx-auto mb-12 h-[300px] max-w-[650px] overflow-hidden sm:h-[390px]">
+   <div className="relative mx-auto mb-12 h-[320px] w-full max-w-[650px] touch-pan-y select-none overflow-hidden sm:h-[410px]" onPointerDown={e=>{heroDragged.current=false;setHeroStartX(e.clientX)}} onPointerUp={e=>endHeroDrag(e.clientX)} onPointerCancel={()=>setHeroStartX(null)}>
+    <div key={heroAnimKey} className={`absolute inset-0 ${heroDirection==='next'?'hero-next':'hero-prev'}`}>
     {heroCards.map(({offset,w})=>{
-     const abs=Math.abs(offset),scale=offset===0?1:abs===1?0.82:0.68,shift=offset*105;
-     return <div key={`${w.id}-hero-${offset}`} className="group absolute left-1/2 top-1/2 w-[150px] transition-all duration-700 ease-out sm:w-[195px]" style={{zIndex:10-abs,opacity:abs===2?0.48:abs===1?0.76:1,transform:`translate(calc(-50% + ${shift}px),-50%) scale(${scale})`}}>
-      <button type="button" onClick={()=>setSelected(w.image)} className={`relative block aspect-[9/16] w-full overflow-hidden rounded-[26px] border bg-[#111] shadow-2xl ${offset===0?'border-[#D51F2B]/45':'border-white/10'}`}>
-       <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async"/>
+     const abs=Math.abs(offset),scale=offset===0?1:abs===1?0.82:0.68,shift=offset*88;
+     return <div key={w.id} className="group absolute left-1/2 top-1/2 w-[158px] transition-[transform,opacity] duration-700 ease-out sm:w-[205px]" style={{zIndex:10-abs,opacity:abs===2?0.28:abs===1?0.68:1,transform:`translate3d(calc(-50% + ${shift}px),-50%,0) scale(${scale})`}}>
+      <button type="button" onClick={()=>{if(heroDragged.current){heroDragged.current=false;return}setSelected(w.image)}} className={`relative block aspect-[9/16] w-full overflow-hidden rounded-[26px] border bg-[#111] shadow-2xl ${offset===0?'border-[#D51F2B]/45':'border-white/10'}`}>
+       <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" draggable={false}/>
       </button>
       {offset===0&&<div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-black/70 p-1 backdrop-blur-md">
        <a href={w.image} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-black/70"><Download className="h-3.5 w-3.5 text-white"/></a>
@@ -49,6 +52,7 @@ export const ResourcesPage:React.FC=()=>{
       </div>}
      </div>
     })}
+    </div>
    </div>
 
    <div className="mb-8 border-y border-white/5 py-7">
