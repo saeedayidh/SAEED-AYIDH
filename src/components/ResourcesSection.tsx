@@ -5,12 +5,15 @@ import{useLanguage}from'../context/LanguageContext';
 import{wallpapers}from'../data/resourcesData';
 import{watchFaces}from'../data/watchFacesData';
 import{WatchFaceCarousel}from'./WatchFaceCarousel';
+import{featuredFilters}from'../data/featuredFiltersData';
+import{FeaturedFilterCarousel}from'./FeaturedFilterCarousel';
 
 export const ResourcesSection:React.FC=()=>{
  const{isArabic}=useLanguage();
  const navigate=useNavigate();
  const[q,setQ]=useState('');
  const[watchQ,setWatchQ]=useState('');
+ const[filterQ,setFilterQ]=useState('');
  const[active,setActive]=useState(0);
  const[startX,setStartX]=useState<number|null>(null);
  const[direction,setDirection]=useState<'next'|'prev'>('next');
@@ -27,6 +30,7 @@ export const ResourcesSection:React.FC=()=>{
  useEffect(()=>{if(featured.length<2)return;const t=window.setInterval(()=>move('next'),4200);return()=>window.clearInterval(t)},[featured.length,move]);
  const cards=featured.length?[-2,-1,0,1,2].map(offset=>({offset,w:featured[(active+offset+featured.length)%featured.length]})):[];
  const watchFeatured=useMemo(()=>watchFaces.filter(x=>!watchQ.trim()||x.title.includes(watchQ.trim())||x.englishTitle.toLowerCase().includes(watchQ.trim().toLowerCase())||String(x.id).includes(watchQ.trim())),[watchQ]);
+ const filterFeatured=useMemo(()=>featuredFilters.filter(x=>`${x.title} ${x.titleEn}`.toLowerCase().includes(filterQ.trim().toLowerCase())),[filterQ]);
  const endDrag=(x:number)=>{if(startX===null)return;const d=x-startX;dragged.current=Math.abs(d)>20;if(d<-35)move('next');else if(d>35)move('prev');setStartX(null)};
  return <section id="resources-section" className="relative overflow-hidden border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}>
   <style>{`
@@ -70,6 +74,14 @@ export const ResourcesSection:React.FC=()=>{
      <Link to="/resources/watch-faces" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl border border-[#D51F2B]/45 px-3 py-3.5 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-6 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
     </div>
     {watchFeatured.length?<WatchFaceCarousel faces={watchFeatured} isArabic={isArabic} onSelect={w=>navigate(`/resources/watch-faces#watch-face-${w.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا واجهات مطابقة.':'No matching watch faces found.'}</div>}
+   </div>
+   <div className="mt-14 border-t border-white/5 pt-12">
+    <Link to="/resources/filters" className="mb-3 flex w-full items-center justify-center rounded-2xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] px-5 py-4 text-base font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-lg">{isArabic?'فلتر مميز':'Featured Filters'}</Link>
+    <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
+     <label className="flex min-w-0 flex-1 items-center gap-2 rounded-2xl border border-white/10 bg-[#111] px-3 py-3.5 focus-within:border-[#D51F2B]/60 sm:px-4"><Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={filterQ} onChange={e=>setFilterQ(e.target.value)} placeholder={isArabic?'ابحث عن فلتر...':'Search filters...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/></label>
+     <Link to="/resources/filters" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-2xl border border-[#D51F2B]/45 px-3 py-3.5 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-6 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
+    </div>
+    {filterFeatured.length?<FeaturedFilterCarousel items={filterFeatured} isArabic={isArabic} onSelect={item=>navigate(`/resources/filters#featured-filter-${item.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا فلاتر مطابقة.':'No matching filters found.'}</div>}
    </div>
   </div>
  </section>
