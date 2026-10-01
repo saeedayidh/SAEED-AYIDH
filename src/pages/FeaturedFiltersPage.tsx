@@ -1,3 +1,4 @@
+import { ResourceBackButton } from '../components/ResourceBackButton';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Download, Search, SlidersHorizontal } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
@@ -25,6 +26,7 @@ export const FeaturedFiltersPage: React.FC = () => {
   const select = (item: FeaturedFilter) => document.getElementById(`featured-filter-${item.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   return <main className="min-h-screen bg-[#090909] pb-24 pt-28 text-white" dir={isArabic ? 'rtl' : 'ltr'}>
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <ResourceBackButton/>
       <div className="mb-10 text-center">
         <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic ? 'موارد سعيد' : 'Saeed Resources'}</p>
         <h1 className="text-3xl font-black sm:text-5xl">{isArabic ? 'فلتر مميز' : 'Featured Filters'}</h1>

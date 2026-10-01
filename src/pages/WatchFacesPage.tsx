@@ -1,3 +1,4 @@
+import { ResourceBackButton } from '../components/ResourceBackButton';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Download, Search, X, ChevronLeft, ChevronRight, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
@@ -37,6 +38,7 @@ export const WatchFacesPage: React.FC = () => {
   const pageButtons = Array.from({ length: pages }, (_, i) => i + 1);
   return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic ? 'rtl' : 'ltr'}>
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <ResourceBackButton/>
       <div className="mb-10">
         <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic ? 'موارد سعيد' : 'Saeed Resources'}</p>
         <h1 className="text-4xl font-black sm:text-6xl">{isArabic ? 'واجهة الساعة' : 'Watch Face'}</h1>

@@ -1,3 +1,4 @@
+import { ResourceBackButton } from '../components/ResourceBackButton';
 import React,{useEffect,useMemo,useState}from'react';
 import{Search,SlidersHorizontal,ChevronDown,ChevronLeft,ChevronRight,X,Download}from'lucide-react';
 import{FavoriteButton}from'../components/FavoriteButton';
@@ -34,6 +35,7 @@ export const ResourcesPage:React.FC=()=>{
  },[page,pages]);
  return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}><style>{`@keyframes heroNext{0%{opacity:.65;transform:translateX(32px)}100%{opacity:1;transform:translateX(0)}}@keyframes heroPrev{0%{opacity:.65;transform:translateX(-32px)}100%{opacity:1;transform:translateX(0)}}.hero-next{animation:heroNext 1.05s cubic-bezier(.22,.75,.25,1)}.hero-prev{animation:heroPrev 1.05s cubic-bezier(.22,.75,.25,1)}`}</style>
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <ResourceBackButton/>
    <div className="mb-8">
     <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد سعيد':'Saeed Resources'}</p>
     <h1 className="text-4xl font-black sm:text-6xl">{isArabic?'خلفية جوال':'Mobile Wallpaper'}</h1>

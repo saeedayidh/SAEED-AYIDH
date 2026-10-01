@@ -1,3 +1,4 @@
+import { ResourceBackButton } from '../components/ResourceBackButton';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ChevronDown, Search, SlidersHorizontal, ArrowDownWideNarrow } from 'lucide-react';
@@ -20,6 +21,7 @@ export function ImagePromptsPage() {
     return () => window.clearTimeout(timer);
   }, [hash]);
   return <div className="min-h-screen bg-[#090909] pb-24 pt-28 text-white" dir={isArabic ? 'rtl' : 'ltr'}><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <ResourceBackButton/>
     <div className="mb-7 text-center"><p className="text-xs font-bold text-[#D51F2B]">{isArabic ? 'موارد سعيد' : 'Saeed Resources'}</p><h1 className="mt-3 text-3xl font-black sm:text-5xl">{isArabic ? 'برومبت صور' : 'Image Prompts'}</h1><p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-gray-400">{isArabic ? 'برومبتات أصلية للصور. اختر المنصة والتصنيف، ثم انسخ النص واستخدمه مع أداة الصور المناسبة.' : 'Original image prompts. Choose a platform and category, then copy the text into your preferred image tool.'}</p></div>
     <ImagePromptCarousel items={items} isArabic={isArabic} onSelect={item => document.getElementById(`image-prompt-${item.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}/>
     <h2 className="mb-5 mt-9 text-center text-xl font-black">{isArabic ? 'مكتبة برومبت صور' : 'Image Prompt Library'}</h2>
