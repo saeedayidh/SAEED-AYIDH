@@ -29,7 +29,7 @@ export const ResourcesSection:React.FC=()=>{
     <div className="saeed-resources-track flex w-max gap-4 py-2" dir="ltr">
      {loop.map((w,i)=><Link key={`${w.id}-${i}`} to="/resources/wallpapers" className="group block w-[150px] shrink-0 sm:w-[190px]">
       <div className="aspect-[9/16] overflow-hidden rounded-[24px] border border-white/10 bg-[#141414] shadow-xl">
-       <img src={w.image} alt={w.title} loading="lazy" onError={e=>{const img=e.currentTarget;if(!img.dataset.fallback){img.dataset.fallback='1';img.src='https://picsum.photos/seed/saeed-wallpaper-'+(img.alt.match(/\\d+/)?.[0]||'1')+'/720/1280'}} className="h-full w-full object-cover transition duration-500 group-hover:scale-105"/>
+       <img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105"/>
       </div>
      </Link>)}
     </div>
