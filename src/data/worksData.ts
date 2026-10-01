@@ -52,7 +52,7 @@ export const ardrNaosWork={
   shortDescriptionEn:'A platform specialized in gaming news.',
   description:'اردر ناوس أحد عوالم اردر، ومتخصص في أخبار الألعاب.',
   descriptionEn:'ARDR Naos is one of ARDR’s worlds, specialized in gaming news.',
-  previewUrl:'',
+  previewUrl:'https://solo.to/ardrnaos',
   category:'أخبار الألعاب',
   categoryEn:'Gaming News',
   categoryDetails:'أخبار الألعاب',
