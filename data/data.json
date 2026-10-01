@@ -1022,10 +1022,10 @@
     },
     {
       "id": 12,
-      "category": "content",
+      "category": "photo",
       "categoryName": {
-        "ar": "سعيد كونتنت",
-        "en": "Saeed Content"
+        "ar": "سعيد فوتو",
+        "en": "Saeed Photo"
       },
       "title": {
         "ar": "تصوير مقطع إعلاني",
@@ -1040,10 +1040,10 @@
     },
     {
       "id": 13,
-      "category": "content",
+      "category": "photo",
       "categoryName": {
-        "ar": "سعيد كونتنت",
-        "en": "Saeed Content"
+        "ar": "سعيد فوتو",
+        "en": "Saeed Photo"
       },
       "title": {
         "ar": "تغطية مؤتمرات أو فعاليات",
