@@ -668,5 +668,6 @@ export const publicEnglish:Record<string,string>={
   "محتوى متنوع بهوية مختلفة لكل مجال.": "Diverse content with a distinct identity for each field.",
   "صناعة المحتوى الإبداعي": "Creative Content Creation",
   "تصميم واجهات المستخدم": "User Interface Design",
-  "روابط المنصات والتواصل": "Platform & Contact Links"
+  "روابط المنصات والتواصل": "Platform & Contact Links",
+  "خدمات سعيد فوتو": "Saeed Photo"
 };
