@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const test = require('node:test'), assert = require('node:assert/strict');
 const fs = require('fs'), os = require('os'), path = require('path');
 const { createPromptCopies } = require('../lib/prompt-copies');
@@ -5,7 +6,16 @@ const prompts = require('../src/data/imagePrompts.json');
 test('50 unique bilingual prompts and valid original assets', () => {
   assert.equal(prompts.length, 50);
   for (const key of ['id', 'title', 'titleEn', 'promptAr', 'promptEn', 'image']) assert.equal(new Set(prompts.map(x => x[key])).size, 50);
-  for (const item of prompts) assert.ok(fs.existsSync(path.join(__dirname, '../public', item.image)));
+  const hashes = new Set();
+  for (const item of prompts) {
+    const bytes = fs.readFileSync(path.join(__dirname, '../public', item.image));
+    assert.ok(bytes.length > 1000);
+    assert.equal(bytes.toString('ascii', 0, 4), 'RIFF');
+    assert.equal(bytes.toString('ascii', 8, 12), 'WEBP');
+    hashes.add(crypto.createHash('sha256').update(bytes).digest('hex'));
+    assert.ok(item.promptEn.includes('primary identity reference'));
+  }
+  assert.equal(hashes.size, 50);
   assert.equal(new Set(prompts.map(x => x.category)).size, 6);
 });
 test('persistent unique browser counts, independent prompts and rejected writes', async () => {

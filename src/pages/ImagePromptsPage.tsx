@@ -22,7 +22,7 @@ export function ImagePromptsPage() {
   }, [hash]);
   return <div className="min-h-screen bg-[#090909] pb-24 pt-28 text-white" dir={isArabic ? 'rtl' : 'ltr'}><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <ResourceBackButton/>
-    <div className="mb-7 text-center"><p className="text-xs font-bold text-[#D51F2B]">{isArabic ? 'موارد سعيد' : 'Saeed Resources'}</p><h1 className="mt-3 text-3xl font-black sm:text-5xl">{isArabic ? 'برومبت صور' : 'Image Prompts'}</h1><p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-gray-400">{isArabic ? 'برومبتات أصلية للصور. اختر المنصة والتصنيف، ثم انسخ النص واستخدمه مع أداة الصور المناسبة.' : 'Original image prompts. Choose a platform and category, then copy the text into your preferred image tool.'}</p></div>
+    <div className="mb-7 text-center"><p className="text-xs font-bold text-[#D51F2B]">{isArabic ? 'موارد سعيد' : 'Saeed Resources'}</p><h1 className="mt-3 text-3xl font-black sm:text-5xl">{isArabic ? 'برومبت صور' : 'Image Prompts'}</h1><p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-gray-400">{isArabic ? '50 برومبت لصور الأشخاص. اختر الأسلوب، ثم انسخ النص وأرفق صورة الشخص مع أداة الصور المناسبة.' : '50 people portrait prompts. Choose a style, copy the text and attach the person’s photo in your preferred image tool.'}</p></div>
     <ImagePromptCarousel items={items} isArabic={isArabic} onSelect={item => document.getElementById(`image-prompt-${item.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}/>
     <h2 className="mb-5 mt-9 text-center text-xl font-black">{isArabic ? 'مكتبة برومبت صور' : 'Image Prompt Library'}</h2>
     <div className="mb-7 flex gap-2 overflow-x-auto pb-3" aria-label={isArabic ? 'اختيار المنصة' : 'Choose platform'}>
@@ -40,6 +40,6 @@ export function ImagePromptsPage() {
     <p aria-live="polite" className="mb-5 text-xs text-gray-500">{items.length} {isArabic ? 'برومبت' : 'prompts'}</p>
     <div className="grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">{items.map(item => <ImagePromptCard key={`${item.id}-${platform}-${language}`} item={item} isArabic={isArabic} platform={platform} language={language}/>)}</div>
     {!items.length && <p className="py-16 text-center text-sm text-gray-500">{isArabic ? 'ما لقينا برومبتات مطابقة. جرّب تصنيفًا أو بحثًا آخر.' : 'No matching prompts. Try another category or search.'}</p>}
-    <p className="mt-9 text-center text-[11px] leading-6 text-gray-600">{isArabic ? 'الصور أمثلة توضيحية أصلية. قد تختلف النتيجة حسب الأداة والصورة المرجعية والإعدادات.' : 'Original preview images illustrate the prompts. Results vary by tool, reference image and settings.'}</p>
+    <p className="mt-9 text-center text-[11px] leading-6 text-gray-600">{isArabic ? 'المعاينات لشخصيات خيالية. أرفق صورتك عند استخدام البرومبت؛ قد تختلف النتيجة حسب الأداة والإعدادات.' : 'Previews feature fictional people. Attach your photo when using a prompt; results vary by tool and settings.'}</p>
   </div></div>;
 }
