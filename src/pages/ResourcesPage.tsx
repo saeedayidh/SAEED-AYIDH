@@ -15,6 +15,7 @@ export const ResourcesPage:React.FC=()=>{
  const filtered=useMemo(()=>wallpapers.filter(w=>(category==='الكل'||w.category===category)&&(!q.trim()||w.title.includes(q.trim())||w.category.includes(q.trim()))),[q,category]);
  const pages=Math.max(1,Math.ceil(filtered.length/PER_PAGE));
  useEffect(()=>setPage(1),[q,category]);
+ useEffect(()=>{wallpapers.slice(0,20).forEach(w=>{const img=new Image();img.src=w.image})},[]);
  const visible=filtered.slice((page-1)*PER_PAGE,page*PER_PAGE);
  const hero=wallpapers.slice(0,7);
  const pageButtons=useMemo(()=>{
@@ -33,7 +34,7 @@ export const ResourcesPage:React.FC=()=>{
    </div>
 
    <div className="mb-12 overflow-hidden">
-    <div className="wall-hero-track flex w-max gap-3 py-2" dir="ltr">
+    <div className="wall-hero-track gap-3 py-2" dir="ltr">
      {[...hero,...hero].map((w,i)=><div key={`${w.id}-hero-${i}`} className="group relative w-[120px] shrink-0 sm:w-[155px]">
       <button type="button" onClick={()=>setSelected(w.image)} className="relative block aspect-[9/16] w-full overflow-hidden rounded-[22px] border border-white/10 bg-[#111]">
        <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async"/>
@@ -62,7 +63,7 @@ export const ResourcesPage:React.FC=()=>{
     {visible.map(w=><div key={w.id} id={`wallpaper-${w.id}`} className="group text-right">
      <div className="relative aspect-[9/16] overflow-hidden rounded-[22px] border border-white/10 bg-[#111] transition group-hover:border-[#D51F2B]/60">
       <button type="button" onClick={()=>setSelected(w.image)} className="absolute inset-0 h-full w-full" aria-label={w.title}>
-       <img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
+       <img src={w.image} alt={w.title} loading="eager" decoding="async" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
       </button>
       <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-black/65 p-1.5 backdrop-blur-md">
        <a href={w.image} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/70 transition hover:border-[#D51F2B]"><Download className="h-4 w-4 text-white"/></a>
