@@ -24,7 +24,7 @@ export const ResourcesPage:React.FC=()=>{
   return[page-2,page-1,page,page+1,page+2];
  },[page,pages]);
  return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}>
-  <style>{`@keyframes wallHeroLTR{from{transform:translateX(-50%)}to{transform:translateX(0)}}.wall-hero-track{animation:wallHeroLTR 38s linear infinite}.wall-hero-track:hover{animation-play-state:paused}`}</style>
+  <style>{`@keyframes wallHeroLTR{0%{transform:translate3d(-50%,0,0)}100%{transform:translate3d(0,0,0)}}.wall-hero-track{animation:wallHeroLTR 38s linear infinite;will-change:transform}.wall-hero-track:hover{animation-play-state:paused}@media(prefers-reduced-motion:reduce){.wall-hero-track{animation:none;transform:none}}`}</style>
   <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
    <div className="mb-8">
     <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'موارد سعيد':'Saeed Resources'}</p>
@@ -32,11 +32,18 @@ export const ResourcesPage:React.FC=()=>{
     <p className="mt-3 text-sm text-gray-500">{isArabic?'100 خلفية مختارة للجوال — طبيعة، بحر، جبال، صحراء وسماء.':'100 selected mobile wallpapers — nature, sea, mountains, desert and sky.'}</p>
    </div>
 
-   <div className="mb-12 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+   <div className="mb-12 overflow-hidden">
     <div className="wall-hero-track flex w-max gap-3 py-2" dir="ltr">
-     {[...hero,...hero].map((w,i)=><button key={`${w.id}-hero-${i}`} onClick={()=>setSelected(w.image)} className="w-[120px] shrink-0 overflow-hidden rounded-[22px] border border-white/10 bg-[#111] sm:w-[155px]">
-      <img src={w.image} alt={w.title} className="aspect-[9/16] h-auto w-full object-cover" loading="eager"/>
-     </button>)}
+     {[...hero,...hero].map((w,i)=><div key={`${w.id}-hero-${i}`} className="group relative w-[120px] shrink-0 sm:w-[155px]">
+      <button type="button" onClick={()=>setSelected(w.image)} className="relative block aspect-[9/16] w-full overflow-hidden rounded-[22px] border border-white/10 bg-[#111]">
+       <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async"/>
+      </button>
+      <div className="absolute bottom-2 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-black/70 p-1 backdrop-blur-md">
+       <a href={w.image} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-black/70"><Download className="h-3.5 w-3.5 text-white"/></a>
+       <ShareButton title={w.title} url={w.image} className="!h-8 !w-8"/>
+       <FavoriteButton id={`wallpaper-${w.id}`} title={w.title} url={`/resources/wallpapers#wallpaper-${w.id}`} type="wallpaper" className="!h-8 !w-8"/>
+      </div>
+     </div>)}
     </div>
    </div>
 
