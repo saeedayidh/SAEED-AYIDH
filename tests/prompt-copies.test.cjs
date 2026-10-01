@@ -41,3 +41,15 @@ test('persistent unique browser counts, independent prompts and rejected writes'
     assert.equal((await call('GET', '/api/image-prompts/copies', a.cookie)).body.counts['ember-portrait'], 2);
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });
+
+test('platform libraries have distinct assigned prompts and language-specific workflows', () => {
+  for (const platform of ['chatgpt', 'gemini', 'claude', 'grok', 'other']) {
+    const group = prompts.filter(item => item.platforms.includes(platform));
+    assert.equal(group.length, 10);
+    for (const item of group) assert.equal(item.platforms.length, 1);
+  }
+  for (const item of prompts.filter(item => item.platforms[0] === 'claude')) {
+    assert.ok(item.promptEn.includes('Do not generate an image'));
+    assert.ok(item.promptAr.includes('لا تولّد صورة'));
+  }
+});

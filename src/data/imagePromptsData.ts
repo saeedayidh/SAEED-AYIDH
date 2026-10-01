@@ -13,12 +13,9 @@ export const promptCategories = [
   { id: 'mono', ar: 'أبيض وأسود', en: 'Black & White' },
 ];
 export const imagePrompts: ImagePrompt[] = items;
-// These are natural-language prompts suitable for multiple image tools.
-// Claude is a prompt-writing workflow rather than native photo generation.
-export function promptText(item: ImagePrompt, language: 'ar' | 'en', platform: PromptPlatform) {
-  const text = language === 'ar' ? item.promptAr : item.promptEn;
-  if (platform !== 'claude') return text;
-  return (language === 'ar' ? 'صغ برومبتًا احترافيًا جاهزًا لأداة توليد صور بناءً على الوصف التالي. حافظ على شروط الهوية والملامح والشعارات، ولا تنشئ الصورة أو تدّعِ توليدها. أعد البرومبت فقط:\n\n' : 'Write a polished prompt for an image-generation tool from the following brief. Preserve all identity, facial-feature and logo constraints. Do not generate an image or claim to have done so. Return only the prompt:\n\n') + text;
+// Each entry belongs to one target workflow; preview images are independent of that target.
+export function promptText(item: ImagePrompt, language: 'ar' | 'en', _platform: PromptPlatform) {
+  return language === 'ar' ? item.promptAr : item.promptEn;
 }
 export function selectImagePrompts(category: string, query: string, sort: string, platform: PromptPlatform = 'all') {
   const q = query.trim().toLocaleLowerCase();

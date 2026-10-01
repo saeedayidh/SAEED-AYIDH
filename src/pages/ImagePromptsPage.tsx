@@ -28,6 +28,7 @@ export function ImagePromptsPage() {
     <div className="mb-7 flex gap-2 overflow-x-auto pb-3" aria-label={isArabic ? 'اختيار المنصة' : 'Choose platform'}>
       {promptPlatforms.map(item => <button type="button" key={item.id} aria-pressed={platform === item.id} onClick={() => setPlatform(item.id)} className={`shrink-0 rounded-2xl border px-5 py-3 text-sm font-bold transition ${platform === item.id ? 'border-[#D51F2B] bg-[#D51F2B] text-white' : 'border-white/10 bg-[#111] text-gray-400 hover:text-white'}`}>{isArabic ? item.ar : item.en}</button>)}
     </div>
+    <p className="mb-5 text-xs leading-6 text-gray-500">{isArabic ? 'كل مجموعة لها صياغة مخصصة للمنصة المستهدفة. صور المعاينة مولّدة هنا، وليست نتائج اختبار على كل منصة.' : 'Each group is written for its target platform. Previews were generated here and are not test results from every platform.'}</p>
     {platform === 'claude' && <p className="mb-6 rounded-2xl border border-white/10 bg-[#111] p-4 text-xs leading-7 text-gray-400">{isArabic ? 'كلود يساعدك على إعداد وصياغة البرومبت. بعد ذلك استخدم النص مع أداة توليد صور؛ هذه البرومبتات لا تفترض أن كلود يولّد صورًا فوتوغرافية مباشرة.' : 'Claude helps prepare and refine the prompt. Use the result with an image-generation tool; these prompts do not assume native photo generation in Claude.'}</p>}
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6">
       <div className="flex flex-wrap gap-3">
