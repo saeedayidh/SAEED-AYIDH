@@ -1,0 +1,110 @@
+[
+  {
+    "id": "ember-portrait",
+    "title": "بورتريه وهج أحمر",
+    "titleEn": "Ember Portrait",
+    "category": "portrait",
+    "featured": true,
+    "image": "/assets/prompts/ember-portrait.webp",
+    "description": "إضاءة جانبية دافئة وخلفية فحمية بتفاصيل واقعية.",
+    "descriptionEn": "Warm side lighting, a charcoal background and realistic detail.",
+    "promptAr": "أنشئ بورتريه سينمائي عمودي لشخص بالغ، من الصدر إلى أعلى، بزاوية ثلاثة أرباع ونظرة هادئة. استخدم إضاءة رئيسية ناعمة ودافئة من الجانب، مع ضوء حافة أحمر خافت وخلفية فحمية بسيطة. اجعل البشرة طبيعية بتفاصيل واقعية، والملابس داكنة دون شعارات، والعمق ضحلًا بأسلوب عدسة 85 مم. التكوين متوازن، والتباين غني دون حرق الإضاءة، والنسبة 4:5. لا تضف نصوصًا أو علامات مائية. إذا أرفقت صورة مرجعية، حافظ على ملامح الشخص وهويته كما هي دون إعادة تشكيل وجهه أو تعديل شعاره.",
+    "promptEn": "Create a vertical cinematic chest-up portrait of an adult, in a three-quarter pose with a calm expression. Use a soft warm key light from one side, a restrained red rim light, and a minimal charcoal background. Keep natural skin texture and believable facial proportions, dark clothing without logos, shallow depth of field and an 85mm editorial lens aesthetic. Balance the composition with rich contrast and protected highlights. Aspect ratio 4:5. No text or watermarks. If a reference photo is attached, preserve the person's exact facial identity and features without reshaping their face or modifying any supplied logo.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "grok",
+      "claude"
+    ]
+  },
+  {
+    "id": "rain-traveler",
+    "title": "مسافر تحت المطر",
+    "titleEn": "Rain Traveler",
+    "category": "scenes",
+    "featured": true,
+    "image": "/assets/prompts/rain-traveler.webp",
+    "description": "مشهد قصصي في مدينة ليلية، مع انعكاسات المطر وإضاءة هادئة.",
+    "descriptionEn": "A storytelling scene with night streets, rain reflections and quiet light.",
+    "promptAr": "صمّم مشهدًا سينمائيًا لمسافر بالغ يرتدي معطفًا داكنًا ويحمل حقيبة صغيرة، واقفًا من الخلف عند تقاطع شارع في مدينة خيالية بعد المطر. أضف انعكاسات كهرمانية وزرقاء على الرصيف، ضبابًا خفيفًا بين المباني، وتفاصيل معمارية واقعية دون أسماء متاجر أو شعارات. ضع الشخصية في الثلث السفلي واترك مساحة للمدينة والسماء. منظور عدسة 35 مم، عمق واقعي، وإحساس بالهدوء والترقب. نسبة 4:5، دون نصوص أو علامات مائية، ودون تقليد شخصية معروفة.",
+    "promptEn": "Create a cinematic scene of an adult traveler in a dark coat carrying a small bag, seen from behind at a street intersection in a fictional city after rain. Add amber and cool blue pavement reflections, a light veil of fog between buildings, and believable architecture without readable store names or logos. Place the traveler in the lower third and leave room for the city and sky. Use a 35mm lens perspective, convincing depth, and a quiet anticipatory mood. Vertical 4:5 composition. No text, watermarks or recognizable existing characters.",
+    "platforms": [
+      "chatgpt",
+      "grok",
+      "other",
+      "claude"
+    ]
+  },
+  {
+    "id": "botanical-vector",
+    "title": "حديقة مرسومة",
+    "titleEn": "Botanical Illustration",
+    "category": "art",
+    "featured": false,
+    "image": "/assets/prompts/botanical-vector.webp",
+    "description": "رسم نباتي أنيق بخطوط واضحة وألوان محدودة.",
+    "descriptionEn": "An elegant botanical illustration with clean lines and a restrained palette.",
+    "promptAr": "أنشئ رسمًا تحريريًا نباتيًا لفرع زيتون وأوراق عريضة وزهرة بيضاء في مزهرية خزفية بسيطة. استخدم أسلوب فيكتور أنيق بحواف واضحة، ومساحات لونية مسطحة مع تدرجات خفيفة جدًا، ولوحة ألوان من أخضر داكن وعاجي وذهبي مطفأ. الخلفية ورقية بلون عاجي مع نسيج خفيف، والتكوين عمودي متوازن بمساحة فارغة حول العناصر. اجعل الأشكال طبيعية وغير مزدحمة، والتفاصيل دقيقة دون مظهر فوتوغرافي. نسبة 4:5، دون نص أو شعارات أو علامات مائية.",
+    "promptEn": "Create an editorial botanical illustration of an olive branch, broad leaves and a white flower arranged in a simple ceramic vase. Use a refined vector-inspired style with crisp edges, broad flat color areas and very subtle gradients. Limit the palette to deep green, ivory and muted gold. Add a faint paper texture to the ivory background, with a balanced vertical composition and generous negative space. Keep organic shapes uncluttered and details precise without a photographic appearance. Aspect ratio 4:5. No text, logos or watermarks.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "other",
+      "claude"
+    ]
+  },
+  {
+    "id": "glass-dunes",
+    "title": "كرة زجاجية فوق الرمال",
+    "titleEn": "Glass over Dunes",
+    "category": "concepts",
+    "featured": true,
+    "image": "/assets/prompts/glass-dunes.webp",
+    "description": "مفهوم بصري يجمع الزجاج الشفاف والكثبان وقت الغروب.",
+    "descriptionEn": "A visual concept combining transparent glass and sunset dunes.",
+    "promptAr": "أنشئ مشهدًا مفاهيميًا سرياليًا لكرة زجاجية شفافة معلقة قليلًا فوق كثيب رملي ناعم وقت الغروب. اجعل الكرة تعكس السماء والكثبان بانكسارات واقعية، وأضف ظلًا ناعمًا أسفلها دون أي دعامة ظاهرة. لوحة ألوان رملية دافئة مع سماء هادئة، وإضاءة منخفضة من الأفق. ضع الكرة في وسط التكوين مع مساحات واسعة ونظيفة حولها، واظهر تفاصيل الزجاج والرمال دون مبالغة. نسبة 4:5، جودة فوتوغرافية واقعية، دون بشر أو نصوص أو شعارات.",
+    "promptEn": "Create a surreal conceptual scene of a clear glass sphere hovering slightly above a smooth sand dune at sunset. Let the sphere reflect the sky and dunes through believable refraction, with a soft contact shadow beneath it and no visible support. Use a warm sandy palette, a quiet sky and low horizon light. Center the sphere with expansive uncluttered space around it, showing convincing glass and sand detail without excessive effects. Vertical 4:5 composition, photographic realism. No people, text, logos or watermarks.",
+    "platforms": [
+      "gemini",
+      "grok",
+      "other",
+      "claude"
+    ]
+  },
+  {
+    "id": "miniature-courtyard",
+    "title": "فناء مصغّر ثلاثي الأبعاد",
+    "titleEn": "Miniature Courtyard",
+    "category": "3d",
+    "featured": false,
+    "image": "/assets/prompts/miniature-courtyard.webp",
+    "description": "مجسّم معماري صغير بمواد واضحة وإضاءة استوديو.",
+    "descriptionEn": "A miniature architectural model with tangible materials and studio lighting.",
+    "promptAr": "صمّم مجسّمًا ثلاثي الأبعاد مصغّرًا لفناء عربي هادئ، فيه أقواس حجرية بلون رملي وباب خشبي ونبتتان ونوافير صغيرة، موضوعًا على قاعدة مربعة مستقلة. منظور إيزومتري من أعلى بزاوية 45 درجة، مواد خزفية وخشبية واقعية، وحواف نظيفة مع تفاصيل معمارية دقيقة. استخدم إضاءة استوديو ناعمة وظلالًا لطيفة وخلفية فحمية موحدة. اجعل المجسم كاملًا داخل الإطار ولا تقص القاعدة، والنسبة 4:5. دون نصوص أو شعارات أو علامات مائية.",
+    "promptEn": "Design a miniature 3D model of a quiet Arabian courtyard with sand-colored stone arches, a wooden door, two plants and a small fountain, all standing on a separate square display base. Use a 45-degree elevated isometric viewpoint, believable ceramic and wood materials, clean edges and carefully scaled architectural detail. Add soft studio lighting, gentle shadows and a uniform charcoal background. Keep the entire model and base within the frame. Vertical 4:5 aspect ratio. No text, logos or watermarks.",
+    "platforms": [
+      "chatgpt",
+      "gemini",
+      "other",
+      "claude"
+    ]
+  },
+  {
+    "id": "monochrome-street",
+    "title": "شارع أبيض وأسود",
+    "titleEn": "Monochrome Street",
+    "category": "mono",
+    "featured": false,
+    "image": "/assets/prompts/monochrome-street.webp",
+    "description": "تصوير معماري أحادي اللون بخطوط وظلال قوية.",
+    "descriptionEn": "Monochrome architectural photography with strong lines and shadows.",
+    "promptAr": "أنشئ صورة شارع معماري بالأبيض والأسود، لأقواس وممر حجري طويل مع ضوء شمس مائل يرسم ظلالًا هندسية واضحة. استخدم درجات رمادية غنية من الأسود العميق إلى الأبيض النظيف مع الحفاظ على تفاصيل الحجر. منظور من مستوى العين وعدسة 50 مم، وتكوين يعتمد على خطوط تقود العين إلى نهاية الممر. أضف حبيبات فيلم خفيفة جدًا دون إفساد الحدة. النسبة 4:5. دون بشر أو سيارات أو نصوص أو شعارات أو علامات مائية.",
+    "promptEn": "Create a black-and-white architectural street photograph of stone arches and a long passage, with angled sunlight casting clear geometric shadows. Use rich gray tones from deep black to clean white while retaining stone detail. Shoot from eye level with a 50mm lens aesthetic and leading lines drawing the eye toward the end of the passage. Add very fine film grain without sacrificing sharpness. Vertical 4:5 composition. No people, vehicles, text, logos or watermarks.",
+    "platforms": [
+      "chatgpt",
+      "grok",
+      "other",
+      "claude"
+    ]
+  }
+]

@@ -1,3 +1,4 @@
+import{ImagePromptsResource}from'./ImagePromptsResource';
 import React,{useCallback,useEffect,useMemo,useRef,useState}from'react';
 import{Link,useNavigate}from'react-router-dom';
 import{Search,ChevronLeft}from'lucide-react';
@@ -83,6 +84,7 @@ export const ResourcesSection:React.FC=()=>{
     </div>
     {filterFeatured.length?<FeaturedFilterCarousel items={filterFeatured} isArabic={isArabic} onSelect={item=>navigate(`/resources/filters#featured-filter-${item.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا فلاتر مطابقة.':'No matching filters found.'}</div>}
    </div>
+   <ImagePromptsResource/>
   </div>
  </section>
 };
