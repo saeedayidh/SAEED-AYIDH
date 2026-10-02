@@ -145,7 +145,7 @@ export const ContentFieldDetailPage: React.FC = () => {
 
                 <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-5">
                   <h3 className="text-lg font-bold text-white">{isArabic?'أعمالي':'My Works'}</h3>
-                  <div dir="ltr" className="overflow-x-auto scroll-smooth snap-x snap-mandatory touch-pan-x [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  <div dir="ltr" className="overflow-x-auto scroll-smooth snap-x snap-mandatory  [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     <div className="flex w-max gap-5 pb-2">
                       {musicWorks.map(work=>(
                         <div key={work.id} dir={isArabic?'rtl':'ltr'} className="w-[290px] sm:w-[360px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d]">
@@ -178,7 +178,7 @@ export const ContentFieldDetailPage: React.FC = () => {
                 </div>
                 <div className="p-6 rounded-2xl bg-[#121212] border border-white/10 space-y-5">
                   <h3 className="text-lg font-bold text-white">{isArabic?'قصصي':'My Stories'}</h3>
-                  <div dir="ltr" className="overflow-x-auto scroll-smooth snap-x snap-mandatory touch-pan-x [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  <div dir="ltr" className="overflow-x-auto scroll-smooth snap-x snap-mandatory  [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     <div className="flex w-max gap-5 pb-2">
                       {storyWorks.map(work=>(
                         <div key={work.id} dir={isArabic?'rtl':'ltr'} className="w-[290px] sm:w-[360px] shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 bg-[#0d0d0d]">

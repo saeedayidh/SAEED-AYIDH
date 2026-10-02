@@ -1,3 +1,4 @@
+import {useVisibleAutoplay} from '../hooks/useVisibleAutoplay';
 import React, { useEffect, useRef, useState } from 'react';
 import type { WatchFaceItem } from '../data/watchFacesData';
 
@@ -16,13 +17,7 @@ export function WatchFaceCarousel({ faces, isArabic, onSelect, initialId }: Prop
     setActive(Math.max(0, faces.findIndex(face => face.id === initialId)));
   }, [faces, initialId]);
   const move = (step: number) => setActive(index => (index + step + faces.length) % faces.length);
-  useEffect(() => {
-    if (faces.length < 2) return;
-    const timer = window.setInterval(() => {
-      if (startX.current === null) move(1);
-    }, 4600);
-    return () => window.clearInterval(timer);
-  }, [faces.length]);
+  const autoplay = useVisibleAutoplay(() => { if (startX.current === null) move(1); }, faces.length > 1);
   const endDrag = (x: number) => {
     if (startX.current === null) return;
     const delta = x - startX.current;
@@ -35,7 +30,7 @@ export function WatchFaceCarousel({ faces, isArabic, onSelect, initialId }: Prop
   const offsets = faces.length === 1 ? [0] : faces.length === 2 ? [0, 1] :
     faces.length === 3 ? [-1, 0, 1] : faces.length === 4 ? [-1, 0, 1, 2] : [-2, -1, 0, 1, 2];
   return <div className="mx-auto w-full max-w-[700px]" dir="ltr">
-    <div className="relative h-[240px] w-full touch-pan-y select-none overflow-hidden sm:h-[330px]"
+    <div ref={autoplay} className="relative h-[240px] w-full touch-pan-y select-none overflow-hidden sm:h-[330px]"
       onPointerDown={event => { startX.current = event.clientX; dragged.current = false; }}
       onPointerUp={event => endDrag(event.clientX)}
       onPointerCancel={() => { startX.current = null; }}>

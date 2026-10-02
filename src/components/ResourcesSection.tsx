@@ -1,3 +1,4 @@
+import {useVisibleAutoplay} from '../hooks/useVisibleAutoplay';
 import{ExtraResourcesSection}from'./ExtraResourcesSection';
 import{ImagePromptsResource}from'./ImagePromptsResource';
 import React,{useCallback,useEffect,useMemo,useRef,useState}from'react';
@@ -29,8 +30,9 @@ export const ResourcesSection:React.FC=()=>{
   setActive(v=>dir==='next'?(v+1)%featured.length:(v-1+featured.length)%featured.length);
  },[featured.length]);
  useEffect(()=>{setActive(0)},[q]);
- useEffect(()=>{if(featured.length<2)return;const t=window.setInterval(()=>move('next'),4600);return()=>window.clearInterval(t)},[featured.length,move]);
- const cards=featured.length?[-2,-1,0,1,2].map(offset=>({offset,w:featured[(active+offset+featured.length)%featured.length]})):[];
+ const autoplay=useVisibleAutoplay(()=>{if(startX===null)move('next')},featured.length>1);
+ const offsets=featured.length===1?[0]:featured.length===2?[0,1]:featured.length===3?[-1,0,1]:featured.length===4?[-1,0,1,2]:[-2,-1,0,1,2];
+ const cards=featured.length?offsets.map(offset=>({offset,w:featured[(active+offset+featured.length)%featured.length]})):[];
  const watchFeatured=useMemo(()=>watchFaces.filter(x=>!watchQ.trim()||x.title.includes(watchQ.trim())||x.englishTitle.toLowerCase().includes(watchQ.trim().toLowerCase())||String(x.id).includes(watchQ.trim())),[watchQ]);
  const filterFeatured=useMemo(()=>featuredFilters.filter(x=>`${x.title} ${x.titleEn}`.toLowerCase().includes(filterQ.trim().toLowerCase())),[filterQ]);
  const endDrag=(x:number)=>{if(startX===null)return;const d=x-startX;dragged.current=Math.abs(d)>20;if(d<-35)move('next');else if(d>35)move('prev');setStartX(null)};
@@ -55,7 +57,7 @@ export const ResourcesSection:React.FC=()=>{
      <Link to="/resources/wallpapers" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-xl border border-[#D51F2B]/45 h-10 px-3 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-4 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
     </div>
    </div>
-   {cards.length?<div className="relative mx-auto h-[330px] w-full max-w-[650px] touch-pan-y select-none overflow-hidden sm:h-[410px]"
+   {cards.length?<div ref={autoplay} className="relative mx-auto h-[330px] w-full max-w-[650px] touch-pan-y select-none overflow-hidden sm:h-[410px]"
     onPointerDown={e=>{dragged.current=false;setStartX(e.clientX)}} onPointerUp={e=>endDrag(e.clientX)} onPointerCancel={()=>setStartX(null)}>
     <div key={animKey} className={`absolute inset-0 ${direction==='next'?'resource-carousel-next':'resource-carousel-prev'}`}>
     {cards.map(({offset,w})=>{

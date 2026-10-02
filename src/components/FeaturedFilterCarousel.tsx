@@ -1,3 +1,4 @@
+import {useVisibleAutoplay} from '../hooks/useVisibleAutoplay';
 import React, { useEffect, useRef, useState } from 'react';
 import type { FeaturedFilter } from '../data/featuredFiltersData';
 import { FeaturedFilterPreview } from './FeaturedFilterPreview';
@@ -7,14 +8,10 @@ export function FeaturedFilterCarousel({ items, isArabic, onSelect }: { items: F
   const start = useRef<number | null>(null);
   const dragged = useRef(false);
   useEffect(() => setActive(0), [items]);
-  useEffect(() => {
-    if (items.length < 2) return;
-    const timer = window.setInterval(() => { if (start.current === null) setActive(v => (v + 1) % items.length); }, 4600);
-    return () => window.clearInterval(timer);
-  }, [items.length]);
+  const autoplay = useVisibleAutoplay(() => { if (start.current === null) setActive(v => (v + 1) % items.length); }, items.length > 1);
   if (!items.length) return null;
   const offsets = items.length < 3 ? [0] : [-2, -1, 0, 1, 2];
-  return <div className="relative mx-auto h-[265px] w-full max-w-[750px] touch-pan-y select-none overflow-hidden sm:h-[345px]" dir="ltr"
+  return <div ref={autoplay} className="relative mx-auto h-[265px] w-full max-w-[750px] touch-pan-y select-none overflow-hidden sm:h-[345px]" dir="ltr"
     onPointerDown={event => { start.current = event.clientX; dragged.current = false; }}
     onPointerUp={event => { if (start.current === null) return; const delta = event.clientX - start.current; dragged.current = Math.abs(delta) > 25; if (delta < -35) setActive(v => (v + 1) % items.length); if (delta > 35) setActive(v => (v - 1 + items.length) % items.length); start.current = null; }}
     onPointerCancel={() => { start.current = null; }}>
