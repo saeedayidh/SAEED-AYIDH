@@ -71,14 +71,9 @@ export const ResourcesSection:React.FC=()=>{
     </div>
    </div>:<div className="grid h-[260px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا خلفيات مطابقة.':'No matching wallpapers found.'}</div>}
 
-   <div className="mt-14 border-t border-white/5 pt-12">
-    <Link to="/resources/watch-faces" className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'واجهة الساعة':'Watch Face'}</Link>
-    <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
-     <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/10 bg-[#111] h-10 px-3 focus-within:border-[#D51F2B]/60 sm:px-4"><Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={watchQ} onChange={e=>setWatchQ(e.target.value)} placeholder={isArabic?'ابحث عن واجهة ساعة...':'Search watch faces...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/></label>
-     <Link to="/resources/watch-faces" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-xl border border-[#D51F2B]/45 h-10 px-3 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-4 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
-    </div>
-    {watchFeatured.length?<WatchFaceCarousel faces={watchFeatured} isArabic={isArabic} onSelect={w=>navigate(`/resources/watch-faces#watch-face-${w.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا واجهات مطابقة.':'No matching watch faces found.'}</div>}
-   </div>
+   <ExtraResourcesSection ids={['ipad-wallpapers','desktop-wallpapers','profile-pictures']}/>
+   <ImagePromptsResource/>
+   <ExtraResourcesSection ids={['video-prompts']}/>
    <div className="mt-14 border-t border-white/5 pt-12">
     <Link to="/resources/filters" className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'فلتر مميز':'Featured Filters'}</Link>
     <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
@@ -87,8 +82,15 @@ export const ResourcesSection:React.FC=()=>{
     </div>
     {filterFeatured.length?<FeaturedFilterCarousel items={filterFeatured} isArabic={isArabic} onSelect={item=>navigate(`/resources/filters#featured-filter-${item.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا فلاتر مطابقة.':'No matching filters found.'}</div>}
    </div>
-   <ImagePromptsResource/>
-   <ExtraResourcesSection/>
+   <div className="mt-14 border-t border-white/5 pt-12">
+    <Link to="/resources/watch-faces" className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'واجهة الساعة':'Watch Face'}</Link>
+    <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
+     <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/10 bg-[#111] h-10 px-3 focus-within:border-[#D51F2B]/60 sm:px-4"><Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={watchQ} onChange={e=>setWatchQ(e.target.value)} placeholder={isArabic?'ابحث عن واجهة ساعة...':'Search watch faces...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/></label>
+     <Link to="/resources/watch-faces" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-xl border border-[#D51F2B]/45 h-10 px-3 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-4 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
+    </div>
+    {watchFeatured.length?<WatchFaceCarousel faces={watchFeatured} isArabic={isArabic} onSelect={w=>navigate(`/resources/watch-faces#watch-face-${w.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا واجهات مطابقة.':'No matching watch faces found.'}</div>}
+   </div>
+   <ExtraResourcesSection ids={['color-palettes','gradients','font-packs','app-icons','social-sizes']}/>
   </div>
  </section>
 };
