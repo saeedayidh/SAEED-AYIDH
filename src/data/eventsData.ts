@@ -1,7 +1,8 @@
+import photoContest from './photoContest.json' with { type: 'json' };
 export type SaeedEvent = {
   id: string; title: string; titleEn: string; description: string; descriptionEn: string;
   image: string; start: string; end: string; platform: string; location: string; locationEn: string;
-  registration: 'open' | 'closed'; registrationEnd?: string; about: string; aboutEn: string; instructions: string; instructionsEn: string;
+  registration: 'open' | 'closed'; registrationStart?: string; registrationEnd?: string; about: string; aboutEn: string; instructions: string; instructionsEn: string;
   prizes: string; prizesEn: string; important: string; importantEn: string; registrationUrl: string; eventUrl: string;
   demo?: boolean; enabled?: boolean;
 };
@@ -16,8 +17,9 @@ export const demoEvents: SaeedEvent[] = [{
   important: 'الموعد والمدة والمنصة بيانات تجريبية. جميع الأوقات بتوقيت السعودية. لا توجد صفحة تسجيل أو بث حقيقي لهذه التجربة.', importantEn: 'Date, duration and platform are test data. All times use Saudi time. No real registration page or stream exists for this demo.',
   registrationUrl: '', eventUrl: '', demo: true, enabled: true,
 }];
+export const defaultEvents: SaeedEvent[] = [photoContest as SaeedEvent];
 export function normalizeEvents(value: unknown): SaeedEvent[] {
-  const source = Array.isArray(value) ? value : demoEvents;
+  const source = Array.isArray(value) ? value : defaultEvents;
   const seen = new Set<string>();
   return source.filter((item): item is SaeedEvent => !!item && typeof item === 'object' && /^[A-Za-z0-9_-]{1,80}$/.test(item.id) && !seen.has(item.id) && (seen.add(item.id), true) && item.enabled !== false && typeof item.title === 'string' && Number.isFinite(Date.parse(item.start)) && Date.parse(item.end) > Date.parse(item.start)).sort((a,b) => Date.parse(a.start) - Date.parse(b.start));
 }
