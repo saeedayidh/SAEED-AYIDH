@@ -2,12 +2,12 @@ Licensed stock references for scene and motion. Not AI-generated results of the 
 0.mp4: https://www.pexels.com/video/5319070/
 1.mp4: https://www.pexels.com/video/18928752/
 2.mp4: https://www.pexels.com/video/6878204/
-3.mp4: https://www.pexels.com/video/8891860/
 4.mp4: https://www.pexels.com/video/11943651/
-5.mp4: https://www.pexels.com/video/31211441/
 6.mp4: https://www.pexels.com/video/7656533/
-7.mp4: https://www.pexels.com/video/5124235/
 8.mp4: https://www.pexels.com/video/10325661/
-9.mp4: https://www.pexels.com/video/14072443/
 10.mp4: https://www.pexels.com/video/7063371/
 11.mp4: https://www.pexels.com/video/34742093/
+male-outdoor.mp4: https://www.pexels.com/video/5319070/ (male reference reused; not a generated prompt result)
+male-camera.mp4: https://www.pexels.com/video/7656533/ (male reference reused; not a generated prompt result)
+male-reading.mp4: https://www.pexels.com/video/7063371/ (male reference reused; not a generated prompt result)
+male-speaking.mp4: https://www.pexels.com/video/34742093/ (male reference reused; not a generated prompt result)
