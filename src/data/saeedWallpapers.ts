@@ -61,7 +61,12 @@ export const saeedMobileWallpapers = [
     "image": "/assets/saeed-wallpapers/mobile-09.jpg",
     "width": 711,
     "height": 1536
-  }
+  },
+  {"id":10,"title":"خلفية سعيد 10","image":"/assets/saeed-wallpapers/mobile-10.jpg","width":864,"height":1536}
+];
+
+export const saeedIpadWallpapers = [
+  {"id":1,"title":"خلفية سعيد 01","image":"/assets/saeed-wallpapers/ipad-01.jpg","width":1536,"height":864}
 ];
 
 export const saeedDesktopWallpapers = [

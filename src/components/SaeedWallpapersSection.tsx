@@ -3,8 +3,8 @@ import{Link}from'react-router-dom';
 import{Search,ChevronLeft}from'lucide-react';
 import{useLanguage}from'../context/LanguageContext';
 import{useVisibleAutoplay}from'../hooks/useVisibleAutoplay';
-import{saeedMobileWallpapers,saeedDesktopWallpapers}from'../data/saeedWallpapers';
-const WallpaperCollection=({desktop=false}:{desktop?:boolean})=>{const{isArabic}=useLanguage();const source=desktop?saeedDesktopWallpapers:saeedMobileWallpapers;const url=desktop?'/saeed-wallpapers/desktop':'/saeed-wallpapers/mobile';
+import{saeedMobileWallpapers,saeedDesktopWallpapers,saeedIpadWallpapers}from'../data/saeedWallpapers';
+const WallpaperCollection=({device='mobile'}:{device?:'mobile'|'desktop'|'ipad'})=>{const{isArabic}=useLanguage();const desktop=device!=='mobile';const ipad=device==='ipad';const source=ipad?saeedIpadWallpapers:desktop?saeedDesktopWallpapers:saeedMobileWallpapers;const url=`/saeed-wallpapers/${device}`;
  const[q,setQ]=useState('');
  const[active,setActive]=useState(0);
  const[startX,setStartX]=useState<number|null>(null);
@@ -36,7 +36,7 @@ const WallpaperCollection=({desktop=false}:{desktop?:boolean})=>{const{isArabic}
     <h2 className="text-3xl font-black text-white sm:text-5xl">{isArabic?'خلفية سعيد':'Saeed Wallpapers'}</h2>
    </div>}
    <div className="mb-7">
-    <Link to={url} className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?(desktop?'خلفية كمبيوتر':'خلفية جوال'):(desktop?'Desktop Wallpaper':'Mobile Wallpaper')}</Link>
+    <Link to={url} className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?(ipad?'خلفية ايباد':desktop?'خلفية كمبيوتر':'خلفية جوال'):(ipad?'iPad Wallpaper':desktop?'Desktop Wallpaper':'Mobile Wallpaper')}</Link>
     <div className="flex w-full items-stretch gap-2 sm:gap-3">
      <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/10 bg-[#111] h-10 px-3 focus-within:border-[#D51F2B]/60 sm:px-4">
       <Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder={isArabic?'ابحث عن خلفية...':'Search wallpapers...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/>
@@ -59,4 +59,4 @@ const WallpaperCollection=({desktop=false}:{desktop?:boolean})=>{const{isArabic}
    </div>:<div className="grid h-[260px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا خلفيات مطابقة.':'No matching wallpapers found.'}</div>}
 
 </div></div>;};
-export const SaeedWallpapersSection=()=>{const{isArabic}=useLanguage();return <section id="saeed-wallpapers-section" className="relative overflow-hidden border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}><WallpaperCollection/><WallpaperCollection desktop/></section>;};
+export const SaeedWallpapersSection=()=>{const{isArabic}=useLanguage();return <section id="saeed-wallpapers-section" className="relative overflow-hidden border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}><WallpaperCollection/><WallpaperCollection device="ipad"/><WallpaperCollection device="desktop"/></section>;};

@@ -2,17 +2,17 @@ import React,{useState}from'react';
 import{Link,useParams}from'react-router-dom';
 import{Search,Download,X}from'lucide-react';
 import{useLanguage}from'../context/LanguageContext';
-import{saeedMobileWallpapers,saeedDesktopWallpapers}from'../data/saeedWallpapers';
+import{saeedMobileWallpapers,saeedDesktopWallpapers,saeedIpadWallpapers}from'../data/saeedWallpapers';
 import{FavoriteButton}from'../components/FavoriteButton';
 import{ShareButton}from'../components/ShareButton';
 export const SaeedWallpapersPage=()=>{
- const{isArabic}=useLanguage();const{device}=useParams();const desktop=device==='desktop';
+ const{isArabic}=useLanguage();const{device}=useParams();const desktop=device!=='mobile';const ipad=device==='ipad';
  const[q,setQ]=useState('');const[selected,setSelected]=useState<string|null>(null);
- const items=(desktop?saeedDesktopWallpapers:saeedMobileWallpapers).filter(w=>w.title.includes(q.trim()));
+ const items=(ipad?saeedIpadWallpapers:desktop?saeedDesktopWallpapers:saeedMobileWallpapers).filter(w=>w.title.includes(q.trim()));
  return <div className="min-h-screen bg-[#080808] pb-24 pt-28 text-white" dir={isArabic?'rtl':'ltr'}><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
  <Link to="/#saeed-wallpapers-section" className="mb-6 inline-flex rounded-xl border border-[#D51F2B]/40 px-4 py-2.5 text-sm font-bold text-[#ED1C2E]">{isArabic?'الرجوع':'Back'}</Link>
- <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'خلفية سعيد':'Saeed Wallpapers'}</p><h1 className="mb-7 text-4xl font-black sm:text-6xl">{isArabic?(desktop?'خلفية كمبيوتر':'خلفية جوال'):(desktop?'Desktop Wallpaper':'Mobile Wallpaper')}</h1>
- <div className="mb-6 flex gap-2">{['mobile','desktop'].map(d=><Link key={d} to={`/saeed-wallpapers/${d}`} className={`rounded-xl border px-4 py-2 text-sm font-bold ${device===d?'border-[#D51F2B] bg-[#D51F2B]':'border-white/10 bg-[#111]'}`}>{isArabic?(d==='mobile'?'خلفية جوال':'خلفية كمبيوتر'):(d==='mobile'?'Mobile':'Desktop')}</Link>)}</div>
+ <p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'خلفية سعيد':'Saeed Wallpapers'}</p><h1 className="mb-7 text-4xl font-black sm:text-6xl">{isArabic?(ipad?'خلفية ايباد':desktop?'خلفية كمبيوتر':'خلفية جوال'):(ipad?'iPad Wallpaper':desktop?'Desktop Wallpaper':'Mobile Wallpaper')}</h1>
+ <div className="mb-6 flex flex-wrap gap-2">{['mobile','ipad','desktop'].map(d=><Link key={d} to={`/saeed-wallpapers/${d}`} className={`rounded-xl border px-4 py-2 text-sm font-bold ${device===d?'border-[#D51F2B] bg-[#D51F2B]':'border-white/10 bg-[#111]'}`}>{isArabic?(d==='mobile'?'خلفية جوال':d==='ipad'?'خلفية ايباد':'خلفية كمبيوتر'):(d==='mobile'?'Mobile':d==='ipad'?'iPad':'Desktop')}</Link>)}</div>
  {<label className="mb-9 flex items-center gap-3 rounded-xl border border-white/10 bg-[#111] px-4 py-3"><Search className="h-4 w-4 text-gray-500"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder={isArabic?'ابحث عن خلفية...':'Search wallpapers...'} className="min-w-0 w-full bg-transparent text-sm outline-none"/></label>}
  {items.length?<div className={`grid gap-4 ${desktop?'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3':'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'}`}>{items.map(w=><div key={w.id} id={`saeed-wallpaper-${w.id}`}><div className={`relative ${desktop?'aspect-video':'aspect-[9/16]'} overflow-hidden rounded-[22px] border border-white/10 bg-[#111]`}>
  <button onClick={()=>setSelected(w.image)} className="absolute inset-0 h-full w-full" aria-label={w.title}><img src={w.image} alt={w.title} loading="lazy" className="h-full w-full object-cover"/></button>
