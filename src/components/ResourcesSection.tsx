@@ -73,7 +73,6 @@ export const ResourcesSection:React.FC=()=>{
 
    <ExtraResourcesSection ids={['ipad-wallpapers','desktop-wallpapers','profile-pictures']}/>
    <ImagePromptsResource/>
-   <ExtraResourcesSection ids={['video-prompts']}/>
    <div className="mt-14 border-t border-white/5 pt-12">
     <Link to="/resources/filters" className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'فلتر مميز':'Featured Filters'}</Link>
     <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
