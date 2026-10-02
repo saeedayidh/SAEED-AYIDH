@@ -1,0 +1,1 @@
+Brand SVGs from https://github.com/simple-icons/simple-icons (CC0 collection). Brand names and logos remain trademarks of their respective owners. Follow each brand guideline; this collection does not grant trademark rights or imply endorsement. Original shapes are preserved.

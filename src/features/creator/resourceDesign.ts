@@ -36,10 +36,16 @@ export function resourceSvg(item:ResourceItem,color?:string){
  return`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 1200 900" preserveAspectRatio="none"><defs>${item.kind==='gradient'&&item.variant%2?`<radialGradient id="g" cx="25%" cy="20%" r="100%"><stop stop-color="${c2}"/><stop offset=".45" stop-color="${accent}"/><stop offset="1" stop-color="${c0}"/></radialGradient>`:`<linearGradient id="g" x2="1" y2="1"><stop stop-color="${c0}"/><stop offset=".5" stop-color="${accent}"/><stop offset="1" stop-color="${c2}"/></linearGradient>`}</defs><rect width="1200" height="900" fill="${c0}"/>${art}</svg>`;
 }
 export function textCss(item:ResourceItem){const c=item.colors;return[
- `font-family: sans-serif; font-weight: 900; color: ${c[2]}; letter-spacing: -0.03em;`,
- `font-family: sans-serif; font-weight: 900; background: linear-gradient(120deg, ${c[1]}, ${c[2]}); -webkit-background-clip: text; background-clip: text; color: transparent;`,
- `font-family: sans-serif; font-weight: 900; color: transparent; -webkit-text-stroke: 2px ${c[2]};`,
- `font-family: sans-serif; font-weight: 700; color: ${c[2]}; text-shadow: 0 0 12px ${c[1]}, 0 0 32px ${c[1]};`,
- `font-family: sans-serif; font-weight: 900; color: ${c[2]}; text-shadow: 3px 3px 0 ${c[1]}, 6px 6px 0 ${c[3]};`,
- `font-family: Georgia, serif; font-weight: 400; color: ${c[2]}; line-height: 1.6;`,
- ][item.variant%6];}
+ `font-family: CreatorInter, CreatorCairo, sans-serif; font-weight: 900; color: ${c[2]}; letter-spacing: -0.04em;`,
+ `font-family: CreatorCairo, sans-serif; font-weight: 900; background: linear-gradient(120deg, #E88FB1, #FFD6A5, #A7C5FF); -webkit-background-clip: text; background-clip: text; color: transparent;`,
+ `font-family: CreatorChanga, sans-serif; font-weight: 800; color: transparent; -webkit-text-stroke: 1.2px #eeeeee; letter-spacing: 0.01em;`,
+ `font-family: CreatorCairo, sans-serif; font-weight: 700; color: #fff; text-shadow: 0 0 3px #fff, 0 0 12px #D51F2B, 0 0 24px #D51F2B;`,
+ `font-family: CreatorChanga, sans-serif; font-weight: 900; color: #ffe2bf; text-shadow: 1px 1px 0 #a7653b, 2px 2px 0 #a7653b, 3px 3px 0 #a7653b, 4px 4px 0 #a7653b, 7px 9px 10px #000;`,
+ `font-family: CreatorAmiri, Georgia, serif; font-weight: 400; color: #e9e1d2; line-height: 1.7; font-style: italic;`,
+ `font-family: CreatorInter, CreatorCairo, sans-serif; font-weight: 900; background: linear-gradient(180deg, #fff 15%, #9ba6b6 40%, #eef4ff 50%, #6c7689 75%, #fff 95%); -webkit-background-clip: text; background-clip: text; color: transparent;`,
+ `font-family: CreatorAmiri, serif; font-weight: 700; background: linear-gradient(135deg, #9c7332, #fff0af, #be9349, #fff0af); -webkit-background-clip: text; background-clip: text; color: transparent;`,
+ `font-family: CreatorChanga, sans-serif; font-weight: 900; color: #161616; background: #f0d55c; padding: 0.08em 0.3em; transform: rotate(-3deg); display: inline-block;`,
+ `font-family: CreatorAmiri, Georgia, serif; font-weight: 700; color: #eee7de; border-top: 1px solid #777; border-bottom: 1px solid #777; padding: 0.15em 0; line-height: 1.7;`,
+ `font-family: CreatorInter, CreatorCairo, sans-serif; font-weight: 800; color: #dceeff; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #384b60, 0 5px 18px #000; opacity: .9;`,
+ `font-family: CreatorChanga, sans-serif; font-weight: 900; color: #e96c5f; border: 2px solid #e96c5f; border-radius: 6px; padding: 0.1em 0.35em; transform: rotate(3deg); display: inline-block;`,
+ ][item.variant%12];}

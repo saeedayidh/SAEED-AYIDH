@@ -19,3 +19,9 @@ export async function compressImage(file:File,targetKB:number,maxEdge:number,mim
  throw Error('image_target');
  }finally{bitmap.close();}
 }
+export async function imageToPng(url:string,width:number,height:number){
+ const image=new Image();image.crossOrigin='anonymous';await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=reject;image.src=url});
+ const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;const ctx=canvas.getContext('2d');if(!ctx)throw Error('canvas');
+ const scale=Math.max(width/image.naturalWidth,height/image.naturalHeight);ctx.drawImage(image,(width-image.naturalWidth*scale)/2,(height-image.naturalHeight*scale)/2,image.naturalWidth*scale,image.naturalHeight*scale);
+ return await new Promise<Blob>((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('encode')),'image/png'));
+}
