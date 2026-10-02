@@ -8,8 +8,8 @@ test('Arabic usernames and topic hashtags are usable, links reject unsafe protoc
  const tags=logic.hashtags('تصوير جوال في الدمام');assert.ok(tags.includes('#تصوير_جوال'));assert.ok(tags.includes('#photography'));assert.ok(!tags.includes('#في'));assert.equal(new Set(tags).size,tags.length);
  for(const value of ['javascript:alert(1)','data:text/html,x','https://name:secret@example.com'])assert.throws(()=>logic.validLink(value));assert.equal(logic.validLink('https://instagram.com/name'),'https://instagram.com/name');
 });
-test('all 10 libraries have bilingual usable resources and verified local font assets',async()=>{
- const{catalog,design}=await modules;assert.equal(catalog.extraResources.length,10);
+test('all 9 libraries have bilingual usable resources and verified local font assets',async()=>{
+ const{catalog,design}=await modules;assert.equal(catalog.extraResources.length,9);assert.ok(!catalog.extraResources.some(g=>g.id==='text-styles'));
  const all=catalog.extraResources.flatMap(x=>x.items);assert.equal(new Set(all.map(x=>x.id)).size,all.length);
  for(const group of catalog.extraResources){assert.ok(group.ar&&group.en&&group.items.length);for(const item of group.items){assert.ok(item.ar&&item.en);if(item.font){assert.equal(fs.readFileSync(path.join(__dirname,'../public',item.font)).subarray(0,4).toString('hex'),'00010000');assert.match(fs.readFileSync(path.join(__dirname,'../public',item.license),'utf8'),/SIL OPEN FONT LICENSE/)}for(const asset of [item.image,item.preview,item.video].filter(Boolean)){assert.ok(fs.statSync(path.join(__dirname,'../public',asset)).size>100,asset)}if(['wallpaper','avatar','icons','gradient','template','sizes'].includes(item.kind)){const svg=design.resourceSvg(item);assert.match(svg,/^<svg/);assert.ok(!svg.includes('<script'));}if(item.kind==='prompt'){assert.ok(item.prompt.length>200&&item.promptEn.length>200)}}}
  const prompts=all.filter(x=>x.kind==='prompt');assert.equal(new Set(prompts.map(x=>x.prompt)).size,prompts.length);
