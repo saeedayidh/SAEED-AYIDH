@@ -20,7 +20,7 @@ export function WatchFaceCarousel({ faces, isArabic, onSelect, initialId }: Prop
     if (faces.length < 2) return;
     const timer = window.setInterval(() => {
       if (startX.current === null) move(1);
-    }, 4200);
+    }, 4600);
     return () => window.clearInterval(timer);
   }, [faces.length]);
   const endDrag = (x: number) => {
@@ -48,7 +48,7 @@ export function WatchFaceCarousel({ faces, isArabic, onSelect, initialId }: Prop
           if (offset) move(offset);
           else onSelect(face);
         }} aria-label={`${isArabic ? 'واجهة ساعة' : 'Watch face'} ${face.id}`}
-          className="absolute left-1/2 top-1/2 w-[180px] transition-[transform,opacity] duration-[1050ms] ease-out sm:w-[245px]"
+          className="absolute left-1/2 top-1/2 w-[180px] transition-[transform,opacity] duration-[1100ms] ease-out sm:w-[245px]"
           style={{ zIndex: 10 - distance, opacity: distance === 2 ? .3 : distance === 1 ? .72 : 1,
             transform: `translate3d(calc(-50% + ${offset * 87}px),-50%,0) scale(${distance === 0 ? 1 : distance === 1 ? .78 : .61})` }}>
           <img src={face.image} alt={isArabic ? face.title : face.englishTitle} draggable={false}
