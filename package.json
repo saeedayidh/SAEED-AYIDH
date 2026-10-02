@@ -16,13 +16,18 @@
     "@types/react-dom": "^19.2.5",
     "@vitejs/plugin-react": "^6.1.0",
     "autoprefixer": "^10.5.4",
+    "jszip": "^3.10.2",
     "lucide-react": "^1.34.0",
     "postcss": "^8.5.26",
+    "qrcode": "^1.5.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.2",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
     "vite": "^8.2.2"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.6"
   }
 }
