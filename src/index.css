@@ -138,3 +138,5 @@ html, body, #root {
   overflow-x: clip;
 }
 #root { overflow-anchor: none; }
+/* Prevent delayed images or CMS sections anchoring a fresh visit halfway down. */
+html, body { overflow-anchor: none; }
