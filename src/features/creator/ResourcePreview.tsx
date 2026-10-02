@@ -12,8 +12,19 @@ export function ResourcePreview({item,isArabic,text,color,playable=false}:{item:
  const name=isArabic?item.ar:item.en;
  if(item.kind==='template')return <TemplateThumbnail item={item} isArabic={isArabic}/>;
  if(item.kind==='wallpaper'||item.kind==='avatar')return <img loading="lazy" draggable={false} src={item.preview||item.image} alt={name} className="aspect-[4/3] w-full object-cover"/>;
- if(item.kind==='sizes'){const brand=brandResources.find(x=>x.brand===item.id.split('-')[0]),vertical=(item.height||1)>(item.width||1);return <div className="relative flex aspect-[4/3] flex-col items-center justify-center gap-3 overflow-hidden bg-[#111] p-5"><div className="absolute -right-8 -top-8 h-40 w-40 rounded-full opacity-20 blur-2xl" style={{background:brand?.colors[0]||'#D51F2B'}}/><div className="flex w-full items-center justify-between"><span className="text-xs font-bold text-white">{name.split(' · ')[0]}</span>{brand&&<span className="grid h-10 w-10 place-items-center rounded-xl bg-white"><img src={brand.image} alt="" className="h-6 w-6"/></span>}</div><div className={`relative grid place-items-center rounded-xl border border-[#D51F2B]/40 bg-gradient-to-br from-[#D51F2B]/15 to-[#202028] ${vertical?'h-28 w-20':'h-20 w-40'}`}><span className="text-2xl font-black text-white/25">{item.type==='video'?'▶':'▧'}</span><span className="absolute bottom-2 text-[8px] text-gray-400">{item.width===item.height?'1:1':vertical?(item.width===1080&&item.height===1440?'3:4':'9:16'):'LANDSCAPE'}</span></div><p dir="ltr" className="font-mono text-sm font-bold text-white">{item.width} × {item.height} px</p></div>}
- if(item.kind==='icons')return <div className="flex aspect-[4/3] flex-col items-center justify-center gap-5 bg-[#111]"><span className="grid h-28 w-28 place-items-center rounded-[28px] bg-white shadow-xl"><img src={item.image} alt={name} className="h-16 w-16 object-contain"/></span><p className="text-sm font-bold text-white">{item.en}</p><span className="text-[10px] text-gray-500">SVG · PNG</span></div>;
+ if(item.kind==='sizes'){
+ const brand=brandResources.find(x=>x.brand===item.id.split('-')[0]),ratio=(item.width||1)/(item.height||1),frameWidth=Math.min(150,90*ratio),frameHeight=frameWidth/ratio;
+ return <div className="relative flex aspect-[4/3] flex-col items-center justify-center gap-2 overflow-hidden bg-[#111] p-4">
+ <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full opacity-20 blur-2xl" style={{background:brand?.colors[0]||'#D51F2B'}}/>
+ <span className="relative text-xs font-bold text-white">{name.split(' · ')[0]}</span>
+ <div data-size-frame className="relative grid shrink-0 place-items-center rounded-xl border border-[#D51F2B]/40 bg-gradient-to-br from-[#D51F2B]/15 to-[#202028]" style={{width:frameWidth,height:frameHeight}}>
+ {brand&&<span className="grid h-8 w-8 place-items-center rounded-lg bg-white"><img src={brand.image} alt={brand.en} className="h-5 w-5 object-contain"/></span>}
+ {item.type==='video'&&<span className="absolute right-1 top-1 text-[8px] text-white/60">▶</span>}
+ </div>
+ <p dir="ltr" className="relative font-mono text-xs font-bold text-white">{item.width} × {item.height} px</p>
+ </div>;
+ }
+ if(item.kind==='icons')return <div className="flex aspect-[4/3] flex-col items-center justify-center gap-2 overflow-hidden bg-[#111] p-4"><span className="grid h-[72px] w-[72px] shrink-0 place-items-center rounded-[20px] bg-white shadow-xl"><img src={item.image} alt={name} className="h-10 w-10 object-contain"/></span><p className="text-sm font-bold text-white">{item.en}</p><span className="text-[10px] text-gray-500">SVG · PNG</span></div>;
  if(item.kind==='palette')return <div className="grid aspect-[4/3] grid-cols-4">{item.colors.map(c=><div key={c} style={{background:c}} className="flex items-end justify-center pb-5 text-[10px] text-white [text-shadow:0_1px_3px_black]">{c}</div>)}</div>;
  if(item.kind==='gradient')return <div className="aspect-[4/3]" style={{background:gradientCss(item)}}/>;
  if(item.kind==='font'||item.kind==='text'){
