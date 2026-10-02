@@ -36,7 +36,7 @@
     color: var(--color-text);
     font-family: 'Cairo', 'Readex Pro', 'IBM Plex Sans Arabic', system-ui, sans-serif;
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 }
 
@@ -129,3 +129,12 @@
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
+
+/* Clip root overflow without creating a horizontally scrollable viewport. */
+html, body, #root {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
+}
+#root { overflow-anchor: none; }
