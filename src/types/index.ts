@@ -71,6 +71,15 @@ export interface NewsItem {
   relatedNewsSlugs?: string[];
 }
 
+// Presentation model retained for the inactive legacy tools gallery.
+export interface LegacyToolItem {
+  id: string;
+  titleKey: string;
+  descKey: string;
+  iconName: string;
+  category: 'System' | 'Web' | 'Presets' | 'Graphics' | 'UI/UX' | 'AI';
+}
+
 export interface ToolItem {
   id: string;
   slug: string;

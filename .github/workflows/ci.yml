@@ -25,5 +25,7 @@ jobs:
         run: npm ci
       - name: Syntax check server
         run: node --check server.js && node --check lib/store.js && node --check lib/sessions.js && node --check lib/cms-store.js
+      - name: Type check
+        run: npm run typecheck
       - name: Build
         run: npm run build

@@ -17,6 +17,7 @@ export interface ThemeSettings {
 }
 
 export interface GlobalSettings {
+  descriptionEn?: string;
   websiteName: string;
   nameArabic: string;
   nameEnglish: string;
@@ -96,6 +97,8 @@ export interface SubmissionItem {
 }
 
 export interface PageContent {
+  titleEn?: string;
+  contentEn?: string;
   id: string;
   title: string;
   slug: string;
@@ -195,7 +198,7 @@ export const defaultCMSData: CMSDataStore = {
     { id: 'portfolio', title: 'أعمال سعيد', subtitle: 'مقتطفات استثنائية ونماذج واقعية منفذة للعملاء والمشاريع التجارية.', badge: 'معرض الأعمال والشركاء', isVisible: true, order: 7 }
   ],
   contentFields: siteData.contentFields,
-  news: siteData.news,
+  news: [],
   blog: siteData.blogPosts,
   tools: siteData.tools,
   services: siteData.services,

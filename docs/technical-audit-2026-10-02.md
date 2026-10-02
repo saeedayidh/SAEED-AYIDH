@@ -28,3 +28,16 @@ Baseline: main at 4471d4f4561ec0a169a77bb0d01074a9ddb0b8fc.
 - The production URL returned a Site Unavailable page in the audit environment. This is not evidence that it is unavailable for the owner or that Render deployment failed.
 - A local Chromium download failed in this environment, and the cloud browser could not open localhost. Actual Safari/iPhone gestures, visual layout, navigation histories, FPS, downloads and production behavior remain unverified.
 - Render deployment completion has not been verified. GitHub success alone is insufficient.
+
+## Follow-up: TypeScript errors resolved
+
+All 23 remaining errors were corrected. Full `npm run typecheck` now passes with no errors; the 26 Node tests and production build also pass.
+
+- Legacy gallery tools use their own presentation model instead of weakening the current CMS tool model.
+- Optional English description/page fields are declared in CMS types.
+- Vite CSS import declarations are enabled.
+- Admin collection lookup uses the actual collection keys and handles unknown keys safely.
+- Default CMS news is an empty array rather than referencing a nonexistent property. Existing saved CMS news is preserved by the existing merge flow.
+- CI now runs TypeScript checking before building.
+
+The previously documented production, Render and Safari verification limitations remain unchanged.

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Sliders } from 'lucide-react';
-import { Language, ToolItem } from '../types';
+import { Language, LegacyToolItem } from '../types';
 import { translations } from '../i18n/translations';
 
 interface ToolsSectionProps {
   lang: Language;
-  onSelectTool: (tool: ToolItem) => void;
+  onSelectTool: (tool: LegacyToolItem) => void;
 }
 
 export const ToolsSection: React.FC<ToolsSectionProps> = ({ lang, onSelectTool }) => {
   const t = translations[lang].toolsSection;
 
-  const tools: (ToolItem & { img: string })[] = [
+  const tools: (LegacyToolItem & { img: string })[] = [
     {
       id: 'shortcuts',
       titleKey: t.shortcuts.title,

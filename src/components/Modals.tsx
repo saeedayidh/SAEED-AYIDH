@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, CheckCircle, AlertTriangle, Lightbulb, Send, Download } from 'lucide-react';
-import { Language, ToolItem } from '../types';
+import { Language, LegacyToolItem } from '../types';
 import { translations } from '../i18n/translations';
 
 interface ModalProps {
@@ -323,7 +323,7 @@ export const ContactModal: React.FC<ModalProps> = ({ isOpen, onClose, lang }) =>
 
 // 4. Tool Preview Modal Component
 interface ToolModalProps {
-  tool: ToolItem | null;
+  tool: LegacyToolItem | null;
   onClose: () => void;
   lang: Language;
 }
