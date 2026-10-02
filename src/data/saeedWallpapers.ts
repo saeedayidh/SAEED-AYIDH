@@ -63,3 +63,69 @@ export const saeedMobileWallpapers = [
     "height": 1536
   }
 ];
+
+export const saeedDesktopWallpapers = [
+  {
+    "id": 1,
+    "title": "خلفية سعيد 01",
+    "image": "/assets/saeed-wallpapers/desktop-01.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 2,
+    "title": "خلفية سعيد 02",
+    "image": "/assets/saeed-wallpapers/desktop-02.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 3,
+    "title": "خلفية سعيد 03",
+    "image": "/assets/saeed-wallpapers/desktop-03.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 4,
+    "title": "خلفية سعيد 04",
+    "image": "/assets/saeed-wallpapers/desktop-04.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 5,
+    "title": "خلفية سعيد 05",
+    "image": "/assets/saeed-wallpapers/desktop-05.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 6,
+    "title": "خلفية سعيد 06",
+    "image": "/assets/saeed-wallpapers/desktop-06.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 7,
+    "title": "خلفية سعيد 07",
+    "image": "/assets/saeed-wallpapers/desktop-07.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 8,
+    "title": "خلفية سعيد 08",
+    "image": "/assets/saeed-wallpapers/desktop-08.jpg",
+    "width": 1536,
+    "height": 864
+  },
+  {
+    "id": 9,
+    "title": "خلفية سعيد 09",
+    "image": "/assets/saeed-wallpapers/desktop-09.jpg",
+    "width": 1536,
+    "height": 864
+  }
+];
