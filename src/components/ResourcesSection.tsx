@@ -1,3 +1,4 @@
+import {ResourceCount} from './ResourceCount';
 import {useVisibleAutoplay} from '../hooks/useVisibleAutoplay';
 import{ExtraResourcesSection}from'./ExtraResourcesSection';
 import{ImagePromptsResource}from'./ImagePromptsResource';
@@ -49,7 +50,7 @@ export const ResourcesSection:React.FC=()=>{
     <h2 className="text-3xl font-black text-white sm:text-5xl">{isArabic?'موارد سعيد':'Saeed Resources'}</h2>
    </div>
    <div className="mb-7">
-    <Link to="/resources/wallpapers" className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'خلفية جوال':'Mobile Wallpaper'}</Link>
+    <Link to="/resources/wallpapers" className="relative mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-24 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'خلفية جوال':'Mobile Wallpaper'}<ResourceCount count={wallpapers.length} unit="خلفية" unitEn="wallpapers" isArabic={isArabic}/></Link>
     <div className="flex w-full items-stretch gap-2 sm:gap-3">
      <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/10 bg-[#111] h-10 px-3 focus-within:border-[#D51F2B]/60 sm:px-4">
       <Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={q} onChange={e=>setQ(e.target.value)} placeholder={isArabic?'ابحث عن خلفية...':'Search wallpapers...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/>
@@ -74,7 +75,7 @@ export const ResourcesSection:React.FC=()=>{
    <ExtraResourcesSection ids={['ipad-wallpapers','desktop-wallpapers','profile-pictures']}/>
    <ImagePromptsResource/>
    <div className="mt-14 border-t border-white/5 pt-12">
-    <Link to="/resources/filters" className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'فلتر مميز':'Featured Filters'}</Link>
+    <Link to="/resources/filters" className="relative mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-24 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'فلتر مميز':'Featured Filters'}<ResourceCount count={featuredFilters.length} unit="فلتر" unitEn="filters" isArabic={isArabic}/></Link>
     <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
      <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/10 bg-[#111] h-10 px-3 focus-within:border-[#D51F2B]/60 sm:px-4"><Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={filterQ} onChange={e=>setFilterQ(e.target.value)} placeholder={isArabic?'ابحث عن فلتر...':'Search filters...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/></label>
      <Link to="/resources/filters" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-xl border border-[#D51F2B]/45 h-10 px-3 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-4 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
@@ -82,7 +83,7 @@ export const ResourcesSection:React.FC=()=>{
     {filterFeatured.length?<FeaturedFilterCarousel items={filterFeatured} isArabic={isArabic} onSelect={item=>navigate(`/resources/filters#featured-filter-${item.id}`)}/>:<div className="grid h-[220px] place-items-center text-sm text-gray-500">{isArabic?'ما لقينا فلاتر مطابقة.':'No matching filters found.'}</div>}
    </div>
    <div className="mt-14 border-t border-white/5 pt-12">
-    <Link to="/resources/watch-faces" className="mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-4 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'واجهة الساعة':'Watch Face'}</Link>
+    <Link to="/resources/watch-faces" className="relative mb-3 flex w-full items-center justify-center rounded-xl border border-[#D51F2B]/55 bg-[#D51F2B]/[0.06] h-10 px-24 text-sm font-black text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:text-base">{isArabic?'واجهة الساعة':'Watch Face'}<ResourceCount count={watchFaces.length} unit="واجهة" unitEn="faces" isArabic={isArabic}/></Link>
     <div className="mb-7 flex w-full items-stretch gap-2 sm:gap-3">
      <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/10 bg-[#111] h-10 px-3 focus-within:border-[#D51F2B]/60 sm:px-4"><Search className="h-4 w-4 shrink-0 text-gray-500"/><input value={watchQ} onChange={e=>setWatchQ(e.target.value)} placeholder={isArabic?'ابحث عن واجهة ساعة...':'Search watch faces...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/></label>
      <Link to="/resources/watch-faces" className="inline-flex shrink-0 items-center justify-center gap-1 rounded-xl border border-[#D51F2B]/45 h-10 px-3 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-4 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span><ChevronLeft className="h-4 w-4"/></Link>
