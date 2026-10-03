@@ -48,9 +48,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, showBackButton 
       {showBackButton && (
         <button
           onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#151515] border border-white/10 text-gray-300 hover:text-white hover:border-[#D51F2B]/40 hover:bg-[#1a0507] transition-all text-xs font-semibold cursor-pointer"
+          className="sba-back-button"
         >
-          <ArrowRight className="w-3.5 h-3.5 text-[#D51F2B]" />
+          <ArrowRight className="h-4 w-4" />
           <span>الرجوع للسابقة</span>
         </button>
       )}

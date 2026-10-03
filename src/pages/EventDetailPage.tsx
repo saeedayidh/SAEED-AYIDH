@@ -15,7 +15,7 @@ export function EventDetailPage(){
  const {id}=useParams(),{data}=useCMS(),{isArabic}=useLanguage();
  const now=useEventClock();
  const event=normalizeEvents((data.global as any).saeedEvents).find(x=>x.id===id),t=(ar:string,en:string)=>isArabic?ar:en;
- if(!event)return <main className="px-4 pb-24 pt-32 text-center"><p>{t('الفعالية غير متاحة.','Event unavailable.')}</p><Link to="/events" className="mt-6 inline-block text-[#D51F2B]">{t('الرجوع للفعاليات','Back to events')}</Link></main>;
+ if(!event)return <main className="px-4 pb-24 pt-32 text-center"><p>{t('الفعالية غير متاحة.','Event unavailable.')}</p><Link to="/events" className="sba-back-button mt-6">{t('الرجوع للفعاليات','Back to events')}</Link></main>;
  const title=t(event.title,event.titleEn||event.title),url=`/events/${event.id}`,platform=smartLinkPlatforms.find(p=>p.id===event.platform);
  const deadline=event.registrationEnd&&Number.isFinite(Date.parse(event.registrationEnd))?Date.parse(event.registrationEnd):Date.parse(event.end);
  const open=event.registration==='open'&&deadline>now&&Date.parse(event.end)>now,registrationStarted=!event.registrationStart||Date.parse(event.registrationStart)<=now,registrationUrl=open?safeEventUrl(event.registrationUrl):'',eventUrl=safeEventUrl(event.eventUrl);

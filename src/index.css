@@ -140,3 +140,8 @@ html, body, #root {
 #root { overflow-anchor: none; }
 /* Prevent delayed images or CMS sections anchoring a fresh visit halfway down. */
 html, body { overflow-anchor: none; }
+/* Consistent public back navigation. */
+.sba-back-button { display: inline-flex; align-items: center; gap: .5rem; padding: .625rem 1rem; border: 1px solid rgb(213 31 43 / .4); border-radius: .75rem; background: rgb(213 31 43 / .1); color: #ED1C2E; font-size: .875rem; font-weight: 700; line-height: 1.5; cursor: pointer; transition: background-color .2s, color .2s; }
+.sba-back-button:hover { background: #D51F2B; color: white; }
+.sba-back-button:focus-visible { outline: 2px solid #D51F2B; outline-offset: 4px; }
+.sba-back-button svg { width: 1rem; height: 1rem; flex-shrink: 0; color: currentColor; }
