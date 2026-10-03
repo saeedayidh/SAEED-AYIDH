@@ -51,7 +51,7 @@ export const ResourcesPage:React.FC=()=>{
        <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" decoding="async" draggable={false}/>
       </button>
       {offset===0&&<div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-black/70 p-1 backdrop-blur-md">
-       <a href={w.image} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-black/70"><Download className="h-3.5 w-3.5 text-white"/></a>
+       <a href={`/api/wallpapers/${w.id}/download`} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-8 w-8 place-items-center rounded-full border border-white/10 bg-black/70"><Download className="h-3.5 w-3.5 text-white"/></a>
        <ShareButton title={w.title} url={w.image} className="!h-8 !w-8"/>
        <FavoriteButton id={`wallpaper-${w.id}`} title={w.title} url={`/resources/wallpapers#wallpaper-${w.id}`} type="wallpaper" className="!h-8 !w-8"/>
       </div>}
@@ -84,7 +84,7 @@ export const ResourcesPage:React.FC=()=>{
        <img src={w.image} alt={w.title} loading="eager" decoding="async" className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"/>
       </button>
       <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-black/65 p-1.5 backdrop-blur-md">
-       <a href={w.image} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/70 transition hover:border-[#D51F2B]"><Download className="h-4 w-4 text-white"/></a>
+       <a href={`/api/wallpapers/${w.id}/download`} download={`saeed-wallpaper-${w.id}.jpg`} target="_blank" rel="noreferrer" onClick={e=>e.stopPropagation()} aria-label={isArabic?'تحميل':'Download'} title={isArabic?'تحميل':'Download'} className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-black/70 transition hover:border-[#D51F2B]"><Download className="h-4 w-4 text-white"/></a>
        <ShareButton title={w.title} url={w.image}/>
        <FavoriteButton id={`wallpaper-${w.id}`} title={w.title} url={`/resources/wallpapers#wallpaper-${w.id}`} type="wallpaper"/>
       </div>

@@ -1,5 +1,5 @@
 import type {ServiceItem} from '../types';
-export const advertisingServices:(ServiceItem & {titleEn:string;priceEn:string})[] = [
+export const advertisingServices:(ServiceItem & {titleEn:string;priceEn:string;descriptionEn:string;longDescriptionEn:string;featuresEn:string[];categoryEn:string})[] = [
   {
     "id": "saeed-ads-snapchat",
     "title": "إعلان سناب شات",
@@ -14,7 +14,15 @@ export const advertisingServices:(ServiceItem & {titleEn:string;priceEn:string})
       "إعلان على سناب شات",
       "عرض المنتج أو الخدمة",
       "تنسيق المحتوى وموعد الإعلان"
-    ]
+    ],
+    "descriptionEn": "A Snapchat advertisement introducing your product or service and presenting your message to the audience.",
+    "longDescriptionEn": "A Snapchat advertisement presenting the product or service and brand message. Content, timing and delivery details are coordinated via WhatsApp before work begins.",
+    "featuresEn": [
+      "Snapchat advertisement",
+      "Presenting the product or service",
+      "Coordinating content and timing"
+    ],
+    "categoryEn": "Saeed Ads"
   },
   {
     "id": "saeed-ads-store",
@@ -30,7 +38,15 @@ export const advertisingServices:(ServiceItem & {titleEn:string;priceEn:string})
       "التعريف بالمتجر الإلكتروني",
       "إبراز المنتجات أو الخدمات",
       "إضافة رابط المتجر"
-    ]
+    ],
+    "descriptionEn": "An advertisement introducing your online store and products and directing visitors to its website.",
+    "longDescriptionEn": "An advertisement introducing the online store and highlighting its products or services, with its website link. Content, placement and timing are agreed via WhatsApp before delivery.",
+    "featuresEn": [
+      "Introducing the online store",
+      "Highlighting products or services",
+      "Including the store link"
+    ],
+    "categoryEn": "Saeed Ads"
   },
   {
     "id": "saeed-ads-company",
@@ -46,7 +62,15 @@ export const advertisingServices:(ServiceItem & {titleEn:string;priceEn:string})
       "التعريف بالشركة أو المؤسسة",
       "إبراز النشاط والخدمات",
       "تنسيق الرسالة الإعلانية"
-    ]
+    ],
+    "descriptionEn": "An advertisement introducing your company or organization, its activity and services.",
+    "longDescriptionEn": "An advertisement for companies and organizations introducing the business, its activity, services and identity. The message, content, placement and timing are coordinated via WhatsApp.",
+    "featuresEn": [
+      "Introducing the company or organization",
+      "Highlighting activity and services",
+      "Coordinating the advertising message"
+    ],
+    "categoryEn": "Saeed Ads"
   },
   {
     "id": "saeed-ads-week",
@@ -62,7 +86,15 @@ export const advertisingServices:(ServiceItem & {titleEn:string;priceEn:string})
       "مدة الرعاية أسبوع",
       "التعريف بالعلامة التجارية",
       "تنسيق مواضع الظهور والمحتوى"
-    ]
+    ],
+    "descriptionEn": "One week of advertising sponsorship to introduce your brand.",
+    "longDescriptionEn": "One week of sponsorship displaying the brand and introducing its activity. Placement, content and start and end dates are agreed via WhatsApp before delivery.",
+    "featuresEn": [
+      "One week duration",
+      "Introducing the brand",
+      "Coordinating placement and content"
+    ],
+    "categoryEn": "Saeed Ads"
   },
   {
     "id": "saeed-ads-month",
@@ -78,6 +110,14 @@ export const advertisingServices:(ServiceItem & {titleEn:string;priceEn:string})
       "مدة الرعاية شهر",
       "التعريف بالعلامة التجارية",
       "تنسيق مواضع الظهور والمحتوى"
-    ]
+    ],
+    "descriptionEn": "One month of advertising sponsorship to introduce your brand.",
+    "longDescriptionEn": "One month of sponsorship displaying the brand and introducing its activity. Placement, content and start and end dates are agreed via WhatsApp before delivery.",
+    "featuresEn": [
+      "One month duration",
+      "Introducing the brand",
+      "Coordinating placement and content"
+    ],
+    "categoryEn": "Saeed Ads"
   }
 ];
