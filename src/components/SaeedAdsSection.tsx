@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {AdTypeFilter,matchesAdType,type AdType} from './AdTypeFilter';
 import {Link} from 'react-router-dom';
-import {ExternalLink,ChevronLeft,ChevronRight} from 'lucide-react';
+import {ExternalLink,ChevronLeft,ChevronRight,Search} from 'lucide-react';
 import {useCMS} from '../context/CMSContext';
 import {useLanguage} from '../context/LanguageContext';
 import {getAds,safeAdUrl,isSponsorship,type SaeedAd} from '../data/adsData';
@@ -11,4 +11,24 @@ export function SaeedAdCard({ad}:{ad:SaeedAd}){const{isArabic}=useLanguage();ret
  <FavoriteButton id={`ad-${ad.id}`} title={isArabic?ad.name:ad.nameEn} url={`/ads/${ad.id}`} type={isArabic?'إعلان':'Ad'} className="absolute left-3 top-3 z-10"/>
  <Link to={`/ads/${ad.id}`} className="relative block aspect-[2/1] w-full shrink-0 overflow-hidden" aria-label={isArabic?`تفاصيل ${ad.name}`:`About ${ad.nameEn}`}><img src={safeAdUrl(ad.banner)||ad.banner.startsWith('/')&&ad.banner||undefined} alt={isArabic?ad.name:ad.nameEn} className="absolute inset-0 block h-full w-full object-cover object-center" loading="lazy"/></Link>
  <div className="p-5 sm:p-7 flex flex-1 flex-col"><p className="mb-3 text-xs font-bold text-[#D51F2B]">{isSponsorship(ad)?(isArabic?'رعاية':'Sponsorship'):(isArabic?'إعلان':'Advertisement')}</p><div className="flex min-h-16 shrink-0 items-center gap-4"><img src={safeAdUrl(ad.logo)||ad.logo.startsWith('/')&&ad.logo||undefined} alt="" className="h-16 w-16 shrink-0 rounded-xl object-contain" loading="lazy"/><h3 className="text-xl font-black text-white">{isArabic?ad.name:ad.nameEn}</h3></div><span className="mt-3 self-start rounded-full border border-[#D51F2B]/25 bg-[#D51F2B]/10 px-3 py-1 text-xs font-bold text-[#D51F2B]">{isArabic?ad.category:ad.categoryEn}</span><p className="mt-4 h-[84px] shrink-0 line-clamp-3 text-sm leading-7 text-gray-400">{isArabic?ad.description:ad.descriptionEn}</p><div className="mt-auto grid grid-cols-2 gap-3 pt-6"><Link to={`/ads/${ad.id}`} className="flex items-center justify-center rounded-xl bg-[#D51F2B] px-3 py-2.5 text-center text-xs font-bold text-white sm:text-sm">{isArabic?'تفاصيل الإعلان':'Ad details'}</Link><a href={safeAdUrl(ad.website)} target="_blank" rel="noopener noreferrer sponsored" className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 px-3 py-2.5 text-center text-xs font-bold text-white sm:text-sm">{isArabic?'زيارة الموقع':'Visit website'}<ExternalLink className="h-4 w-4"/></a></div></div></article>;}
-export function SaeedAdsSection(){const{data}=useCMS(),{isArabic}=useLanguage();const [adType,setAdType]=useState<AdType>('all');const ads=getAds(data.global).filter(ad=>ad.inSection);const visible=ads.filter(ad=>matchesAdType(ad,adType));if(!ads.length)return null;return <section id="saeed-ads-section" className="border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}><div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><div className="mb-9 text-center"><p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'مساحة إعلانية':'Advertising space'}</p><h2 className="text-3xl font-black text-white sm:text-5xl">{isArabic?'سعيد ادز':'Saeed Ads'}</h2></div><AdTypeFilter value={adType} onChange={setAdType}/>{visible.length?<AdsCarousel key={adType} ads={visible}/>:<p className="py-10 text-center text-sm text-gray-400">{isArabic?'لا توجد إعلانات في هذا التصنيف':'No ads in this category'}</p>}<div className="mt-8 text-center"><Link to="/ads" className="sba-btn-secondary inline-flex items-center gap-2 px-7 py-3 text-xs">{isArabic?'استكشف الكل':'Explore all'}{isArabic?<ChevronLeft className="h-4 w-4 text-[#D51F2B]"/>:<ChevronRight className="h-4 w-4 text-[#D51F2B]"/>}</Link></div></div></section>;}
+export function SaeedAdsSection(){
+ const {data}=useCMS(),{isArabic}=useLanguage();
+ const [adType,setAdType]=useState<AdType>('all'),[query,setQuery]=useState('');
+ const ads=getAds(data.global).filter(ad=>ad.inSection);
+ const visible=ads.filter(ad=>matchesAdType(ad,adType)&&`${ad.name} ${ad.nameEn} ${ad.category} ${ad.categoryEn} ${ad.description} ${ad.descriptionEn}`.toLowerCase().includes(query.trim().toLowerCase()));
+ const params=new URLSearchParams();if(adType!=='all')params.set('type',adType);if(query.trim())params.set('q',query.trim());
+ if(!ads.length)return null;
+ return <section id="saeed-ads-section" className="border-t border-white/5 bg-[#0B0B0B] py-20" dir={isArabic?'rtl':'ltr'}>
+ <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+ <div className="mb-9 text-center"><p className="mb-2 text-xs font-bold text-[#D51F2B]">{isArabic?'مساحة إعلانية':'Advertising space'}</p><h2 className="text-3xl font-black text-white sm:text-5xl">{isArabic?'سعيد ادز':'Saeed Ads'}</h2></div>
+ <div className="mb-7">
+ <AdTypeFilter bar value={adType} onChange={setAdType}/>
+ <div className="flex w-full items-stretch gap-2 sm:gap-3">
+ <label className="flex h-10 min-w-0 flex-1 items-center gap-2 rounded-xl border border-white/10 bg-[#111] px-3 focus-within:border-[#D51F2B]/60 sm:px-4">
+ <Search className="h-4 w-4 shrink-0 text-gray-500"/><span className="sr-only">{isArabic?'البحث في سعيد ادز':'Search Saeed Ads'}</span><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder={isArabic?'ابحث عن متجر أو شركة...':'Search stores or companies...'} className="w-full min-w-0 bg-transparent text-sm text-white outline-none placeholder:text-gray-600"/>
+ </label>
+ <Link to={`/ads${params.size?'?'+params.toString():''}`} className="inline-flex h-10 shrink-0 items-center justify-center gap-1 rounded-xl border border-[#D51F2B]/45 px-3 text-xs font-bold text-[#ED1C2E] transition hover:bg-[#D51F2B] hover:text-white sm:gap-2 sm:px-4 sm:text-sm"><span>{isArabic?'استكشف الكل':'Explore All'}</span>{isArabic?<ChevronLeft className="h-4 w-4"/>:<ChevronRight className="h-4 w-4"/>}</Link>
+ </div></div>
+ {visible.length?<AdsCarousel key={adType+query} ads={visible}/>:<p role="status" className="py-10 text-center text-sm text-gray-400">{isArabic?'لا توجد إعلانات مطابقة':'No matching ads'}</p>}
+ </div></section>;
+}
