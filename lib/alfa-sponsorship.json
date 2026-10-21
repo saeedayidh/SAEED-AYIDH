@@ -1,0 +1,24 @@
+{
+  "id": "alfa-perfume",
+  "name": "ألفا للعطور",
+  "nameEn": "ALFA Perfume",
+  "category": "متجر عطور",
+  "categoryEn": "Perfume store",
+  "teaser": "عطور سعودية",
+  "teaserEn": "Saudi perfumes",
+  "description": "ألفا للعطور متجر سعودي يقدم ثلاثة عطور، لكل منها طابعه الخاص: ALFA GOLD بلمسة ورد وفانيليا ناعمة، وALFA PLUS بطابع متبّل وأخشاب ناعمة ولمسة حلوة، وALFA STRONG بلمسة زعفران وعنبر دافئة. تتوفر العطور بحجم 100 مل وبتركيز برفيوم للجنسين، ويمكنك اختيار عطرك المفضل أو استكشاف الباقة الثلاثية من الموقع الرسمي. تصفّح تفاصيل العطور وخيارات الطلب والدفع والشحن داخل السعودية مباشرة من المتجر، وتابع حسابات ألفا الرسمية للاطلاع على جديده.",
+  "descriptionEn": "ALFA Perfume is a Saudi store offering three perfumes, each with its own character: ALFA GOLD with soft rose and vanilla notes, ALFA PLUS with a spicy character, soft woods and a sweet touch, and ALFA STRONG with warm saffron and amber notes. The unisex perfumes come in 100 ml bottles at parfum concentration. Choose your favorite or explore the three-perfume bundle on the official website. Visit the store for fragrance details, ordering, payment and shipping options within Saudi Arabia, and follow ALFA's official accounts for updates.",
+  "website": "https://alfaperfume.online/",
+  "logo": "https://cdn.files.salla.network/homepage/671857785/2e18169c-07e1-4f73-b4ab-b9aa77c63ec4-original.webp",
+  "banner": "https://cdn.files.salla.network/homepage/671857785/1c0c8c61-080d-4a28-be46-27323af60b9d-original.webp",
+  "accounts": [
+    {"platform": "Instagram", "url": "https://www.instagram.com/alfa1perfumes"},
+    {"platform": "Snapchat", "url": "https://www.snapchat.com/add/alfaperfumes"},
+    {"platform": "TikTok", "url": "https://www.tiktok.com/@alfa1perfumes"}
+  ],
+  "sponsorship": true,
+  "enabled": true,
+  "inSection": true,
+  "inStrip": true,
+  "order": 3
+}

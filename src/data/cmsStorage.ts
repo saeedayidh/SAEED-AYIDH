@@ -18,6 +18,7 @@ export interface ThemeSettings {
 
 export interface GlobalSettings {
   saeedAds?: import('./adsData').SaeedAd[];
+  alfaSponsorshipAddedV1?: boolean;
   descriptionEn?: string;
   websiteName: string;
   nameArabic: string;
