@@ -19,6 +19,6 @@
   "sponsorship": true,
   "enabled": true,
   "inSection": true,
-  "inStrip": true,
+  "inStrip": false,
   "order": 3
 }
